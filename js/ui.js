@@ -1,0 +1,216 @@
+
+(function(M){
+  'use strict';
+  const C=M.core;
+  const root=document.getElementById('app');
+  const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:false,minFan:0},passSelected:new Set(),selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
+  let pumpTimer=null,toastTimer=null;
+  const THEMES=[['ivory','Classic Ivory'],['minimal','Modern Minimal'],['neon','Neon Night'],['pastel','Cozy Pastel']];
+  function readAppearance(){
+    try{
+      const saved=JSON.parse(localStorage.getItem('mahjong-atelier-appearance'))||{};
+      return {theme:['ivory','minimal','neon','pastel'].includes(saved.theme)?saved.theme:'ivory',indices:saved.indices!==false};
+    }catch{return {theme:'ivory',indices:true};}
+  }
+  function saveAppearance(){try{localStorage.setItem('mahjong-atelier-appearance',JSON.stringify(state.appearance));}catch{}}
+  function readStats(){try{return JSON.parse(localStorage.getItem('mahjong-arcade-stats'))||{solitaire:0,hongkong:0,american:0};}catch{return {solitaire:0,hongkong:0,american:0};}}
+  function saveWin(which){state.stats[which]=(state.stats[which]||0)+1;try{localStorage.setItem('mahjong-arcade-stats',JSON.stringify(state.stats));}catch{}}
+  function notify(text){state.toast=text;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{state.toast='';const el=document.querySelector('.toast');if(el)el.remove();},3500);}
+  function pop(){if(!state.toast)return '';return '<div role="status" aria-live="polite" class="toast"><span class="toast-dot"></span>'+escapeHTML(state.toast)+'</div>';}
+  function escapeHTML(s){return String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+  function btn(text,action,variant='secondary',disabled=false,attrs=''){
+    return `<button class="ui-btn ${variant}" type="button" data-act="${action}" ${disabled?'disabled':''} ${attrs}>${text}</button>`;
+  }
+  function currentGame(){return state.games[state.mode];}
+  function switchMode(mode){
+    clearTimeout(pumpTimer);pumpTimer=null;
+    state.mode=mode;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
+    document.title='Mahjong Atelier · '+({solitaire:'Solitaire',hongkong:'Hong Kong',american:'American'}[mode]);
+    render();
+  }
+  function header(){
+    const tabs=[['solitaire','layers','Solitaire'],['hongkong','users','Hong Kong'],['american','star','American']];
+    return `<header class="masthead"><div class="identity"><div class="logo-tile" aria-hidden="true">中</div><div><div class="brand-name">MAHJONG <em>ATELIER</em></div><div class="brand-sub">Three ways to make your move</div></div></div><div class="masthead-right"><span class="offline-pill"><span class="signal"></span> FREE · OFFLINE</span>${btn('ⓘ &nbsp; How to play','toggle-guide','header-btn')}</div></header><nav class="game-nav" aria-label="Game mode">${tabs.map(([mode,ico,text])=>`<button type="button" class="game-tab ${state.mode===mode?'on':''}" data-act="switch" data-mode="${mode}" aria-current="${state.mode===mode?'page':'false'}"><span class="tab-icon">${mode==='solitaire'?'◈':mode==='hongkong'?'♟':'✦'}</span><span>${text}</span><span class="tab-suffix">${mode==='solitaire'?'01':mode==='hongkong'?'02':'03'}</span></button>`).join('')}</nav>`;
+  }
+  function appearanceBar(){
+    return `<div class="appearance-bar" aria-label="Tile appearance"><div class="appearance-intro"><span class="appearance-sparkle">✧</span><span><strong>Find your tile style</strong><small>Same tiles, same rules. Just a different look.</small></span></div><div class="appearance-controls"><label class="appearance-picker" for="tile-style"><span>DESIGN</span><select id="tile-style" data-appearance="theme">${THEMES.map(([key,label])=>`<option value="${key}" ${state.appearance.theme===key?'selected':''}>${label}</option>`).join('')}</select></label><label class="indices-label"><input type="checkbox" data-appearance="indices" ${state.appearance.indices?'checked':''}/><span>English indices</span></label><button type="button" class="tile-help-trigger" data-act="tile-guide">◈ &nbsp; Learn the tiles</button></div></div>`;
+  }
+  function legendTile(type){return `<div class="legend-tile"><div class="mj-tile tile-example" role="img" aria-label="${C.name(type)}">${C.tileMarkup(type)}</div><span>${escapeHTML(C.name(type))}</span></div>`;}
+  function tileGuide(){
+    if(!state.showTileGuide)return '';
+    const suits=[['Dots · 筒子','Copper-coin circles. Tile 1 is a larger, decorated circle.',['d1','d5','d9']],['Bamboo · 條子','Counting bamboo stalks, with a bird on the 1-Bamboo tile.',['b1','b5','b9']],['Characters · 萬子','Chinese numbers above the red character 萬 (ten thousand).',['c1','c5','c9']]];
+    return `<div class="tile-help-overlay"><div class="tile-help-scrim" data-act="close-tile-guide"></div><div class="tile-help-panel" role="dialog" aria-modal="true" aria-labelledby="tile-help-title"><header class="tile-help-heading"><div><p class="eyebrow">THE TILE LIBRARY</p><h2 id="tile-help-title">Read the tiles at a glance.</h2><p>Every style keeps the same suit, number and tile meaning.</p></div><button type="button" class="tile-help-close" aria-label="Close tile guide" data-act="close-tile-guide">×</button></header><div class="legend-suits">${suits.map(([title,desc,types])=>`<section class="legend-group"><h3>${title}</h3><p>${desc}</p><div class="legend-tiles">${types.map(legendTile).join('')}</div></section>`).join('')}</div><section class="legend-special"><h3>The honors</h3><p>Winds and Dragons cannot form numbered sequences. Their symbols have fixed meanings.</p><div class="legend-tiles">${['we','ws','ww','wn','dr','dg','dw'].map(legendTile).join('')}</div></section><section class="legend-special"><h3>Flowers, Seasons &amp; Jokers</h3><div class="legend-tiles">${['f1','f5','j'].map(legendTile).join('')}</div><p>American practice adds eight Jokers and eight bonus tiles. Solitaire uses bonus tiles; Hong Kong basics uses the 136 standard suit and honor tiles.</p></section><p class="legend-note">English indices are a learning aid. Hide them in the appearance bar whenever you want a more traditional challenge. The Mahjong rules do not change.</p></div></div>`;
+  }
+  function panelHeader(kicker,title,description){return `<div class="section-heading"><div><p class="eyebrow">${kicker}</p><h1>${title}</h1><p class="lede">${description}</p></div></div>`;}
+  function guide(mode){
+    if(!state.showGuide)return '';
+    if(mode==='solitaire')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>01 / 03</span></div><h3>A quiet game of strategy.</h3><p>Find two matching <strong>free tiles</strong>. A tile is free when nothing rests directly on it and at least one horizontal side is open.</p><div class="tip-list"><div><span class="tip-icon">01</span><span><b>Work from the top</b><small>Peel away layers to reveal the tiles below.</small></span></div><div><span class="tip-icon">02</span><span><b>Plan your pairs</b><small>A match now can block a better match later.</small></span></div><div><span class="tip-icon">03</span><span><b>Rescue your run</b><small>Use Hint, Undo, or Shuffle when stuck; Shuffle can flatten a trapped stack.</small></span></div></div><div class="guide-note">Each new deal is built from at least one valid full-clearing sequence. Some choices can still lead to a dead end.</div></aside>`;
+    if(mode==='hongkong')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>02 / 03</span></div><h3>Build your winning hand.</h3><p>Work toward <strong>four melds and one pair</strong>. Each turn, draw and discard. Call an opponent's latest discard when eligible.</p><div class="tip-list"><div><span class="tip-icon">吃</span><span><b>Chow</b><small>Three consecutive numbers of one suit. Only from the player before you.</small></span></div><div><span class="tip-icon">碰</span><span><b>Pung / Kong</b><small>Three or four identical tiles; Kong draws a replacement.</small></span></div><div><span class="tip-icon">胡</span><span><b>Mahjong</b><small>A complete hand; declare it before discarding.</small></span></div></div><div class="guide-note">Beginner rules use 136 tiles and default to no minimum faan. The optional 3-faan setting uses a limited teaching score model, not tournament scoring. Special hands and added Kongs are not yet included.</div></aside>`;
+    return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>03 / 03</span></div><h3>Play the American way.</h3><p>Build a hand matching <strong>one complete line</strong> on the original practice card. This is not an official NMJL annual card.</p><div class="tip-list"><div><span class="tip-icon">↗</span><span><b>Charleston</b><small>Pass three non-Joker tiles: Right, Across, Left. Optional second round reverses direction.</small></span></div><div><span class="tip-icon">★</span><span><b>Jokers</b><small>Use in groups of three or more, never singles or pairs.</small></span></div><div><span class="tip-icon">↔</span><span><b>Joker exchange</b><small>Trade a natural tile for an exposed matching Joker on your turn.</small></span></div></div><div class="guide-note">This original-card learning edition omits blind/courtesy passes, official hand categories, full exposure restrictions, and NMJL scoring. An officially licensed annual card would require separate integration.</div></aside>`;
+  }
+  function solitaireView(){
+    const g=currentGame(),positions=g.tiles,free=new Set(g.available().map(t=>t.id));
+    const maxX=Math.max(...positions.map(p=>p.x)),maxY=Math.max(...positions.map(p=>p.y));
+    const width=Math.max(755,110+(maxX+1)*55),height=100+(maxY+1)*69;
+    const board=positions.filter(p=>!p.removed).sort((a,b)=>a.z-b.z).map(p=>{
+      const enabled=free.has(p.id),tip=g.lastHint.includes(p.id),type=p.tile.type;
+      return `<button type="button" title="${C.name(type)}${enabled?' · Free':' · Blocked'}" aria-label="${C.name(type)}${enabled?' free':' blocked'}" ${enabled?'':'disabled'} data-act="sol-pick" data-tile-id="${p.id}" class="mj-tile board-tile layer-${p.z} ${enabled?'free':'blocked'} ${g.selected===p.id?'is-selected':''} ${tip?'is-hint':''}" style="left:${43+p.x*55-p.z*4}px;top:${37+p.y*69-p.z*7}px;z-index:${5+p.z*3};">${C.tileMarkup(type)}</button>`;
+    }).join('');
+    return `${panelHeader('SOLO PLAY / MATCH & CLEAR','A little peace. A lot of possibilities.','Match free tiles, uncover new paths, and clear the board at your own pace.')}
+    <div class="stats-grid"><div class="stat"><span>Tiles remaining</span><strong>${g.remaining}<small> / 144</small></strong></div><div class="stat"><span>Pairs matched</span><strong>${g.moves}</strong></div><div class="stat"><span>Time in play</span><strong data-timer>${C.elapsed(Math.floor((Date.now()-g.startedAt)/1000))}</strong></div><div class="stat"><span>Best moments</span><strong>${state.stats.solitaire||0}<small> clears</small></strong></div></div>
+    <div class="solitaire-settings"><div class="layout-prompt">BOARD SHAPE <span class="bullet">•</span> <span class="muted">Choose your challenge</span></div><div class="segment">${['pyramid','garden','bridge'].map(l=>`<button data-act="layout" data-layout="${l}" class="${g.layout===l?'active':''}" type="button">${({pyramid:'Pyramid',garden:'Garden',bridge:'Bridge'})[l]}</button>`).join('')}</div></div>
+    <div class="board-frame"><div class="board-topline"><span>✧ &nbsp; ${g.reflowed?'RESCUE TRAY':g.layout.toUpperCase()} / LAYERED PUZZLE</span><span>144 TILES · ${g.pairs().length} PAIRS AVAILABLE</span></div><div class="board-scroller"><div class="solitaire-board" role="group" aria-label="Mahjong Solitaire board" style="width:${width}px;height:${height}px">${board}</div></div>${g.finished?'<div class="board-overlay"><div class="winning-medal">✦</div><h2>Beautifully played.</h2><p>You cleared every tile!</p>'+btn('Play again','new-sol','primary')+'</div>':''}${!g.finished&&g.pairs().length===0?'<div class="no-moves">No matching free pairs. Try Undo or Shuffle to continue.</div>':''}</div>
+    <div class="toolbar">${btn('↶ &nbsp; Undo','undo','secondary',!g.undoStack.length)}${btn('◌ &nbsp; Hint','hint','secondary',g.finished)}${btn('⤨ &nbsp; Shuffle','shuffle','secondary',g.finished)}<span class="toolbar-divider"></span>${btn('✧ &nbsp; New puzzle','new-sol','primary')}</div>`;
+  }
+  function setupView(){
+    const isAm=state.mode==='american';
+    return `${panelHeader(isAm?'FOUR-PLAYER / AMERICAN RULES':'FOUR-PLAYER / HONG KONG BASICS',isAm?'The Charleston is calling.':'Gather around the table.',isAm?'An American-style practice game with original card patterns, Jokers and tile passing.':'Build sets, call discards and race to Mahjong using beginner-friendly Hong Kong rules.')}
+    <div class="setup-area"><div class="setup-top"><div class="setup-emblem">${isAm?'★':'中'}</div><h2>Set the table</h2><p>Choose how you want to play. Your table runs entirely in this browser.</p></div><h3 class="setup-label">PLAY AGAINST</h3><div class="opponent-grid"><button type="button" data-act="opponents" data-value="bots" class="opponent ${state.settings.opponents==='bots'?'chosen':''}"><span class="opponent-pict">◉ ◉ ◉</span><b>You + three bots</b><small>Play on your own against computer seats</small></button><button type="button" data-act="opponents" data-value="local" class="opponent ${state.settings.opponents==='local'?'chosen':''}"><span class="opponent-pict">♟ ♟ ♟ ♟</span><b>Four players, one device</b><small>Pass the device and keep hands hidden</small></button></div>
+    ${isAm?`<div class="setup-field"><label for="second-pass">Charleston passing</label><select id="second-pass" data-setting="secondCharleston"><option value="false" ${!state.settings.secondCharleston?'selected':''}>Mandatory first round (Right · Across · Left)</option><option value="true" ${state.settings.secondCharleston?'selected':''}>First + optional second round (6 passes)</option></select><small>The optional round assumes all four players agreed before the deal.</small></div>`:`<div class="setup-field"><label for="fan-rule">Winning requirement</label><select id="fan-rule" data-setting="minFan"><option value="0" ${!state.settings.minFan?'selected':''}>Beginner: four melds + pair (0 faan minimum)</option><option value="3" ${state.settings.minFan===3?'selected':''}>Practice: 3 faan (simplified scoring)</option></select><small>Full Hong Kong tournament scoring is not implemented.</small></div>`}
+    ${btn('Start a new table &nbsp; →','start-table','primary')}<p class="setup-note">✦ &nbsp; No sign-in · No server · No tracking · No bets</p></div>`;
+  }
+  function seatMarkup(p,seat,active,game){
+    let special=p.seat===active?' active':'';
+    let exposed=p.melds.length?`<div class="seat-melds">${p.melds.map((m,i)=>`<div title="${m.kind} · ${C.name(m.type)}" class="exposed-meld"><span class="meld-icon">${m.kind==='chow'?'≋':m.kind==='kong'?'▣':'◈'}</span> ${escapeHTML(m.kind.toUpperCase())} <strong>${escapeHTML(C.name(m.type))}</strong>${m.tiles.some(t=>t.type==='j')&&game.variant==='american'&&game.phase==='discard'&&!game.players[game.current].bot&&game.players[game.current].hand.some(t=>t.type===m.type)?`<button type="button" class="swap-btn" data-act="joker-swap" data-seat="${seat}" data-meld="${i}" title="Exchange matching tile for exposed Joker">↔ Joker</button>`:''}</div>`).join('')}</div>`:'<span class="seat-meta">No exposed sets</span>';
+    return `<div class="seat seat-${seat}${special}"><div class="seat-heading"><span class="wind-chip">${['東','南','西','北'][seat]}</span><span><strong>${p.name}</strong><small>${p.bot?'BOT':'LOCAL PLAYER'}</small></span>${p.seat===active?'<span class="turn-pin">● TURN</span>':''}</div><div class="seat-tiles"><span>▥ ${p.hand.length} concealed</span><span>◫ ${p.discards.length} discards</span></div>${exposed}</div>`;
+  }
+  function compactTile(type){
+    const t={'we':'東','ws':'南','ww':'西','wn':'北','dr':'中','dg':'發','dw':'白','j':'★'};
+    if(type[0]==='f')return '✿';if(t[type])return t[type];return type.slice(1)+({b:'竹',d:'●',c:'萬'}[type[0]]||'');
+  }
+  function pondMarkup(g){
+    const thrown=[];
+    for(let p of g.players)for(let d of p.discards)thrown.push({tile:d,player:p.seat});
+    return `<div class="pond-head"><span>THE DISCARD POND</span><span>${g.wall.length} TILES IN THE WALL</span></div><div class="pond-tiles">${thrown.slice(-60).map(x=>`<span class="pond-tile ${g.lastDiscard?.tile.id===x.tile.id?'newest':''}" title="${g.players[x.player].name}: ${C.name(x.tile.type)}">${compactTile(x.tile.type)}</span>`).join('')||'<span class="pond-empty">The tiles have not yet begun to fall.</span>'}</div>`;
+  }
+  function handMarkup(g,active){
+    const p=g.players[active];
+    const playable=!p.bot&&(g.phase==='discard'||g.phase==='charleston');
+    if(!p)return '';
+    const tiles=p.hand.map(t=>`${C.tileButton(t,{selected:(g.phase==='charleston'?state.passSelected.has(t.id):state.selected===t.id),disabled:!playable,attr:playable?`data-act="hand-pick" data-id="${t.id}"`:''})}`).join('');
+    return `<div class="hand-panel"><div class="hand-title"><div><span class="eyebrow">${g.phase==='charleston'?'THE PASSING RACK':'CONCEALED TILES'}</span><h3>${p.name}'s hand <span>· ${p.hand.length} tiles</span></h3></div><span class="rack-symbol">${g.variant==='american'?'AMERICAN RACK':'TABLE HAND'}</span></div><div class="rack" role="group" aria-label="${p.name} player's tiles">${tiles}</div><div class="rack-hint">← Swipe or scroll the rack to see all your tiles →</div></div>`;
+  }
+  function cardMarkup(g){if(state.mode!=='american')return '';
+    return `<div class="practice-card"><div class="practice-header"><div><p class="eyebrow">AMERICAN EDITION · ORIGINAL CONTENT</p><h3>The Atelier Practice Card</h3></div><span>6 PATTERNS</span></div><p>Complete <strong>any one entire row</strong> to declare Mah Jongg. The highlighted target is a planning aid, not a restriction.</p><div class="pattern-list">${M.americanTest.CARD.map((c,i)=>`<button type="button" data-act="goal" data-goal="${i}" class="pattern ${state.goal===i?'goal':''}"><span class="pattern-name">${escapeHTML(c.name)}<small>${c.level}</small></span><span class="pattern-blocks">${c.groups.map(n=>`<b class="pattern-group ${n<=2?'singles':''}">${n===1?'F':n}</b>`).join('')}</span><span class="pattern-desc">${escapeHTML(c.description)}</span></button>`).join('')}</div><p class="practice-disclaimer">Each number is a group size; F means a single Flower. Groups of 3+ are identical tiles; a Joker can fill these groups, never a pair or single. <strong>Unofficial original learning patterns</strong>, not NMJL annual-card hands.</p></div>`;
+  }
+  function actionMarkup(g,active){
+    if(g.phase==='finished')return `<div class="action-banner result-banner"><div class="result-star">${g.result.kind==='win'?'✦':'◌'}</div><div><h3>${g.result.kind==='win'?g.result.message:'A peaceful draw.'}</h3><p>${g.result.kind==='win'?(g.variant==='hk'?`${g.result.analysis.fan} faan · ${g.result.analysis.details.join(' · ')||'Standard winning hand'}`:`${g.result.analysis.card.name} · Original practice card`):g.result.message}</p></div>${btn('New hand &nbsp; →','new-table','primary')}</div>`;
+    if(g.phase==='charleston'){
+      const r=g.passRoute[g.charIndex];
+      return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">CHARLESTON · PASS ${g.charIndex+1} OF ${g.passRoute.length}</div><h3>Pass three tiles ${r.name.toLowerCase()} <span class="direction">${r.name==='Right'?'→':r.name==='Left'?'←':'↔'}</span></h3><p>Choose three tiles from ${g.players[active].name}'s rack. Jokers cannot be passed. All four hands exchange simultaneously.</p></div><div class="action-buttons"><span class="counter-note">${state.passSelected.size}/3 selected</span>${btn('Pass selected 3 &nbsp; →','submit-pass','primary',g.players[active].bot||state.passSelected.size!==3)}</div></div>`;
+    }
+    if(g.phase==='claims'){
+      const opts=g.offered().options;
+      return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">DISCARD CLAIM · ${g.players[active].name.toUpperCase()}</div><h3>Someone played ${C.name(g.lastDiscard.tile.type)}.</h3><p>Claim it for a legal exposed set or a complete winning hand—or pass to continue.</p></div><div class="action-buttons claim-actions">${g.players[active].bot?'<span class="muted">Thinking…</span>':opts.map(o=>btn(o.kind==='win'?'✦ '+o.title:escapeHTML(o.title),'claim','secondary',false,`data-code="${o.code}"`)).join('')+btn('Pass','claim','ghost',false,'data-code="pass"')}</div></div>`;
+    }
+    const p=g.players[active],canWin=g.winAnalysis(active,null,true),kongs=g.kongOptions?g.kongOptions(active):[];
+    return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">YOUR MOVE · ${p.name.toUpperCase()}</div><h3>${p.bot?'Computer is choosing a tile…':'Choose a tile to discard.'}</h3><p>${g.variant==='hk'?'Four melds + a pair wins. Claim a Kong whenever your hand has four identical tiles.':'Only hands on the practice card win. You can redeem Jokers from exposed groups on your turn.'}</p></div><div class="action-buttons">${canWin?btn('✦ &nbsp; Declare Mahjong!','win','highlight',p.bot):''}${kongs.map(type=>btn('▣ Kong '+escapeHTML(C.name(type)),'kong','secondary',p.bot,`data-type="${type}"`)).join('')}${btn('Discard '+(state.selected===null?'selected tile':'tile →'),'discard','primary',p.bot||state.selected===null)}</div></div>`;
+  }
+  function tableView(){
+    const g=currentGame();if(!g)return setupView();
+    const active=g.who()??g.current;
+    const subtitle=state.mode==='american'?'An original card, a little luck, and a whole lot of strategy.':'Chows, Pungs and Kongs. Every discarded tile tells a story.';
+    const title=state.mode==='american'?'A distinctly American table.':'Every tile has a story.';
+    return `${panelHeader((g.variant==='hk'?'HONG KONG BASICS':'AMERICAN PRACTICE')+' / FOUR PLAYERS',title,subtitle)}
+      <div class="stats-grid table-stats"><div class="stat"><span>Remaining wall</span><strong>${g.wall.length}</strong></div><div class="stat"><span>Round status</span><strong class="stat-status">${g.phase==='charleston'?'Charleston':g.phase==='claims'?'Claims open':g.phase==='finished'?'Hand ended':'In play'}</strong></div><div class="stat"><span>Active seat</span><strong>${g.players[active].name}</strong></div><div class="stat"><span>Completed games</span><strong>${state.stats[state.mode]||0}</strong></div></div>
+      <div class="arena"><div class="arena-label"><span>✦ THE FELT TABLE</span><span>${g.settings.opponents==='bots'?'SOLO VS. THREE BOTS':'FOUR LOCAL PLAYERS'}</span></div><div class="arena-grid"><div class="arena-seat-top">${seatMarkup(g.players[2],2,active,g)}</div><div class="arena-seat-left">${seatMarkup(g.players[3],3,active,g)}</div><div class="discard-pond">${pondMarkup(g)}</div><div class="arena-seat-right">${seatMarkup(g.players[1],1,active,g)}</div><div class="arena-seat-bottom">${seatMarkup(g.players[0],0,active,g)}</div></div></div>
+      ${actionMarkup(g,active)}${handMarkup(g,active)}
+      <div class="table-footer">${btn('↻ &nbsp; New hand','new-table','secondary')}${btn('⚙ &nbsp; Change table settings','change-settings','secondary')}<span class="muted">${escapeHTML(g.log[0]||'')}</span></div>${cardMarkup(g)}
+      <div class="turn-history"><h3>Table notes</h3><ol>${g.log.slice(0,7).map(t=>`<li>${escapeHTML(t)}</li>`).join('')}</ol></div>`;
+  }
+  function privacyCurtain(){
+    if(state.curtain===null)return '';
+    const p=currentGame()?.players[state.curtain];if(!p)return '';
+    return `<div class="curtain" role="dialog" aria-modal="true" aria-label="Private hand handoff"><div class="curtain-content"><div class="curtain-lock">♧</div><p class="eyebrow">PRIVATE HAND · ONE DEVICE</p><h2>Pass to ${p.name}.</h2><p>Other players, please look away. Only ${p.name} should see the next rack or discard opportunity.</p>${btn('I am '+p.name+' · Reveal my hand →','reveal','primary')}</div></div>`;
+  }
+  function render(){
+    const which=state.mode;
+    root.innerHTML=`<div class="shell" data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
+    maybeGuard();schedulePump();
+  }
+  function activeHumanSeat(){
+    if(state.mode==='solitaire')return null;
+    const g=currentGame();if(!g||g.phase==='finished')return null;
+    const seat=g.who();return !g.isBotSeat(seat)?seat:null;
+  }
+  function maybeGuard(){
+    const g=currentGame();if(state.mode==='solitaire'||!g?.settings||g.settings.opponents!=='local'||g.phase==='finished'||state.curtain!==null)return;
+    const seat=activeHumanSeat();if(seat!==null&&seat!==state.lastSeat){state.curtain=seat;root.insertAdjacentHTML('beforeend',privacyCurtain());}
+  }
+  function schedulePump(){
+    clearTimeout(pumpTimer);pumpTimer=null;
+    if(state.mode==='solitaire'||state.curtain!==null)return;
+    const g=currentGame();if(!g||g.phase==='finished')return;
+    if(g.isBotSeat(g.who()))pumpTimer=setTimeout(()=>{
+      try{if(g.botStep()){
+        if(g.phase==='finished'&&g.result.kind==='win')saveWin(state.mode);
+        state.selected=null;state.passSelected.clear();render();
+      }}catch(err){notify('A table action could not complete: '+err.message);render();}
+    },270);
+  }
+  root.addEventListener('click',e=>{
+    const control=e.target.closest('[data-act]');if(!control)return;
+    const act=control.dataset.act;
+    try{
+      if(act==='switch'){switchMode(control.dataset.mode);return;}
+      if(act==='toggle-guide'){state.showGuide=!state.showGuide;render();return;}
+      if(act==='tile-guide'){state.showTileGuide=true;render();root.querySelector('.tile-help-close')?.focus();return;}
+      if(act==='close-tile-guide'){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();return;}
+      if(act==='layout'){state.games.solitaire.newGame(control.dataset.layout);render();return;}
+      if(act==='sol-pick'){
+        const g=state.games.solitaire,action=g.choose(control.dataset.tileId);
+        if(action.action==='match'&&action.completed){g.finishedSeconds=Math.floor((Date.now()-g.startedAt)/1000);saveWin('solitaire');notify('You cleared the board!');}
+        if(action.action==='nomatch')notify('Those tiles do not match. Try another pair.');render();return;
+      }
+      if(act==='new-sol'){state.games.solitaire.newGame();render();return;}
+      if(act==='undo'){if(state.games.solitaire.undo())notify('The last pair is back.');render();return;}
+      if(act==='hint'){if(!state.games.solitaire.hint().length)notify('No match available. Shuffle or Undo to continue.');render();return;}
+      if(act==='shuffle'){if(state.games.solitaire.reshuffle())notify(state.games.solitaire.reflowed?'Remaining tiles reorganized into an open rescue layout. Undo history cleared.':'Remaining tiles reshuffled into a solvable arrangement. Undo history cleared.');render();return;}
+      if(act==='opponents'){state.settings.opponents=control.dataset.value;render();return;}
+      if(act==='start-table'||act==='new-table'){
+        const g=state.mode==='hongkong'?new M.HongKongTable(state.settings):new M.AmericanTable(state.settings);
+        state.games[state.mode]=g;state.curtain=null;state.lastSeat=-1;state.selected=null;state.passSelected.clear();render();return;
+      }
+      if(act==='change-settings'){state.games[state.mode]=null;state.curtain=null;state.lastSeat=-1;render();return;}
+      if(act==='reveal'){state.lastSeat=state.curtain;state.curtain=null;render();return;}
+      const g=currentGame();if(!g)return;
+      if(state.curtain!==null)return;
+      if(act==='goal'){state.goal=Number(control.dataset.goal);render();return;}
+      if(act==='hand-pick'){
+        const id=+control.dataset.id;
+        if(g.phase==='charleston'){
+          const tile=g.players[g.charSeat].hand.find(t=>t.id===id);
+          if(tile?.type==='j'){notify('Jokers cannot be passed during the Charleston.');render();return;}
+          if(state.passSelected.has(id))state.passSelected.delete(id);else if(state.passSelected.size<3)state.passSelected.add(id);else notify('You have already selected three tiles.');
+        }else state.selected=state.selected===id?null:id;
+        render();return;
+      }
+      if(act==='submit-pass'){g.submitPass(g.charSeat,[...state.passSelected]);state.passSelected.clear();state.selected=null;render();return;}
+      if(act==='discard'){if(state.selected===null){notify('Select a tile from your rack first.');render();return;}g.discard(g.current,state.selected);state.selected=null;render();return;}
+      if(act==='claim'){g.submitClaim(g.offered().seat,control.dataset.code);state.selected=null;render();return;}
+      if(act==='win'){g.declareWin(g.current,true);saveWin(state.mode);render();return;}
+      if(act==='kong'){g.declareKong(g.current,control.dataset.type);render();return;}
+      if(act==='joker-swap'){g.exchangeJoker(g.current,+control.dataset.seat,+control.dataset.meld);notify('Joker redeemed! The exposed set still has its original tile value.');render();return;}
+    }catch(err){notify(err.message);render();}
+  });
+  root.addEventListener('change',e=>{
+    if(e.target.dataset.appearance==='theme'){
+      if(THEMES.some(([id])=>id===e.target.value))state.appearance.theme=e.target.value;
+      saveAppearance();render();return;
+    }
+    if(e.target.dataset.appearance==='indices'){
+      state.appearance.indices=e.target.checked;saveAppearance();render();return;
+    }
+    const key=e.target.dataset.setting;if(!key)return;
+    if(key==='secondCharleston')state.settings.secondCharleston=e.target.value==='true';
+    if(key==='minFan')state.settings.minFan=Number(e.target.value);
+    render();
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.showTileGuide){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();}});
+  setInterval(()=>{
+    if(state.mode!=='solitaire')return;
+    const t=state.games.solitaire;
+    const cell=document.querySelector('[data-timer]');if(cell)cell.textContent=C.elapsed(t.finishedSeconds??Math.floor((Date.now()-t.startedAt)/1000));
+  },1000);
+  render();
+})(globalThis.Mahjong=globalThis.Mahjong||{});
