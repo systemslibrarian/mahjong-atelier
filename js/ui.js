@@ -3,7 +3,7 @@
   'use strict';
   const C=M.core;
   const root=document.getElementById('app');
-  const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:false,minFan:0},passSelected:new Set(),selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
+  const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,learning:false,games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:false,minFan:0},passSelected:new Set(),selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
   let pumpTimer=null,toastTimer=null,timerInterval=null;
   const THEMES=[['ivory','Classic Ivory'],['minimal','Modern Minimal'],['neon','Neon Night'],['pastel','Cozy Pastel']];
   function readAppearance(){
@@ -31,7 +31,7 @@
   }
   function header(){
     const tabs=[['solitaire','layers','Solitaire'],['hongkong','users','Hong Kong'],['american','star','American']];
-    return `<header class="masthead"><div class="identity"><div class="logo-tile" aria-hidden="true">中</div><div><div class="brand-name">MAHJONG <em>ATELIER</em></div><div class="brand-sub">Three ways to make your move</div></div></div><div class="masthead-right"><span class="offline-pill"><span class="signal"></span> FREE · OFFLINE</span>${btn('ⓘ &nbsp; How to play','toggle-guide','header-btn')}</div></header><nav class="game-nav" aria-label="Game mode">${tabs.map(([mode,ico,text])=>`<button type="button" class="game-tab ${state.mode===mode?'on':''}" data-act="switch" data-mode="${mode}" aria-current="${state.mode===mode?'page':'false'}"><span class="tab-icon">${mode==='solitaire'?'◈':mode==='hongkong'?'♟':'✦'}</span><span>${text}</span><span class="tab-suffix">${mode==='solitaire'?'01':mode==='hongkong'?'02':'03'}</span></button>`).join('')}</nav>`;
+    return `<header class="masthead"><div class="identity"><div class="logo-tile" aria-hidden="true">中</div><div><div class="brand-name">MAHJONG <em>ATELIER</em></div><div class="brand-sub">Three ways to make your move</div></div></div><div class="masthead-right"><span class="offline-pill"><span class="signal"></span> FREE · OFFLINE</span>${btn('ⓘ &nbsp; How to play','learn','header-btn')}</div></header><nav class="game-nav" aria-label="Game mode">${tabs.map(([mode,ico,text])=>`<button type="button" class="game-tab ${state.mode===mode?'on':''}" data-act="switch" data-mode="${mode}" aria-current="${state.mode===mode?'page':'false'}"><span class="tab-icon">${mode==='solitaire'?'◈':mode==='hongkong'?'♟':'✦'}</span><span>${text}</span><span class="tab-suffix">${mode==='solitaire'?'01':mode==='hongkong'?'02':'03'}</span></button>`).join('')}</nav>`;
   }
   function appearanceBar(){
     return `<div class="appearance-bar" aria-label="Tile appearance"><div class="appearance-intro"><span class="appearance-sparkle">✧</span><span><strong>Find your tile style</strong><small>Same tiles, same rules. Just a different look.</small></span></div><div class="appearance-controls"><label class="appearance-picker" for="tile-style"><span>DESIGN</span><select id="tile-style" data-appearance="theme">${THEMES.map(([key,label])=>`<option value="${key}" ${state.appearance.theme===key?'selected':''}>${label}</option>`).join('')}</select></label><label class="indices-label"><input type="checkbox" data-appearance="indices" ${state.appearance.indices?'checked':''}/><span>English indices</span></label><button type="button" class="tile-help-trigger" data-act="tile-guide">◈ &nbsp; Learn the tiles</button></div></div>`;
@@ -47,7 +47,7 @@
     if(!state.showGuide)return '';
     if(mode==='solitaire')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>01 / 03</span></div><h3>A quiet game of strategy.</h3><p>Find two matching <strong>free tiles</strong>. A tile is free when nothing rests directly on it and at least one horizontal side is open.</p><div class="tip-list"><div><span class="tip-icon">01</span><span><b>Work from the top</b><small>Peel away layers to reveal the tiles below.</small></span></div><div><span class="tip-icon">02</span><span><b>Plan your pairs</b><small>A match now can block a better match later.</small></span></div><div><span class="tip-icon">03</span><span><b>Rescue your run</b><small>Use Hint, Undo, or Shuffle when stuck; Shuffle can flatten a trapped stack.</small></span></div></div><div class="guide-note">Each new deal is built from at least one valid full-clearing sequence. Some choices can still lead to a dead end.</div></aside>`;
     if(mode==='hongkong')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>02 / 03</span></div><h3>Build your winning hand.</h3><p>Work toward <strong>four melds and one pair</strong>. Each turn, draw and discard. Call an opponent's latest discard when eligible.</p><div class="tip-list"><div><span class="tip-icon">吃</span><span><b>Chow</b><small>Three consecutive numbers of one suit. Only from the player before you.</small></span></div><div><span class="tip-icon">碰</span><span><b>Pung / Kong</b><small>Three or four identical tiles; Kong draws a replacement.</small></span></div><div><span class="tip-icon">胡</span><span><b>Mahjong</b><small>A complete hand; declare it before discarding.</small></span></div></div><div class="guide-note">Beginner rules use 136 tiles and default to no minimum faan. The optional 3-faan setting uses a limited teaching score model, not tournament scoring. Special hands and added Kongs are not yet included.</div></aside>`;
-    return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>03 / 03</span></div><h3>Play the American way.</h3><p>Build a hand matching <strong>one complete line</strong> on the original practice card. This is not an official NMJL annual card.</p><div class="tip-list"><div><span class="tip-icon">↗</span><span><b>Charleston</b><small>Pass three non-Joker tiles: Right, Across, Left. Optional second round reverses direction.</small></span></div><div><span class="tip-icon">★</span><span><b>Jokers</b><small>Use in groups of three or more, never singles or pairs.</small></span></div><div><span class="tip-icon">↔</span><span><b>Joker exchange</b><small>Trade a natural tile for an exposed matching Joker on your turn.</small></span></div></div><div class="guide-note">This original-card learning edition omits blind/courtesy passes, official hand categories, full exposure restrictions, and NMJL scoring. An officially licensed annual card would require separate integration.</div></aside>`;
+    return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>03 / 03</span></div><h3>Play the American way.</h3><p>Build a hand matching <strong>one complete line</strong> on the original practice card. This is not an official NMJL annual card.</p><div class="tip-list"><div><span class="tip-icon">↗</span><span><b>Charleston</b><small>Pass three non-Joker tiles: Right, Across, Left. Optional second round reverses direction.</small></span></div><div><span class="tip-icon">★</span><span><b>Jokers</b><small>Use in groups of three or more, never singles or pairs.</small></span></div><div><span class="tip-icon">↔</span><span><b>Joker exchange</b><small>Trade a natural tile for a matching Joker in your own exposed set on your turn.</small></span></div></div><div class="guide-note">This original-card learning edition omits blind/courtesy passes, official hand categories, full exposure restrictions, and NMJL scoring. An officially licensed annual card would require separate integration.</div></aside>`;
   }
   function solitaireView(){
     const g=currentGame(),positions=g.tiles,free=new Set(g.available().map(t=>t.id));
@@ -72,7 +72,7 @@
   }
   function seatMarkup(p,seat,active,game){
     let special=p.seat===active?' active':'';
-    let exposed=p.melds.length?`<div class="seat-melds">${p.melds.map((m,i)=>`<div title="${m.kind} · ${C.name(m.type)}" class="exposed-meld"><span class="meld-icon">${m.kind==='chow'?'≋':m.kind==='kong'?'▣':'◈'}</span> ${escapeHTML(m.kind.toUpperCase())} <strong>${escapeHTML(C.name(m.type))}</strong>${m.tiles.some(t=>t.type==='j')&&game.variant==='american'&&game.phase==='discard'&&!game.players[game.current].bot&&game.players[game.current].hand.some(t=>t.type===m.type)?`<button type="button" class="swap-btn" data-act="joker-swap" data-seat="${seat}" data-meld="${i}" title="Exchange matching tile for exposed Joker">↔ Joker</button>`:''}</div>`).join('')}</div>`:'<span class="seat-meta">No exposed sets</span>';
+    let exposed=p.melds.length?`<div class="seat-melds">${p.melds.map((m,i)=>`<div title="${m.kind} · ${C.name(m.type)}" class="exposed-meld"><span class="meld-icon">${m.kind==='chow'?'≋':m.kind==='kong'?'▣':'◈'}</span> ${escapeHTML(m.kind.toUpperCase())} <strong>${escapeHTML(C.name(m.type))}</strong>${m.tiles.some(t=>t.type==='j')&&game.variant==='american'&&seat===game.current&&game.phase==='discard'&&!game.players[game.current].bot&&game.players[game.current].hand.some(t=>t.type===m.type)?`<button type="button" class="swap-btn" data-act="joker-swap" data-seat="${seat}" data-meld="${i}" title="Exchange matching tile for exposed Joker">↔ Joker</button>`:''}</div>`).join('')}</div>`:'<span class="seat-meta">No exposed sets</span>';
     return `<div class="seat seat-${seat}${special}"><div class="seat-heading"><span class="wind-chip">${['東','南','西','北'][seat]}</span><span><strong>${p.name}</strong><small>${p.bot?'BOT':'LOCAL PLAYER'}</small></span>${p.seat===active?'<span class="turn-pin">● TURN</span>':''}</div><div class="seat-tiles"><span>▥ ${p.hand.length} concealed</span><span>◫ ${p.discards.length} discards</span></div>${exposed}</div>`;
   }
   function compactTile(type){
@@ -126,7 +126,7 @@
   }
   function render(){
     const which=state.mode;
-    root.innerHTML=`<div class="shell" data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
+    root.innerHTML=`<div class="shell" data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Step-by-step rules, illustrated examples, strategy, and a practice question.</p>${btn('Open lessons →','learn','primary')}</div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
     maybeGuard();schedulePump();
   }
   function activeHumanSeat(){
@@ -140,7 +140,7 @@
   }
   function schedulePump(){
     clearTimeout(pumpTimer);pumpTimer=null;
-    if(state.mode==='solitaire'||state.curtain!==null)return;
+    if(state.learning||state.mode==='solitaire'||state.curtain!==null)return;
     const g=currentGame();if(!g||g.phase==='finished')return;
     if(g.isBotSeat(g.who()))pumpTimer=setTimeout(()=>{
       try{if(g.botStep()){
@@ -153,6 +153,7 @@
     const control=e.target.closest('[data-act]');if(!control)return;
     const act=control.dataset.act;
     try{
+      if(act==='learn'){state.learning=true;clearTimeout(pumpTimer);M.openLessons(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
       if(act==='switch'){switchMode(control.dataset.mode);return;}
       if(act==='toggle-guide'){state.showGuide=!state.showGuide;render();return;}
       if(act==='tile-guide'){state.showTileGuide=true;render();root.querySelector('.tile-help-close')?.focus();return;}
@@ -215,3 +216,4 @@
   },1000);
   render();
 })(globalThis.Mahjong=globalThis.Mahjong||{});
+

@@ -10,6 +10,16 @@ A browser-based, offline-first Mahjong game with three modes and four interchang
 
 This is **not** an online multiplayer service. It does not include Riichi rules, full Hong Kong tournament scoring, or licensed annual American card patterns. These are distinct projects rather than mere appearances.
 
+## In-depth learning
+
+Use **Open lessons** above the game or **How to play** in the header. Each variant has its own chapter navigation, illustrated tile examples, turn instructions, strategy routine, and a practice question with explanatory feedback. Lessons pause computer turns, preserve the current game, and support keyboard navigation and Escape to close.
+
+- Solitaire: free-tile tests, bonus matching, planning pairs, and recovery tools.
+- Hong Kong Basics: melds, claims, waits, and the exact simplified faan table.
+- American Practice: all six original patterns, Charleston, exposures, natural pairs, and Joker use.
+
+Guides explicitly distinguish the implemented rules from full traditional or NMJL play. American Joker redemption is limited to your own exposures; the UI only offers those supported exchanges. Lessons are also bundled into the standalone offline file.
+
 ## Tile styles
 
 The tile engine renders each face with built-in SVG and readable text (no network assets):
@@ -46,6 +56,7 @@ Visit `http://localhost:8000`.
 - `js/table.js`: four-player table state
 - `js/hongkong.js`: Hong Kong beginner rules
 - `js/american.js`: American practice rules
+- `js/learn.js`: variant-specific lesson content and accessible lesson dialog
 - `js/ui.js`: UI, controls, in-browser preferences and teaching modal
 - `build.py`: build the single-file `Mahjong_Atelier.html`
 - `tests/engine.test.cjs`: game engine regression tests (Node built-in test runner)
