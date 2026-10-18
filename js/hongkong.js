@@ -60,9 +60,15 @@
         for(const start of [n-2,n-1,n]){
           if(start<1||start>7)continue;
           const needed=[start,start+1,start+2].filter(x=>x!==n).map(x=>suit+x);
-          let t1=hand.find(t=>t.type===needed[0]),t2=hand.find(t=>t.type===needed[1]);
-          if(t1&&t2){let use=[t1.id,t2.id];
-            options.push({code:'chow-'+start,kind:'chow',type:suit+start,use,priority:40,title:`Chow · ${start}–${start+1}–${start+2} ${M.core.SUIT_NAMES[suit]}`});}
+          const neededTiles = [];
+          for(const t of hand) {
+            if(t.type === needed[0] && !neededTiles.some(nt => nt.id === t.id)) neededTiles.push(t);
+            if(t.type === needed[1] && !neededTiles.some(nt => nt.id === t.id)) neededTiles.push(t);
+            if(neededTiles.length === 2) break;
+          }
+          if(neededTiles.length === 2) {
+            options.push({code:'chow-'+start,kind:'chow',type:suit+start,use:neededTiles.map(t=>t.id),priority:40,title:`Chow · ${start}–${start+1}–${start+2} ${M.core.SUIT_NAMES[suit]}`});
+          }
         }
       }
       return options;

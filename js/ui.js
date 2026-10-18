@@ -4,7 +4,7 @@
   const C=M.core;
   const root=document.getElementById('app');
   const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:false,minFan:0},passSelected:new Set(),selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
-  let pumpTimer=null,toastTimer=null;
+  let pumpTimer=null,toastTimer=null,timerInterval=null;
   const THEMES=[['ivory','Classic Ivory'],['minimal','Modern Minimal'],['neon','Neon Night'],['pastel','Cozy Pastel']];
   function readAppearance(){
     try{
@@ -24,6 +24,7 @@
   function currentGame(){return state.games[state.mode];}
   function switchMode(mode){
     clearTimeout(pumpTimer);pumpTimer=null;
+    if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
     state.mode=mode;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
     document.title='Mahjong Atelier · '+({solitaire:'Solitaire',hongkong:'Hong Kong',american:'American'}[mode]);
     render();
@@ -207,7 +208,7 @@
     render();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.showTileGuide){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();}});
-  setInterval(()=>{
+  timerInterval=setInterval(()=>{
     if(state.mode!=='solitaire')return;
     const t=state.games.solitaire;
     const cell=document.querySelector('[data-timer]');if(cell)cell.textContent=C.elapsed(t.finishedSeconds??Math.floor((Date.now()-t.startedAt)/1000));

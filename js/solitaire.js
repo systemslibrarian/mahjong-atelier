@@ -13,9 +13,10 @@
   }
   function free(pos,occ) {
     if(!occ.has(pos.id))return false;
-    for(const n of occ.values())if(n.z>pos.z && n.x===pos.x && n.y===pos.y)return false;
-    const left=[...occ.values()].some(n=>n.z===pos.z&&n.y===pos.y&&n.x===pos.x-1);
-    const right=[...occ.values()].some(n=>n.z===pos.z&&n.y===pos.y&&n.x===pos.x+1);
+    const occVals = [...occ.values()];
+    for(const n of occVals)if(n.z>pos.z && n.x===pos.x && n.y===pos.y)return false;
+    const left=occVals.some(n=>n.z===pos.z&&n.y===pos.y&&n.x===pos.x-1);
+    const right=occVals.some(n=>n.z===pos.z&&n.y===pos.y&&n.x===pos.x+1);
     return !left||!right;
   }
   function removalOrder(positions, random=Math.random){
@@ -56,6 +57,7 @@
     freeId(id){const p=this.tiles.find(t=>t.id===id);return !!p && free(p,this.occupied());}
     pairs(){const arr=this.available(),out=[];for(let i=0;i<arr.length;i++)for(let j=i+1;j<arr.length;j++)if(matchKey(arr[i].tile.type)===matchKey(arr[j].tile.type))out.push([arr[i].id,arr[j].id]);return out;}
     choose(id){
+      if(this.finished)return {action:'locked'};
       if(!this.freeId(id))return {action:'locked'};
       if(this.selected===id){this.selected=null;return {action:'deselect'};}
       if(!this.selected){this.selected=id;return {action:'select'};}

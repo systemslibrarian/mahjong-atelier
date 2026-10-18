@@ -106,6 +106,7 @@
     }
     exchangeJoker(seat,fromSeat,meldIndex){
       if(this.phase!=='discard'||seat!==this.current)throw Error('Joker exchange is only available on your turn');
+      if(fromSeat !== seat)throw Error('Can only exchange from your own exposed melds');
       const m=this.players[fromSeat]?.melds[meldIndex];if(!m||!m.tiles.some(t=>t.type==='j'))throw Error('No Joker to redeem');
       const p=this.players[seat],natural=p.hand.find(t=>t.type===m.type);
       if(!natural)throw Error('You need a natural matching tile');

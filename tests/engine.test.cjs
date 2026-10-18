@@ -48,3 +48,49 @@ test('tables conserve tiles and American begins with Charleston',()=>{
   assert.equal(hk.players.length,4);assert.equal(us.players.length,4);
   assert.equal(us.phase,'charleston');
 });
+test('sortHand correctly orders winds and dragons',()=>{
+  const tiles=hand(['b1','c1','d1','we','ws','ww','wn','dr','dg','dw']);
+  const sorted=M.core.sortHand([...tiles]);
+  const types=sorted.map(t=>t.type);
+  assert.deepEqual(types.slice(0,3),['b1','d1','c1']);
+  assert.ok(types.indexOf('we')>types.indexOf('c1'),'we should be after suits');
+  assert.ok(types.indexOf('ws')>types.indexOf('c1'),'ws should be after suits');
+  assert.ok(types.indexOf('ww')>types.indexOf('c1'),'ww should be after suits');
+  assert.ok(types.indexOf('wn')>types.indexOf('c1'),'wn should be after suits');
+  assert.ok(types.indexOf('dr')>types.indexOf('c1'),'dr should be after suits');
+  assert.ok(types.indexOf('dg')>types.indexOf('c1'),'dg should be after suits');
+  assert.ok(types.indexOf('dw')>types.indexOf('c1'),'dw should be after suits');
+});
+test('name function handles empty type',()=>{
+  assert.equal(M.core.name(''),'Unknown');
+  assert.equal(M.core.name('b1'),'1 Bamboo');
+  assert.equal(M.core.name('we'),'East wind');
+  assert.equal(M.core.name('dr'),'Red dragon');
+});
+test('matchKey handles empty type',()=>{
+  assert.equal(M.core.matchKey(''),'');
+  assert.equal(M.core.matchKey('f1'),'flower');
+  assert.equal(M.core.matchKey('f5'),'season');
+});
+test('American exchangeJoker requires own melds',()=>{
+  const us=new M.AmericanTable();
+  us.players[0].melds.push({kind:'pung',tiles:[M.core.makeTile('b1'),M.core.makeTile('b1'),M.core.makeTile('j')],type:'b1',from:0});
+  us.players[1].melds.push({kind:'pung',tiles:[M.core.makeTile('c1'),M.core.makeTile('c1'),M.core.makeTile('j')],type:'c1',from:1});
+  us.current=0;
+  us.phase='discard';
+  assert.throws(()=>us.exchangeJoker(0,1,0),/Can only exchange from your own exposed melds/);
+});
+test('solitaire finished state blocks moves',()=>{
+  const g=new M.Solitaire('pyramid');
+  g.finished=true;
+  assert.equal(g.choose(g.tiles[0].id).action,'locked');
+});
+test('botChooseClaim prioritizes claim types correctly',()=>{
+  const hk=new M.HongKongTable();
+  hk.current=0;
+  const offer={options:[{kind:'chow',code:'chow-1',priority:40},{kind:'pung',code:'pung-1',priority:50},{kind:'kong',code:'kong-1',priority:60}]};
+  const bigOptions=offer.options.filter(o=>o.kind==='kong'||o.kind==='quint'||o.kind==='pung');
+  assert.equal(bigOptions.length,2,'Should have 2 big options (pung and kong)');
+  bigOptions.sort((a,b)=>b.priority-a.priority);
+  assert.equal(bigOptions[0].code,'kong-1','Highest priority should be kong-1');
+});

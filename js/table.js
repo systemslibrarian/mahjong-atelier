@@ -70,8 +70,11 @@
     }
     botChooseClaim(offer){
       const win=offer.options.find(o=>o.kind==='win');if(win)return win.code;
-      const big=offer.options.find(o=>o.kind==='kong')||offer.options.find(o=>o.kind==='quint')||offer.options.find(o=>o.kind==='pung');
-      if(big&&Math.random()<.55)return big.code;
+      const bigOptions=offer.options.filter(o=>o.kind==='kong'||o.kind==='quint'||o.kind==='pung');
+      if(bigOptions.length>0){
+        bigOptions.sort((a,b)=>b.priority-a.priority);
+        if(Math.random()<.55)return bigOptions[0].code;
+      }
       const chow=offer.options.find(o=>o.kind==='chow');if(chow&&Math.random()<.23)return chow.code;
       return 'pass';
     }

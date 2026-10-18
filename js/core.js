@@ -13,12 +13,13 @@
   let uid=0;
   function makeTile(type) { return {id:++uid,type}; }
   function name(type) {
+    if (!type) return 'Unknown';
     if (type==='j') return 'Joker';
     if(type[0]==='f')return FLOWERS[Number(type.slice(1))-1]+' flower';
     if(TITLES[type])return TITLES[type];
     return (type.slice(1)||'')+' '+(SUIT_NAMES[type[0]]||'Tile');
   }
-  function matchKey(type) {if(type[0]==='f')return +type.slice(1)<=4?'flower':'season';return type;}
+  function matchKey(type) {if(!type) return type; if(type[0]==='f')return +type.slice(1)<=4?'flower':'season';return type;}
   function tileset(variant='hk'){
     const types=STANDARD_TYPES.flatMap(type=>Array.from({length:4},()=>makeTile(type)));
     if(variant==='american'){for(let i=1;i<=8;i++)types.push(makeTile('f'+i));for(let i=0;i<8;i++)types.push(makeTile('j'));}
@@ -28,9 +29,9 @@
   function shuffle(arr, random=Math.random){ for(let i=arr.length-1;i>0;i--){let j=Math.floor(random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr;}
   function count(hand,type){return hand.reduce((v,t)=>v+(t.type===type?1:0),0);}
   function countTypes(tiles){let out={}; for(let t of tiles)out[t.type]=(out[t.type]||0)+1;return out;}
-  function sortHand(hand){ const order={b:0,d:1,c:2,w:3,dr:4,dg:4,dw:4,f:5,j:6};
+  function sortHand(hand){ const order={b:0,d:1,c:2,we:3,ws:3,ww:3,wn:3,dr:4,dg:4,dw:4,f:5,j:6};
     return hand.sort((a,b)=>{
-      let ca=a.type[0], cb=b.type[0]; const oa=order[a.type]??order[ca]??7,ob=order[b.type]??order[cb]??7;
+      const oa=order[a.type]??order[a.type[0]]??7,ob=order[b.type]??order[b.type[0]]??7;
       return oa-ob || a.type.localeCompare(b.type,undefined,{numeric:true}) || a.id-b.id;
     });
   }
