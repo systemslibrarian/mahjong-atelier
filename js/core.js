@@ -99,3 +99,4 @@
   function setCountValid(tiles){return tiles.length===136||tiles.length===144||tiles.length===152;}
   M.core={SUITS,HONORS,STANDARD_TYPES, SUIT_NAMES,FLOWERS, tileset, makeTile, shuffle, count, countTypes, sortHand, name, matchKey, tileMarkup,tileButton,elapsed,setCountValid};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
+

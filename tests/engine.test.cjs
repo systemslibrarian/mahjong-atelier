@@ -72,13 +72,12 @@ test('matchKey handles empty type',()=>{
   assert.equal(M.core.matchKey('f1'),'flower');
   assert.equal(M.core.matchKey('f5'),'season');
 });
-test('American exchangeJoker requires own melds',()=>{
-  const us=new M.AmericanTable();
-  us.players[0].melds.push({kind:'pung',tiles:[M.core.makeTile('b1'),M.core.makeTile('b1'),M.core.makeTile('j')],type:'b1',from:0});
-  us.players[1].melds.push({kind:'pung',tiles:[M.core.makeTile('c1'),M.core.makeTile('c1'),M.core.makeTile('j')],type:'c1',from:1});
-  us.current=0;
-  us.phase='discard';
-  assert.throws(()=>us.exchangeJoker(0,1,0),/Can only exchange from your own exposed melds/);
+test('American Joker redemption works across exposures and enforces turn/material',()=>{
+ const us=new M.AmericanTable();us.phase='discard';us.current=0;us.players[0].hand=hand(['c1','b2']);
+ us.players[1].melds=[{kind:'pung',type:'c1',tiles:hand(['c1','c1','j']),from:2}];
+ assert.throws(()=>us.exchangeJoker(1,1,0),/your turn/);
+ us.exchangeJoker(0,1,0);assert.equal(us.players[0].hand.length,2);assert.ok(us.players[0].hand.some(t=>t.type==='j'));assert.ok(us.players[1].melds[0].tiles.every(t=>t.type==='c1'));
+ assert.throws(()=>us.exchangeJoker(0,1,0),/No Joker/);
 });
 test('solitaire finished state blocks moves',()=>{
   const g=new M.Solitaire('pyramid');
@@ -94,3 +93,4 @@ test('botChooseClaim prioritizes claim types correctly',()=>{
   bigOptions.sort((a,b)=>b.priority-a.priority);
   assert.equal(bigOptions[0].code,'kong-1','Highest priority should be kong-1');
 });
+

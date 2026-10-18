@@ -95,3 +95,4 @@
   M.Solitaire=Solitaire;
   M.solitaireTest={coords,free,removalOrder,assignDeal};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
+

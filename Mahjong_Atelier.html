@@ -37,17 +37,17 @@
 .joker-symbol{color:var(--suit-red)}
 .flower-symbol{color:var(--suit-green)}
 .shell[data-indices="hide"] .tile-index{visibility:hidden}
-.shell[data-tile-theme="minimal"] .mj-tile{--tile-face:#fff;--tile-ink:#233d48;--suit-red:#c04744;--suit-green:#277252;--suit-blue:#2a718d;background:#fefefe;border:1px solid #c5d1d1;border-radius:5px;color:#233d48;box-shadow:inset -2px -2px #d5dddd,0 4px 0 #8fa9a3,1px 6px 4px #051c1b66}
-.shell[data-tile-theme="minimal"] .tile-art{filter:saturate(.9)}
-.shell[data-tile-theme="neon"] .mj-tile{--tile-face:#152639;--tile-ink:#effce9;--suit-red:#ff6eaa;--suit-green:#88f4b9;--suit-blue:#5cc9f7;background:linear-gradient(145deg,#1c3148,#10233a 75%,#0b192d);border:1px solid #6be5d8;border-radius:5px;color:#e9fff6;box-shadow:inset -2px -2px 0 #0a1426,0 4px 0 #287d82,0 6px 11px #022038ad}
-.shell[data-tile-theme="neon"] .tile-caption{color:#a4f8d6}
-.shell[data-tile-theme="neon"] .tile-index{color:#ffb0ce}
-.shell[data-tile-theme="neon"] .tile-symbol{text-shadow:0 0 8px #75d6ffa8}
-.shell[data-tile-theme="pastel"] .mj-tile{--tile-face:#fff7ed;--tile-ink:#605b87;--suit-red:#d77a95;--suit-green:#5daba4;--suit-blue:#8a8ed1;background:linear-gradient(145deg,#fffaf3,#fcece7 75%,#f7dfe3);border:1px solid #fffcf4;border-radius:10px;color:#605b87;box-shadow:inset -3px -3px #eacfd7,0 4px 0 #b89bc0,1px 6px 5px #132d2988}
-.shell[data-tile-theme="pastel"] .tile-caption{color:#605b87}
-.shell[data-tile-theme="pastel"] .flower-symbol{color:#c67dba}
-.shell[data-tile-theme] .board-tile.is-selected,.shell[data-tile-theme] .rack .mj-tile.is-selected{box-shadow:0 0 20px #f6d18e9c,0 6px 0 #497d65;outline:3px solid #ffd58d}
-.shell[data-tile-theme="neon"] .board-tile.is-selected,.shell[data-tile-theme="neon"] .rack .mj-tile.is-selected{box-shadow:0 0 20px #70e8fdbf,0 6px 0 #12768f;outline-color:#a3f5ff}
+:is(.shell,.learn-dialog)[data-tile-theme="minimal"] .mj-tile{--tile-face:#fff;--tile-ink:#233d48;--suit-red:#c04744;--suit-green:#277252;--suit-blue:#2a718d;background:#fefefe;border:1px solid #c5d1d1;border-radius:5px;color:#233d48;box-shadow:inset -2px -2px #d5dddd,0 4px 0 #8fa9a3,1px 6px 4px #051c1b66}
+:is(.shell,.learn-dialog)[data-tile-theme="minimal"] .tile-art{filter:saturate(.9)}
+:is(.shell,.learn-dialog)[data-tile-theme="neon"] .mj-tile{--tile-face:#152639;--tile-ink:#effce9;--suit-red:#ff6eaa;--suit-green:#88f4b9;--suit-blue:#5cc9f7;background:linear-gradient(145deg,#1c3148,#10233a 75%,#0b192d);border:1px solid #6be5d8;border-radius:5px;color:#e9fff6;box-shadow:inset -2px -2px 0 #0a1426,0 4px 0 #287d82,0 6px 11px #022038ad}
+:is(.shell,.learn-dialog)[data-tile-theme="neon"] .tile-caption{color:#a4f8d6}
+:is(.shell,.learn-dialog)[data-tile-theme="neon"] .tile-index{color:#ffb0ce}
+:is(.shell,.learn-dialog)[data-tile-theme="neon"] .tile-symbol{text-shadow:0 0 8px #75d6ffa8}
+:is(.shell,.learn-dialog)[data-tile-theme="pastel"] .mj-tile{--tile-face:#fff7ed;--tile-ink:#605b87;--suit-red:#d77a95;--suit-green:#5daba4;--suit-blue:#8a8ed1;background:linear-gradient(145deg,#fffaf3,#fcece7 75%,#f7dfe3);border:1px solid #fffcf4;border-radius:10px;color:#605b87;box-shadow:inset -3px -3px #eacfd7,0 4px 0 #b89bc0,1px 6px 5px #132d2988}
+:is(.shell,.learn-dialog)[data-tile-theme="pastel"] .tile-caption{color:#605b87}
+:is(.shell,.learn-dialog)[data-tile-theme="pastel"] .flower-symbol{color:#c67dba}
+:is(.shell,.learn-dialog)[data-tile-theme] .board-tile.is-selected,:is(.shell,.learn-dialog)[data-tile-theme] .rack .mj-tile.is-selected{box-shadow:0 0 20px #f6d18e9c,0 6px 0 #497d65;outline:3px solid #ffd58d}
+:is(.shell,.learn-dialog)[data-tile-theme="neon"] .board-tile.is-selected,:is(.shell,.learn-dialog)[data-tile-theme="neon"] .rack .mj-tile.is-selected{box-shadow:0 0 20px #70e8fdbf,0 6px 0 #12768f;outline-color:#a3f5ff}
 .appearance-bar{display:flex;gap:18px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:10px;background:#10312caa;padding:12px 16px;margin:-14px 0 28px;flex-wrap:wrap}
 .appearance-intro{display:flex;align-items:center;gap:10px;min-width:195px}
 .appearance-sparkle{color:#e2c392;font-size:22px}
@@ -89,6 +89,11 @@
 .learn-dialog{color:var(--text);background:#102d28;border:1px solid #8caa88;border-radius:16px;width:min(1040px,96vw);max-height:90dvh;padding:clamp(16px,3vw,32px);box-shadow:0 24px 90px #0009;line-height:1.75}.learn-dialog::backdrop{background:#031815db}.learn-heading{display:flex;gap:16px;justify-content:space-between;align-items:start}.learn-heading h2{font:normal clamp(26px,4vw,38px) Georgia,serif;margin:0}.learn-intro{color:#c3d4c5;max-width:760px}.learn-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;margin-top:24px}.learn-layout nav{display:flex;flex-direction:column;gap:6px;align-self:start}.learn-layout nav button{background:#153c32;color:#d3e1d2;border:1px solid #41614e;border-radius:7px;text-align:left;padding:11px;font:inherit;line-height:1.4}.learn-layout nav button[aria-current=step]{background:#e6c79b;color:#19382d;font-weight:800}.lesson-body{min-width:0;outline-offset:5px}.lesson-body h3{font:normal 28px Georgia,serif;margin:0 0 18px}.lesson-body p,.lesson-body li{font-size:15px;color:#d7e4d6}.lesson-body li{margin-bottom:10px}.lesson-body strong{color:#fff2d4}.lesson-body a{color:#ffe0a6;text-decoration:underline}.lesson-example{margin:20px 0;padding:16px;background:#1b4538;border:1px solid #50725b;border-radius:9px}.lesson-tiles{display:flex;gap:9px;flex-wrap:wrap;padding-bottom:8px}.lesson-example figcaption{font-size:13px;color:#d7dfc6;margin-top:10px}.lesson-table{overflow-x:auto}.lesson-table table{border-collapse:collapse;width:100%}.lesson-table th,.lesson-table td{padding:9px;text-align:left;border-bottom:1px solid #496951}.lesson-pager{display:flex;justify-content:space-between;gap:10px;margin-top:28px;padding-top:18px;border-top:1px solid #496951}.lesson-answers{display:grid;gap:10px}.lesson-feedback{padding:12px 0;color:#ffe0a6!important}.learn-entry{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 22px;padding:15px 19px;border:1px solid #61795d;border-radius:9px;background:#183b30}.learn-entry p{margin:0;color:#c4d8c5}.learn-entry strong{color:#f1d3a4}.learn-entry .ui-btn{flex-shrink:0}
 @media(max-width:680px){.learn-layout{grid-template-columns:1fr;gap:20px}.learn-layout nav{display:grid;grid-template-columns:1fr 1fr}.learn-layout nav button{font-size:12px;padding:9px}.learn-entry{align-items:start;flex-direction:column}.learn-heading .ui-btn{padding:9px}.lesson-example{padding:10px}.lesson-tiles{gap:7px}.learn-dialog{max-height:94dvh}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.match-ledger{background:#143a30;border:1px solid #557458;border-radius:9px;padding:15px;margin:0 0 18px}.match-ledger p{margin:0 0 10px}.match-ledger>div{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}.match-ledger>div>span{padding:9px;background:#0d2c25;border-radius:6px}.match-ledger strong{color:#f2d4a6}.match-ledger small{color:#b9cdbb}.blind-choice select{background:#102c25;color:#fff;padding:7px;border:1px solid #8ba77a;border-radius:5px}.learn-entry-actions{display:flex;gap:8px;flex-wrap:wrap}.practice-rack{display:flex;gap:9px;flex-wrap:wrap;margin:25px 0;padding:20px 0}.practice-selected{outline:3px solid #ffe0a6!important;transform:translateY(-7px)}.practice-mini-board{position:relative;height:300px;background:#1a543f;border-radius:12px;margin:20px 0;max-width:440px}.practice-mini-board .mj-tile{position:absolute}.practice-boundary{color:#c8d4bd;font-size:12px}.learning-status{padding:10px 0;color:#e6c79b}.lesson-complete{margin-top:20px}.learn-dialog button:focus-visible,.learn-dialog a:focus-visible{outline:3px solid #ffe1a5;outline-offset:3px}.learn-dialog .lesson-body:focus{outline:2px solid #799e79}.lesson-complete[aria-pressed=true]{background:#295a3e}
+@media(max-width:680px){.match-ledger>div{grid-template-columns:1fr 1fr}.practice-rack{gap:8px}.practice-rack .mj-tile{width:48px}.learn-entry-actions{width:100%}}
+.coach-panel{margin-top:22px;padding:20px;background:linear-gradient(130deg,#183d34,#102d27);border:1px solid #668065;border-radius:12px}.coach-heading{display:flex;justify-content:space-between;gap:10px;align-items:center}.coach-heading label{font-weight:800;color:#f4d7a8}.coach-heading small{color:#b9cebc}.coach-panel p{font-size:13px;line-height:1.65;color:#c8dacb}.coach-panel strong{color:#f4d7a8}.coach-review{padding:12px;background:#234c3b;border-left:3px solid #e2bd83}.coach-alternatives{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}.coach-alternatives article{background:#0d2e26;border:1px solid #4e6f54;border-radius:8px;padding:15px}.coach-alternatives h4{font:normal 20px Georgia,serif;margin:0 0 12px;color:#f5d8aa}.coach-boundary{font-size:12px!important}.coach-alternatives .ui-btn{width:100%}
+@media(max-width:820px){.coach-alternatives{grid-template-columns:1fr}.coach-heading{align-items:start;flex-direction:column}}
+.path-motto{font:normal clamp(22px,3vw,30px) Georgia,serif;color:#f5d4a5;margin:20px 0 10px}.path-stages{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0}.path-stages button{background:#163b31;color:#d1e1cf;border:1px solid #537757;border-radius:20px;padding:8px 12px;font-size:12px}.path-stages button[aria-current=step]{background:#edcfa2;color:#163a2d;font-weight:800}.path-stage{background:#173d32;border:1px solid #567456;border-radius:13px;padding:clamp(16px,3vw,28px)}.path-stage h3{font:normal 28px Georgia,serif;margin:0 0 12px}.path-tiles{display:flex;gap:9px;flex-wrap:wrap;padding:18px 0}.path-options{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.path-sources{margin-top:22px;color:#c2d4c3;font-size:12px}.path-sources summary{cursor:pointer;padding:10px 0}.path-sources a{color:#e8c792}.compare-explanation{padding:16px;background:#0d2d25;border-left:3px solid #e5bd7f;line-height:1.7}
 
 </style>
 </head>
@@ -297,113 +302,68 @@
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
 
-
 (function(M){
-  'use strict';
-  const {tileset,shuffle,sortHand, count}=M.core;
-  const WINDS=['East','South','West','North'];
-  class BaseTable {
-    constructor(variant,settings={}){
-      this.variant=variant;
-      this.settings={opponents:'bots',...settings};
-      this.players=WINDS.map((name,i)=>({name,seat:i,hand:[],melds:[],discards:[],bot:this.settings.opponents!=='local'&&i!==0,goal:0}));
-      this.wall=shuffle(tileset(variant));this.current=0;this.phase='discard';this.claimQueue=[];this.claimVotes=[];this.lastDiscard=null;this.winner=null;this.result=null;this.log=[];
-      for(let n=0;n<13;n++)for(let p of this.players)p.hand.push(this.wall.shift());
-      this.players[0].hand.push(this.wall.shift());
-      this.players.forEach(p=>sortHand(p.hand));
-      this.note('East begins with 14 tiles. Choose a tile to discard.');
-    }
-    note(message){this.log.unshift(message);this.log.length=Math.min(this.log.length,30);}
-    who(){if(this.phase==='claims')return this.claimQueue[0]??null; if(this.phase==='charleston')return this.charSeat??null;return this.current;}
-    drawReplacement(seat){if(!this.wall.length)return this.endDraw();const tile=this.wall.pop();this.players[seat].hand.push(tile);sortHand(this.players[seat].hand);this.note(`${this.players[seat].name} draws a Kong replacement.`);return true;}
-    nextTurn(from){if(!this.wall.length)return this.endDraw();this.current=(from+1)%4;const p=this.players[this.current];p.hand.push(this.wall.shift());sortHand(p.hand);this.phase='discard';this.note(`${p.name} draws from the wall.`);}
-    discard(seat,tileId){
-      if(this.phase!=='discard'||seat!==this.current)throw Error('Not your discard turn');
-      const p=this.players[seat],i=p.hand.findIndex(t=>t.id===tileId);
-      if(i<0)throw Error('Tile is not in your hand');
-      const tile=p.hand.splice(i,1)[0];p.discards.push(tile);this.lastDiscard={tile,by:seat};this.note(`${p.name} discarded ${M.core.name(tile.type)}.`);
-      this.claimVotes=[];this.claimQueue=[];
-      for(let step=1;step<=3;step++){
-        const other=(seat+step)%4;
-        if(this.claimOptions(other,tile,seat).length)this.claimQueue.push(other);
-      }
-      if(this.claimQueue.length)this.phase='claims';else this.nextTurn(seat);
-    }
-    offered(){if(this.phase!=='claims'||!this.claimQueue.length)return {seat:null,options:[]};const seat=this.claimQueue[0];return {seat,options:this.claimOptions(seat,this.lastDiscard.tile,this.lastDiscard.by)};}
-    submitClaim(seat,code){
-      const offer=this.offered();if(offer.seat!==seat)throw Error('Claim is not available for this player');
-      if(code!=='pass'){
-        const opt=offer.options.find(o=>o.code===code);
-        if(!opt)throw Error('Unknown claim');
-        this.claimVotes.push({seat,option:opt});
-      }
-      this.claimQueue.shift();
-      if(!this.claimQueue.length)this.resolveClaims();
-    }
-    resolveClaims(){
-      if(!this.claimVotes.length){const from=this.lastDiscard.by;this.lastDiscard=null;this.nextTurn(from);return;}
-      const from=this.lastDiscard.by;
-      this.claimVotes.sort((a,b)=>b.option.priority-a.option.priority || ((a.seat-from+4)%4)-((b.seat-from+4)%4));
-      const {seat,option}=this.claimVotes[0];const p=this.players[seat];const thrower=this.players[from];
-      const dropped=thrower.discards.pop();if(!dropped||dropped.id!==this.lastDiscard.tile.id)throw Error('Discard stack mismatch');
-      if(option.kind==='win'){
-        p.hand.push(dropped);sortHand(p.hand);this.lastDiscard=null;this.current=seat;this.declareWin(seat,false);return;
-      }
-      const used=[];
-      for(const id of option.use){const idx=p.hand.findIndex(t=>t.id===id);if(idx<0)throw Error('Claim material missing');used.push(p.hand.splice(idx,1)[0]);}
-      p.melds.push({kind:option.kind,tiles:[...used,dropped],type:option.type||dropped.type,from});
-      this.note(`${p.name} calls ${option.kind.toUpperCase()} on ${thrower.name}'s discard.`);
-      this.current=seat;this.lastDiscard=null;sortHand(p.hand);this.phase='discard';
-      if(option.kind==='kong'&&this.variant==='hk')this.drawReplacement(seat);
-    }
-    isBotSeat(seat){return seat!=null&&this.players[seat].bot;}
-    endDraw(){this.phase='finished';this.result={kind:'draw',message:'The wall is empty. Nobody declared Mahjong.'};this.note(this.result.message);}
-    declareWin(seat,selfDraw=true){
-      const analysis=this.winAnalysis(seat,null,selfDraw);
-      if(!analysis)throw Error('This hand does not satisfy the selected rules');
-      this.current=seat;this.winner=seat;this.phase='finished';this.result={kind:'win',seat,analysis,selfDraw,message:`${this.players[seat].name} calls Mahjong!`};this.note(this.result.message);
-      return this.result;
-    }
-    integrity(){
-      return this.wall.length + this.players.reduce((sum,p)=>sum+p.hand.length+p.discards.length+p.melds.reduce((n,m)=>n+m.tiles.length,0),0);
-    }
-    botChooseClaim(offer){
-      const win=offer.options.find(o=>o.kind==='win');if(win)return win.code;
-      const bigOptions=offer.options.filter(o=>o.kind==='kong'||o.kind==='quint'||o.kind==='pung');
-      if(bigOptions.length>0){
-        bigOptions.sort((a,b)=>b.priority-a.priority);
-        if(Math.random()<.55)return bigOptions[0].code;
-      }
-      const chow=offer.options.find(o=>o.kind==='chow');if(chow&&Math.random()<.23)return chow.code;
-      return 'pass';
-    }
-    botChooseDiscard(seat){
-      const p=this.players[seat],hand=p.hand;
-      const scores=hand.map(t=>{
-        let same=count(hand,t.type)-1,sameScore=3.3*same;
-        if('bdc'.includes(t.type[0])&&t.type.length===2){let x=+t.type.slice(1);for(const other of hand){if(other.id===t.id || other.type[0]!==t.type[0])continue;const dist=Math.abs(+other.type.slice(1)-x);if(dist===1)sameScore+=1.35;if(dist===2)sameScore+=.6;}}
-        if(t.type==='j')sameScore+=99;
-        return sameScore+Math.random()*.3;
-      });
-      return hand[scores.indexOf(Math.min(...scores))].id;
-    }
-    botStep(){
-      if(this.phase==='claims'){
-        const offer=this.offered();if(offer.seat!=null&&this.isBotSeat(offer.seat)){this.submitClaim(offer.seat,this.botChooseClaim(offer));return true;}
-        return false;
-      }
-      if(this.phase==='discard'&&this.isBotSeat(this.current)){
-        if(this.winAnalysis(this.current,null,true)){this.declareWin(this.current,true);return true;}
-        const kongs=this.kongOptions?this.kongOptions(this.current):[];
-        if(kongs.length&&Math.random()<.55){this.declareKong(this.current,kongs[0]);return true;}
-        this.discard(this.current,this.botChooseDiscard(this.current));return true;
-      }
-      return false;
-    }
-  }
-  M.BaseTable=BaseTable;
+'use strict';
+const {tileset,shuffle,sortHand,count}=M.core;
+const WINDS=['East','South','West','North'];
+class BaseTable {
+ constructor(variant,settings={}){
+  this.variant=variant;this.settings={opponents:'bots',...settings};
+  const match=settings.match||{};
+  this.dealer=Number.isInteger(match.dealer)?match.dealer:0;this.round=match.round||0;this.rotations=match.rotations||0;this.handNumber=(match.hands||0)+1;this.scores=(match.scores||[0,0,0,0]).slice();
+  this.expanded=variant==='hk'&&settings.hkProfile==='atelier';this.flowersEnabled=this.expanded&&settings.flowers!==false;
+  this.players=WINDS.map((_,i)=>({name:settings.opponents==='local'?`Player ${i+1}`:i===0?'You':`Player ${i+1}`,seat:i,hand:[],melds:[],flowers:[],discards:[],bot:this.settings.opponents!=='local'&&i!==0}));
+  this.wall=shuffle(tileset(this.flowersEnabled?'solitaire':variant));this.current=this.dealer;this.phase='discard';this.claimQueue=[];this.claimVotes=[];this.lastDiscard=null;this.winner=null;this.result=null;this.log=[];this.lastSource='deal';this.lastDraw=null;this.discardCount=0;this.interrupted=false;
+  for(let n=0;n<13;n++)for(let step=0;step<4;step++)this.drawTile((this.dealer+step)%4,false,'deal');
+  this.drawTile(this.dealer,false,'deal');this.players.forEach(p=>sortHand(p.hand));this.note(`${this.players[this.dealer].name} is East and begins with 14 tiles.`);
+ }
+ windIndex(seat){return (seat-this.dealer+4)%4;}
+ windName(seat){return WINDS[this.windIndex(seat)];}
+ note(message){this.log.unshift(message);this.log.length=Math.min(this.log.length,40);}
+ who(){if(this.phase==='claims'||this.phase==='robkong')return this.claimQueue[0]??null;if(['charleston','secondChoice','courtesyChoice'].includes(this.phase))return this.charSeat;return this.current;}
+ drawTile(seat,replacement=false,source='draw'){
+  while(this.wall.length){const tile=replacement?this.wall.pop():this.wall.shift();if(this.flowersEnabled&&tile.type[0]==='f'){this.players[seat].flowers.push(tile);replacement=true;continue;}this.players[seat].hand.push(tile);this.lastDraw=tile;this.lastSource=source;sortHand(this.players[seat].hand);return tile;}return null;
+ }
+ drawReplacement(seat){if(!this.drawTile(seat,true,'kong'))return this.endDraw();this.note(`${this.players[seat].name} draws a Kong replacement.`);return true;}
+ nextTurn(from){this.current=(from+1)%4;if(!this.drawTile(this.current))return this.endDraw();this.phase='discard';this.note(`${this.players[this.current].name} draws from the wall.`);}
+ discard(seat,tileId){
+  if(this.phase!=='discard'||seat!==this.current)throw Error('Not your discard turn');const p=this.players[seat],i=p.hand.findIndex(t=>t.id===tileId);if(i<0)throw Error('Tile is not in your hand');
+  const tile=p.hand.splice(i,1)[0];p.discards.push(tile);this.discardCount++;this.lastDiscard={tile,by:seat,lastWall:this.wall.length===0};this.note(`${p.name} discarded ${M.core.name(tile.type)}.`);this.claimVotes=[];this.claimQueue=[];
+  for(let step=1;step<=3;step++){const other=(seat+step)%4;if(this.claimOptions(other,tile,seat).length)this.claimQueue.push(other);}
+  if(this.claimQueue.length)this.phase='claims';else{this.lastDiscard=null;this.nextTurn(seat);}
+ }
+ offered(){if(!['claims','robkong'].includes(this.phase)||!this.claimQueue.length)return {seat:null,options:[]};const seat=this.claimQueue[0];return {seat,options:this.phase==='robkong'?this.robOptions(seat):this.claimOptions(seat,this.lastDiscard.tile,this.lastDiscard.by)};}
+ submitClaim(seat,code){const offer=this.offered();if(offer.seat!==seat)throw Error('Claim is not available for this player');if(code!=='pass'){const opt=offer.options.find(o=>o.code===code);if(!opt)throw Error('Unknown claim');this.claimVotes.push({seat,option:opt});}this.claimQueue.shift();if(!this.claimQueue.length)this.resolveClaims();}
+ resolveClaims(){
+  if(this.phase==='robkong')return this.resolveRob();
+  if(!this.claimVotes.length){const from=this.lastDiscard.by;this.lastDiscard=null;this.nextTurn(from);return;}
+  const from=this.lastDiscard.by;this.claimVotes.sort((a,b)=>b.option.priority-a.option.priority||((a.seat-from+4)%4)-((b.seat-from+4)%4));const {seat,option}=this.claimVotes[0],p=this.players[seat],thrower=this.players[from];
+  const dropped=thrower.discards.pop();if(!dropped||dropped.id!==this.lastDiscard.tile.id)throw Error('Discard stack mismatch');
+  if(option.kind==='win'){p.hand.push(dropped);sortHand(p.hand);this.current=seat;this.winningFrom=from;this.declareWin(seat,false);this.lastDiscard=null;return;}
+  const used=option.use.map(id=>p.hand.find(t=>t.id===id));if(used.some(t=>!t))throw Error('Claim material missing');p.hand=p.hand.filter(t=>!option.use.includes(t.id));p.melds.push({kind:option.kind,tiles:[...used,dropped],type:option.type||dropped.type,from});
+  this.note(`${p.name} calls ${option.kind.toUpperCase()} on ${thrower.name}'s discard.`);this.interrupted=true;this.current=seat;this.lastDiscard=null;sortHand(p.hand);this.phase='discard';this.lastSource='claim';if(option.kind==='kong'&&this.variant==='hk')this.drawReplacement(seat);
+ }
+ isBotSeat(seat){return seat!=null&&this.players[seat].bot;}
+ endDraw(){this.phase='finished';this.result={kind:'draw',message:'The wall is empty. Nobody declared Mahjong.',payments:[0,0,0,0]};this.note(this.result.message);return false;}
+ canDeclareWin(seat){return this.phase==='discard'&&this.current===seat&&(this.variant!=='hk'||this.lastSource!=='claim')?this.winAnalysis(seat,null,true):null;}
+ declareWin(seat,selfDraw=true){
+  if(this.phase==='finished'||seat!==this.current||!['discard','claims','robkong'].includes(this.phase))throw Error('Not a winning opportunity');
+  if(selfDraw&&!this.canDeclareWin(seat))throw Error('Draw a winning tile before declaring');const analysis=this.winAnalysis(seat,null,selfDraw);if(!analysis)throw Error('This hand does not satisfy the selected rules');
+  this.winner=seat;this.result={kind:'win',seat,analysis,selfDraw,from:selfDraw?null:this.winningFrom,message:`${this.players[seat].name} calls Mahjong!`};
+  const base=this.paymentBase?this.paymentBase(analysis):1;const payments=this.players.map(p=>p.seat===seat?0:-base*(selfDraw||p.seat===this.winningFrom?2:1));payments[seat]=-payments.reduce((a,b)=>a+b,0);this.result.payments=payments;this.result.base=base;this.scores=this.scores.map((s,i)=>s+payments[i]);this.phase='finished';this.note(this.result.message);return this.result;
+ }
+ nextHand(){
+  if(this.phase!=='finished')throw Error('Finish this hand first');
+  const repeat=this.variant==='hk'&&(this.result.kind==='draw'||this.winner===this.dealer);const rotations=this.rotations+(repeat?0:1);if(rotations>=16)return null;
+  return new this.constructor({...this.settings,match:{dealer:repeat?this.dealer:(this.dealer+1)%4,round:Math.floor(rotations/4),rotations,scores:this.scores,hands:this.handNumber}});
+ }
+ integrity(){return this.wall.length+this.players.reduce((sum,p)=>sum+p.hand.length+p.flowers.length+p.discards.length+p.melds.reduce((n,m)=>n+m.tiles.length,0),0);}
+ botChooseClaim(offer){const win=offer.options.find(o=>o.kind==='win');if(win)return win.code;const big=offer.options.filter(o=>['kong','quint','pung','sextet'].includes(o.kind)).sort((a,b)=>b.priority-a.priority);if(big.length&&Math.random()<.55)return big[0].code;const chow=offer.options.find(o=>o.kind==='chow');return chow&&Math.random()<.23?chow.code:'pass';}
+ botChooseDiscard(seat){const hand=this.players[seat].hand;const scores=hand.map(t=>{let score=3.3*(count(hand,t.type)-1);if(this.variant==='hk'&&/^[bdc][1-9]$/.test(t.type)){for(const o of hand){if(o.id===t.id||o.type[0]!==t.type[0])continue;const d=Math.abs(+o.type.slice(1)-+t.type.slice(1));if(d===1)score+=1.35;if(d===2)score+=.6;}}if(t.type==='j')score+=99;return score+Math.random()*.3;});return hand[scores.indexOf(Math.min(...scores))].id;}
+ botStep(){if(['claims','robkong'].includes(this.phase)){const offer=this.offered();if(this.isBotSeat(offer.seat)){this.submitClaim(offer.seat,this.botChooseClaim(offer));return true;}return false;}if(this.phase==='discard'&&this.isBotSeat(this.current)){if(this.canDeclareWin(this.current)){this.declareWin(this.current,true);return true;}const kongs=this.kongOptions?this.kongOptions(this.current):[];if(kongs.length&&Math.random()<.55){this.declareKong(this.current,kongs[0]);return true;}this.discard(this.current,this.botChooseDiscard(this.current));return true;}return false;}
+}
+M.BaseTable=BaseTable;
 })(globalThis.Mahjong=globalThis.Mahjong||{});
-
 
 
 (function(M){
@@ -429,14 +389,14 @@
     search([],null);
     return result;
   }
-  function fanScore(partition,exposed,seat,selfDraw){
+  function fanScore(partition,exposed,seat,selfDraw,prevailing=0){
     const melds=[...partition.melds,...exposed.map(m=>({kind:m.kind,type:m.type,tiles:m.tiles.map(t=>t.type)}))];
     const vals=[];const pung=melds.filter(m=>m.kind!=='chow');
     let fan=0;
     for(const m of pung){
       if(['dr','dg','dw'].includes(m.type)){fan++;vals.push('Dragon set +1');}
       if(m.type==='w'+['e','s','w','n'][seat]){fan++;vals.push('Seat wind +1');}
-      if(m.type==='we'){fan++;vals.push('Prevailing East +1');}
+      if(m.type==='w'+['e','s','w','n'][prevailing]){fan++;vals.push('Prevailing wind +1');}
     }
     if(pung.length===4){fan+=3;vals.push('All Pungs +3');}
     if(!pung.length){fan++;vals.push('All Chows +1');}
@@ -447,32 +407,64 @@
     if(selfDraw){fan++;vals.push('Self-draw +1');}
     return {fan,details:vals,partition};
   }
+  const honors=M.core.HONORS, terminals=['b1','b9','c1','c9','d1','d9'];
+  function specialHands(tiles,exposed,c){
+    if(exposed.length||tiles.length!==14)return [];const counts=countTypes(tiles),keys=Object.keys(counts),out=[];
+    const add=(name,fan)=>out.push({fan,qualifyingFan:fan,details:[name+' · '+fan+' faan (fixed special-hand score)'],special:name});
+    if([...honors,...terminals].every(t=>counts[t]>=1)&&keys.length===13)add('Thirteen Orphans',10);
+    if(['b','c','d'].some(s=>keys.every(t=>t[0]===s)&&counts[s+'1']>=3&&counts[s+'9']>=3&&[2,3,4,5,6,7,8].every(n=>counts[s+n]>=1)))add('Nine Gates',10);
+    if(c.sevenPairs&&keys.length===7&&keys.every(t=>counts[t]===2))add('Seven distinct pairs (house option)',4);
+    return out;
+  }
+  function extendedScore(partition,exposed,tiles,c){
+    const melds=[...partition.melds,...exposed.map(m=>({...m,tiles:m.tiles.map(t=>t.type)}))],sets=melds.filter(m=>m.kind!=='chow'),all=melds.flatMap(m=>m.tiles).concat(partition.pair,partition.pair);
+    const dragonSets=sets.filter(m=>['dr','dg','dw'].includes(m.type)).length,windSets=sets.filter(m=>m.type[0]==='w').length;
+    const special=[];
+    if(all.every(t=>honors.includes(t)))special.push('All Honors');
+    if(all.every(t=>terminals.includes(t)))special.push('All Terminals');
+    if(windSets===4)special.push('Big Four Winds');
+    if(windSets===3&&partition.pair[0]==='w')special.push('Little Four Winds');
+    if(dragonSets===3)special.push('Three Great Scholars');
+    if(melds.every(m=>m.kind==='kong'))special.push('Four Kongs');
+    if(sets.length===4&&exposed.every(m=>m.concealed)&&c.selfDraw)special.push('Four Concealed Pungs');
+    if(c.heavenly)special.push('Heavenly Hand');if(c.earthly)special.push('Earthly Hand');
+    for(const [dragon,suit,label] of [['dg','b','Jade Dragon'],['dr','c','Ruby Dragon'],['dw','d','Pearl Dragon']])if(sets.length===4&&sets.some(m=>m.type===dragon)&&all.every(t=>t===dragon||t[0]===suit))special.push(label);
+    if(special.length)return {fan:10,qualifyingFan:10,details:[special.join(' / ')+' · 10 faan (fixed limit)'],special:special.join(' / '),partition};
+    const a=fanScore(partition,exposed,c.seat,c.selfDraw,c.prevailing);
+    // Little Three Dragons has a fixed special-hand score in this named profile.
+    if(dragonSets===2&&['dr','dg','dw'].includes(partition.pair))return {fan:4,qualifyingFan:4,details:['Little Three Dragons · 4 faan (fixed special-hand score)'],special:'Little Three Dragons',partition};
+    const add=(label,n=1)=>{a.fan+=n;a.details.push(label+' +'+n);};
+    if(c.source==='robkong'&&!c.selfDraw)add('Robbing added Kong');
+    if(c.source==='kong'&&c.selfDraw)add('Kong replacement');
+    if(c.lastWall)add(c.selfDraw?'Last wall tile':'Last discard');
+    a.qualifyingFan=a.fan;
+    if(c.flowersEnabled){if(!c.flowers.length)add('No Flowers');else{for(const f of c.flowers)if((+f.type.slice(1)-1)%4===c.seat)add('Own Flower/Season');for(const first of [1,5])if([0,1,2,3].every(n=>c.flowers.some(f=>f.type==='f'+(first+n))))add('Complete bonus family',2);}}
+    if(a.fan>10){a.details.push('Capped at 10 faan');a.fan=10;}return a;
+  }
   class HongKongTable extends M.BaseTable {
-    constructor(settings={}){super('hk',settings);this.minFan=Number(settings.minFan||0);this.note(this.minFan?'Practice scoring uses a simplified 3-faan threshold.':'Beginner rules: any four melds and a pair can win.');}
+    constructor(settings={}){super('hk',settings);this.minFan=Number(settings.minFan||0);this.note(this.expanded?'Atelier Hong Kong: special hands, full score breakdown, and four wind rounds.':'Beginner profile: four melds and a pair; simplified faan.');}
     winAnalysis(seat,extra=null,selfDraw=true){
-      const p=this.players[seat],poss=partitions(extra?[...p.hand,extra]:p.hand,p.melds);
-      const candidates=poss.map(g=>fanScore(g,p.melds,seat,selfDraw)).sort((a,b)=>b.fan-a.fan);
-      return candidates.find(c=>c.fan>=this.minFan)||null;
+      const p=this.players[seat],tiles=extra?[...p.hand,extra]:p.hand;
+      const context={seat:this.windIndex(seat),prevailing:this.round,selfDraw,flowers:p.flowers,flowersEnabled:this.flowersEnabled,source:this.phase==='robkong'?'robkong':this.lastSource,lastWall:this.wall.length===0,heavenly:selfDraw&&this.discardCount===0&&!this.interrupted,earthly:!selfDraw&&this.discardCount===1&&!this.interrupted,sevenPairs:this.settings.sevenPairs===true};
+      const candidates=partitions(tiles,p.melds).map(g=>this.expanded?extendedScore(g,p.melds,tiles,context):fanScore(g,p.melds,this.windIndex(seat),selfDraw,this.round));
+      if(this.expanded)candidates.push(...specialHands(tiles,p.melds,context));
+      return candidates.filter(c=>(c.qualifyingFan??c.fan)>=this.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;
     }
+    paymentBase(a){return this.expanded?(a.fan<4?2**a.fan:a.fan<7?16:a.fan<10?32:64):2**Math.min(a.fan,6);}
     claimOptions(seat,tile,by){
       const hand=this.players[seat].hand,options=[];
       const can=this.winAnalysis(seat,tile,false);
       if(can)options.push({code:'win',kind:'win',priority:100,title:'Mahjong!'});
       if(this.players[seat].melds.length>=4)return options;
       const alike=hand.filter(t=>t.type===tile.type);
-      if(alike.length>=3)options.push({code:'kong',kind:'kong',type:tile.type,use:alike.slice(0,3).map(t=>t.id),priority:60,title:'Kong · four of a kind'});
+      if(alike.length>=3&&this.wall.length)options.push({code:'kong',kind:'kong',type:tile.type,use:alike.slice(0,3).map(t=>t.id),priority:50,title:'Kong · four of a kind'});
       if(alike.length>=2)options.push({code:'pung',kind:'pung',type:tile.type,use:alike.slice(0,2).map(t=>t.id),priority:50,title:'Pung · three of a kind'});
       if((by+1)%4===seat && 'bdc'.includes(tile.type[0])&&tile.type.length===2){
         const n=+tile.type.slice(1), suit=tile.type[0];
         for(const start of [n-2,n-1,n]){
           if(start<1||start>7)continue;
           const needed=[start,start+1,start+2].filter(x=>x!==n).map(x=>suit+x);
-          const neededTiles = [];
-          for(const t of hand) {
-            if(t.type === needed[0] && !neededTiles.some(nt => nt.id === t.id)) neededTiles.push(t);
-            if(t.type === needed[1] && !neededTiles.some(nt => nt.id === t.id)) neededTiles.push(t);
-            if(neededTiles.length === 2) break;
-          }
+          const neededTiles=needed.map(type=>hand.find(t=>t.type===type)).filter(Boolean);
           if(neededTiles.length === 2) {
             options.push({code:'chow-'+start,kind:'chow',type:suit+start,use:neededTiles.map(t=>t.id),priority:40,title:`Chow · ${start}–${start+1}–${start+2} ${M.core.SUIT_NAMES[suit]}`});
           }
@@ -480,16 +472,31 @@
       }
       return options;
     }
-    kongOptions(seat){const p=this.players[seat];if(p.melds.length>=4)return [];
-      return [...new Set(p.hand.filter(t=>count(p.hand,t.type)===4).map(t=>t.type))];}
-    declareKong(seat,type){if(this.phase!=='discard'||this.current!==seat||!this.kongOptions(seat).includes(type))throw Error('Invalid Kong');
-      const p=this.players[seat];const tiles=p.hand.filter(t=>t.type===type).slice(0,4);
-      p.hand=p.hand.filter(t=>!tiles.some(x=>x.id===t.id));p.melds.push({kind:'kong',tiles,type,from:seat,concealed:true});this.note(`${p.name} declares a concealed Kong.`);
-      this.drawReplacement(seat);sortHand(p.hand);
+    kongOptions(seat){
+      const p=this.players[seat];if(this.phase!=='discard'||seat!==this.current||this.lastSource==='claim'||!this.wall.length)return [];
+      const hidden=p.melds.length<4?[...new Set(p.hand.filter(t=>count(p.hand,t.type)===4).map(t=>t.type))]:[];
+      return hidden.concat(this.expanded?p.melds.filter(m=>m.kind==='pung'&&p.hand.some(t=>t.type===m.type)).map(m=>'add:'+m.type):[]);
+    }
+    declareKong(seat,type){
+      if(!this.kongOptions(seat).includes(type))throw Error('Invalid Kong');const p=this.players[seat];
+      if(type.startsWith('add:')){
+        const natural=type.slice(4),tile=p.hand.find(t=>t.type===natural);this.pendingKong={seat,tile,type:natural};this.claimVotes=[];this.claimQueue=[];this.phase='robkong';
+        for(let step=1;step<4;step++){const other=(seat+step)%4;if(this.robOptions(other).length)this.claimQueue.push(other);}
+        this.note(`${p.name} proposes adding a fourth tile to a Pung. Opponents may claim it only to win.`);if(!this.claimQueue.length)this.resolveRob();return;
+      }
+      const tiles=p.hand.filter(t=>t.type===type).slice(0,4);p.hand=p.hand.filter(t=>!tiles.some(x=>x.id===t.id));p.melds.push({kind:'kong',tiles,type,from:seat,concealed:true});this.interrupted=true;this.note(`${p.name} declares a concealed Kong.`);this.drawReplacement(seat);
+    }
+    robOptions(seat){return this.winAnalysis(seat,this.pendingKong.tile,false)?[{code:'win',kind:'win',priority:100,title:'Mahjong · rob the added Kong'}]:[];}
+    resolveRob(){
+      const {seat,tile,type}=this.pendingKong,p=this.players[seat];
+      if(this.claimVotes.length){this.claimVotes.sort((a,b)=>((a.seat-seat+4)%4)-((b.seat-seat+4)%4));const winner=this.claimVotes[0].seat;p.hand=p.hand.filter(t=>t.id!==tile.id);this.players[winner].hand.push(tile);this.current=winner;this.winningFrom=seat;this.declareWin(winner,false);}
+      else {p.hand=p.hand.filter(t=>t.id!==tile.id);const meld=p.melds.find(m=>m.kind==='pung'&&m.type===type);meld.kind='kong';meld.tiles.push(tile);this.interrupted=true;this.phase='discard';this.current=seat;this.drawReplacement(seat);}
+      this.pendingKong=null;
     }
   }
+
   M.HongKongTable=HongKongTable;
-  M.hongkongTest={partitions,fanScore};
+  M.hongkongTest={partitions,fanScore,extendedScore,specialHands};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
 
@@ -499,15 +506,15 @@
   const {count,sortHand,STANDARD_TYPES}=M.core;
   // These are original beginner patterns, NOT an NMJL published annual card.
   const CARD=[
-    {id:'four',name:'Four of a Kindred',groups:[3,3,3,3,2],description:'Four Pungs and one natural Pair.',level:'Starter'},
-    {id:'towers',name:'Three Towers',groups:[4,4,4,2],description:'Three Kongs and one natural Pair.',level:'Strategic'},
-    {id:'parade',name:'Joker Parade',groups:[5,4,3,2],description:'A Quint, a Kong, a Pung and a natural Pair.',level:'Joker practice'},
-    {id:'twins',name:'Twin Comets',groups:[5,5,2,2],description:'Two Quints and two natural Pairs.',level:'Advanced'},
-    {id:'grand',name:'Grand Lantern',groups:[6,3,3,2],description:'A Sextet, two Pungs and a natural Pair.',level:'Advanced'},
-    {id:'blooms',name:'Bloom Festival',groups:[1,1,3,3,4,2],flowers:2,description:'Two individual Flowers, two Pungs, a Kong and a natural Pair.',level:'Flowers'}
+    {id:'four',name:'Four of a Kindred',groups:[3,3,3,3,2],description:'Four Pungs and one natural Pair.',level:'Exposed · 25 points',value:25},
+    {id:'towers',name:'Three Towers',groups:[4,4,4,2],description:'Three Kongs and one natural Pair.',level:'Exposed · 30 points',value:30},
+    {id:'parade',name:'Joker Parade',groups:[5,4,3,2],description:'A Quint, a Kong, a Pung and a natural Pair.',level:'Exposed · 35 points',value:35},
+    {id:'twins',name:'Twin Comets',groups:[5,5,2,2],description:'Two Quints and two natural Pairs.',level:'Concealed · 40 points',value:40,concealed:true},
+    {id:'grand',name:'Grand Lantern',groups:[6,3,3,2],description:'A Sextet, two Pungs and a natural Pair.',level:'Exposed · 40 points',value:40},
+    {id:'blooms',name:'Bloom Festival',groups:[1,1,3,3,4,2],flowers:2,description:'Two individual Flowers, two Pungs, a Kong and a natural Pair.',level:'Exposed · 30 points',value:30}
   ];
   function matchPattern(hand, melds=[],pattern){
-    if(!pattern||hand.length+melds.reduce((v,m)=>v+m.tiles.length,0)!==14)return false;
+    if(!pattern||(pattern.concealed&&melds.length)||hand.length+melds.reduce((v,m)=>v+m.tiles.length,0)!==14)return false;
     // An exposure consumes exactly one identically sized set on this custom card.
     let specs=pattern.groups.map((size,i)=>({size,flower:!!pattern.flowers&&size===1}));
     for(const meld of melds){
@@ -526,14 +533,14 @@
       const [group,...rest]=left;
       const types=group.flower?Object.keys(counts).filter(t=>t[0]==='f'&&counts[t]>0)
         : group.size===2?Object.keys(counts).filter(t=>t!=='j'&&t[0]!=='f'&&counts[t]>=2)
-        : STANDARD_TYPES.filter(t=>(counts[t]||0)>0);
+        : STANDARD_TYPES.filter(t=>(counts[t]||0)>0).concat(j>=group.size?['__joker_only']:[]);
       for(const t of types){
         if(group.flower){counts[t]--;if(dfs(rest,j)){counts[t]++;memo.set(key,true);return true;}counts[t]++;continue;}
         const size=group.size;
-        const from=Math.max(1,size-j),to=Math.min(size,counts[t]);
+        const from=Math.max(size===2?2:0,size-j),to=Math.min(size,counts[t]||0);
         for(let natural=to;natural>=from;natural--){
           if(size===2 && natural!==2)continue;
-          counts[t]-=natural;
+          counts[t]=(counts[t]||0)-natural;
           if(dfs(rest,j-(size-natural))){counts[t]+=natural;memo.set(key,true);return true;}
           counts[t]+=natural;
         }
@@ -545,28 +552,36 @@
   const ROUTE=[{name:'Right',offset:1},{name:'Across',offset:2},{name:'Left',offset:3}];
   class AmericanTable extends M.BaseTable {
     constructor(settings={}){
-      super('american',settings);
-      this.passRoute=[...ROUTE,...(settings.secondCharleston?[{name:'Left',offset:3},{name:'Across',offset:2},{name:'Right',offset:1}]:[])];
-      this.charIndex=0;this.charPicks=[null,null,null,null];this.charSeat=0;this.phase='charleston';this.note('The Charleston begins: each player passes three non-Joker tiles to the right.');
+      super('american',settings);this.passRoute=[...ROUTE];this.charIndex=0;this.charPicks=[null,null,null,null];this.charSeat=0;this.phase='charleston';this.blindPicks=[0,0,0,0];this.secondVotes=[null,null,null,null];this.courtesyOffers=[null,null,null,null];this.note('Charleston: pass three non-Joker tiles to the right.');
     }
+    passCount(seat){return this.passRoute[this.charIndex]?.courtesy?Math.min(this.courtesyOffers[seat],this.courtesyOffers[(seat+2)%4]):3;}
+    canBlind(){return this.phase==='charleston'&&!this.passRoute[this.charIndex]?.courtesy&&[2,5].includes(this.charIndex);}
+    chooseSecond(seat,yes){
+      if(this.phase!=='secondChoice'||seat!==this.charSeat)throw Error('Not your Charleston decision');this.secondVotes[seat]=!!yes;this.charSeat++;
+      if(this.charSeat===4){if(this.secondVotes.every(Boolean)){this.passRoute.push({name:'Left',offset:3},{name:'Across',offset:2},{name:'Right',offset:1});this.phase='charleston';this.charSeat=0;this.note('All players agreed to a second Charleston.');}else{this.note('Second Charleston declined.');this.beginCourtesy();}}
+    }
+    chooseCourtesy(seat,n){
+      if(this.phase!=='courtesyChoice'||seat!==this.charSeat||!Number.isInteger(n)||n<0||n>3)throw Error('Choose a courtesy offer from 0 to 3');this.courtesyOffers[seat]=n;this.charSeat++;
+      if(this.charSeat===4){this.passRoute.push({name:'Across',offset:2,courtesy:true});this.phase='charleston';this.charSeat=0;this.note('Courtesy pairs exchange the smaller of their two offers. Zero declines.');}
+    }
+    beginCourtesy(){this.phase='courtesyChoice';this.charSeat=0;}
+    startPlay(){this.phase='discard';this.current=this.dealer;this.lastSource='deal';this.note('Passing complete. East makes the first discard.');}
     winAnalysis(seat,extra=null){
       const p=this.players[seat],all=extra?[...p.hand,extra]:p.hand;
       const matched=CARD.find(c=>matchPattern(all,p.melds,c));
-      return matched?{card:matched,details:[`Original practice card · ${matched.name}`]}:null;
+      return matched?{card:matched,jokerFree:![...all,...p.melds.flatMap(m=>m.tiles)].some(t=>t.type==='j'),details:[`Original practice card · ${matched.name}`,matched.concealed?'Concealed hand':'Exposures permitted']}:null;
     }
+    paymentBase(a){return a.card.value*(a.jokerFree?2:1);}
+    exposureFits(melds){return CARD.some(c=>{if(c.concealed)return !melds.length;const sizes=c.groups.slice();for(const m of melds){const i=sizes.indexOf(m.tiles.length);if(i<0||m.tiles.length<3)return false;sizes.splice(i,1);}return true;});}
     claimOptions(seat,tile){
-      const hand=this.players[seat].hand,opts=[];
+      if(tile.type==='j')return [];const p=this.players[seat],hand=p.hand,opts=[];
       if(this.winAnalysis(seat,tile,false))opts.push({code:'win',kind:'win',priority:100,title:'Mah Jongg!'});
-      if(tile.type==='j'||tile.type[0]==='f'||this.players[seat].melds.length>=4)return opts;
+      if(tile.type[0]==='f'||p.melds.length>=4)return opts;
       const alike=hand.filter(t=>t.type===tile.type),jokers=hand.filter(t=>t.type==='j');
-      for(const size of [5,4,3]){
-        if(!CARD.some(c=>c.groups.includes(size)))continue;
-        const needed=size-1;
-        if(alike.length+jokers.length<needed)continue;
-        const use=[...alike.slice(0,needed),...jokers.slice(0,Math.max(0,needed-alike.length))].slice(0,needed);
-        if(use.length===needed)opts.push({code:'set-'+size,kind:size===5?'quint':size===4?'kong':'pung',type:tile.type,use:use.map(t=>t.id),priority:60+size,title:`Expose ${size} matching tiles`});
-      }
-      return opts;
+      for(const size of [6,5,4,3]){
+        const needed=size-1,use=[...alike.slice(0,needed),...jokers.slice(0,Math.max(0,needed-alike.length))].slice(0,needed),kind=({3:'pung',4:'kong',5:'quint',6:'sextet'})[size];
+        if(use.length===needed&&this.exposureFits([...p.melds,{tiles:[...use,tile]}]))opts.push({code:'set-'+size,kind,type:tile.type,use:use.map(t=>t.id),priority:50,title:`Expose ${size} matching tiles`});
+      }return opts;
     }
     botPassTiles(seat){
       const p=this.players[seat],hand=p.hand;
@@ -577,32 +592,31 @@
       });
       return candidates.slice(0,3).map(t=>t.id);
     }
-    submitPass(seat,ids){
+    submitPass(seat,ids,blind=0){
       if(this.phase!=='charleston'||seat!==this.charSeat)throw Error('Not the current Charleston seat');
-      if(!Array.isArray(ids)||ids.length!==3||new Set(ids).size!==3)throw Error('Choose exactly three tiles to pass');
-      const p=this.players[seat],picks=ids.map(id=>p.hand.find(t=>t.id===id));
-      if(picks.some(t=>!t||t.type==='j'))throw Error('Jokers may not be passed');
-      this.charPicks[seat]=ids.slice();
-      this.charSeat++;
-      if(this.charSeat===4)this.finishPass();
+      if(!Number.isInteger(blind)||blind<0||blind>3||(blind&&!this.canBlind()))throw Error('Blind passing is only available on the last pass of a Charleston');
+      const wanted=this.passCount(seat)-blind;
+      if(!Array.isArray(ids)||ids.length!==wanted||new Set(ids).size!==wanted)throw Error(`Choose exactly ${wanted} tiles from your rack`);
+      const p=this.players[seat],picks=ids.map(id=>p.hand.find(t=>t.id===id));if(picks.some(t=>!t||t.type==='j'))throw Error('Pass only non-Joker tiles from your own rack');
+      this.charPicks[seat]=ids.slice();this.blindPicks[seat]=blind;this.charSeat++;if(this.charSeat===4)this.finishPass();
     }
     finishPass(){
-      const route=this.passRoute[this.charIndex];const packets=[];
-      for(let p of this.players){
-        const ids=this.charPicks[p.seat];if(!ids||ids.length!==3)throw Error('Incomplete Charleston round');
-        const selected=p.hand.filter(t=>ids.includes(t.id));if(selected.length!==3)throw Error('Charleston picks disappeared');
-        packets.push(selected);p.hand=p.hand.filter(t=>!ids.includes(t.id));
-      }
-      packets.forEach((packet,seat)=>this.players[(seat+route.offset)%4].hand.push(...packet));
-      this.players.forEach(p=>sortHand(p.hand));
-      this.note(`All players passed three tiles ${route.name.toLowerCase()}.`);
-      this.charIndex++;this.charPicks=[null,null,null,null];this.charSeat=0;
-      if(this.charIndex>=this.passRoute.length){this.phase='discard';this.current=0;this.note('Charleston complete! East makes the first discard.');}
+      const route=this.passRoute[this.charIndex],packets=this.players.map((p,i)=>p.hand.filter(t=>this.charPicks[i].includes(t.id)));
+      this.players.forEach((p,i)=>{p.hand=p.hand.filter(t=>!this.charPicks[i].includes(t.id));});
+      const blind=this.blindPicks.slice(),received=[[],[],[],[]];
+      // Route selected physical tiles. A blind recipient forwards without revealing.
+      for(let origin=0;origin<4;origin++)for(const tile of packets[origin]){let seat=(origin+route.offset)%4;while(blind[seat]>0){blind[seat]--;seat=(seat+route.offset)%4;}received[seat].push(tile);}
+      // If everybody elects three blind tiles, the closed loop is a no-op.
+      this.players.forEach((p,i)=>{p.hand.push(...received[i]);sortHand(p.hand);});
+      this.note(`${route.courtesy?'Courtesy exchange':'Charleston pass'} ${route.name.toLowerCase()} complete${this.blindPicks.some(Boolean)?' (blind tiles forwarded without showing faces)':''}.`);
+      this.charIndex++;this.charPicks=[null,null,null,null];this.blindPicks=[0,0,0,0];this.charSeat=0;
+      if(route.courtesy){this.startPlay();return;}
+      if(this.charIndex===3){this.phase='secondChoice';return;}
+      if(this.charIndex===6)this.beginCourtesy();
     }
     exchangeJoker(seat,fromSeat,meldIndex){
       if(this.phase!=='discard'||seat!==this.current)throw Error('Joker exchange is only available on your turn');
-      if(fromSeat !== seat)throw Error('Can only exchange from your own exposed melds');
-      const m=this.players[fromSeat]?.melds[meldIndex];if(!m||!m.tiles.some(t=>t.type==='j'))throw Error('No Joker to redeem');
+      const m=this.players[fromSeat]?.melds[meldIndex];if(!m||m.concealed||!m.tiles.some(t=>t.type==='j'))throw Error('No Joker to redeem');
       const p=this.players[seat],natural=p.hand.find(t=>t.type===m.type);
       if(!natural)throw Error('You need a natural matching tile');
       p.hand.splice(p.hand.findIndex(t=>t.id===natural.id),1);
@@ -615,8 +629,11 @@
       return set&&Math.random()<.55?set.code:'pass';
     }
     botStep(){
+      if(this.phase==='secondChoice'&&this.isBotSeat(this.charSeat)){this.chooseSecond(this.charSeat,this.settings.secondCharleston!==false);return true;}
+      if(this.phase==='courtesyChoice'&&this.isBotSeat(this.charSeat)){this.chooseCourtesy(this.charSeat,3);return true;}
+      if(this.phase==='discard'&&this.isBotSeat(this.current)){const hand=this.players[this.current].hand;for(const p of this.players){const i=p.melds.findIndex(m=>m.tiles.some(t=>t.type==='j')&&hand.some(t=>t.type===m.type));if(i>=0){this.exchangeJoker(this.current,p.seat,i);return true;}}}
       if(this.phase==='charleston'&&this.isBotSeat(this.charSeat)){
-        this.submitPass(this.charSeat,this.botPassTiles(this.charSeat));return true;
+        this.submitPass(this.charSeat,this.botPassTiles(this.charSeat).slice(0,this.passCount(this.charSeat)));return true;
       }
       return super.botStep();
     }
@@ -625,6 +642,58 @@
   M.americanTest={CARD,matchPattern,ROUTE};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
+
+(function(M){
+'use strict';
+const C=M.core;
+const copyTile=t=>({id:t.id,type:t.type});
+const copyMeld=m=>({kind:m.kind,type:m.type,concealed:!!m.concealed,tiles:m.tiles.map(copyTile)});
+// Privacy boundary: downstream analysis receives only this explicit public view.
+function publicView(g,seat){
+ const own=g.players[seat];
+ return {variant:g.variant,seat,phase:g.phase,current:g.current,hand:own.hand.map(copyTile),melds:own.melds.map(copyMeld),flowers:own.flowers.map(copyTile),
+  opponents:g.players.filter(p=>p.seat!==seat).map(p=>({seat:p.seat,melds:p.melds.filter(m=>!m.concealed).map(copyMeld),discards:p.discards.map(copyTile)})),
+  discards:g.players.flatMap(p=>p.discards.map(copyTile)),publicMelds:g.players.flatMap(p=>p.seat===seat?p.melds.map(copyMeld):p.melds.filter(m=>!m.concealed).map(copyMeld)),
+  expanded:!!g.expanded,minFan:g.minFan||0,seatWind:g.windIndex(seat),prevailing:g.round,flowersEnabled:!!g.flowersEnabled,sevenPairs:!!g.settings.sevenPairs,
+  wallCount:g.wall.length,lastSource:g.lastSource,latest:g.lastDiscard?{type:g.lastDiscard.tile.type,by:g.lastDiscard.by}:null};
+}
+function winForView(v,tiles){
+ if(v.variant==='american'){const card=M.americanTest.CARD.find(c=>M.americanTest.matchPattern(tiles,v.melds,c));return card?{card}:null;}
+ const context={seat:v.seatWind,prevailing:v.prevailing,selfDraw:true,flowers:v.flowers,flowersEnabled:v.flowersEnabled,source:'draw',lastWall:false,heavenly:false,earthly:false,sevenPairs:v.sevenPairs};
+ const values=M.hongkongTest.partitions(tiles,v.melds).map(p=>v.expanded?M.hongkongTest.extendedScore(p,v.melds,tiles,context):M.hongkongTest.fanScore(p,v.melds,v.seatWind,true,v.prevailing));
+ if(v.expanded)values.push(...M.hongkongTest.specialHands(tiles,v.melds,context));return values.filter(a=>(a.qualifyingFan??a.fan)>=v.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;
+}
+function knownCounts(v){return C.countTypes([...v.hand,...v.discards,...v.publicMelds.flatMap(m=>m.tiles)]);}
+function support(hand,t,variant){const same=hand.filter(x=>x.type===t.type).length-1;let adjacent=0,gapped=0;if(variant==='hk'&&/^[bdc][1-9]$/.test(t.type))for(const o of hand){if(o.type[0]!==t.type[0])continue;const d=Math.abs(+o.type.slice(1)-+t.type.slice(1));if(d===1)adjacent++;if(d===2)gapped++;}return {same,adjacent,gapped,cost:same*3+adjacent*1.35+gapped*.6+(t.type==='j'?100:0)};}
+function alternatives(v){
+ if(v.phase!=='discard'||v.current!==v.seat)return [];
+ const known=knownCounts(v),types=[...C.STANDARD_TYPES,...(v.variant==='american'?['j',...Array.from({length:8},(_,i)=>'f'+(i+1))]:[])];
+ return [...new Map(v.hand.map(t=>[t.type,t])).values()].map(tile=>{
+  const remaining=v.hand.filter(t=>t.id!==tile.id),s=support(v.hand,tile,v.variant),waits=[];
+  for(const type of types){const total=type==='j'?8:type[0]==='f'?1:4,unseen=Math.max(0,total-(known[type]||0));if(!unseen)continue;const analysis=winForView(v,[...remaining,{id:-1,type}]);if(analysis)waits.push({type,unseen,fan:analysis.fan??null,pattern:analysis.card?.name??null});}
+  const visibleDiscardCount=v.discards.filter(t=>t.type===tile.type).length;
+  return {id:tile.id,type:tile.type,waits,unseenWinning:waits.reduce((n,w)=>n+w.unseen,0),support:s,
+   rule:`Discarding ${C.name(tile.type)} is legal on your discard turn.`,
+   calculation:`Keeps ${remaining.length} concealed tiles. ${waits.length} tile type${waits.length===1?'':'s'} could complete a legal hand on a later ordinary self-draw (${waits.reduce((n,w)=>n+w.unseen,0)} copies not accounted for in your hand and visible tiles).`,
+   heuristic:s.same?`Giving up a duplicate reduces a ${s.same+1}-tile group. Compare whether its tiles serve another structure.`:v.variant==='hk'&&(s.adjacent||s.gapped)?`This tile has ${s.adjacent} adjacent and ${s.gapped} one-gap suit partner(s). Keeping it may preserve sequence routes.`:tile.type==='j'?'A Joker is flexible in large American groups; discarding it usually gives up useful options.':'This tile has little local support in the current rack. Discarding it may preserve stronger groups.',
+   defense:`${visibleDiscardCount} matching tile${visibleDiscardCount===1?' has':'s have'} already been discarded. That is visible information, not proof this discard is safe.`};
+ }).sort((a,b)=>b.unseenWinning-a.unseenWinning||a.support.cost-b.support.cost||a.type.localeCompare(b.type));
+}
+function solitaireChoices(g){
+ const before=new Set(g.available().map(t=>t.id));
+ return g.pairs().map(ids=>{const remaining=g.tiles.filter(t=>!t.removed&&!ids.includes(t.id));const occ=new Map(remaining.map(t=>[t.id,t]));const newly=remaining.filter(t=>!before.has(t.id)&&M.solitaireTest.free(t,occ)).map(t=>t.id);return {ids,newly,rule:'Both tiles are free and their matching keys agree.',calculation:`Removing this pair makes ${newly.length} previously blocked tile${newly.length===1?'':'s'} free.`,heuristic:'Opening more tiles may give you more choices. This one-step count does not prove the whole board can be cleared.'};}).sort((a,b)=>b.newly.length-a.newly.length);
+}
+function actionRule(g,seat){
+ if(g.phase==='finished')return 'This hand is finished. Read the score breakdown, then choose Next hand.';
+ if(g.phase==='secondChoice')return 'Every player chooses. The second Charleston occurs only with unanimous agreement.';
+ if(g.phase==='courtesyChoice')return 'Offer 0–3 tiles. Each opposite pair exchanges the smaller offer; zero declines.';
+ if(g.phase==='charleston')return `Select ${g.passCount(seat)} non-Joker tiles in total${g.canBlind()?', including any incoming tiles you choose to pass blind':''}. Passing a Joker is illegal.`;
+ if(g.phase==='robkong')return 'Only a complete qualifying win may take the proposed fourth tile. You cannot claim it for a meld.';
+ if(g.phase==='claims')return g.variant==='hk'?'The banner lists claims the engine has verified for your rack. Chow is limited to the preceding seat; Pung/Kong can use any latest discard; Mahjong takes priority.':'The banner lists verified claims. A set must fit an exposed original-card row; singles/pairs may use a discard only for a complete win. Discarded Jokers cannot be claimed.';
+ return g.variant==='hk'?'Select any rack tile to discard, or declare an eligible winning hand. Kong options appear only when the engine permits them.':'Select a rack tile to discard, redeem an eligible exposed Joker, or declare a complete original-card hand. No Chow calls and no Joker pairs.';
+}
+M.coach={publicView,winForView,knownCounts,support,alternatives,solitaireChoices,actionRule};
+})(globalThis.Mahjong=globalThis.Mahjong||{});
 
 (function(M){
 'use strict';
@@ -638,31 +707,164 @@ lesson('Flowers and Seasons',()=>`<p>Numbered tiles, Winds, and Dragons match id
 lesson('Think one move ahead',()=>`<p>Before taking an obvious pair, ask what it will release. Favor pairs that uncover a stack or unlock a long row. A pair of isolated tiles may be safe to leave until later.</p><p>If three identical tiles are free, compare all three possible pairings. Removing two easy edge tiles may leave the third trapped behind the only remaining copy. Choose the pairing that opens the most useful space.</p><p>Look for tiles directly above needed matches. Work across the board rather than clearing one corner automatically. Each initial deal has a clearing sequence, but not every sequence of choices succeeds.</p>`),
 lesson('Hints, undo, and a practice routine',()=>`<p><strong>Hint</strong> highlights an available pair; it does not promise the best long-term move. <strong>Undo</strong> restores the last removed pair so you can compare another choice. <strong>Shuffle</strong> rearranges remaining tiles into a solvable arrangement and clears undo history; a trapped shape may become an open rescue tray.</p><ol><li>Play five pairs without a hint. Say what each removal opens.</li><li>Use Hint and explain why both highlighted tiles are free.</li><li>Undo a pair and try a different pairing. Compare the new openings.</li></ol><p>New puzzle and changing the layout replace the current puzzle. Your goal is understanding the board, not beating the clock.</p>`)
 ],question:'A tile has an open left side, but another tile overlaps it from above. Can you remove it?',choices:['Yes, one open side is enough','No, it must also be uncovered'],answer:1,why:'Both conditions are required: uncovered from above AND at least one horizontal side open.'},
-hongkong:{name:'Hong Kong Basics',intro:'A four-player draw-and-discard game. Learn the shape of a hand before adding the optional scoring threshold.',lessons:[
-lesson('Tiles, seats, and the goal',()=>`<p>This beginner table uses 136 tiles: four copies of each of the 27 numbered suit tiles and seven honor tiles. There are no Flowers, Seasons, or Jokers in this mode. Seats are East, South, West, and North.</p><p>Win with <strong>four melds and one pair</strong>. A meld is a Chow, Pung, or Kong. Each tile belongs to exactly one group. The pair is two identical tiles.</p>${row('b1 b2 b3 d4 d5 d6 c7 c8 c9 dr dr dr we we','A complete beginner hand: three Chows, a Red Dragon Pung, and an East pair.')}<p>This example wins at the default 0-faan minimum. A complete shape must also meet the selected threshold in 3-faan practice.</p>`),
-lesson('Follow one complete turn',()=>`<ol><li>Choose bots or four local players, then start the table. You are East against bots.</li><li>East starts with 14 tiles; the others have 13. East discards first.</li><li>Select a rack tile and press Discard. Other players may claim that latest discard.</li><li>If nobody claims, the next seat draws automatically from the wall and discards.</li><li>If your hand is complete, use Declare Mahjong before discarding—or use the Mahjong claim on a winning discard.</li></ol><p>A claim can interrupt normal seat order. After a Chow or Pung claim, discard without an extra ordinary draw. If the wall empties without a win, the hand is a draw. Pass-and-play uses a privacy screen between human turns.</p>`),
-lesson('Chow, Pung, and Kong',()=>`${row('b3 b4 b5','Chow: three consecutive numbers in ONE suit.')}${row('dg dg dg','Pung: three identical tiles, including honors.')}${row('d8 d8 d8 d8','Kong: four identical tiles, declared as one meld.')}<p>You may claim a Chow only from the player immediately before you in turn order. A Pung or Kong can use any opponent’s latest discard. Winds and Dragons cannot make Chows; sequences cannot cross suits or wrap from 9 to 1.</p><p>A Kong receives a replacement draw. It is still one of your four melds, so a completed hand can physically contain more than 14 tiles. This app supports discard Kongs and concealed Kongs, but not adding a fourth tile to an already exposed Pung.</p>`),
-lesson('Claims and waiting hands',()=>`<p>The action banner offers legal claims when your seat can use the latest discard. Choose a claim or Pass. The app gathers eligible responses before resolving them: Mahjong takes priority; this engine then ranks Kong, Pung, and Chow, with seat order resolving ties. Earlier discards cannot be picked up later.</p>${row('b4 b5','An open-ended wait for a Chow: either 3-Bamboo or 6-Bamboo completes this group.')}<p>A 4–6 shape needs only 5; a 1–2 shape needs only 3. Flexible neighboring tiles often give you more routes than isolated tiles. Completing this group wins only when the rest of your hand already makes the other three melds and a pair.</p><p>Exposed sets cannot be rearranged. Do not call a Pung just because you can: those tiles might be more useful in Chows.</p>`),
-lesson('The optional faan model',()=>`<p>Faan is the app’s teaching score. Start at zero minimum, then try the 3-faan option once you can recognize complete hands. These are <strong>this app’s simplified values</strong>, not a full Hong Kong scoring standard.</p><div class="lesson-table"><table><thead><tr><th>Feature</th><th>Faan</th></tr></thead><tbody><tr><td>Each Dragon Pung/Kong</td><td>1</td></tr><tr><td>Seat-wind Pung/Kong</td><td>1</td></tr><tr><td>Prevailing East Pung/Kong</td><td>1</td></tr><tr><td>All Pungs/Kongs</td><td>3</td></tr><tr><td>All Chows</td><td>1</td></tr><tr><td>One suit plus honors (half flush)</td><td>3</td></tr><tr><td>One suit without honors (full flush)</td><td>6</td></tr><tr><td>Self-draw</td><td>1</td></tr></tbody></table></div><p>Applicable entries add together. East’s East-wind set gets both wind bonuses here. A Dragon pair earns no Dragon-set bonus. For example, a Red Dragon Pung + South-wind Pung as South + self-draw earns at least 3 faan.</p><p>The prevailing wind stays East. Special winning hands, full match rotation, settlement, and tournament scoring are outside this edition.</p>`),
-lesson('Strategy and your first three hands',()=>`<ol><li>First hand: use 0 faan. Identify a possible pair and four possible groups before each discard.</li><li>Second hand: keep connected suit tiles, and compare a two-sided wait with a one-tile wait. Count visible copies before hoping to draw a tile.</li><li>Third hand: try 3 faan. Pick a plausible scoring route early and check whether calls preserve it.</li></ol><p>Balance speed with caution. Discards and exposed sets reveal useful information about opponents, but they do not prove what anyone holds. A tile someone discarded earlier is not guaranteed safe now.</p><p>For a real table, agree on house rules first. <a href="https://en.wikipedia.org/wiki/Hong_Kong_mahjong_scoring_rules" target="_blank" rel="noopener noreferrer">Read about Hong Kong scoring variations</a>; this app’s simplified model is listed in the previous lesson.</p>`)
-],question:'You hold 4-Bamboo and 5-Bamboo. Which discard may you claim for a Chow?',choices:['3-Bamboo from the player immediately before you','3-Dots from any player','6-Bamboo from any player'],answer:0,why:'A Chow needs consecutive numbers in the same suit, and a discard Chow is limited to the immediately preceding player.'},
-american:{name:'American Practice',intro:'Learn passing, pattern planning, exposures, and Jokers using the Atelier’s six original learning hands.',lessons:[
-lesson('Understand the practice card',()=>`<p>This mode uses 152 tiles: 136 standard tiles, eight bonus tiles, and eight Jokers. Win by matching <strong>one complete row</strong> of the Atelier Practice Card. Its numbers mean group sizes, not tile ranks. There are no Chows.</p><p>The <strong>National Mah Jongg League (NMJL)</strong> publishes an annual card used at many American tables. This app does not reproduce that card. Its six original patterns teach basic mechanics without annual-card suit, number, or concealed-hand restrictions.</p><p>Selecting a highlighted target is a planning aid. The game accepts any complete practice-card row, even if it is not highlighted. The official card and rules are available from the <a href="https://www.nationalmahjonggleague.org/" target="_blank" rel="noopener noreferrer">National Mah Jongg League</a>.</p>`),
-lesson('Read all six patterns',()=>`<ul>${M.americanTest.CARD.map(c=>`<li><strong>${c.name}: ${c.groups.map(n=>n===1?'F':n).join(' + ')}</strong>. ${c.description}</li>`).join('')}</ul><p>Every row totals 14. Each group of three or more uses identical natural tiles, with Jokers allowed to fill missing copies. A pair must be two identical natural tiles. In Bloom Festival, each F is one bonus tile; this engine accepts Flowers or Seasons for those positions.</p><p>A Quint (five) or Sextet (six) requires Jokers because there are only four natural copies of a standard tile. This engine requires at least one natural tile in every large group. There are no suit-color requirements in this original card.</p>`),
-lesson('Pass through the Charleston',()=>`<ol><li>Choose exactly three non-Joker tiles from your rack.</li><li>Press Pass selected 3. Each player submits a packet before the exchange occurs.</li><li>Repeat for Right, Across, then Left.</li><li>If you enabled the second round before starting, continue Left, Across, then Right.</li><li>East makes the first discard after passing ends.</li></ol><p>Keep pairs, useful repeated tiles, and Jokers. Pass tiles that do not support your likely patterns, then reconsider when new tiles arrive. Do not break your only natural pair casually: a Joker cannot repair it.</p><p>The optional second round assumes agreement before the deal. Blind passes and courtesy passes are not implemented here. Follow the on-screen direction rather than guessing from seat positions.</p>`),
-lesson('Draw, discard, and expose',()=>`<p>East begins with 14 tiles; other seats have 13. After the Charleston, select a tile and Discard. When no claim interrupts play, the next player draws automatically and discards. Declare Mah Jongg when an entire card row is complete.</p><p>A latest discard may complete an exposed Pung, Kong, or Quint. The app presents the available calls. An exposure stays fixed, so check that its size still fits a row you can finish. Unlike Hong Kong, an American Kong is a four-tile pattern group and <strong>does not receive a replacement draw</strong>.</p><p>You cannot call a discard just to start a pair. A discard may complete a pair or single only when it completes the entire winning hand. Discarded Jokers are not offered for claims. The Sextet in Grand Lantern must be assembled in the concealed rack here; a Sextet exposure button is not provided.</p><p>Full official exposure restrictions and concealed-card categories are omitted. A claim being offered is not a promise that your resulting exposures can finish a row.</p>`),
-lesson('Use and redeem Jokers',()=>`${row('b2 b2 j','A Joker can complete this Pung of 2-Bamboo.')}${row('we j','Not a legal pair: you need two natural East tiles.')}<p>Jokers can fill groups of three or more, never singles or pairs, and cannot be passed during the Charleston. A Joker’s identity comes from the group it occupies.</p><p>In this app, on your discard turn, you can redeem a Joker from <strong>your own exposed set</strong> if your rack contains its matching natural tile. Press ↔ Joker beside that set. The natural tile replaces the exposed Joker, and the Joker moves to your rack; the set keeps its original identity.</p><p>This own-exposure-only rule is a limitation of this edition. Do not treat it as a complete statement of official American Joker exchange rules. Official play also has additional timing and exposure rules.</p>`),
-lesson('Build a complete hand',()=>`${row('b2 b2 j d4 d4 d4 c7 c7 c7 dr dr dr we we','Four of a Kindred: 3 + 3 + 3 + 3 + 2 = 14. The Joker fills a Pung; the East pair is natural.')}<p>Start with this simplest pattern. Count what you already have, then identify exactly what is missing. If your hand grows toward three groups of four, consider Three Towers. Do not split a strong pair just to make a larger group unless another natural pair is realistic.</p><ol><li>During the Charleston, choose two plausible rows and pass tiles that help neither.</li><li>After each draw, compare the whole rack against the card, including fixed exposures.</li><li>Before calling, check the group size and your remaining pair requirements.</li><li>Watch visible natural copies. Joker flexibility does not help an impossible pair.</li></ol><p>The table ends on a valid win or when the wall is empty. There is no NMJL scoring or payment calculation here. Before playing at an official-card table, learn that card’s notation and the current League rules.</p>`)
-],question:'Your practice-card pair is one East tile and one Joker. Is it complete?',choices:['Yes, Jokers replace any tile','No, pairs require two natural identical tiles'],answer:1,why:'Jokers work only in groups of three or more. Singles and pairs must be natural, so this pair needs another East.'}
+hongkong:{name:'Hong Kong Mahjong',intro:'Learn the draw-and-discard game, then explore the named Atelier rules profile. Beginner mode remains available.',lessons:[
+lesson('Tiles, profiles, and a complete hand',()=>`<p>Both profiles use four players and 136 standard tiles. Atelier can add eight Flowers and Seasons: these are exposed automatically and replaced, never used in melds. Start with zero minimum faan; move to three when ready.</p><p>A standard winning hand has four melds plus a pair. Each tile belongs to one group. A Kong is one meld containing four physical tiles; its replacement draw means a winning hand with Kongs contains more than 14 physical tiles.</p>${row('b1 b2 b3 d4 d5 d6 c7 c8 c9 dr dr dr we we','Three Chows + a Dragon Pung + an East pair.')}<p>Atelier also recognizes special hands. Beginner accepts only the standard shape and uses the smaller scoring model.</p>`),
+lesson('A turn and a claim',()=>`<ol><li>East starts with 14 tiles and discards first. Others start with 13.</li><li>The next player draws automatically, checks for a win, then selects and discards a tile.</li><li>Other players may claim the latest discard. Earlier discards are unavailable.</li><li>After calling Chow or Pung, discard without drawing again. A Kong receives a replacement.</li></ol><p>Mahjong claims outrank all meld claims. Pung and Kong share priority above Chow; equal-priority claims go to the next eligible player in turn order. This profile awards one winner per hand. Passing a win does not introduce Riichi-style furiten restrictions.</p><p>The action banner shows your legal choices. In local play, hand the device over behind the privacy screen. Draws, shuffling, and dealing are automatic.</p>`),
+lesson('Build melds and flexible waits',()=>`${row('b3 b4 b5','Chow: three consecutive numbers, all in one suit.')}${row('dg dg dg','Pung: three identical tiles.')}${row('d8 d8 d8 d8','Kong: four identical tiles, declared as one meld.')}<p>A Chow claim can use only the immediately preceding player’s discard. A Pung or Kong can use any opponent’s latest discard. Honors do not form sequences. Neither 8–9–1 nor mixed suits make a Chow.</p><p>Holding 4–5 gives two possible completions: 3 or 6. Holding 4–6 needs 5. Keep flexible shapes where practical, but also preserve a pair. A completed group is not a complete hand by itself.</p>`),
+lesson('Added Kongs and robbing',()=>`<p>After a draw, four identical rack tiles may become a concealed Kong. In Atelier, a natural fourth tile can also upgrade your own exposed Pung: choose <strong>Add to Pung</strong>. It stays one meld.</p><p>Before that upgrade completes, every eligible opponent may claim the proposed fourth tile to win. This is robbing an added Kong. If someone wins, the original Pung stays a Pung, the fourth tile goes to the winner, and no replacement is drawn. If everyone passes, the Kong completes and gets its replacement.</p><p>This profile does not permit robbing a concealed Kong. Kong declarations require a replacement tile to remain in the wall. You cannot declare an unrelated concealed or added Kong immediately after calling Chow or Pung.</p>`),
+lesson('Special hands and the house option',()=>`<p>Atelier recognizes Thirteen Orphans (all thirteen distinct terminals and honors plus a duplicate), Nine Gates (one suit: three 1s, one each 2–8, three 9s, plus one more tile), and several rare standard shapes.</p>${row('b1 b9 c1 c9 d1 d9 we ws ww wn dr dg dw we','Thirteen Orphans: thirteen distinct terminal/honor types and one duplicate. No exposures.')}<p>Fixed 10-faan hands: Thirteen Orphans, Nine Gates, All Honors, All Terminals, Little/Big Four Winds, Three Great Scholars, Four Kongs, four concealed Pungs on self-draw, Heavenly Hand, Earthly Hand, and Jade/Ruby/Pearl Dragon. Little Three Dragons is fixed at 4 faan. Fixed scores do not stack with other bonuses.</p><p>Heavenly means East wins the initial dealt hand; Earthly means winning on the first discard without an intervening call. Jade/Ruby/Pearl require the matching Dragon Pung, three Pungs of Bamboo/Characters/Dots respectively, and a pair in that suit.</p><p><strong>Seven distinct pairs</strong> is an optional 4-faan house rule, off by default. Seven different types must occur exactly twice; a four-of-a-kind is not two pairs. It allows no exposures and is not presented as universal Hong Kong practice.</p>`),
+lesson('Read the score breakdown',()=>`<p>Atelier’s regular scoring adds: each Dragon set 1; seat-wind set 1; prevailing-wind set 1; all Chows 1; all Pungs/Kongs 3; one suit with honors 3; one suit without honors 6; self-draw 1; Kong replacement 1; robbing an added Kong 1; last wall tile or last discard 1. The total is capped at 10.</p><p>If Flowers are enabled: no bonus tiles gives 1; your own numbered Flower and Season each give 1; each complete four-tile bonus family gives 2. These bonuses are applied only <strong>after</strong> checking the minimum qualifying faan. Disabling Flowers also disables the no-Flower bonus.</p><p>A Dragon pair earns no Dragon-set point. An East Pung while you are East in the East round earns both wind points. Fixed special-hand scores are evaluated separately, and the engine chooses the highest eligible interpretation.</p><p>Beginner uses only Dragon/wind sets, all Chows/Pungs, flushes, and self-draw. It has no special hands or Flower scoring.</p>`),
+lesson('Points, rounds, and continuing a match',()=>`<div class="lesson-table"><table><thead><tr><th>Atelier faan</th><th>Base points</th></tr></thead><tbody>${[[0,1],[1,2],[2,4],[3,8],['4–6',16],['7–9',32],['10',64]].map(([f,p])=>`<tr><td>${f}</td><td>${p}</td></tr>`).join('')}</tbody></table></div><p>On a discard win, the discarder pays twice the base and the other two players each pay the base. On self-draw, all three opponents pay twice the base. Example: 3 faan means base 8; a discard win receives 16 + 8 + 8 = 32. All points are virtual and the ledger sums to zero.</p><p>Choose <strong>Next hand</strong> to retain the ledger. East remains dealer after an East win or a drawn hand. Otherwise the dealer advances. After four dealer advances the prevailing wind changes; completing East, South, West, and North rounds ends the match. Players remain in their physical positions while their seat winds change.</p><p>Beginner uses a teaching base of 2 to the power of faan, capped at 64. A New match resets points and rounds.</p>`),
+lesson('Strategy, practice, and rule sources',()=>`<ol><li>Start at zero minimum and identify four potential melds and a pair before discarding.</li><li>Compare open-ended and closed waits. Count visible copies before relying on a tile.</li><li>Try three qualifying faan. Choose a credible route before exposing sets.</li><li>Open Guided practice to discard an isolated tile, finish a staged hand, and declare a Kong.</li></ol><p>House conventions differ. Atelier uses an explicit profile rather than claiming one universal or tournament ruleset. The wall is one finite pool with replacements drawn from its back; there is no separate reserved dead-wall zone or liability penalty system.</p><p>Further reading: <a href="https://c.tabletopia.com/games/old-hong-kong-mahjong/rules/mahjong-rules/en" target="_blank" rel="noopener noreferrer">Tabletopia-hosted Mahjong rules</a> and <a href="https://mahjlife.com/wp-content/uploads/2023/09/Cantonese-Mahjong-HKOS_Quick-Reference-EZ-Reader.pdf" target="_blank" rel="noopener noreferrer">Mahj Life’s Cantonese reference</a>. These explain conventions; Atelier’s implemented profile is the one described in these lessons. Text, examples, and code here are independently written.</p>`)
+],question:'An opponent proposes upgrading an exposed Pung to a Kong. When can you take that fourth tile?',choices:['To make a Chow','Only to complete a valid winning hand','Whenever it matches a pair'],answer:1,why:'An added Kong opens a win-only claim window. A successful robbery leaves the original Pung intact and prevents the replacement draw.'},
+
+american:{name:'American Practice',intro:'American-style mechanics with six original Atelier patterns. Learn passing, exposures, concealed hands, and Joker redemption.',lessons:[
+lesson('Read an original practice card',()=>`<p>The 152-tile set contains 136 standard tiles, eight bonus tiles, and eight Jokers. Your 14 tiles must match one complete practice-card row. Numbers on this card mean group sizes, not tile ranks. F means one natural Flower or Season.</p><p>Each group of three or more is one identical tile type, with Jokers permitted. Pairs and singles must be natural. There are no Chows. A highlighted goal helps planning but does not restrict which valid row can win.</p><p>The <a href="https://www.nationalmahjonggleague.org/" target="_blank" rel="noopener noreferrer">National Mah Jongg League</a> publishes an annual card. This app does not include it or claim League endorsement. Our pattern selection, values, and examples are original; the interface is not a substitute for learning an official card.</p>`),
+lesson('Six rows, exposed or concealed',()=>`<ul>${M.americanTest.CARD.map(c=>`<li><strong>${c.name}: ${c.groups.map(n=>n===1?'F':n).join(' + ')}</strong>. ${c.description} ${c.concealed?'Concealed: no exposures before winning.':'Exposures allowed.'} ${c.value} original practice points.</li>`).join('')}</ul><p>Each row totals 14. A Quint is five tiles; a Sextet is six. Because a natural standard tile has only four copies, these larger groups need Jokers. A completely Joker-filled concealed group of three or more is accepted; a Joker never replaces a single or pair.</p><p>Twin Comets teaches concealed play. You may still redeem Jokers from other players’ exposures while pursuing it, because that creates no exposure of your own.</p>`),
+lesson('Charleston and blind passes',()=>`<ol><li>Pass three non-Jokers Right, then Across, then Left.</li><li>After the first round, each player votes. One stop ends the Charleston; unanimous agreement starts Left, Across, Right.</li><li>On the last pass of either round, optionally forward 0–3 incoming tiles blind. Choose the remaining tiles from your own rack.</li><li>After passing, make courtesy offers across the table.</li></ol><p>Blind tiles are forwarded without showing their faces to you. Selecting two blind tiles means selecting only one rack tile. Packets resolve together. <a href="https://guide.americanmahjonggassociation.com/how-to-play-american-mah-jongg/the-charleston/" target="_blank" rel="noopener noreferrer">Association Charleston reference</a> (reviewed 18 October 2026). If everyone chooses three blind, no rack changes in that pass and the next phase follows; this is an explicit house convention. Pre-Charleston winning declarations and physical-table declaration windows are not simulated.</p><p>Keep Jokers, useful duplicates, and natural pairs. Reassess your target after receiving tiles. The computer’s second-round preference is set before the game, while human players decide after the first round.</p>`),
+lesson('Negotiate the courtesy exchange',()=>`<p>Each player offers 0, 1, 2, or 3 tiles to the opposite player. The pair exchanges the smaller offer. If you offer 3 and the opposite player offers 1, each selects one tile. If either offers zero, neither sends any.</p><p>Both opposite pairs decide independently. The game shows the agreed count; select exactly that many tiles and send the packet. For zero, send the empty packet to acknowledge the pass. No Jokers and no blind forwarding are permitted in the courtesy exchange.</p><p>When courtesy passing finishes, East makes the first discard. Others then draw automatically and discard unless a claim interrupts the sequence.</p>`),
+lesson('Expose with a plan',()=>`<p>A latest discard may complete a Pung, Kong, Quint, or Sextet when that exposure remains compatible with an exposed practice-card row. Your selected planning goal does not force a row; you can change direction.</p><p>The engine prevents combinations of exposed group sizes that fit no remaining row. It also excludes concealed rows from exposure-based wins. Once committed, an exposure is fixed. The app deliberately makes claims atomic: it has no provisional exposure rearrangement window.</p><p>You cannot call a discard merely to build a pair or single; it must complete the whole winning hand. A discarded Joker cannot be claimed. Flower/Season singles on this original card can likewise be called only for the final win. An American Kong does not draw a replacement.</p><p>Mah Jongg has priority over set claims. Competing set claims have equal priority, resolved in turn order. Invalid moves are prevented rather than penalized through tournament-style dead-hand adjudication.</p>`),
+lesson('Redeem a Joker on your turn',()=>`${row('c5 c5 j','An exposed 5-Characters Pung containing a Joker.')}${row('we j','This cannot be your pair: pairs must be two natural identical tiles.')}<p>After your draw or valid set claim and before discarding, trade a natural matching rack tile for a Joker in any eligible exposure—your own or another player’s. Press the ↔ Joker button next to that exposure. The natural tile replaces the Joker; the Joker goes into your rack. Neither player gains a tile.</p><p>Redeeming is not taking a discard and does not expose your concealed hand. You may redeem more than one available Joker while it is still your turn. Exposed sets retain their tile identity after each swap.</p><p>Read more about timing and physical-table etiquette in <a href="https://guide.americanmahjonggassociation.com/how-to-play-american-mah-jongg/jokers-and-joker-exchange/" target="_blank" rel="noopener noreferrer">the American Mah Jongg Association rulebook</a>. Our app automates the physical exchange.</p>`),
+lesson('Win, score, and keep learning',()=>`${row('b2 b2 j d4 d4 d4 c7 c7 c7 dr dr dr we we','Four of a Kindred: four groups of three, plus a natural East pair.')}<p>Declare Mah Jongg before discarding when the entire rack and exposures match a row. The original card’s value is the base; a Joker-free hand doubles it. On self-draw, each opponent pays double that adjusted base. On a discard win, only the discarder pays double; the other two pay the adjusted base.</p><p>For example, Four of a Kindred with a Joker is worth base 25: a discard win receives 50 + 25 + 25 = 100. A Joker-free self-draw uses base 50 and receives 100 from each opponent. These are virtual Atelier practice points, not official annual-card values.</p><p>Next hand retains scores and advances the dealer after every hand, including draws. A practice match lasts 16 hands. Start Guided practice to select a Charleston packet, redeem another player’s Joker, and complete a staged winning hand.</p><p>Saved lesson markers and bookmarks remain in this browser when storage is available. They do not save your in-progress game. You can reset learning progress in the lesson window.</p>`)
+],question:'You offer three courtesy tiles, but the player opposite offers one. How many does each of you pass?',choices:['Three','One','Nobody passes'],answer:1,why:'The smaller offer determines the exchange for that opposite pair. Either player can decline by offering zero.'}
+
 };
 M.lessons=courses;
+const progressKey='mahjong-atelier-learning-v2';
+let progress={},persistent=true;
+try{const raw=JSON.parse(localStorage.getItem(progressKey)||'{}');if(raw&&typeof raw==='object'&&!Array.isArray(raw))progress=raw;}catch{persistent=false;}
+function record(mode){const r=progress[mode];if(!r||typeof r!=='object'||!Array.isArray(r.done))progress[mode]={page:0,done:[]};return progress[mode];}
+function save(){try{localStorage.setItem(progressKey,JSON.stringify(progress));}catch{persistent=false;}}
+M.learningProgress={get:record,complete(mode,id){const r=record(mode);if(!r.done.includes(id))r.done.push(id);save();},bookmark(mode,page){record(mode).page=page;save();},reset(mode){progress[mode]={page:0,done:[]};save();},persistent:()=>persistent};
 M.openLessons=function(mode,onClose){
- const course=courses[mode]; let page=0; const dialog=document.createElement('dialog');
- dialog.className='learn-dialog';dialog.setAttribute('aria-labelledby','learn-title');
+ const course=courses[mode],saved=record(mode);let page=Number.isInteger(saved.page)?Math.max(0,Math.min(saved.page,course.lessons.length)):0;
+ const dialog=document.createElement('dialog');dialog.className='learn-dialog';dialog.setAttribute('aria-labelledby','learn-title');
  const theme=document.querySelector('[data-tile-theme]');dialog.dataset.tileTheme=theme?.dataset.tileTheme||'ivory';dialog.dataset.indices='show';
- function render(){dialog.innerHTML=`<header class="learn-heading"><div><p class="eyebrow">THE ATELIER SCHOOL · ${course.lessons.length} LESSONS</p><h2 id="learn-title">${course.name}</h2></div><button type="button" class="ui-btn secondary" data-learn="close" aria-label="Close lessons and return to game">Close ×</button></header><p class="learn-intro">${course.intro}</p><div class="learn-layout"><nav aria-label="Lesson chapters">${course.lessons.map((l,i)=>`<button type="button" data-page="${i}" aria-current="${i===page?'step':'false'}">${i+1}. ${l.title}</button>`).join('')}<button type="button" data-page="${course.lessons.length}" aria-current="${page===course.lessons.length?'step':'false'}">Practice question</button></nav><article class="lesson-body" tabindex="-1"><p class="eyebrow">${page<course.lessons.length?`LESSON ${page+1} OF ${course.lessons.length}`:'PUT IT INTO PRACTICE'}</p><h3>${page<course.lessons.length?course.lessons[page].title:'Check your understanding'}</h3>${page<course.lessons.length?course.lessons[page].body():`<p>${course.question}</p><div class="lesson-answers">${course.choices.map((c,i)=>`<button class="ui-btn secondary" type="button" data-answer="${i}">${c}</button>`).join('')}</div><p class="lesson-feedback" role="status" aria-live="polite"></p><p>Return to your game and try the practice routine. You can reopen these lessons at any time.</p>`}<footer class="lesson-pager"><button class="ui-btn secondary" type="button" data-page="${page-1}" ${page===0?'disabled':''}>← Previous</button>${page<course.lessons.length?`<button class="ui-btn primary" type="button" data-page="${page+1}">Next →</button>`:'<button class="ui-btn primary" type="button" data-learn="close">Return to game →</button>'}</footer></article></div>`;}
- dialog.addEventListener('click',e=>{const el=e.target.closest('button');if(!el)return;if(el.dataset.learn==='close')dialog.close();else if(el.dataset.page!==undefined){page=Number(el.dataset.page);render();dialog.querySelector('.lesson-body').focus();dialog.scrollTop=0;}else if(el.dataset.answer!==undefined){dialog.querySelector('.lesson-feedback').textContent=(Number(el.dataset.answer)===course.answer?'Correct. ':'Try again. ')+course.why;}});
+ function render(){const done=record(mode).done;dialog.innerHTML=`<header class="learn-heading"><div><p class="eyebrow">THE ATELIER SCHOOL · ${course.lessons.length} LESSONS</p><h2 id="learn-title">${course.name}</h2></div><button type="button" class="ui-btn secondary" data-learn="close" aria-label="Close lessons and return to game">Close ×</button></header><p class="learn-intro">${course.intro}</p><div class="learning-status">${course.lessons.filter(l=>done.includes(l.title)).length}/${course.lessons.length} lessons marked read · ${done.includes('question')?'Question completed':'Question to try'} · ${done.includes('practice')?'Guided practice completed':'Guided practice available above the game'}<br><small>${persistent?'Bookmarks and completion are saved in this browser.':'Browser storage is unavailable; progress lasts only for this page session.'}</small></div><div class="learn-layout"><nav aria-label="Lesson chapters">${course.lessons.map((l,i)=>`<button type="button" data-page="${i}" aria-current="${i===page?'step':'false'}">${done.includes(l.title)?'✓ ':''}${i+1}. ${l.title}</button>`).join('')}<button type="button" data-page="${course.lessons.length}" aria-current="${page===course.lessons.length?'step':'false'}">${done.includes('question')?'✓ ':''}Practice question</button><button type="button" data-learn="reset">Reset this course’s progress</button></nav><article class="lesson-body" tabindex="-1"><p class="eyebrow">${page<course.lessons.length?`LESSON ${page+1} OF ${course.lessons.length}`:'PUT IT INTO PRACTICE'}</p><h3>${page<course.lessons.length?course.lessons[page].title:'Check your understanding'}</h3>${page<course.lessons.length?course.lessons[page].body()+`<button class="ui-btn secondary lesson-complete" data-learn="complete" aria-pressed="${done.includes(course.lessons[page].title)}">${done.includes(course.lessons[page].title)?'Marked as read ✓':'Mark this lesson as read'}</button>`:`<p>${course.question}</p><div class="lesson-answers">${course.choices.map((c,i)=>`<button class="ui-btn secondary" type="button" data-answer="${i}">${c}</button>`).join('')}</div><p class="lesson-feedback" role="status" aria-live="polite"></p>`}<footer class="lesson-pager"><button class="ui-btn secondary" type="button" data-page="${page-1}" ${page===0?'disabled':''}>← Previous</button>${page<course.lessons.length?`<button class="ui-btn primary" type="button" data-page="${page+1}">Next →</button>`:'<button class="ui-btn primary" type="button" data-learn="close">Return to game →</button>'}</footer></article></div>`;}
+ dialog.addEventListener('click',e=>{const el=e.target.closest('button');if(!el)return;
+  if(el.dataset.learn==='close')dialog.close();
+  else if(el.dataset.learn==='complete'){M.learningProgress.complete(mode,course.lessons[page].title);render();dialog.querySelector('.lesson-complete').focus();}
+  else if(el.dataset.learn==='reset'){M.learningProgress.reset(mode);page=0;render();dialog.querySelector('.lesson-body').focus();}
+  else if(el.dataset.page!==undefined){page=Number(el.dataset.page);M.learningProgress.bookmark(mode,page);render();dialog.querySelector('.lesson-body').focus();dialog.scrollTop=0;}
+  else if(el.dataset.answer!==undefined){const correct=Number(el.dataset.answer)===course.answer;if(correct)M.learningProgress.complete(mode,'question');dialog.querySelector('.lesson-feedback').textContent=(correct?'Correct. Progress recorded. ':'Try again. ')+course.why;}
+ });
  dialog.addEventListener('close',()=>{dialog.remove();onClose();},{once:true});render();document.body.append(dialog);dialog.showModal();
+};
+})(globalThis.Mahjong=globalThis.Mahjong||{});
+
+(function(M){
+'use strict';
+const C=M.core;
+const hand=s=>s.split(' ').filter(Boolean).map(C.makeTile);
+// Staged instructional racks use the same engines as the live tables.
+class Practice {
+ constructor(mode){this.mode=mode;this.step=0;this.picks=new Set();this.feedback='';this.comparisons=[];this.complete=false;this.setup();}
+ setup(){this.picks.clear();this.feedback='';this.comparisons=[];this.done=false;
+  if(this.mode==='solitaire'){
+   this.game=new M.Solitaire();this.game.tiles=[['a',0,0,0,'d5'],['b',2,0,0,'d5'],['c',0,0,1,'b2'],['d',2,0,1,'b2'],['e',0,1,0,'f1'],['f',2,1,0,'f2']].map(([id,x,y,z,type])=>({id,x,y,z,tile:C.makeTile(type),removed:false}));
+   this.title='Uncover a six-tile board';this.prompt='Remove the matching top Bamboo pair, then the uncovered Dots. Finish by pairing the two different Flowers.';return;
+  }
+  if(this.mode==='hongkong'){
+   this.game=new M.HongKongTable({opponents:'local',hkProfile:'atelier',flowers:false});this.game.discardCount=4;this.game.lastSource='draw';this.game.current=0;
+   if(this.step===0){this.game.players[0].hand=hand('b1 b2 d4 d5 d6 c7 c8 c9 dr dr dr we we wn');this.title='Choose a useful discard';this.prompt='You already have three melds and an East pair. Select the isolated tile to discard while keeping the 1–2 Bamboo wait.';}
+   if(this.step===1){this.game.players[0].hand=hand('b1 b2 b3 d4 d5 d6 c7 c8 c9 dr dr dr we we');this.title='Draw the winning tile';this.prompt='The next draw is 3-Bamboo. Your rack now has four melds and a pair. Declare Mahjong and inspect the score.';}
+   if(this.step===2){this.game.players[0].hand=hand('b4 b4 b4 b4 d1 d2 d3 c7 c8 c9 we we dr dr');this.title='Make a concealed Kong';this.prompt='Declare the four 4-Bamboo tiles as one Kong. The engine removes all four from the rack and draws one replacement.';}
+  }else{
+   this.game=new M.AmericanTable({opponents:'local'});this.game.current=0;
+   if(this.step===0){this.game.players[0].hand=hand('b2 b2 j d4 d4 d4 c7 c7 c7 we we c1 c5 c9');this.title='Choose your Charleston packet';this.prompt='Aim for Four of a Kindred. Select three isolated Character tiles to pass. Preserve your pairs, repeated tiles, and Joker.';}
+   if(this.step===1){this.game.phase='discard';this.game.players[0].hand=hand('b2 b2 b2 d4 d4 d4 c7 c7 dr dr dr we we c5');this.game.players[1].melds=[{kind:'pung',type:'c5',tiles:hand('c5 c5 j'),from:2}];this.title='Redeem another player’s Joker';this.prompt='Player 2 has exposed 5-Characters, 5-Characters, Joker. Your rack holds the natural 5-Characters. Exchange it for that Joker.';}
+   if(this.step===2){this.game.phase='discard';this.game.lastSource='draw';this.game.players[0].hand=hand('b2 b2 b2 d4 d4 d4 c7 c7 j dr dr dr we we');this.title='Finish the original practice pattern';this.prompt='The redeemed Joker fills the 7-Characters Pung. The East pair stays natural. Declare Mah Jongg.';}
+  }
+ }
+ tiles(){return this.mode==='solitaire'?this.game.tiles.filter(t=>!t.removed):this.game.players[0].hand;}
+ pick(id){
+  if(this.done)return;
+  if(this.mode==='solitaire'){const r=this.game.choose(id);this.feedback=r.action==='locked'?'That tile is covered. Remove the Bamboo tile above it first.':r.action==='nomatch'?'Those faces do not match. Flowers match other Flowers; numbered tiles need identical suit and rank.':r.action==='match'?'Pair removed. Notice which tiles are now uncovered.':'Now choose its free matching partner.';if(this.game.finished){this.done=true;this.feedback='Board cleared: you used both the free-tile rule and the Flower exception.';}return;}
+  if(this.mode==='hongkong'){this.picks.clear();this.picks.add(Number(id));}
+  else if(this.picks.has(Number(id)))this.picks.delete(Number(id));else this.picks.add(Number(id));
+ }
+ hint(){
+  if(this.mode==='solitaire'){const choices=M.coach.solitaireChoices(this.game);this.feedback=choices.length?`Rule: choose a matching free pair. Calculation: a suggested pair opens ${choices[0].newly.length} previously blocked tiles. Heuristic: consider opening tiles first; this does not prove a full-board solution.`:'No pair is free. Try Undo or restart the teaching board.';this.game.lastHint=choices[0]?.ids||[];}
+  else if(this.step===0){this.feedback=this.mode==='hongkong'?'Rule: any rack tile may be discarded. Calculation: North has no matching copy and honors cannot form Chows. Heuristic: preserve the three completed melds and East pair for this exercise’s 1–2 Bamboo wait.':'Rule: send three non-Jokers. Calculation: 1-, 5-, and 9-Characters each occur once, while 7-Characters occurs three times. Heuristic: preserve the repeated group and East pair for Four of a Kindred.';}
+  else this.feedback=this.prompt+' Rule: the action button executes the same validated engine action as the normal game.';
+ }
+ compare(){
+  if(this.mode==='solitaire'){this.comparisons=M.coach.solitaireChoices(this.game).slice(0,3).map(a=>({...a,label:a.ids.map(id=>C.name(this.game.tiles.find(t=>t.id===id).tile.type)).join(' + ')}));return;}
+  if(this.step!==0){this.feedback='This station demonstrates one rule transition. Use Retry this station to replay it, or compare alternative discards at the first station.';return;}
+  if(this.mode==='hongkong'){const all=M.coach.alternatives(M.coach.publicView(this.game,0));this.comparisons=['wn','we','d4'].map(type=>all.find(a=>a.type===type)).filter(Boolean).map(a=>({...a,ids:[a.id],label:'Discard '+C.name(a.type)}));}
+  else {const tiles=this.game.players[0].hand;this.comparisons=[['c1','c5','c9'],['c7','c7','c7'],['we','we','c1']].map(types=>{const available=tiles.slice(),chosen=types.map(type=>available.splice(available.findIndex(t=>t.type===type),1)[0]);return {ids:chosen.map(t=>t.id),label:'Pass '+types.map(C.name).join(' / '),rule:'These are three natural rack tiles, so this packet is legal.',calculation:`After passing, you retain ${available.filter(t=>t.type==='we').length} East tiles, ${available.filter(t=>t.type==='c7').length} 7-Characters, and ${available.filter(t=>t.type==='j').length} Joker.`,heuristic:types.includes('we')?'This gives up the natural pair that Jokers cannot replace.':types[0]==='c7'?'This gives up an entire Pung. It changes direction rather than preserving the current plan.':'This preserves the pair, repeated groups, and Joker. It fits our teaching goal, but unseen incoming tiles can still change your plan.'};});}
+ }
+ act(){
+  if(this.done)return;
+  const p=this.game.players[0];
+  if(this.mode==='hongkong'&&this.step===0){const t=p.hand.find(t=>this.picks.has(t.id));if(!t||t.type!=='wn'){this.feedback='Keep the completed groups and East pair. North is isolated; discarding it preserves the 1–2 Bamboo wait.';return;}this.game.discard(0,t.id);this.feedback='North discarded. You kept three melds, a pair, and the wait for 3-Bamboo.';}
+  else if(this.mode==='hongkong'&&this.step===1){const r=this.game.declareWin(0);this.feedback=`Mahjong! ${r.analysis.details.join(' · ')} = ${r.analysis.fan} faan. The complete shape was checked by the game engine.`;}
+  else if(this.mode==='hongkong'&&this.step===2){this.game.declareKong(0,'b4');this.feedback='Four tiles became one concealed Kong. A replacement was drawn; you still need to complete the rest of the hand.';}
+  else if(this.mode==='american'&&this.step===0){const picked=p.hand.filter(t=>this.picks.has(t.id));if(picked.length!==3||!picked.every(t=>['c1','c5','c9'].includes(t.type))){this.feedback='For this teaching goal, pass 1-, 5-, and 9-Characters. Keep 7-Characters as a group and keep both East tiles for the natural pair.';return;}this.game.submitPass(0,[...this.picks]);this.feedback='Packet accepted. Jokers and the natural pair stayed in your rack. The next exercise stages a later Joker exchange.';}
+  else if(this.mode==='american'&&this.step===1){this.game.exchangeJoker(0,1,0);this.feedback='The natural 5-Characters replaced Player 2’s exposed Joker. You received a Joker without changing either player’s tile count.';}
+  else if(this.mode==='american'&&this.step===2){const r=this.game.declareWin(0);this.feedback=`Mah Jongg! ${r.analysis.card.name}: four groups of three plus a natural pair. The engine validated the complete original-card pattern.`;}
+  this.done=true;
+ }
+ next(){if(!this.done)return false;if(this.mode==='solitaire'||this.step===2){this.complete=true;return false;}this.step++;this.setup();return true;}
+}
+M.Practice=Practice;
+M.openPractice=function(mode,onClose){let practice=new Practice(mode);const d=document.createElement('dialog');d.className='learn-dialog practice-dialog';const appearance=document.querySelector('.shell');if(appearance){d.dataset.tileTheme=appearance.dataset.tileTheme;d.dataset.indices=appearance.dataset.indices;}d.setAttribute('aria-labelledby','practice-title');
+ function draw(){const p=practice;if(p.complete){d.innerHTML=`<header class="learn-heading"><h2 id="practice-title">You practiced a useful decision.</h2></header><p>${mode==='solitaire'?'You uncovered blocked tiles and used the Flower matching exception.':mode==='hongkong'?'You preserved a useful wait, verified a winning shape, and saw why a Kong needs a replacement.':'You protected a natural pair, redeemed an exposed Joker, and matched a complete original-card row.'}</p><p>Try explaining one decision in your own words. Winning quickly was not the goal.</p><div class="path-options"><button class="ui-btn primary" data-do="close">Return to my game</button><button class="ui-btn secondary" data-do="retry">Retry the last station</button><button class="ui-btn secondary" data-do="restart">Start practice again</button></div>`;return;}d.innerHTML=`<header class="learn-heading"><div><p class="eyebrow">GUIDED PRACTICE · ${mode==='solitaire'?'MINI BOARD':`STATION ${p.step+1} OF 3`}</p><h2 id="practice-title">${p.title}</h2></div><button class="ui-btn secondary" data-do="close">Close ×</button></header><p class="learn-intro">${p.prompt}</p><p class="practice-boundary">Staged teaching scenario · your regular game is paused and preserved.</p>${mode==='solitaire'?`<div class="practice-mini-board" aria-label="Six-tile practice board">${p.tiles().map(t=>`<button class="mj-tile ${p.game.selected===t.id||p.game.lastHint.includes(t.id)?'practice-selected':''}" style="left:${40+t.x*75-t.z*6}px;top:${35+t.y*110-t.z*16}px;z-index:${t.z+1}" data-pick="${t.id}" aria-label="${C.name(t.tile.type)} · ${p.game.freeId(t.id)?'free':'covered'}">${C.tileMarkup(t.tile.type)}</button>`).join('')}</div>`:`<div class="practice-rack" aria-label="Teaching hand">${p.tiles().map(t=>`<button class="mj-tile ${p.picks.has(t.id)?'practice-selected':''}" data-pick="${t.id}" aria-pressed="${p.picks.has(t.id)}" aria-label="${C.name(t.type)}" ${p.step!==0||p.done?'disabled':''}>${C.tileMarkup(t.type)}</button>`).join('')}</div>${mode==='american'&&p.step===1?'<p>Player 2’s exposure: 5-Characters · 5-Characters · Joker</p>':''}<button class="ui-btn primary" data-do="act" ${p.done?'disabled':''}>${p.step===0?(mode==='hongkong'?'Discard selected tile':'Pass selected three'):p.step===1?(mode==='hongkong'?'Declare Mahjong':'Exchange natural tile for Joker'):(mode==='hongkong'?'Declare concealed Kong':'Declare Mah Jongg')}</button>`}<div class="path-options"><button class="ui-btn secondary" data-do="hint">Hint before choosing</button><button class="ui-btn secondary" data-do="compare">Compare alternatives</button><button class="ui-btn ghost" data-do="retry">${mode==='solitaire'?'Undo last pair':'Retry this station'}</button></div><div class="coach-alternatives">${p.comparisons.map((a,i)=>`<article><button class="ui-btn secondary" data-comparison="${i}">${a.label}</button><p><strong>Rule</strong> ${a.rule}</p><p><strong>Calculation</strong> ${a.calculation}</p><p><strong>Heuristic</strong> ${a.heuristic}</p></article>`).join('')}</div><p class="lesson-feedback" role="status" aria-live="polite">${p.feedback}</p><footer class="lesson-pager"><button class="ui-btn secondary" data-do="restart">Restart practice</button>${p.done?`<button class="ui-btn primary" data-do="next">${mode==='solitaire'||p.step===2?'Complete practice ✓':'Next station →'}</button>`:''}</footer>`;}
+ d.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;try{if(b.dataset.do==='close'){d.close();return;}if(b.dataset.do==='restart')practice=new Practice(mode);if(b.dataset.do==='hint')practice.hint();if(b.dataset.do==='compare')practice.compare();if(b.dataset.do==='retry'){practice.complete=false;if(mode==='solitaire'){practice.game.undo();practice.done=false;practice.comparisons=[];practice.feedback='The last pair is back. Try another legal pairing.';}else practice.setup();}if(b.dataset.comparison!==undefined){const a=practice.comparisons[Number(b.dataset.comparison)];if(mode==='solitaire')practice.game.lastHint=a.ids;else practice.picks=new Set(a.ids);practice.feedback=a.calculation+' '+a.heuristic;}if(b.dataset.pick!==undefined)practice.pick(b.dataset.pick);if(b.dataset.do==='act')practice.act();if(b.dataset.do==='next'){practice.next();if(practice.complete){M.learningProgress.complete(mode,'practice');}}draw();const selector=b.dataset.pick!==undefined?`[data-pick="${b.dataset.pick}"]`:b.dataset.comparison!==undefined?`[data-comparison="${b.dataset.comparison}"]`:`[data-do="${b.dataset.do}"]`;const focus=d.querySelector(selector);if(focus&&!focus.disabled)focus.focus({preventScroll:true});else (d.querySelector('[data-do="next"]')||d.querySelector('[data-pick]')||d.querySelector('[data-do="close"]'))?.focus({preventScroll:true});}catch(err){practice.feedback=err.message;draw();}});
+ d.addEventListener('close',()=>{d.remove();onClose();},{once:true});draw();document.body.append(d);d.showModal();
+};
+})(globalThis.Mahjong=globalThis.Mahjong||{});
+
+(function(M){
+'use strict';
+const C=M.core,H=s=>s.split(' ').map(C.makeTile);
+const tileStrip=types=>`<div class="path-tiles">${types.map(t=>`<span class="mj-tile" role="img" aria-label="${C.name(t)}">${C.tileMarkup(t)}</span>`).join('')}</div>`;
+const sourceLinks='<a href="https://www.americanmahjonggassociation.com/american-mah-jongg-rules" target="_blank" rel="noopener noreferrer">American Mah Jongg Association rules</a> · <a href="https://www.nationalmahjonggleague.org/" target="_blank" rel="noopener noreferrer">NMJL official card and materials</a> · <a href="https://c.tabletopia.com/games/old-hong-kong-mahjong/rules/mahjong-rules/en" target="_blank" rel="noopener noreferrer">Hong Kong rule reference</a>';
+function view(mode,types){return {variant:mode==='american'?'american':'hk',hand:H(types),melds:[],flowers:[],publicMelds:[],opponents:[],discards:[],expanded:mode!=='american',minFan:0,seatWind:0,prevailing:0,flowersEnabled:false,sevenPairs:false,phase:'discard',current:0,seat:0,wallCount:60,lastSource:'draw'};}
+const comparisons=[
+ {id:'sequence',title:'Three consecutive tiles',types:['b3','b4','b5'],explain(mode){return mode==='solitaire'?'No pair here: these three numbered faces are different. Solitaire removes matching free pairs; it has no Chow action.':mode==='hongkong'?'This is a Chow. You may build it in your rack; claiming its final tile is limited to the player immediately before you. It is one meld, not a complete win.':'This is not a group on the original American card. Its large groups need identical tiles, possibly with Jokers. A sequence route that helps Hong Kong does not help these practice patterns.';}},
+ {id:'kong',title:'Four identical tiles',types:['d8','d8','d8','d8'],explain(mode){return mode==='solitaire'?'These could form two removable pairs only if the tiles are free. There is no Kong declaration or replacement draw.':mode==='hongkong'?'Declare a legal Kong as one of four melds and take a replacement draw. Four physical tiles occupy one meld slot. An added Kong may first be robbed for a win.':'A four-tile group may fill a Kong slot on the original card. It occupies four of the winning 14 tiles; no replacement draw. Exposing it must leave a compatible exposed row.';}},
+ {id:'joker',title:'A natural tile and a Joker',types:['we','j'],explain(mode){return mode==='american'?'This is not a valid pair. American Jokers may fill groups of three or more, but singles and pairs must be natural.':'Not directly applicable: this mode’s tile set contains no Jokers. Do not transfer the American wildcard rule to this game.';}},
+ {id:'complete',title:'Same rack, different winning rules',types:'b1 b2 b3 d4 d5 d6 c7 c8 c9 dr dr dr we we'.split(' '),explain(mode){if(mode==='solitaire')return 'Not directly applicable: Solitaire has a layered board, not a 14-tile winning rack. Having these tiles together does not end its puzzle.';const a=M.coach.winForView(view(mode,this.types.join(' ')),H(this.types.join(' ')));return a?`The engine accepts this Hong Kong shape at zero minimum. On an ordinary self-draw with Flowers disabled it scores ${a.fan} faan. A higher minimum can still reject it.`:'The engine rejects this rack for all six original American rows: its sequences do not become identical-tile groups. Four melds and a pair is not a universal winning rule.';}}
+];
+function steps(mode){
+ const common={id:'recognize',title:'Meet the tiles',skill:'Recognition',prompt:'Which tile is 1-Bamboo?',types:['b1','d1','c1'],options:['The bird','The circular coin','The character 萬'],answer:0,why:'The bird is 1-Bamboo. The coin is 1-Dots, and 萬 marks the Characters suit. English indices can stay on while you learn.'};
+ if(mode==='solitaire')return [common,
+ {id:'setup',title:'Read the board',skill:'Setup & legal moves',types:['d5','d5'],prompt:'The left 5-Dots is covered by a tile above it. The right one is free. Can you remove this pair?',options:['Yes, the faces match','No, both tiles must be free'],answer:1,why:'Matching faces are necessary but not sufficient. Both must be uncovered and have an open horizontal side. Try the mini board after this path.'},
+ {id:'bonus',title:'A useful exception',skill:'Tile matching',types:['f1','f2','f5'],prompt:'Which two bonus tiles may match in Solitaire?',options:['Plum + Orchid','Plum + Spring','Any two bonus tiles'],answer:0,why:'Plum and Orchid belong to the Flower family. Spring is a Season. Flowers match Flowers; Seasons match Seasons.'},
+ {id:'finish',title:'Know what winning means',skill:'Goal & counting',types:['b2','b2','d3','d3'],prompt:'How many pair removals clear the initial 144-tile board?',options:['14','72','144'],answer:1,why:`Calculation: ${C.tileset('solitaire').length} tiles ÷ 2 = ${C.tileset('solitaire').length/2} pairs. There are no faan or card hands in Solitaire. The timer does not determine success.`},
+ {id:'strategy',title:'Think beyond the match',skill:'Strategy',types:['b2','b2'],prompt:'A hint shows a pair that frees two more tiles. Does that prove it is the best move for clearing the whole board?',options:['Yes, more openings always wins','No, it is a one-step heuristic'],answer:1,why:'The newly free count is demonstrable. Preferring more openings is a heuristic; it is not a full-board solution proof. Compare alternatives and use Undo to learn.'}];
+ if(mode==='hongkong'){const g=view(mode,'b1 b2 b3 d4 d5 d6 c7 c8 c9 dr dr dr we we'),score=M.coach.winForView(g,g.hand).fan;return [common,
+ {id:'setup',title:'Sit down as East',skill:'Setup & turn order',types:['we','ws','ww','wn'],prompt:'At the start of a dealt hand, what does East do first?',options:['Discard from the initial 14-tile hand','Draw a 15th tile','Pass three tiles in a Charleston'],answer:0,why:'East already has 14 tiles and discards first. The other players start with 13. Charleston belongs to American play.'},
+ {id:'chow',title:'Choose a legal claim',skill:'Legal actions',types:['b3','b4','b5'],prompt:'You hold 3- and 4-Bamboo. Who may supply a discarded 5-Bamboo for a Chow?',options:['Any opponent','Only the immediately preceding player','Only the player across'],answer:1,why:'Chow is restricted by turn order. Pung/Kong claims use different rules. A winning claim is considered separately from an ordinary Chow call.'},
+ {id:'shape',title:'Finish the whole hand',skill:'Winning requirements',types:g.hand.map(t=>t.type),prompt:'At zero minimum, does this rack make a legal standard Hong Kong hand?',options:['Yes: four melds and a pair','No: it must be one suit'],answer:M.hongkongTest.partitions(g.hand).length?0:1,why:'The engine partitions it into three Chows, one Red Dragon Pung, and an East pair. Every tile belongs to exactly one group.'},
+ {id:'score',title:'Separate shape from score',skill:'Scoring',types:g.hand.map(t=>t.type),prompt:'Ordinary self-draw, Flowers disabled, no last-tile bonus: how much does this hand score?',options:[String(score),String(score+1),'10'],answer:0,why:`The engine gives ${score} faan: Red Dragon set +1 and self-draw +1. The East pair gives no wind-set bonus. This hand is below a three-faan minimum.`},
+ {id:'strategy',title:'Choose a flexible wait',skill:'Strategy',types:['b4','b5','b4','b6'],prompt:'Ignoring visible exhaustion, which incomplete group has two rank completions?',options:['4–5 Bamboo','4–6 Bamboo','Both have two'],answer:0,why:'4–5 can use 3 or 6; 4–6 needs 5. This is a shape calculation, not a guarantee of a faster win: visible copies and the rest of the hand matter.'}];}
+ const tiles='b2 b2 j d4 d4 d4 c7 c7 c7 dr dr dr we we'.split(' '),a=M.coach.winForView(view(mode,tiles.join(' ')),H(tiles.join(' ')));
+ return [common,
+ {id:'setup',title:'Begin with the Charleston',skill:'Setup & turn order',types:['b1','d3','c5','j'],prompt:'Which tile must stay in your rack during a Charleston pass?',options:['1-Bamboo','5-Characters','Joker'],answer:2,why:'Jokers cannot be passed. Select three non-Jokers unless an eligible blind pass supplies part of the packet. East discards after passing is finished.'},
+ {id:'pair',title:'Keep a natural pair',skill:'Legal actions',types:['we','j'],prompt:'Can this natural East and Joker fill your practice-card pair?',options:['Yes, a Joker replaces anything','No, a pair must be natural'],answer:1,why:'Jokers work in groups of three or more only. This is why keeping a natural pair can matter more than expanding an already strong group.'},
+ {id:'shape',title:'Read the complete row',skill:'Winning requirements',types:tiles,prompt:'Which original practice row does the engine find here?',options:['Four of a Kindred','Three Towers','No valid row'],answer:a?.card.id==='four'?0:2,why:'It is 3 + 3 + 3 + 3 + 2. The Joker fills the Bamboo Pung, while the East pair is natural. This is an original Atelier example, not an NMJL annual-card hand.'},
+ {id:'score',title:'Calculate practice points',skill:'Scoring',types:tiles,prompt:'This row is worth 25 practice points and contains a Joker. What does a self-draw receive from each opponent?',options:['25','50','100'],answer:1,why:'Atelier self-draw doubles the 25-point base for each opponent: 50 each, 150 total. No Joker-free bonus applies. Annual-card values are not reproduced.'},
+ {id:'strategy',title:'Protect your direction',skill:'Strategy',types:['we','we','c7','c7','c7','j'],prompt:'Why might you preserve the East pair while passing unrelated singles?',options:['Jokers can always replace it later','Pairs cannot be repaired with Jokers','Every pair must become a Pung'],answer:1,why:'A natural pair fills a required slot that Jokers cannot fill. This is a planning heuristic tied to the original card, not proof that keeping every pair is optimal.'}];
+}
+M.learningPath={steps,comparisons,view};
+M.openPath=function(mode,onClose){
+ let launchPractice=false;
+ const list=steps(mode),saved=M.learningProgress.get('path-'+mode);let index=Math.max(0,Math.min(saved.page||0,list.length)),feedback='',correct=false,compareIndex=0,compareMode=mode,seen=new Set();
+ const d=document.createElement('dialog');d.className='learn-dialog path-dialog';const appearance=document.querySelector('.shell');if(appearance){d.dataset.tileTheme=appearance.dataset.tileTheme;d.dataset.indices=appearance.dataset.indices;}d.setAttribute('aria-labelledby','path-title');
+ function render(){const st=list[index],done=M.learningProgress.get('path-'+mode).done;d.innerHTML=`<header class="learn-heading"><div><p class="eyebrow">THE ATELIER LEARNING PATH</p><h2 id="path-title">${M.lessons[mode].name}</h2></div><button class="ui-btn secondary" data-path="close">Close ×</button></header><p class="path-motto">Choose a move. See why. Try another way.</p><p class="practice-boundary">${mode==='american'?'Original-card practice; not official annual-card play.':mode==='hongkong'?'Atelier house profile; examples state their scoring assumptions.':'Complete Solitaire puzzle rules; no four-player scoring.'}</p><nav class="path-stages" aria-label="Learning path stages">${list.map((x,i)=>`<button data-stage="${i}" aria-current="${i===index?'step':'false'}">${done.includes(x.id)?'✓ ':''}${i+1}. ${x.skill}</button>`).join('')}<button data-stage="${list.length}" aria-current="${index===list.length?'step':'false'}">Across variants</button></nav>${st?`<article class="path-stage"><p class="eyebrow">${st.skill}</p><h3>${st.title}</h3>${tileStrip(st.types)}<p>${st.prompt}</p><div class="path-options">${st.options.map((text,i)=>`<button class="ui-btn secondary" data-option="${i}">${text}</button>`).join('')}</div><p class="lesson-feedback" role="status" aria-live="polite">${feedback}</p><footer class="lesson-pager"><button class="ui-btn secondary" data-path="retry">Retry this decision</button><button class="ui-btn primary" data-stage="${index+1}" ${correct||done.includes(st.id)?'':'disabled'}>Continue →</button></footer></article>`:`<article class="path-stage"><h3>One idea, three different games</h3><div class="path-options">${comparisons.map((c,i)=>`<button class="ui-btn secondary" data-compare="${i}" aria-pressed="${i===compareIndex}">${c.title}</button>`).join('')}</div>${tileStrip(comparisons[compareIndex].types)}<div class="path-options">${['solitaire','hongkong','american'].map(m=>`<button class="ui-btn ${m===compareMode?'primary':'secondary'}" data-variant="${m}" aria-pressed="${m===compareMode}">${M.lessons[m].name}</button>`).join('')}</div><p class="compare-explanation" role="status">${comparisons[compareIndex].explain(compareMode)}</p><p>Change the variant and notice which rule changes. Tile sets and winning structures are not interchangeable.</p><button class="ui-btn primary" data-path="practice">Try guided practice →</button></article>`}<details class="path-sources"><summary>Rules, sources, and coverage</summary><p>Atelier rules profile v1 · reviewed 18 October 2026. The in-depth lessons list scoring, claims, and house assumptions. These paths teach the implemented games; they do not certify tournament readiness. American official-card play requires your own current authorized card and its rules.</p><p>${sourceLinks}</p></details>`;}
+ d.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.path==='close'){d.close();return;}
+  if(b.dataset.path==='practice'){launchPractice=true;d.close();return;}
+  if(b.dataset.path==='retry'){feedback='Try again. Look at the tiles and explain the rule to yourself before choosing.';correct=false;}
+  if(b.dataset.stage!==undefined){index=Number(b.dataset.stage);correct=false;feedback='';M.learningProgress.bookmark('path-'+mode,index);}
+  if(b.dataset.option!==undefined){correct=Number(b.dataset.option)===list[index].answer;feedback=(correct?'That’s right. ':'Try another choice. ')+list[index].why;if(correct)M.learningProgress.complete('path-'+mode,list[index].id);}
+  if(b.dataset.compare!==undefined)compareIndex=Number(b.dataset.compare);
+  if(b.dataset.variant){compareMode=b.dataset.variant;seen.add(compareMode);if(seen.size===3)M.learningProgress.complete('path-'+mode,'comparison');}
+  render();if(b.dataset.stage!==undefined){d.scrollTop=0;d.querySelector('h3')?.setAttribute('tabindex','-1');d.querySelector('h3')?.focus({preventScroll:true});}else{for(const key of ['option','compare','variant'])if(b.dataset[key]!==undefined)d.querySelector(`[data-${key}="${b.dataset[key]}"]`)?.focus({preventScroll:true});}
+ });
+ d.addEventListener('close',()=>{d.remove();if(launchPractice)M.openPractice(mode,onClose);else onClose();},{once:true});render();document.body.append(d);d.showModal();
 };
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
@@ -671,9 +873,15 @@ M.openLessons=function(mode,onClose){
   'use strict';
   const C=M.core;
   const root=document.getElementById('app');
-  const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,learning:false,games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:false,minFan:0},passSelected:new Set(),selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
+  const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,learning:false,teaching:readTeaching(),advice:[],adviceOpen:false,review:'',games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:true,minFan:0,hkProfile:'atelier',flowers:true,sevenPairs:false},passSelected:new Set(),blind:0,selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
   let pumpTimer=null,toastTimer=null,timerInterval=null;
   const THEMES=[['ivory','Classic Ivory'],['minimal','Modern Minimal'],['neon','Neon Night'],['pastel','Cozy Pastel']];
+  function readTeaching(){try{return localStorage.getItem('mahjong-atelier-teaching')!=='off';}catch{return true;}}
+  function clearAdvice(){state.advice=[];state.adviceOpen=false;}
+  function requestAdvice(){const g=currentGame();if(!g)return;if(state.mode==='solitaire')state.advice=M.coach.solitaireChoices(g).slice(0,3);else{const seat=g.who();if(g.isBotSeat(seat))return;const all=M.coach.alternatives(M.coach.publicView(g,seat));const chosen=all.find(a=>a.id===state.selected);state.advice=all.slice(0,3);if(chosen&&!state.advice.includes(chosen))state.advice[2]=chosen;}state.adviceOpen=true;}
+  function coachPanel(){
+    const g=currentGame();return `<section class="coach-panel" aria-label="Teaching mode"><div class="coach-heading"><label><input type="checkbox" data-teaching="true" ${state.teaching?'checked':''}> Teaching mode</label><small>Choose · understand · compare</small></div>${state.teaching?`<p><strong>Rule</strong> ${state.mode==='solitaire'?'Match identical free tiles (or two Flowers / two Seasons). A free tile is uncovered with an open horizontal side.':g?escapeHTML(M.coach.actionRule(g,g.who())):'Choose your rules profile, minimum, and opponents. Lessons and guided practice remain available before you start.'}</p>${state.review?`<p class="coach-review" role="status"><strong>After your move</strong> ${escapeHTML(state.review)}</p>`:''}${g&&(state.mode==='solitaire'||(!g.isBotSeat(g.who())&&g.phase==='discard'))?btn(state.adviceOpen?'Refresh comparison':'Hint · compare possible moves','coach-hint','secondary'):''}${state.adviceOpen?`<p class="coach-boundary">These are suggestions, not proven optimal moves. Advice uses your rack and public information only. Unseen copies may be in other hands, not necessarily in the wall. No future tiles are inspected.</p><div class="coach-alternatives">${state.advice.map((a,i)=>`<article><h4>${i===0?'Consider':'Alternative '+i}</h4>${state.mode==='solitaire'?`<button class="ui-btn secondary" data-act="coach-pair" data-pair="${a.ids.join(',')}">Highlight this pair</button>`:`<button class="ui-btn secondary" data-act="coach-select" data-id="${a.id}">Consider discarding ${escapeHTML(C.name(a.type))}</button>`}<p><strong>Calculation</strong> ${escapeHTML(a.calculation)}</p><p><strong>Heuristic</strong> ${escapeHTML(a.heuristic)}</p>${a.waits?.length?`<p><strong>Winning draw types</strong> ${a.waits.map(w=>escapeHTML(C.name(w.type))).join(', ')}</p>`:''}${a.defense?`<p><strong>Defense caution</strong> ${escapeHTML(a.defense)}</p>`:''}</article>`).join('')||'<p>No legal pair is currently available. Undo or Shuffle can help you continue.</p>'}</div>`:''}`:''}</section>`;
+  }
   function readAppearance(){
     try{
       const saved=JSON.parse(localStorage.getItem('mahjong-atelier-appearance'))||{};
@@ -692,8 +900,7 @@ M.openLessons=function(mode,onClose){
   function currentGame(){return state.games[state.mode];}
   function switchMode(mode){
     clearTimeout(pumpTimer);pumpTimer=null;
-    if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
-    state.mode=mode;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
+    clearAdvice();state.review='';state.mode=mode;state.blind=0;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
     document.title='Mahjong Atelier · '+({solitaire:'Solitaire',hongkong:'Hong Kong',american:'American'}[mode]);
     render();
   }
@@ -708,14 +915,14 @@ M.openLessons=function(mode,onClose){
   function tileGuide(){
     if(!state.showTileGuide)return '';
     const suits=[['Dots · 筒子','Copper-coin circles. Tile 1 is a larger, decorated circle.',['d1','d5','d9']],['Bamboo · 條子','Counting bamboo stalks, with a bird on the 1-Bamboo tile.',['b1','b5','b9']],['Characters · 萬子','Chinese numbers above the red character 萬 (ten thousand).',['c1','c5','c9']]];
-    return `<div class="tile-help-overlay"><div class="tile-help-scrim" data-act="close-tile-guide"></div><div class="tile-help-panel" role="dialog" aria-modal="true" aria-labelledby="tile-help-title"><header class="tile-help-heading"><div><p class="eyebrow">THE TILE LIBRARY</p><h2 id="tile-help-title">Read the tiles at a glance.</h2><p>Every style keeps the same suit, number and tile meaning.</p></div><button type="button" class="tile-help-close" aria-label="Close tile guide" data-act="close-tile-guide">×</button></header><div class="legend-suits">${suits.map(([title,desc,types])=>`<section class="legend-group"><h3>${title}</h3><p>${desc}</p><div class="legend-tiles">${types.map(legendTile).join('')}</div></section>`).join('')}</div><section class="legend-special"><h3>The honors</h3><p>Winds and Dragons cannot form numbered sequences. Their symbols have fixed meanings.</p><div class="legend-tiles">${['we','ws','ww','wn','dr','dg','dw'].map(legendTile).join('')}</div></section><section class="legend-special"><h3>Flowers, Seasons &amp; Jokers</h3><div class="legend-tiles">${['f1','f5','j'].map(legendTile).join('')}</div><p>American practice adds eight Jokers and eight bonus tiles. Solitaire uses bonus tiles; Hong Kong basics uses the 136 standard suit and honor tiles.</p></section><p class="legend-note">English indices are a learning aid. Hide them in the appearance bar whenever you want a more traditional challenge. The Mahjong rules do not change.</p></div></div>`;
+    return `<div class="tile-help-overlay"><div class="tile-help-scrim" data-act="close-tile-guide"></div><div class="tile-help-panel" role="dialog" aria-modal="true" aria-labelledby="tile-help-title"><header class="tile-help-heading"><div><p class="eyebrow">THE TILE LIBRARY</p><h2 id="tile-help-title">Read the tiles at a glance.</h2><p>Every style keeps the same suit, number and tile meaning.</p></div><button type="button" class="tile-help-close" aria-label="Close tile guide" data-act="close-tile-guide">×</button></header><div class="legend-suits">${suits.map(([title,desc,types])=>`<section class="legend-group"><h3>${title}</h3><p>${desc}</p><div class="legend-tiles">${types.map(legendTile).join('')}</div></section>`).join('')}</div><section class="legend-special"><h3>The honors</h3><p>Winds and Dragons cannot form numbered sequences. Their symbols have fixed meanings.</p><div class="legend-tiles">${['we','ws','ww','wn','dr','dg','dw'].map(legendTile).join('')}</div></section><section class="legend-special"><h3>Flowers, Seasons &amp; Jokers</h3><div class="legend-tiles">${['f1','f5','j'].map(legendTile).join('')}</div><p>American practice adds eight Jokers and eight bonus tiles. Solitaire uses bonus tiles; Hong Kong uses 136 standard tiles, plus optional bonus tiles in the Atelier profile.</p></section><p class="legend-note">English indices are a learning aid. Hide them in the appearance bar whenever you want a more traditional challenge. The Mahjong rules do not change.</p></div></div>`;
   }
   function panelHeader(kicker,title,description){return `<div class="section-heading"><div><p class="eyebrow">${kicker}</p><h1>${title}</h1><p class="lede">${description}</p></div></div>`;}
   function guide(mode){
     if(!state.showGuide)return '';
     if(mode==='solitaire')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>01 / 03</span></div><h3>A quiet game of strategy.</h3><p>Find two matching <strong>free tiles</strong>. A tile is free when nothing rests directly on it and at least one horizontal side is open.</p><div class="tip-list"><div><span class="tip-icon">01</span><span><b>Work from the top</b><small>Peel away layers to reveal the tiles below.</small></span></div><div><span class="tip-icon">02</span><span><b>Plan your pairs</b><small>A match now can block a better match later.</small></span></div><div><span class="tip-icon">03</span><span><b>Rescue your run</b><small>Use Hint, Undo, or Shuffle when stuck; Shuffle can flatten a trapped stack.</small></span></div></div><div class="guide-note">Each new deal is built from at least one valid full-clearing sequence. Some choices can still lead to a dead end.</div></aside>`;
-    if(mode==='hongkong')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>02 / 03</span></div><h3>Build your winning hand.</h3><p>Work toward <strong>four melds and one pair</strong>. Each turn, draw and discard. Call an opponent's latest discard when eligible.</p><div class="tip-list"><div><span class="tip-icon">吃</span><span><b>Chow</b><small>Three consecutive numbers of one suit. Only from the player before you.</small></span></div><div><span class="tip-icon">碰</span><span><b>Pung / Kong</b><small>Three or four identical tiles; Kong draws a replacement.</small></span></div><div><span class="tip-icon">胡</span><span><b>Mahjong</b><small>A complete hand; declare it before discarding.</small></span></div></div><div class="guide-note">Beginner rules use 136 tiles and default to no minimum faan. The optional 3-faan setting uses a limited teaching score model, not tournament scoring. Special hands and added Kongs are not yet included.</div></aside>`;
-    return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>03 / 03</span></div><h3>Play the American way.</h3><p>Build a hand matching <strong>one complete line</strong> on the original practice card. This is not an official NMJL annual card.</p><div class="tip-list"><div><span class="tip-icon">↗</span><span><b>Charleston</b><small>Pass three non-Joker tiles: Right, Across, Left. Optional second round reverses direction.</small></span></div><div><span class="tip-icon">★</span><span><b>Jokers</b><small>Use in groups of three or more, never singles or pairs.</small></span></div><div><span class="tip-icon">↔</span><span><b>Joker exchange</b><small>Trade a natural tile for a matching Joker in your own exposed set on your turn.</small></span></div></div><div class="guide-note">This original-card learning edition omits blind/courtesy passes, official hand categories, full exposure restrictions, and NMJL scoring. An officially licensed annual card would require separate integration.</div></aside>`;
+    if(mode==='hongkong')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>02 / 03</span></div><h3>Build your winning hand.</h3><p>Work toward <strong>four melds and one pair</strong>. Each turn, draw and discard. Call an opponent's latest discard when eligible.</p><div class="tip-list"><div><span class="tip-icon">吃</span><span><b>Chow</b><small>Three consecutive numbers of one suit. Only from the player before you.</small></span></div><div><span class="tip-icon">碰</span><span><b>Pung / Kong</b><small>Three or four identical tiles; Kong draws a replacement.</small></span></div><div><span class="tip-icon">胡</span><span><b>Mahjong</b><small>A complete hand; declare it before discarding.</small></span></div></div><div class="guide-note">Choose Beginner or Atelier Hong Kong. Atelier adds special hands, added Kongs, optional Flowers, four wind rounds, and a visible points ledger. Open lessons for the exact house rules.</div></aside>`;
+    return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>03 / 03</span></div><h3>Play the American way.</h3><p>Build a hand matching <strong>one complete line</strong> on the original practice card. This is not an official NMJL annual card.</p><div class="tip-list"><div><span class="tip-icon">↗</span><span><b>Charleston</b><small>Pass three non-Joker tiles: Right, Across, Left. A second round needs everyone’s agreement; courtesy passing follows.</small></span></div><div><span class="tip-icon">★</span><span><b>Jokers</b><small>Use in groups of three or more, never singles or pairs.</small></span></div><div><span class="tip-icon">↔</span><span><b>Joker exchange</b><small>Trade a natural tile for a matching Joker in any eligible exposed set on your turn.</small></span></div></div><div class="guide-note">Practice blind and courtesy passes, concealed hands, exposure compatibility, and Joker exchanges. Points belong to the original Atelier card; this is not NMJL annual-card play.</div></aside>`;
   }
   function solitaireView(){
     const g=currentGame(),positions=g.tiles,free=new Set(g.available().map(t=>t.id));
@@ -735,13 +942,14 @@ M.openLessons=function(mode,onClose){
     const isAm=state.mode==='american';
     return `${panelHeader(isAm?'FOUR-PLAYER / AMERICAN RULES':'FOUR-PLAYER / HONG KONG BASICS',isAm?'The Charleston is calling.':'Gather around the table.',isAm?'An American-style practice game with original card patterns, Jokers and tile passing.':'Build sets, call discards and race to Mahjong using beginner-friendly Hong Kong rules.')}
     <div class="setup-area"><div class="setup-top"><div class="setup-emblem">${isAm?'★':'中'}</div><h2>Set the table</h2><p>Choose how you want to play. Your table runs entirely in this browser.</p></div><h3 class="setup-label">PLAY AGAINST</h3><div class="opponent-grid"><button type="button" data-act="opponents" data-value="bots" class="opponent ${state.settings.opponents==='bots'?'chosen':''}"><span class="opponent-pict">◉ ◉ ◉</span><b>You + three bots</b><small>Play on your own against computer seats</small></button><button type="button" data-act="opponents" data-value="local" class="opponent ${state.settings.opponents==='local'?'chosen':''}"><span class="opponent-pict">♟ ♟ ♟ ♟</span><b>Four players, one device</b><small>Pass the device and keep hands hidden</small></button></div>
-    ${isAm?`<div class="setup-field"><label for="second-pass">Charleston passing</label><select id="second-pass" data-setting="secondCharleston"><option value="false" ${!state.settings.secondCharleston?'selected':''}>Mandatory first round (Right · Across · Left)</option><option value="true" ${state.settings.secondCharleston?'selected':''}>First + optional second round (6 passes)</option></select><small>The optional round assumes all four players agreed before the deal.</small></div>`:`<div class="setup-field"><label for="fan-rule">Winning requirement</label><select id="fan-rule" data-setting="minFan"><option value="0" ${!state.settings.minFan?'selected':''}>Beginner: four melds + pair (0 faan minimum)</option><option value="3" ${state.settings.minFan===3?'selected':''}>Practice: 3 faan (simplified scoring)</option></select><small>Full Hong Kong tournament scoring is not implemented.</small></div>`}
+    ${isAm?`<div class="setup-field"><label for="second-pass">Computer preference for a second Charleston</label><select id="second-pass" data-setting="secondCharleston"><option value="true" ${state.settings.secondCharleston?'selected':''}>Bots agree to a second round</option><option value="false" ${!state.settings.secondCharleston?'selected':''}>Bots decline a second round</option></select><small>Each human chooses after the first round. One “stop” ends the Charleston. Courtesy offers are then negotiated across the table.</small></div>`:`<div class="setup-field"><label for="hk-profile">Rules profile</label><select id="hk-profile" data-setting="hkProfile"><option value="atelier" ${state.settings.hkProfile==='atelier'?'selected':''}>Atelier Hong Kong · expanded play</option><option value="beginner" ${state.settings.hkProfile==='beginner'?'selected':''}>Beginner · four melds + pair</option></select><small>Atelier uses a named house profile with special hands, added/robbed Kongs, a 10-faan cap, and four wind rounds.</small></div><div class="setup-field"><label for="fan-rule">Minimum qualifying faan</label><select id="fan-rule" data-setting="minFan"><option value="0" ${!state.settings.minFan?'selected':''}>0 · learn hand shapes</option><option value="3" ${state.settings.minFan===3?'selected':''}>3 · scoring challenge</option></select><small>In Atelier, Flower bonuses do not satisfy the minimum.</small></div>${state.settings.hkProfile==='atelier'?`<div class="setup-field"><label><input type="checkbox" data-setting="flowers" ${state.settings.flowers?'checked':''}> Include eight Flowers and Seasons</label><label><input type="checkbox" data-setting="sevenPairs" ${state.settings.sevenPairs?'checked':''}> Allow seven distinct pairs (4-faan house option)</label></div>`:''}`}
+
     ${btn('Start a new table &nbsp; →','start-table','primary')}<p class="setup-note">✦ &nbsp; No sign-in · No server · No tracking · No bets</p></div>`;
   }
   function seatMarkup(p,seat,active,game){
     let special=p.seat===active?' active':'';
-    let exposed=p.melds.length?`<div class="seat-melds">${p.melds.map((m,i)=>`<div title="${m.kind} · ${C.name(m.type)}" class="exposed-meld"><span class="meld-icon">${m.kind==='chow'?'≋':m.kind==='kong'?'▣':'◈'}</span> ${escapeHTML(m.kind.toUpperCase())} <strong>${escapeHTML(C.name(m.type))}</strong>${m.tiles.some(t=>t.type==='j')&&game.variant==='american'&&seat===game.current&&game.phase==='discard'&&!game.players[game.current].bot&&game.players[game.current].hand.some(t=>t.type===m.type)?`<button type="button" class="swap-btn" data-act="joker-swap" data-seat="${seat}" data-meld="${i}" title="Exchange matching tile for exposed Joker">↔ Joker</button>`:''}</div>`).join('')}</div>`:'<span class="seat-meta">No exposed sets</span>';
-    return `<div class="seat seat-${seat}${special}"><div class="seat-heading"><span class="wind-chip">${['東','南','西','北'][seat]}</span><span><strong>${p.name}</strong><small>${p.bot?'BOT':'LOCAL PLAYER'}</small></span>${p.seat===active?'<span class="turn-pin">● TURN</span>':''}</div><div class="seat-tiles"><span>▥ ${p.hand.length} concealed</span><span>◫ ${p.discards.length} discards</span></div>${exposed}</div>`;
+    let exposed=p.melds.length?`<div class="seat-melds">${p.melds.map((m,i)=>`<div title="${m.kind} · ${C.name(m.type)}" class="exposed-meld"><span class="meld-icon">${m.kind==='chow'?'≋':m.kind==='kong'?'▣':'◈'}</span> ${escapeHTML(m.kind.toUpperCase())} <strong>${escapeHTML(C.name(m.type))}</strong>${m.tiles.some(t=>t.type==='j')&&game.variant==='american'&&game.phase==='discard'&&!game.players[game.current].bot&&game.players[game.current].hand.some(t=>t.type===m.type)?`<button type="button" class="swap-btn" data-act="joker-swap" data-seat="${seat}" data-meld="${i}" title="Exchange matching tile for exposed Joker">↔ Joker</button>`:''}</div>`).join('')}</div>`:'<span class="seat-meta">No exposed sets</span>';
+    return `<div class="seat seat-${seat}${special}"><div class="seat-heading"><span class="wind-chip">${['東','南','西','北'][game.windIndex(seat)]}</span><span><strong>${p.name} · ${game.windName(seat)}</strong><small>${p.bot?'BOT':'LOCAL PLAYER'}</small></span>${p.seat===active?'<span class="turn-pin">● TURN</span>':''}</div><div class="seat-tiles"><span>▥ ${p.hand.length} concealed</span><span>◫ ${p.discards.length} discards</span><span>✿ ${p.flowers.length} bonus tiles</span></div>${exposed}</div>`;
   }
   function compactTile(type){
     const t={'we':'東','ws':'南','ww':'西','wn':'北','dr':'中','dg':'發','dw':'白','j':'★'};
@@ -754,35 +962,39 @@ M.openLessons=function(mode,onClose){
   }
   function handMarkup(g,active){
     const p=g.players[active];
+    if(p.bot)return '<div class="hand-panel"><p>Computer rack is concealed. Your rack returns when it is your turn.</p></div>';
     const playable=!p.bot&&(g.phase==='discard'||g.phase==='charleston');
     if(!p)return '';
     const tiles=p.hand.map(t=>`${C.tileButton(t,{selected:(g.phase==='charleston'?state.passSelected.has(t.id):state.selected===t.id),disabled:!playable,attr:playable?`data-act="hand-pick" data-id="${t.id}"`:''})}`).join('');
-    return `<div class="hand-panel"><div class="hand-title"><div><span class="eyebrow">${g.phase==='charleston'?'THE PASSING RACK':'CONCEALED TILES'}</span><h3>${p.name}'s hand <span>· ${p.hand.length} tiles</span></h3></div><span class="rack-symbol">${g.variant==='american'?'AMERICAN RACK':'TABLE HAND'}</span></div><div class="rack" role="group" aria-label="${p.name} player's tiles">${tiles}</div><div class="rack-hint">← Swipe or scroll the rack to see all your tiles →</div></div>`;
+    return `<div class="hand-panel"><div class="hand-title"><div><span class="eyebrow">${['charleston','secondChoice','courtesyChoice'].includes(g.phase)?'THE PASSING RACK':'CONCEALED TILES'}</span><h3>${p.name}'s hand <span>· ${p.hand.length} tiles</span></h3></div><span class="rack-symbol">${g.variant==='american'?'AMERICAN RACK':'TABLE HAND'}</span></div><div class="rack" role="group" aria-label="${p.name} player's tiles">${tiles}</div><div class="rack-hint">← Swipe or scroll the rack to see all your tiles →</div></div>`;
   }
   function cardMarkup(g){if(state.mode!=='american')return '';
-    return `<div class="practice-card"><div class="practice-header"><div><p class="eyebrow">AMERICAN EDITION · ORIGINAL CONTENT</p><h3>The Atelier Practice Card</h3></div><span>6 PATTERNS</span></div><p>Complete <strong>any one entire row</strong> to declare Mah Jongg. The highlighted target is a planning aid, not a restriction.</p><div class="pattern-list">${M.americanTest.CARD.map((c,i)=>`<button type="button" data-act="goal" data-goal="${i}" class="pattern ${state.goal===i?'goal':''}"><span class="pattern-name">${escapeHTML(c.name)}<small>${c.level}</small></span><span class="pattern-blocks">${c.groups.map(n=>`<b class="pattern-group ${n<=2?'singles':''}">${n===1?'F':n}</b>`).join('')}</span><span class="pattern-desc">${escapeHTML(c.description)}</span></button>`).join('')}</div><p class="practice-disclaimer">Each number is a group size; F means a single Flower. Groups of 3+ are identical tiles; a Joker can fill these groups, never a pair or single. <strong>Unofficial original learning patterns</strong>, not NMJL annual-card hands.</p></div>`;
+    return `<div class="practice-card"><div class="practice-header"><div><p class="eyebrow">AMERICAN EDITION · ORIGINAL CONTENT</p><h3>The Atelier Practice Card</h3></div><span>6 PATTERNS</span></div><p>Complete <strong>any one entire row</strong> to declare Mah Jongg. The highlighted target is a planning aid, not a restriction.</p><div class="pattern-list">${M.americanTest.CARD.map((c,i)=>`<button type="button" data-act="goal" data-goal="${i}" class="pattern ${state.goal===i?'goal':''}"><span class="pattern-name">${escapeHTML(c.name)}<small>${c.level}</small></span><span class="pattern-blocks">${c.groups.map(n=>`<b class="pattern-group ${n<=2?'singles':''}">${n===1?'F':n}</b>`).join('')}</span><span class="pattern-desc">${escapeHTML(c.description)}</span></button>`).join('')}</div><p class="practice-disclaimer">Each number is a group size; F means a single Flower or Season. Concealed rows allow no exposed sets before the winning call. Groups of 3+ are identical tiles; a Joker can fill these groups, never a pair or single. <strong>Unofficial original learning patterns</strong>, not NMJL annual-card hands.</p></div>`;
   }
   function actionMarkup(g,active){
-    if(g.phase==='finished')return `<div class="action-banner result-banner"><div class="result-star">${g.result.kind==='win'?'✦':'◌'}</div><div><h3>${g.result.kind==='win'?g.result.message:'A peaceful draw.'}</h3><p>${g.result.kind==='win'?(g.variant==='hk'?`${g.result.analysis.fan} faan · ${g.result.analysis.details.join(' · ')||'Standard winning hand'}`:`${g.result.analysis.card.name} · Original practice card`):g.result.message}</p></div>${btn('New hand &nbsp; →','new-table','primary')}</div>`;
+    if(g.phase==='finished')return `<div class="action-banner result-banner"><div><h3>${g.result.kind==='win'?g.result.message:'A peaceful draw.'}</h3><p>${g.result.kind==='win'?(g.variant==='hk'?`${g.result.analysis.fan} faan · ${g.result.analysis.details.join(' · ')||'Standard hand'}`:`${g.result.analysis.card.name} · ${g.result.analysis.card.value} base points${g.result.analysis.jokerFree?' · Joker-free ×2':''}`):g.result.message}</p><p>Practice points only. ${g.result.kind==='win'?`Each opponent pays ${g.result.base}; ${g.result.selfDraw?'all three pay double for self-draw':'the discarder pays double'}.`:''}</p></div>${btn('Next hand · keep scores →','next-hand','primary')}${btn('New match','new-table','secondary')}</div>`;
+    if(g.phase==='secondChoice')return `<div class="action-banner"><div class="action-copy"><p class="eyebrow">CHARLESTON DECISION · ${g.players[active].name}</p><h3>Continue with a second round?</h3><p>Everyone must agree. One stop takes the table to courtesy offers.</p></div><div class="action-buttons">${btn('Continue · Left, Across, Right','second-yes','primary',g.players[active].bot)}${btn('Stop after first round','second-no','secondary',g.players[active].bot)}</div></div>`;
+    if(g.phase==='courtesyChoice')return `<div class="action-banner"><div class="action-copy"><p class="eyebrow">COURTESY OFFER · ${g.players[active].name}</p><h3>How many tiles would you exchange?</h3><p>You and the opposite player exchange the smaller offer. Choose zero to decline. No blind tiles or Jokers.</p></div><div class="action-buttons">${[0,1,2,3].map(n=>btn(String(n),'courtesy-offer','secondary',g.players[active].bot,`data-count="${n}"`)).join('')}</div></div>`;
     if(g.phase==='charleston'){
-      const r=g.passRoute[g.charIndex];
-      return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">CHARLESTON · PASS ${g.charIndex+1} OF ${g.passRoute.length}</div><h3>Pass three tiles ${r.name.toLowerCase()} <span class="direction">${r.name==='Right'?'→':r.name==='Left'?'←':'↔'}</span></h3><p>Choose three tiles from ${g.players[active].name}'s rack. Jokers cannot be passed. All four hands exchange simultaneously.</p></div><div class="action-buttons"><span class="counter-note">${state.passSelected.size}/3 selected</span>${btn('Pass selected 3 &nbsp; →','submit-pass','primary',g.players[active].bot||state.passSelected.size!==3)}</div></div>`;
+      const r=g.passRoute[g.charIndex],required=g.passCount(active)-state.blind;
+      return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">${r.courtesy?'COURTESY EXCHANGE':`CHARLESTON · PASS ${g.charIndex+1}`}</div><h3>Pass ${g.passCount(active)} tiles ${r.name.toLowerCase()}</h3><p>Select ${required} non-Joker tiles from ${g.players[active].name}'s rack.${state.blind?` The remaining ${state.blind} will be forwarded unseen from the incoming packet.`:''}</p>${g.canBlind()&&!g.players[active].bot?`<label class="blind-choice">Pass unseen: <select data-blind="true" aria-label="Number of incoming tiles to pass blind">${[0,1,2,3].map(n=>`<option value="${n}" ${state.blind===n?'selected':''}>${n} blind tile${n===1?'':'s'}</option>`).join('')}</select></label><p>If all four players choose three blind, this pass is a no-op.</p>`:''}</div><div class="action-buttons"><span class="counter-note">${state.passSelected.size}/${required} selected</span>${btn('Send passing packet →','submit-pass','primary',g.players[active].bot||state.passSelected.size!==required)}</div></div>`;
     }
-    if(g.phase==='claims'){
+    if(g.phase==='claims'||g.phase==='robkong'){
       const opts=g.offered().options;
-      return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">DISCARD CLAIM · ${g.players[active].name.toUpperCase()}</div><h3>Someone played ${C.name(g.lastDiscard.tile.type)}.</h3><p>Claim it for a legal exposed set or a complete winning hand—or pass to continue.</p></div><div class="action-buttons claim-actions">${g.players[active].bot?'<span class="muted">Thinking…</span>':opts.map(o=>btn(o.kind==='win'?'✦ '+o.title:escapeHTML(o.title),'claim','secondary',false,`data-code="${o.code}"`)).join('')+btn('Pass','claim','ghost',false,'data-code="pass"')}</div></div>`;
+      return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">DISCARD CLAIM · ${g.players[active].name.toUpperCase()}</div><h3>${g.phase==='robkong'?'Added Kong offered:':'Someone played'} ${C.name(g.phase==='robkong'?g.pendingKong.tile.type:g.lastDiscard.tile.type)}.</h3><p>${g.phase==='robkong'?'Only a winning hand can take this tile. Passing lets the Kong receive its replacement draw.':'Claim a legal exposed set or a complete winning hand—or pass to continue.'}</p></div><div class="action-buttons claim-actions">${g.players[active].bot?'<span class="muted">Thinking…</span>':opts.map(o=>btn(o.kind==='win'?'✦ '+o.title:escapeHTML(o.title),'claim','secondary',false,`data-code="${o.code}"`)).join('')+btn('Pass','claim','ghost',false,'data-code="pass"')}</div></div>`;
     }
-    const p=g.players[active],canWin=g.winAnalysis(active,null,true),kongs=g.kongOptions?g.kongOptions(active):[];
-    return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">YOUR MOVE · ${p.name.toUpperCase()}</div><h3>${p.bot?'Computer is choosing a tile…':'Choose a tile to discard.'}</h3><p>${g.variant==='hk'?'Four melds + a pair wins. Claim a Kong whenever your hand has four identical tiles.':'Only hands on the practice card win. You can redeem Jokers from exposed groups on your turn.'}</p></div><div class="action-buttons">${canWin?btn('✦ &nbsp; Declare Mahjong!','win','highlight',p.bot):''}${kongs.map(type=>btn('▣ Kong '+escapeHTML(C.name(type)),'kong','secondary',p.bot,`data-type="${type}"`)).join('')}${btn('Discard '+(state.selected===null?'selected tile':'tile →'),'discard','primary',p.bot||state.selected===null)}</div></div>`;
+    const p=g.players[active],canWin=g.canDeclareWin(active),kongs=g.kongOptions?g.kongOptions(active):[];
+    return `<div class="action-banner"><div class="action-copy"><div class="eyebrow">YOUR MOVE · ${p.name.toUpperCase()}</div><h3>${p.bot?'Computer is choosing a tile…':'Choose a tile to discard.'}</h3><p>${g.variant==='hk'?'Build a complete hand under your selected profile. Added Kongs may be robbed for a win.':'Only hands on the practice card win. You can redeem Jokers from exposed groups on your turn.'}</p></div><div class="action-buttons">${canWin?btn('✦ &nbsp; Declare Mahjong!','win','highlight',p.bot):''}${kongs.map(type=>btn((type.startsWith('add:')?'▣ Add to Pung · ':'▣ Concealed Kong · ')+escapeHTML(C.name(type.replace('add:',''))),'kong','secondary',p.bot,`data-type="${type}"`)).join('')}${btn('Discard '+(state.selected===null?'selected tile':'tile →'),'discard','primary',p.bot||state.selected===null)}</div></div>`;
   }
+  function scoreboard(g){return `<section class="match-ledger" aria-label="Match scores"><p><strong>${g.variant==='hk'?(g.expanded?'Atelier Hong Kong':'Beginner Hong Kong'):'Atelier American'}</strong> · ${['East','South','West','North'][g.round]} round · Hand ${g.handNumber} · Dealer: ${g.players[g.dealer].name}</p><div>${g.players.map((p,i)=>`<span>${p.name} (${g.windName(i)}) <strong>${g.scores[i]}</strong>${g.result?` <small>(${g.result.payments[i]>=0?'+':''}${g.result.payments[i]})</small>`:''}</span>`).join('')}</div><small>Virtual practice points · ${g.variant==='hk'?'East repeats after winning or a draw; otherwise the dealer moves.':'Dealer moves after every hand.'} Four dealer rotations advance the round wind.</small></section>`;}
   function tableView(){
     const g=currentGame();if(!g)return setupView();
     const active=g.who()??g.current;
     const subtitle=state.mode==='american'?'An original card, a little luck, and a whole lot of strategy.':'Chows, Pungs and Kongs. Every discarded tile tells a story.';
     const title=state.mode==='american'?'A distinctly American table.':'Every tile has a story.';
     return `${panelHeader((g.variant==='hk'?'HONG KONG BASICS':'AMERICAN PRACTICE')+' / FOUR PLAYERS',title,subtitle)}
-      <div class="stats-grid table-stats"><div class="stat"><span>Remaining wall</span><strong>${g.wall.length}</strong></div><div class="stat"><span>Round status</span><strong class="stat-status">${g.phase==='charleston'?'Charleston':g.phase==='claims'?'Claims open':g.phase==='finished'?'Hand ended':'In play'}</strong></div><div class="stat"><span>Active seat</span><strong>${g.players[active].name}</strong></div><div class="stat"><span>Completed games</span><strong>${state.stats[state.mode]||0}</strong></div></div>
-      <div class="arena"><div class="arena-label"><span>✦ THE FELT TABLE</span><span>${g.settings.opponents==='bots'?'SOLO VS. THREE BOTS':'FOUR LOCAL PLAYERS'}</span></div><div class="arena-grid"><div class="arena-seat-top">${seatMarkup(g.players[2],2,active,g)}</div><div class="arena-seat-left">${seatMarkup(g.players[3],3,active,g)}</div><div class="discard-pond">${pondMarkup(g)}</div><div class="arena-seat-right">${seatMarkup(g.players[1],1,active,g)}</div><div class="arena-seat-bottom">${seatMarkup(g.players[0],0,active,g)}</div></div></div>
+      <div class="stats-grid table-stats"><div class="stat"><span>Remaining wall</span><strong>${g.wall.length}</strong></div><div class="stat"><span>Round status</span><strong class="stat-status">${['charleston','secondChoice','courtesyChoice'].includes(g.phase)?'Passing':['claims','robkong'].includes(g.phase)?'Claims open':g.phase==='finished'?'Hand ended':'In play'}</strong></div><div class="stat"><span>Active seat</span><strong>${g.windName(active)}</strong></div><div class="stat"><span>Completed games</span><strong>${state.stats[state.mode]||0}</strong></div></div>
+      ${scoreboard(g)}<div class="arena"><div class="arena-label"><span>✦ THE FELT TABLE</span><span>${g.settings.opponents==='bots'?'SOLO VS. THREE BOTS':'FOUR LOCAL PLAYERS'}</span></div><div class="arena-grid"><div class="arena-seat-top">${seatMarkup(g.players[2],2,active,g)}</div><div class="arena-seat-left">${seatMarkup(g.players[3],3,active,g)}</div><div class="discard-pond">${pondMarkup(g)}</div><div class="arena-seat-right">${seatMarkup(g.players[1],1,active,g)}</div><div class="arena-seat-bottom">${seatMarkup(g.players[0],0,active,g)}</div></div></div>
       ${actionMarkup(g,active)}${handMarkup(g,active)}
       <div class="table-footer">${btn('↻ &nbsp; New hand','new-table','secondary')}${btn('⚙ &nbsp; Change table settings','change-settings','secondary')}<span class="muted">${escapeHTML(g.log[0]||'')}</span></div>${cardMarkup(g)}
       <div class="turn-history"><h3>Table notes</h3><ol>${g.log.slice(0,7).map(t=>`<li>${escapeHTML(t)}</li>`).join('')}</ol></div>`;
@@ -794,7 +1006,7 @@ M.openLessons=function(mode,onClose){
   }
   function render(){
     const which=state.mode;
-    root.innerHTML=`<div class="shell" data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Step-by-step rules, illustrated examples, strategy, and a practice question.</p>${btn('Open lessons →','learn','primary')}</div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
+    root.innerHTML=`<div class="shell" data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
     maybeGuard();schedulePump();
   }
   function activeHumanSeat(){
@@ -813,7 +1025,7 @@ M.openLessons=function(mode,onClose){
     if(g.isBotSeat(g.who()))pumpTimer=setTimeout(()=>{
       try{if(g.botStep()){
         if(g.phase==='finished'&&g.result.kind==='win')saveWin(state.mode);
-        state.selected=null;state.passSelected.clear();render();
+        state.selected=null;state.passSelected.clear();state.blind=0;render();
       }}catch(err){notify('A table action could not complete: '+err.message);render();}
     },270);
   }
@@ -821,49 +1033,59 @@ M.openLessons=function(mode,onClose){
     const control=e.target.closest('[data-act]');if(!control)return;
     const act=control.dataset.act;
     try{
+      if(act==='coach-hint'){requestAdvice();render();root.querySelector('.coach-panel')?.scrollIntoView({block:'nearest'});return;}
+      if(act==='coach-select'){state.selected=Number(control.dataset.id);render();root.querySelector('.rack .is-selected')?.focus();return;}
+      if(act==='coach-pair'){currentGame().lastHint=control.dataset.pair.split(',');render();return;}
+      if(act==='path'){state.learning=true;clearTimeout(pumpTimer);M.openPath(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
+      if(act==='practice'){state.learning=true;clearTimeout(pumpTimer);M.openPractice(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
       if(act==='learn'){state.learning=true;clearTimeout(pumpTimer);M.openLessons(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
       if(act==='switch'){switchMode(control.dataset.mode);return;}
       if(act==='toggle-guide'){state.showGuide=!state.showGuide;render();return;}
       if(act==='tile-guide'){state.showTileGuide=true;render();root.querySelector('.tile-help-close')?.focus();return;}
       if(act==='close-tile-guide'){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();return;}
-      if(act==='layout'){state.games.solitaire.newGame(control.dataset.layout);render();return;}
+      if(act==='layout'){clearAdvice();state.review='';state.games.solitaire.newGame(control.dataset.layout);render();return;}
       if(act==='sol-pick'){
-        const g=state.games.solitaire,action=g.choose(control.dataset.tileId);
+        const g=state.games.solitaire,before=g.available().map(t=>t.id),action=g.choose(control.dataset.tileId);
+        if(state.teaching&&action.action==='match'){const n=g.available().filter(t=>!before.includes(t.id)).length;state.review=`Legal pair removed; ${n} previously blocked tile${n===1?' is':'s are'} now free. Look at those new choices before taking another pair.`;clearAdvice();}
         if(action.action==='match'&&action.completed){g.finishedSeconds=Math.floor((Date.now()-g.startedAt)/1000);saveWin('solitaire');notify('You cleared the board!');}
         if(action.action==='nomatch')notify('Those tiles do not match. Try another pair.');render();return;
       }
-      if(act==='new-sol'){state.games.solitaire.newGame();render();return;}
-      if(act==='undo'){if(state.games.solitaire.undo())notify('The last pair is back.');render();return;}
+      if(act==='new-sol'){clearAdvice();state.review='';state.games.solitaire.newGame();render();return;}
+      if(act==='undo'){clearAdvice();state.review='The previous pair has been restored. Compare another choice.';if(state.games.solitaire.undo())notify('The last pair is back.');render();return;}
       if(act==='hint'){if(!state.games.solitaire.hint().length)notify('No match available. Shuffle or Undo to continue.');render();return;}
-      if(act==='shuffle'){if(state.games.solitaire.reshuffle())notify(state.games.solitaire.reflowed?'Remaining tiles reorganized into an open rescue layout. Undo history cleared.':'Remaining tiles reshuffled into a solvable arrangement. Undo history cleared.');render();return;}
+      if(act==='shuffle'){clearAdvice();state.review='The remaining board has been reshuffled. Previous comparisons no longer apply.';if(state.games.solitaire.reshuffle())notify(state.games.solitaire.reflowed?'Remaining tiles reorganized into an open rescue layout. Undo history cleared.':'Remaining tiles reshuffled into a solvable arrangement. Undo history cleared.');render();return;}
       if(act==='opponents'){state.settings.opponents=control.dataset.value;render();return;}
       if(act==='start-table'||act==='new-table'){
         const g=state.mode==='hongkong'?new M.HongKongTable(state.settings):new M.AmericanTable(state.settings);
-        state.games[state.mode]=g;state.curtain=null;state.lastSeat=-1;state.selected=null;state.passSelected.clear();render();return;
+        clearAdvice();state.review='';state.games[state.mode]=g;state.blind=0;state.curtain=null;state.lastSeat=-1;state.selected=null;state.passSelected.clear();render();return;
       }
+      if(act==='next-hand'){const next=currentGame().nextHand();if(!next){notify('Four wind rounds complete! Start a new match when ready.');render();return;}clearAdvice();state.review='';state.games[state.mode]=next;state.curtain=null;state.lastSeat=-1;state.selected=null;state.blind=0;state.passSelected.clear();render();return;}
       if(act==='change-settings'){state.games[state.mode]=null;state.curtain=null;state.lastSeat=-1;render();return;}
       if(act==='reveal'){state.lastSeat=state.curtain;state.curtain=null;render();return;}
       const g=currentGame();if(!g)return;
       if(state.curtain!==null)return;
+      if(act==='second-yes'||act==='second-no'){g.chooseSecond(g.charSeat,act==='second-yes');state.blind=0;render();return;}
+      if(act==='courtesy-offer'){g.chooseCourtesy(g.charSeat,+control.dataset.count);render();return;}
       if(act==='goal'){state.goal=Number(control.dataset.goal);render();return;}
       if(act==='hand-pick'){
         const id=+control.dataset.id;
         if(g.phase==='charleston'){
           const tile=g.players[g.charSeat].hand.find(t=>t.id===id);
           if(tile?.type==='j'){notify('Jokers cannot be passed during the Charleston.');render();return;}
-          if(state.passSelected.has(id))state.passSelected.delete(id);else if(state.passSelected.size<3)state.passSelected.add(id);else notify('You have already selected three tiles.');
+          if(state.passSelected.has(id))state.passSelected.delete(id);else if(state.passSelected.size<g.passCount(g.charSeat)-state.blind)state.passSelected.add(id);else notify('You have selected all required tiles for this pass.');
         }else state.selected=state.selected===id?null:id;
         render();return;
       }
-      if(act==='submit-pass'){g.submitPass(g.charSeat,[...state.passSelected]);state.passSelected.clear();state.selected=null;render();return;}
-      if(act==='discard'){if(state.selected===null){notify('Select a tile from your rack first.');render();return;}g.discard(g.current,state.selected);state.selected=null;render();return;}
-      if(act==='claim'){g.submitClaim(g.offered().seat,control.dataset.code);state.selected=null;render();return;}
+      if(act==='submit-pass'){g.submitPass(g.charSeat,[...state.passSelected],state.blind);state.blind=0;state.passSelected.clear();state.selected=null;render();return;}
+      if(act==='discard'){if(state.selected===null){notify('Select a tile from your rack first.');render();return;}const chosen=state.teaching?M.coach.alternatives(M.coach.publicView(g,g.current)).find(a=>a.id===state.selected||a.type===g.players[g.current].hand.find(t=>t.id===state.selected)?.type):null;g.discard(g.current,state.selected);if(chosen)state.review=`You discarded ${C.name(chosen.type)}. ${chosen.calculation} ${chosen.heuristic}`;clearAdvice();state.selected=null;render();return;}
+      if(act==='claim'){const code=control.dataset.code;const explanation=M.coach.actionRule(g,g.offered().seat);g.submitClaim(g.offered().seat,code);if(state.teaching)state.review=(code==='pass'?'You passed the claim. ':'Your legal claim was submitted. ')+explanation;clearAdvice();state.selected=null;render();return;}
       if(act==='win'){g.declareWin(g.current,true);saveWin(state.mode);render();return;}
       if(act==='kong'){g.declareKong(g.current,control.dataset.type);render();return;}
       if(act==='joker-swap'){g.exchangeJoker(g.current,+control.dataset.seat,+control.dataset.meld);notify('Joker redeemed! The exposed set still has its original tile value.');render();return;}
     }catch(err){notify(err.message);render();}
   });
   root.addEventListener('change',e=>{
+    if(e.target.dataset.teaching){state.teaching=e.target.checked;try{localStorage.setItem('mahjong-atelier-teaching',state.teaching?'on':'off');}catch{}clearAdvice();render();return;}
     if(e.target.dataset.appearance==='theme'){
       if(THEMES.some(([id])=>id===e.target.value))state.appearance.theme=e.target.value;
       saveAppearance();render();return;
@@ -871,8 +1093,11 @@ M.openLessons=function(mode,onClose){
     if(e.target.dataset.appearance==='indices'){
       state.appearance.indices=e.target.checked;saveAppearance();render();return;
     }
+    if(e.target.dataset.blind){state.blind=Number(e.target.value);state.passSelected.clear();render();return;}
     const key=e.target.dataset.setting;if(!key)return;
     if(key==='secondCharleston')state.settings.secondCharleston=e.target.value==='true';
+    if(key==='hkProfile')state.settings.hkProfile=e.target.value;
+    if(key==='flowers'||key==='sevenPairs')state.settings[key]=e.target.checked;
     if(key==='minFan')state.settings.minFan=Number(e.target.value);
     render();
   });
