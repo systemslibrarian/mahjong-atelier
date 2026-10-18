@@ -9,13 +9,13 @@
   const TITLES={...WIND_NAMES,...DRAGON_NAMES,j:'Joker'};
   const WIND_MARKS={we:'東',ws:'南',ww:'西',wn:'北'};
   const DRAGON_MARKS={dr:'中',dg:'發',dw:'白'};
-  const FLOWERS=['Plum','Orchid','Chrysanthemum','Bamboo flower','Spring','Summer','Autumn','Winter'];
+  const FLOWERS=['Plum','Orchid','Chrysanthemum','Bamboo','Spring','Summer','Autumn','Winter'];
   let uid=0;
   function makeTile(type) { return {id:++uid,type}; }
   function name(type) {
     if (!type) return 'Unknown';
     if (type==='j') return 'Joker';
-    if(type[0]==='f')return FLOWERS[Number(type.slice(1))-1]+' flower';
+    if(type[0]==='f')return FLOWERS[Number(type.slice(1))-1]+(+type.slice(1)<=4?' flower':' season');
     if(TITLES[type])return TITLES[type];
     return (type.slice(1)||'')+' '+(SUIT_NAMES[type[0]]||'Tile');
   }
@@ -26,6 +26,7 @@
     if(variant==='solitaire'){for(let i=1;i<=8;i++)types.push(makeTile('f'+i));}
     return types;
   }
+  function validMaterial(tiles,variant='hk'){const counts={};for(const t of tiles){const type=t?.type;const limit=STANDARD_TYPES.includes(type)?4:variant==='american'&&type==='j'?8:variant==='american'&&/^f[1-8]$/.test(type)?1:0;if(!limit||(counts[type]=(counts[type]||0)+1)>limit)return false;}return true;}
   function shuffle(arr, random=Math.random){ for(let i=arr.length-1;i>0;i--){let j=Math.floor(random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr;}
   function count(hand,type){return hand.reduce((v,t)=>v+(t.type===type?1:0),0);}
   function countTypes(tiles){let out={}; for(let t of tiles)out[t.type]=(out[t.type]||0)+1;return out;}
@@ -97,6 +98,6 @@
   }
   function elapsed(seconds){return Math.floor(seconds/60).toString().padStart(2,'0')+':'+(seconds%60).toString().padStart(2,'0');}
   function setCountValid(tiles){return tiles.length===136||tiles.length===144||tiles.length===152;}
-  M.core={SUITS,HONORS,STANDARD_TYPES, SUIT_NAMES,FLOWERS, tileset, makeTile, shuffle, count, countTypes, sortHand, name, matchKey, tileMarkup,tileButton,elapsed,setCountValid};
+  M.core={SUITS,HONORS,STANDARD_TYPES, SUIT_NAMES,FLOWERS, tileset, makeTile,validMaterial, shuffle, count, countTypes, sortHand, name, matchKey, tileMarkup,tileButton,elapsed,setCountValid};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 

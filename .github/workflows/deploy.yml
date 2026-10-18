@@ -19,6 +19,10 @@ jobs:
         run: for file in js/*.js; do node --check "$file"; done
       - name: Run engine tests
         run: node --test tests/*.test.cjs
+      - name: Verify offline bundle matches source
+        run: |
+          python build.py
+          git diff --exit-code -- Mahjong_Atelier.html
   deploy:
     if: github.event_name != 'pull_request'
     needs: verify

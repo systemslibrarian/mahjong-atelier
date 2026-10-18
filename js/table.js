@@ -8,7 +8,7 @@ class BaseTable {
   const match=settings.match||{};
   this.dealer=Number.isInteger(match.dealer)?match.dealer:0;this.round=match.round||0;this.rotations=match.rotations||0;this.handNumber=(match.hands||0)+1;this.scores=(match.scores||[0,0,0,0]).slice();
   this.expanded=variant==='hk'&&settings.hkProfile==='atelier';this.flowersEnabled=this.expanded&&settings.flowers!==false;
-  this.players=WINDS.map((_,i)=>({name:settings.opponents==='local'?`Player ${i+1}`:i===0?'You':`Player ${i+1}`,seat:i,hand:[],melds:[],flowers:[],discards:[],bot:this.settings.opponents!=='local'&&i!==0}));
+  const occupants=match.occupants||[0,1,2,3];this.players=WINDS.map((_,i)=>({id:occupants[i],name:settings.opponents==='local'?`Player ${occupants[i]+1}`:occupants[i]===0?'You':`Player ${occupants[i]+1}`,seat:i,hand:[],melds:[],flowers:[],discards:[],bot:this.settings.opponents!=='local'&&occupants[i]!==0}));
   this.wall=shuffle(tileset(this.flowersEnabled?'solitaire':variant));this.current=this.dealer;this.phase='discard';this.claimQueue=[];this.claimVotes=[];this.lastDiscard=null;this.winner=null;this.result=null;this.log=[];this.lastSource='deal';this.lastDraw=null;this.discardCount=0;this.interrupted=false;
   for(let n=0;n<13;n++)for(let step=0;step<4;step++)this.drawTile((this.dealer+step)%4,false,'deal');
   this.drawTile(this.dealer,false,'deal');this.players.forEach(p=>sortHand(p.hand));this.note(`${this.players[this.dealer].name} is East and begins with 14 tiles.`);
@@ -24,7 +24,7 @@ class BaseTable {
  nextTurn(from){this.current=(from+1)%4;if(!this.drawTile(this.current))return this.endDraw();this.phase='discard';this.note(`${this.players[this.current].name} draws from the wall.`);}
  discard(seat,tileId){
   if(this.phase!=='discard'||seat!==this.current)throw Error('Not your discard turn');const p=this.players[seat],i=p.hand.findIndex(t=>t.id===tileId);if(i<0)throw Error('Tile is not in your hand');
-  const tile=p.hand.splice(i,1)[0];p.discards.push(tile);this.discardCount++;this.lastDiscard={tile,by:seat,lastWall:this.wall.length===0};this.note(`${p.name} discarded ${M.core.name(tile.type)}.`);this.claimVotes=[];this.claimQueue=[];
+  const tile=p.hand.splice(i,1)[0];p.discards.push(tile);this.discardCount++;this.lastDiscard={tile,by:seat,lastWall:this.wall.length===0&&this.lastSource!=='claim'};this.note(`${p.name} discarded ${M.core.name(tile.type)}.`);this.claimVotes=[];this.claimQueue=[];
   for(let step=1;step<=3;step++){const other=(seat+step)%4;if(this.claimOptions(other,tile,seat).length)this.claimQueue.push(other);}
   if(this.claimQueue.length)this.phase='claims';else{this.lastDiscard=null;this.nextTurn(seat);}
  }
@@ -36,7 +36,7 @@ class BaseTable {
   const from=this.lastDiscard.by;this.claimVotes.sort((a,b)=>b.option.priority-a.option.priority||((a.seat-from+4)%4)-((b.seat-from+4)%4));const {seat,option}=this.claimVotes[0],p=this.players[seat],thrower=this.players[from];
   const dropped=thrower.discards.pop();if(!dropped||dropped.id!==this.lastDiscard.tile.id)throw Error('Discard stack mismatch');
   if(option.kind==='win'){p.hand.push(dropped);sortHand(p.hand);this.current=seat;this.winningFrom=from;this.declareWin(seat,false);this.lastDiscard=null;return;}
-  const used=option.use.map(id=>p.hand.find(t=>t.id===id));if(used.some(t=>!t))throw Error('Claim material missing');p.hand=p.hand.filter(t=>!option.use.includes(t.id));p.melds.push({kind:option.kind,tiles:[...used,dropped],type:option.type||dropped.type,from});
+  const used=option.use.map(id=>p.hand.find(t=>t.id===id));if(used.some(t=>!t))throw Error('Claim material missing');p.hand=p.hand.filter(t=>!option.use.includes(t.id));p.melds.push({kind:option.kind,tiles:[...used,dropped],type:option.type||dropped.type,from,claimedTileId:dropped.id});
   this.note(`${p.name} calls ${option.kind.toUpperCase()} on ${thrower.name}'s discard.`);this.interrupted=true;this.current=seat;this.lastDiscard=null;sortHand(p.hand);this.phase='discard';this.lastSource='claim';if(option.kind==='kong'&&this.variant==='hk')this.drawReplacement(seat);
  }
  isBotSeat(seat){return seat!=null&&this.players[seat].bot;}
@@ -51,7 +51,9 @@ class BaseTable {
  nextHand(){
   if(this.phase!=='finished')throw Error('Finish this hand first');
   const repeat=this.variant==='hk'&&(this.result.kind==='draw'||this.winner===this.dealer);const rotations=this.rotations+(repeat?0:1);if(rotations>=16)return null;
-  return new this.constructor({...this.settings,match:{dealer:repeat?this.dealer:(this.dealer+1)%4,round:Math.floor(rotations/4),rotations,scores:this.scores,hands:this.handNumber}});
+  let dealer=repeat?this.dealer:(this.dealer+1)%4;const occupants=this.players.map(p=>p.id),scores=this.scores.slice();
+  if(this.variant==='american'&&rotations%4===0){const pivot=occupants.indexOf(0),right=(pivot+1)%4;[occupants[pivot],occupants[right]]=[occupants[right],occupants[pivot]];[scores[pivot],scores[right]]=[scores[right],scores[pivot]];dealer=right;}
+  return new this.constructor({...this.settings,match:{dealer,occupants,round:Math.floor(rotations/4),rotations,scores,hands:this.handNumber}});
  }
  integrity(){return this.wall.length+this.players.reduce((sum,p)=>sum+p.hand.length+p.flowers.length+p.discards.length+p.melds.reduce((n,m)=>n+m.tiles.length,0),0);}
  botChooseClaim(offer){const win=offer.options.find(o=>o.kind==='win');if(win)return win.code;const big=offer.options.filter(o=>['kong','quint','pung','sextet'].includes(o.kind)).sort((a,b)=>b.priority-a.priority);if(big.length&&Math.random()<.55)return big[0].code;const chow=offer.options.find(o=>o.kind==='chow');return chow&&Math.random()<.23?chow.code:'pass';}

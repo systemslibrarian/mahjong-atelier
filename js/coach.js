@@ -40,11 +40,14 @@ function solitaireChoices(g){
 }
 function actionRule(g,seat){
  if(g.phase==='finished')return 'This hand is finished. Read the score breakdown, then choose Next hand.';
+ if(g.phase==='opening')return 'East checks the dealt 14 tiles before any pass. A complete original-card hand may win immediately; otherwise Charleston begins.';
+ if(g.phase==='passingWin')return 'The three-pass round is complete. East may declare a complete original-card hand at this boundary; no round is interrupted midway.';
+ if(g.phase==='blindDeadlock')return 'A blind pass needs incoming tiles. Rechoose first left with at least one rack tile contributed; all racks are unchanged.';
  if(g.phase==='secondChoice')return 'Every player chooses. The second Charleston occurs only with unanimous agreement.';
  if(g.phase==='courtesyChoice')return 'Offer 0–3 tiles. Each opposite pair exchanges the smaller offer; zero declines.';
  if(g.phase==='charleston')return `Select ${g.passCount(seat)} non-Joker tiles in total${g.canBlind()?', including any incoming tiles you choose to pass blind':''}. Passing a Joker is illegal.`;
  if(g.phase==='robkong')return 'Only a complete qualifying win may take the proposed fourth tile. You cannot claim it for a meld.';
- if(g.phase==='claims')return g.variant==='hk'?'The banner lists claims the engine has verified for your rack. Chow is limited to the preceding seat; Pung/Kong can use any latest discard; Mahjong takes priority.':'The banner lists verified claims. A set must fit an exposed original-card row; singles/pairs may use a discard only for a complete win. Discarded Jokers cannot be claimed.';
+ if(g.phase==='claims')return g.variant==='hk'?'The banner lists claims the engine has verified for your rack. Chow is limited to the preceding seat; Pung/Kong can use any latest discard; Mahjong takes priority.'+(g.expanded?' Thirteen Orphans outranks ordinary wins here. Declining a win blocks another win on the same discarded type until your own next draw.':''):'The banner lists verified claims. A set must fit an exposed original-card row; singles/pairs may use a discard only for a complete win. Discarded Jokers cannot be claimed.';
  return g.variant==='hk'?'Select any rack tile to discard, or declare an eligible winning hand. Kong options appear only when the engine permits them.':'Select a rack tile to discard, redeem an eligible exposed Joker, or declare a complete original-card hand. No Chow calls and no Joker pairs.';
 }
 M.coach={publicView,winForView,knownCounts,support,alternatives,solitaireChoices,actionRule};

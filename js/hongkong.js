@@ -3,7 +3,12 @@
   'use strict';
   const {count,countTypes,sortHand}=M.core;
   const types=M.core.STANDARD_TYPES;
+  function validHandMaterial(tiles,exposed){
+    if(!M.core.validMaterial([...tiles,...exposed.flatMap(m=>m.tiles||[])]))return false;
+    return exposed.every(m=>{const ts=m.tiles.map(t=>t.type);if(m.kind==='chow')return !m.concealed&&ts.length===3&&/^[bdc][1-7]$/.test(m.type)&&[0,1,2].every(n=>ts.includes(m.type[0]+(+m.type[1]+n)));return ['pung','kong'].includes(m.kind)&&ts.length===(m.kind==='kong'?4:3)&&ts.every(t=>t===m.type)&&(!m.concealed||m.kind==='kong');});
+  }
   function partitions(tiles,exposed=[]){
+    if(!validHandMaterial(tiles,exposed))return [];
     const need=4-exposed.length;
     if(need<0||tiles.length!==need*3+2)return [];
     const counts=countTypes(tiles), result=[];
@@ -32,7 +37,7 @@
       if(m.type==='w'+['e','s','w','n'][prevailing]){fan++;vals.push('Prevailing wind +1');}
     }
     if(pung.length===4){fan+=3;vals.push('All Pungs +3');}
-    if(!pung.length){fan++;vals.push('All Chows +1');}
+    if(!pung.length&&/^[bdc][1-9]$/.test(partition.pair)){fan++;vals.push('All Chows +1');}
     const all=melds.flatMap(m=>m.tiles).concat([partition.pair,partition.pair]);
     const suits=new Set(all.filter(t=>/^[bdc][1-9]$/.test(t)).map(t=>t[0]));
     const hasHonor=all.some(t=>['we','ws','ww','wn','dr','dg','dw'].includes(t));
@@ -42,8 +47,8 @@
   }
   const honors=M.core.HONORS, terminals=['b1','b9','c1','c9','d1','d9'];
   function specialHands(tiles,exposed,c){
-    if(exposed.length||tiles.length!==14)return [];const counts=countTypes(tiles),keys=Object.keys(counts),out=[];
-    const add=(name,fan)=>out.push({fan,qualifyingFan:fan,details:[name+' · '+fan+' faan (fixed special-hand score)'],special:name});
+    if(exposed.length||tiles.length!==14||!M.core.validMaterial(tiles))return [];const counts=countTypes(tiles),keys=Object.keys(counts),out=[];
+    const add=(name,fan)=>{if(c.heavenly||c.earthly){name+=' / '+(c.heavenly?'Heavenly Hand':'Earthly Hand');fan=10;}out.push({fan,qualifyingFan:fan,details:[name+' · '+fan+' faan (fixed special-hand score)'],special:name});};
     if([...honors,...terminals].every(t=>counts[t]>=1)&&keys.length===13)add('Thirteen Orphans',10);
     if(['b','c','d'].some(s=>keys.every(t=>t[0]===s)&&counts[s+'1']>=3&&counts[s+'9']>=3&&[2,3,4,5,6,7,8].every(n=>counts[s+n]>=1)))add('Nine Gates',10);
     if(c.sevenPairs&&keys.length===7&&keys.every(t=>counts[t]===2))add('Seven distinct pairs (house option)',4);
@@ -71,14 +76,16 @@
     if(c.source==='kong'&&c.selfDraw)add('Kong replacement');
     if(c.lastWall)add(c.selfDraw?'Last wall tile':'Last discard');
     a.qualifyingFan=a.fan;
-    if(c.flowersEnabled){if(!c.flowers.length)add('No Flowers');else{for(const f of c.flowers)if((+f.type.slice(1)-1)%4===c.seat)add('Own Flower/Season');for(const first of [1,5])if([0,1,2,3].every(n=>c.flowers.some(f=>f.type==='f'+(first+n))))add('Complete bonus family',2);}}
+    if(c.flowersEnabled){if(!c.flowers.length)add('No Flowers');else{for(const first of [1,5]){const complete=[0,1,2,3].every(n=>c.flowers.some(f=>f.type==='f'+(first+n)));if(complete)add(first===1?'Complete Flower family':'Complete Season family',2);else if(c.flowers.some(f=>f.type==='f'+(first+c.seat)))add('Own Flower/Season');}}}
     if(a.fan>10){a.details.push('Capped at 10 faan');a.fan=10;}return a;
   }
   class HongKongTable extends M.BaseTable {
-    constructor(settings={}){super('hk',settings);this.minFan=Number(settings.minFan||0);this.note(this.expanded?'Atelier Hong Kong: special hands, full score breakdown, and four wind rounds.':'Beginner profile: four melds and a pair; simplified faan.');}
+    constructor(settings={}){super('hk',settings);this.minFan=Number(settings.minFan||0);this.missedWins=[new Set(),new Set(),new Set(),new Set()];this.note(this.expanded?'Atelier Hong Kong: special hands, full score breakdown, and four wind rounds.':'Beginner profile: four melds and a pair; simplified faan.');}
+    drawTile(seat,replacement=false,source='draw'){const tile=super.drawTile(seat,replacement,source);if(tile)this.missedWins?.[seat]?.clear();return tile;}
+    submitClaim(seat,code){const offer=this.offered();const declined=offer.seat===seat&&code!=='win'&&offer.options.some(o=>o.kind==='win');const type=this.phase==='robkong'?this.pendingKong?.tile.type:this.lastDiscard?.tile.type;if(this.expanded&&declined&&type&&(code==='pass'||offer.options.some(o=>o.code===code)))this.missedWins[seat].add(type);return super.submitClaim(seat,code);}
     winAnalysis(seat,extra=null,selfDraw=true){
-      const p=this.players[seat],tiles=extra?[...p.hand,extra]:p.hand;
-      const context={seat:this.windIndex(seat),prevailing:this.round,selfDraw,flowers:p.flowers,flowersEnabled:this.flowersEnabled,source:this.phase==='robkong'?'robkong':this.lastSource,lastWall:this.wall.length===0,heavenly:selfDraw&&this.discardCount===0&&!this.interrupted,earthly:!selfDraw&&this.discardCount===1&&!this.interrupted,sevenPairs:this.settings.sevenPairs===true};
+      const p=this.players[seat],tiles=extra?[...p.hand,extra]:p.hand;if(!selfDraw&&extra&&this.expanded&&this.missedWins?.[seat]?.has(extra.type))return null;
+      const context={seat:this.windIndex(seat),prevailing:this.round,selfDraw,flowers:p.flowers,flowersEnabled:this.flowersEnabled,source:this.phase==='robkong'?'robkong':this.lastSource,lastWall:selfDraw?this.wall.length===0&&['draw','kong'].includes(this.lastSource):this.phase!=='robkong'&&!!this.lastDiscard?.lastWall,heavenly:selfDraw&&this.discardCount===0&&!this.interrupted,earthly:!selfDraw&&this.discardCount===1&&!this.interrupted,sevenPairs:this.settings.sevenPairs===true};
       const candidates=partitions(tiles,p.melds).map(g=>this.expanded?extendedScore(g,p.melds,tiles,context):fanScore(g,p.melds,this.windIndex(seat),selfDraw,this.round));
       if(this.expanded)candidates.push(...specialHands(tiles,p.melds,context));
       return candidates.filter(c=>(c.qualifyingFan??c.fan)>=this.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;
@@ -87,7 +94,7 @@
     claimOptions(seat,tile,by){
       const hand=this.players[seat].hand,options=[];
       const can=this.winAnalysis(seat,tile,false);
-      if(can)options.push({code:'win',kind:'win',priority:100,title:'Mahjong!'});
+      if(can)options.push({code:'win',kind:'win',priority:this.expanded&&can.special?.includes('Thirteen Orphans')?110:100,title:'Mahjong!'});
       if(this.players[seat].melds.length>=4)return options;
       const alike=hand.filter(t=>t.type===tile.type);
       if(alike.length>=3&&this.wall.length)options.push({code:'kong',kind:'kong',type:tile.type,use:alike.slice(0,3).map(t=>t.id),priority:50,title:'Kong · four of a kind'});
@@ -119,10 +126,10 @@
       }
       const tiles=p.hand.filter(t=>t.type===type).slice(0,4);p.hand=p.hand.filter(t=>!tiles.some(x=>x.id===t.id));p.melds.push({kind:'kong',tiles,type,from:seat,concealed:true});this.interrupted=true;this.note(`${p.name} declares a concealed Kong.`);this.drawReplacement(seat);
     }
-    robOptions(seat){return this.winAnalysis(seat,this.pendingKong.tile,false)?[{code:'win',kind:'win',priority:100,title:'Mahjong · rob the added Kong'}]:[];}
+    robOptions(seat){const a=this.winAnalysis(seat,this.pendingKong.tile,false);return a?[{code:'win',kind:'win',priority:a.special?.includes('Thirteen Orphans')?110:100,title:'Mahjong · rob the added Kong'}]:[];}
     resolveRob(){
       const {seat,tile,type}=this.pendingKong,p=this.players[seat];
-      if(this.claimVotes.length){this.claimVotes.sort((a,b)=>((a.seat-seat+4)%4)-((b.seat-seat+4)%4));const winner=this.claimVotes[0].seat;p.hand=p.hand.filter(t=>t.id!==tile.id);this.players[winner].hand.push(tile);this.current=winner;this.winningFrom=seat;this.declareWin(winner,false);}
+      if(this.claimVotes.length){this.claimVotes.sort((a,b)=>b.option.priority-a.option.priority||((a.seat-seat+4)%4)-((b.seat-seat+4)%4));const winner=this.claimVotes[0].seat;p.hand=p.hand.filter(t=>t.id!==tile.id);this.players[winner].hand.push(tile);this.current=winner;this.winningFrom=seat;this.declareWin(winner,false);}
       else {p.hand=p.hand.filter(t=>t.id!==tile.id);const meld=p.melds.find(m=>m.kind==='pung'&&m.type===type);meld.kind='kong';meld.tiles.push(tile);this.interrupted=true;this.phase='discard';this.current=seat;this.drawReplacement(seat);}
       this.pendingKong=null;
     }

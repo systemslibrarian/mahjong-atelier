@@ -52,3 +52,12 @@ test('completion through a Joker exchange after claiming a set uses self-picked 
  g.discard(0,g.players[0].hand[0].id);g.submitClaim(1,'set-3');assert.equal(g.canDeclareWin(1),null);g.exchangeJoker(1,2,0);
  const result=g.declareWin(1);assert.equal(result.selfDraw,true);assert.deepEqual(result.payments,[-50,150,-50,-50]);
 });
+test('Solitaire advice never reads the identities of covered or blocked tiles',()=>{
+ const p=new M.Practice('solitaire'),free=new Set(p.game.available().map(t=>t.id));
+ for(const t of p.game.tiles)if(!free.has(t.id))Object.defineProperty(t,'tile',{get(){throw Error('hidden tile identity');}});
+ const choices=M.coach.solitaireChoices(p.game);assert.ok(choices.length);assert.equal(choices[0].newly.length,2);
+});
+test('audited lesson decisions have independent expected answers',()=>{
+ const expected={hongkong:{'chow-pair-v2':1,'flowers-v2':0,'missed-win-v2':1},american:{'opening-v2':1,'blind-end-v2':1,'exposure-v2':0}};
+ for(const [mode,answers] of Object.entries(expected))for(const [id,answer] of Object.entries(answers))assert.equal(M.learningPath.steps(mode).find(s=>s.id===id).answer,answer,id);
+});

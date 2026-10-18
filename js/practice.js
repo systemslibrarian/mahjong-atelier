@@ -16,7 +16,7 @@ class Practice {
    if(this.step===1){this.game.players[0].hand=hand('b1 b2 b3 d4 d5 d6 c7 c8 c9 dr dr dr we we');this.title='Draw the winning tile';this.prompt='The next draw is 3-Bamboo. Your rack now has four melds and a pair. Declare Mahjong and inspect the score.';}
    if(this.step===2){this.game.players[0].hand=hand('b4 b4 b4 b4 d1 d2 d3 c7 c8 c9 we we dr dr');this.title='Make a concealed Kong';this.prompt='Declare the four 4-Bamboo tiles as one Kong. The engine removes all four from the rack and draws one replacement.';}
   }else{
-   this.game=new M.AmericanTable({opponents:'local'});this.game.current=0;
+   this.game=new M.AmericanTable({opponents:'local'});this.game.current=0;this.game.phase='charleston';this.game.lastSource='draw';
    if(this.step===0){this.game.players[0].hand=hand('b2 b2 j d4 d4 d4 c7 c7 c7 we we c1 c5 c9');this.title='Choose your Charleston packet';this.prompt='Aim for Four of a Kindred. Select three isolated Character tiles to pass. Preserve your pairs, repeated tiles, and Joker.';}
    if(this.step===1){this.game.phase='discard';this.game.players[0].hand=hand('b2 b2 b2 d4 d4 d4 c7 c7 dr dr dr we we c5');this.game.players[1].melds=[{kind:'pung',type:'c5',tiles:hand('c5 c5 j'),from:2}];this.title='Redeem another player’s Joker';this.prompt='Player 2 has exposed 5-Characters, 5-Characters, Joker. Your rack holds the natural 5-Characters. Exchange it for that Joker.';}
    if(this.step===2){this.game.phase='discard';this.game.lastSource='draw';this.game.players[0].hand=hand('b2 b2 b2 d4 d4 d4 c7 c7 j dr dr dr we we');this.title='Finish the original practice pattern';this.prompt='The redeemed Joker fills the 7-Characters Pung. The East pair stays natural. Declare Mah Jongg.';}

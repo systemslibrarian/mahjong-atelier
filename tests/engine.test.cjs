@@ -42,11 +42,11 @@ test('American original practice card insists on natural pair',()=>{
   const pair=types.slice();pair[13]='j';
   assert.equal(M.americanTest.matchPattern(hand(pair),[],p),false);
 });
-test('tables conserve tiles and American begins with Charleston',()=>{
+test('tables conserve tiles and American begins with dealer opening check',()=>{
   const hk=new M.HongKongTable(), us=new M.AmericanTable();
   assert.equal(hk.integrity(),136);assert.equal(us.integrity(),152);
   assert.equal(hk.players.length,4);assert.equal(us.players.length,4);
-  assert.equal(us.phase,'charleston');
+  assert.equal(us.phase,'opening');
 });
 test('sortHand correctly orders winds and dragons',()=>{
   const tiles=hand(['b1','c1','d1','we','ws','ww','wn','dr','dg','dw']);
@@ -73,7 +73,7 @@ test('matchKey handles empty type',()=>{
   assert.equal(M.core.matchKey('f5'),'season');
 });
 test('American Joker redemption works across exposures and enforces turn/material',()=>{
- const us=new M.AmericanTable();us.phase='discard';us.current=0;us.players[0].hand=hand(['c1','b2']);
+ const us=new M.AmericanTable();us.phase='discard';us.current=0;us.lastSource='draw';us.players[0].hand=hand(['c1','b2']);
  us.players[1].melds=[{kind:'pung',type:'c1',tiles:hand(['c1','c1','j']),from:2}];
  assert.throws(()=>us.exchangeJoker(1,1,0),/your turn/);
  us.exchangeJoker(0,1,0);assert.equal(us.players[0].hand.length,2);assert.ok(us.players[0].hand.some(t=>t.type==='j'));assert.ok(us.players[1].melds[0].tiles.every(t=>t.type==='c1'));
