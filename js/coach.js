@@ -13,7 +13,7 @@ function publicView(g,seat){
   wallCount:g.wall.length,lastSource:g.lastSource,latest:g.lastDiscard?{type:g.lastDiscard.tile.type,by:g.lastDiscard.by}:null};
 }
 function winForView(v,tiles){
- if(v.variant==='american'){const card=M.americanTest.CARD.find(c=>M.americanTest.matchPattern(tiles,v.melds,c));return card?{card}:null;}
+ if(v.variant==='american'){const card=M.americanTest.winningPatterns(tiles,v.melds)[0];return card?{card}:null;}
  const context={seat:v.seatWind,prevailing:v.prevailing,selfDraw:true,flowers:v.flowers,flowersEnabled:v.flowersEnabled,source:'draw',lastWall:false,heavenly:false,earthly:false,sevenPairs:v.sevenPairs};
  const values=M.hongkongTest.partitions(tiles,v.melds).map(p=>v.expanded?M.hongkongTest.extendedScore(p,v.melds,tiles,context):M.hongkongTest.fanScore(p,v.melds,v.seatWind,true,v.prevailing));
  if(v.expanded)values.push(...M.hongkongTest.specialHands(tiles,v.melds,context));return values.filter(a=>(a.qualifyingFan??a.fan)>=v.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;

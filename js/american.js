@@ -47,6 +47,7 @@
     }
     return dfs(specs,jokers);
   }
+  function winningPatterns(hand,melds=[]){return CARD.filter(c=>matchPattern(hand,melds,c)).sort((a,b)=>b.value-a.value);}
   const ROUTE=[{name:'Right',offset:1},{name:'Across',offset:2},{name:'Left',offset:3}];
   class AmericanTable extends M.BaseTable {
     constructor(settings={}){
@@ -66,8 +67,13 @@
     startPlay(){this.phase='discard';this.current=this.dealer;this.lastSource='deal';this.note('Passing complete. East makes the first discard.');}
     winAnalysis(seat,extra=null){
       const p=this.players[seat],all=extra?[...p.hand,extra]:p.hand;
-      const matched=CARD.find(c=>matchPattern(all,p.melds,c));
+      const matched=winningPatterns(all,p.melds)[0];
       return matched?{card:matched,jokerFree:![...all,...p.melds.flatMap(m=>m.tiles)].some(t=>t.type==='j'),details:[`Original practice card · ${matched.name}`,matched.concealed?'Concealed hand':'Exposures permitted']}:null;
+    }
+    declareWin(seat,selfDraw=true){
+      // Exposing the winning discard does not turn it into a self-picked tile.
+      if(selfDraw&&this.phase==='discard'&&this.lastSource==='claim'){this.winningFrom=this.players[seat].melds.at(-1)?.from;return super.declareWin(seat,false);}
+      return super.declareWin(seat,selfDraw);
     }
     paymentBase(a){return a.card.value*(a.jokerFree?2:1);}
     exposureFits(melds){return CARD.some(c=>{if(c.concealed)return !melds.length;const sizes=c.groups.slice();for(const m of melds){const i=sizes.indexOf(m.tiles.length);if(i<0||m.tiles.length<3)return false;sizes.splice(i,1);}return true;});}
@@ -119,6 +125,7 @@
       if(!natural)throw Error('You need a natural matching tile');
       p.hand.splice(p.hand.findIndex(t=>t.id===natural.id),1);
       const at=m.tiles.findIndex(t=>t.type==='j'),joker=m.tiles[at];m.tiles[at]=natural;p.hand.push(joker);sortHand(p.hand);
+      this.lastSource='exchange';
       this.note(`${p.name} redeems a Joker from an exposed ${M.core.name(m.type)} set.`);
     }
     botChooseClaim(offer){
@@ -137,6 +144,6 @@
     }
   }
   M.AmericanTable=AmericanTable;
-  M.americanTest={CARD,matchPattern,ROUTE};
+  M.americanTest={CARD,matchPattern,winningPatterns,ROUTE};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 

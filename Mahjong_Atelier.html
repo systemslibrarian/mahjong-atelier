@@ -549,6 +549,7 @@ M.BaseTable=BaseTable;
     }
     return dfs(specs,jokers);
   }
+  function winningPatterns(hand,melds=[]){return CARD.filter(c=>matchPattern(hand,melds,c)).sort((a,b)=>b.value-a.value);}
   const ROUTE=[{name:'Right',offset:1},{name:'Across',offset:2},{name:'Left',offset:3}];
   class AmericanTable extends M.BaseTable {
     constructor(settings={}){
@@ -568,8 +569,13 @@ M.BaseTable=BaseTable;
     startPlay(){this.phase='discard';this.current=this.dealer;this.lastSource='deal';this.note('Passing complete. East makes the first discard.');}
     winAnalysis(seat,extra=null){
       const p=this.players[seat],all=extra?[...p.hand,extra]:p.hand;
-      const matched=CARD.find(c=>matchPattern(all,p.melds,c));
+      const matched=winningPatterns(all,p.melds)[0];
       return matched?{card:matched,jokerFree:![...all,...p.melds.flatMap(m=>m.tiles)].some(t=>t.type==='j'),details:[`Original practice card · ${matched.name}`,matched.concealed?'Concealed hand':'Exposures permitted']}:null;
+    }
+    declareWin(seat,selfDraw=true){
+      // Exposing the winning discard does not turn it into a self-picked tile.
+      if(selfDraw&&this.phase==='discard'&&this.lastSource==='claim'){this.winningFrom=this.players[seat].melds.at(-1)?.from;return super.declareWin(seat,false);}
+      return super.declareWin(seat,selfDraw);
     }
     paymentBase(a){return a.card.value*(a.jokerFree?2:1);}
     exposureFits(melds){return CARD.some(c=>{if(c.concealed)return !melds.length;const sizes=c.groups.slice();for(const m of melds){const i=sizes.indexOf(m.tiles.length);if(i<0||m.tiles.length<3)return false;sizes.splice(i,1);}return true;});}
@@ -621,6 +627,7 @@ M.BaseTable=BaseTable;
       if(!natural)throw Error('You need a natural matching tile');
       p.hand.splice(p.hand.findIndex(t=>t.id===natural.id),1);
       const at=m.tiles.findIndex(t=>t.type==='j'),joker=m.tiles[at];m.tiles[at]=natural;p.hand.push(joker);sortHand(p.hand);
+      this.lastSource='exchange';
       this.note(`${p.name} redeems a Joker from an exposed ${M.core.name(m.type)} set.`);
     }
     botChooseClaim(offer){
@@ -639,7 +646,7 @@ M.BaseTable=BaseTable;
     }
   }
   M.AmericanTable=AmericanTable;
-  M.americanTest={CARD,matchPattern,ROUTE};
+  M.americanTest={CARD,matchPattern,winningPatterns,ROUTE};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
 
@@ -658,7 +665,7 @@ function publicView(g,seat){
   wallCount:g.wall.length,lastSource:g.lastSource,latest:g.lastDiscard?{type:g.lastDiscard.tile.type,by:g.lastDiscard.by}:null};
 }
 function winForView(v,tiles){
- if(v.variant==='american'){const card=M.americanTest.CARD.find(c=>M.americanTest.matchPattern(tiles,v.melds,c));return card?{card}:null;}
+ if(v.variant==='american'){const card=M.americanTest.winningPatterns(tiles,v.melds)[0];return card?{card}:null;}
  const context={seat:v.seatWind,prevailing:v.prevailing,selfDraw:true,flowers:v.flowers,flowersEnabled:v.flowersEnabled,source:'draw',lastWall:false,heavenly:false,earthly:false,sevenPairs:v.sevenPairs};
  const values=M.hongkongTest.partitions(tiles,v.melds).map(p=>v.expanded?M.hongkongTest.extendedScore(p,v.melds,tiles,context):M.hongkongTest.fanScore(p,v.melds,v.seatWind,true,v.prevailing));
  if(v.expanded)values.push(...M.hongkongTest.specialHands(tiles,v.melds,context));return values.filter(a=>(a.qualifyingFan??a.fan)>=v.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;
@@ -725,7 +732,7 @@ lesson('Charleston and blind passes',()=>`<ol><li>Pass three non-Jokers Right, t
 lesson('Negotiate the courtesy exchange',()=>`<p>Each player offers 0, 1, 2, or 3 tiles to the opposite player. The pair exchanges the smaller offer. If you offer 3 and the opposite player offers 1, each selects one tile. If either offers zero, neither sends any.</p><p>Both opposite pairs decide independently. The game shows the agreed count; select exactly that many tiles and send the packet. For zero, send the empty packet to acknowledge the pass. No Jokers and no blind forwarding are permitted in the courtesy exchange.</p><p>When courtesy passing finishes, East makes the first discard. Others then draw automatically and discard unless a claim interrupts the sequence.</p>`),
 lesson('Expose with a plan',()=>`<p>A latest discard may complete a Pung, Kong, Quint, or Sextet when that exposure remains compatible with an exposed practice-card row. Your selected planning goal does not force a row; you can change direction.</p><p>The engine prevents combinations of exposed group sizes that fit no remaining row. It also excludes concealed rows from exposure-based wins. Once committed, an exposure is fixed. The app deliberately makes claims atomic: it has no provisional exposure rearrangement window.</p><p>You cannot call a discard merely to build a pair or single; it must complete the whole winning hand. A discarded Joker cannot be claimed. Flower/Season singles on this original card can likewise be called only for the final win. An American Kong does not draw a replacement.</p><p>Mah Jongg has priority over set claims. Competing set claims have equal priority, resolved in turn order. Invalid moves are prevented rather than penalized through tournament-style dead-hand adjudication.</p>`),
 lesson('Redeem a Joker on your turn',()=>`${row('c5 c5 j','An exposed 5-Characters Pung containing a Joker.')}${row('we j','This cannot be your pair: pairs must be two natural identical tiles.')}<p>After your draw or valid set claim and before discarding, trade a natural matching rack tile for a Joker in any eligible exposure—your own or another player’s. Press the ↔ Joker button next to that exposure. The natural tile replaces the Joker; the Joker goes into your rack. Neither player gains a tile.</p><p>Redeeming is not taking a discard and does not expose your concealed hand. You may redeem more than one available Joker while it is still your turn. Exposed sets retain their tile identity after each swap.</p><p>Read more about timing and physical-table etiquette in <a href="https://guide.americanmahjonggassociation.com/how-to-play-american-mah-jongg/jokers-and-joker-exchange/" target="_blank" rel="noopener noreferrer">the American Mah Jongg Association rulebook</a>. Our app automates the physical exchange.</p>`),
-lesson('Win, score, and keep learning',()=>`${row('b2 b2 j d4 d4 d4 c7 c7 c7 dr dr dr we we','Four of a Kindred: four groups of three, plus a natural East pair.')}<p>Declare Mah Jongg before discarding when the entire rack and exposures match a row. The original card’s value is the base; a Joker-free hand doubles it. On self-draw, each opponent pays double that adjusted base. On a discard win, only the discarder pays double; the other two pay the adjusted base.</p><p>For example, Four of a Kindred with a Joker is worth base 25: a discard win receives 50 + 25 + 25 = 100. A Joker-free self-draw uses base 50 and receives 100 from each opponent. These are virtual Atelier practice points, not official annual-card values.</p><p>Next hand retains scores and advances the dealer after every hand, including draws. A practice match lasts 16 hands. Start Guided practice to select a Charleston packet, redeem another player’s Joker, and complete a staged winning hand.</p><p>Saved lesson markers and bookmarks remain in this browser when storage is available. They do not save your in-progress game. You can reset learning progress in the lesson window.</p>`)
+lesson('Win, score, and keep learning',()=>`${row('b2 b2 j d4 d4 d4 c7 c7 c7 dr dr dr we we','Four of a Kindred: four groups of three, plus a natural East pair.')}<p>Declare Mah Jongg before discarding when the entire rack and exposures match a row. If more than one original row fits, Atelier scores the highest-value compatible row. Exposures and concealed restrictions still apply. The original card’s value is the base; a Joker-free hand doubles it. A win completed from a discard stays a discard win even if you first expose its set. Completing the hand through Joker redemption counts as self-picked. On self-draw, each opponent pays double that adjusted base. On a discard win, only the discarder pays double; the other two pay the adjusted base.</p><p>For example, Four of a Kindred with a Joker is worth base 25: a discard win receives 50 + 25 + 25 = 100. A Joker-free self-draw uses base 50 and receives 100 from each opponent. These are virtual Atelier practice points, not official annual-card values.</p><p>Next hand retains scores and advances the dealer after every hand, including draws. A practice match lasts 16 hands. Start Guided practice to select a Charleston packet, redeem another player’s Joker, and complete a staged winning hand.</p><p>Saved lesson markers and bookmarks remain in this browser when storage is available. They do not save your in-progress game. You can reset learning progress in the lesson window.</p>`)
 ],question:'You offer three courtesy tiles, but the player opposite offers one. How many does each of you pass?',choices:['Three','One','Nobody passes'],answer:1,why:'The smaller offer determines the exchange for that opposite pair. Either player can decline by offering zero.'}
 
 };

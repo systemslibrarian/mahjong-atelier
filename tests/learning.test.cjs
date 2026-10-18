@@ -28,3 +28,27 @@ test('lesson answers are valid, score examples use engine, comparisons respect s
  const c=M.learningPath.comparisons.find(c=>c.id==='complete');assert.match(c.explain('hongkong'),/2 faan/);assert.match(c.explain('american'),/rejects/);assert.match(c.explain('solitaire'),/Not directly applicable/);
  const p=new M.Practice('solitaire'),a=M.coach.solitaireChoices(p.game);assert.equal(a[0].newly.length,2);assert.match(a[0].heuristic,/does not prove/);
 });
+
+test('overlapping original rows score the highest compatible value in game and coach',()=>{
+ const g=new M.AmericanTable();g.players[0].hand='b1 b1 b1 b2 b2 b2 b3 b3 b3 we we j j j'.split(' ').map(M.core.makeTile);
+ assert.deepEqual(M.americanTest.winningPatterns(g.players[0].hand).map(c=>c.value),[40,35,30,25]);
+ g.phase='discard';const v=M.coach.publicView(g,0);assert.equal(g.winAnalysis(0).card.id,'grand');assert.equal(M.coach.winForView(v,v.hand).card.id,'grand');
+ assert.deepEqual(g.declareWin(0).payments,[240,-80,-80,-80]);
+ const p=new M.AmericanTable();p.phase='discard';p.players[0].hand='b1 b1 b1 b2 b2 b2 b3 b3 b3 we we j j j'.split(' ').map(M.core.makeTile);
+ const group=p.players[0].hand.splice(0,3);p.players[0].melds=[{kind:'pung',type:'b1',tiles:group}];
+ assert.equal(p.winAnalysis(0).card.id,'grand');assert.ok(M.americanTest.winningPatterns(p.players[0].hand,p.players[0].melds).every(c=>!c.concealed));
+});
+
+test('exposing the winning discard cannot incorrectly charge every opponent double',()=>{
+ const g=new M.AmericanTable();g.phase='discard';g.current=0;g.players[0].hand=['dr'].map(M.core.makeTile);
+ g.players[1].hand='b1 b1 b1 b2 b2 b2 b3 b3 b3 dr dr we we'.split(' ').map(M.core.makeTile);g.players[2].hand=[];g.players[3].hand=[];
+ g.discard(0,g.players[0].hand[0].id);g.submitClaim(1,'set-3');const result=g.declareWin(1);
+ assert.equal(result.selfDraw,false);assert.equal(result.from,0);assert.deepEqual(result.payments,[-100,200,-50,-50]);
+});
+test('completion through a Joker exchange after claiming a set uses self-picked payments',()=>{
+ const g=new M.AmericanTable();g.phase='discard';g.current=0;g.players[0].hand=['dr'].map(M.core.makeTile);
+ g.players[1].hand='b1 b1 b1 b2 b2 b2 b3 b3 dr dr we we c9'.split(' ').map(M.core.makeTile);g.players[2].hand=[];g.players[3].hand=[];
+ g.players[2].melds=[{kind:'pung',type:'c9',tiles:'c9 c9 j'.split(' ').map(M.core.makeTile),from:3}];
+ g.discard(0,g.players[0].hand[0].id);g.submitClaim(1,'set-3');assert.equal(g.canDeclareWin(1),null);g.exchangeJoker(1,2,0);
+ const result=g.declareWin(1);assert.equal(result.selfDraw,true);assert.deepEqual(result.payments,[-50,150,-50,-50]);
+});
