@@ -25,6 +25,8 @@ Optional **Teaching mode** during normal play explains legal actions, offers hin
 | Atelier Hong Kong v2 | Named expanded house profile: optional Flowers/Seasons, added and robbed Kongs, special hands, qualifying minimum, capped scoring, payments and four wind rounds | Not a universal Hong Kong or tournament ruleset; exact conventions below and in the rule library |
 | American Practice v2 | 152 tiles; first/optional second Charleston, blind and courtesy passes; exposures, concealed row, cross-player Joker exchanges; six original patterns and practice points | Mechanically playable original-card game; introductory coverage of American play. No licensed annual card, official-card validation, or tournament penalties |
 
+The setup screen and active table display the named rules profile. Hong Kong tables show the qualifying-faan minimum, Flowers/Seasons, and seven-pairs setting; American tables identify the original practice card and its limits. During a game, this summary reads the running table's settings.
+
 ### Atelier Hong Kong v2 (18 October 2026)
 
 Choose zero or three qualifying faan. Optional Flowers are replaced automatically; their bonuses do not satisfy the minimum. Seven distinct natural pairs is an opt-in four-faan house option. Thirteen Orphans and Nine Gates require concealed hands. The rule library lists all ordinary and fixed special scores, including wind/dragon sets, flushes, all Pungs, last-tile and Kong/robbing bonuses. Fixed special scores do not stack; ordinary scores cap at ten.
@@ -61,27 +63,38 @@ Riichi, online multiplayer, licensed annual-card play, and full tournament adjud
 
 ## Accessibility and appearance
 
-Four tile themes: Classic Ivory, Modern Minimal, Neon Night, Cozy Pastel. Native buttons, labelled tiles, visible focus, dialog keyboard handling/Escape, text feedback, selected outlines, and scrollable racks support desktop/mobile use. Learning has no time-based rewards. Theme and English-index choices also apply to practice dialogs.
+Four tile themes: Classic Ivory, Modern Minimal, Neon Night, Cozy Pastel. Native buttons, labelled tiles, visible focus, dialog keyboard handling/Escape, text feedback, selected outlines, and scrollable racks support desktop/mobile use. Interactive tile names include both the full English identity and visible abbreviations or glyphs. Learning has no time-based rewards. Theme and English-index choices also apply to practice dialogs.
+
+Required automated accessibility checks cover 21 screen/theme states in each build, including all three learning modes, the tile library, active tables, private handoffs, and mobile layout. These checks detect selected WCAG A/AA problems; they do not replace manual assistive-technology testing or certify complete WCAG conformance.
 
 ## Run and verify
 
-Open `Mahjong_Atelier.html` directly for the bundled offline version, or serve the repository with `python -m http.server 8000` and visit `http://localhost:8000`.
+Open `Mahjong_Atelier.html` directly for the bundled offline version, or serve the repository with `python -m http.server 8000` and visit `http://localhost:8000`. The hosted app links to the standalone download. Save that file and open it locally for offline play; the hosted site does not install a service worker.
+
+Development verification requires **Node 24 or later** and Python 3. The lockfile pins development-only TypeScript, Playwright, and axe tools. The shipped game has no npm runtime dependencies.
 
 ```sh
-node --test --test-isolation=none tests/*.test.cjs
+npm ci --ignore-scripts
+npm run typecheck
+npm test
 python build.py
+npx playwright install --with-deps chromium
+npm run test:browser
+npm run test:browser:offline
+npm run test:a11y
+npm run test:a11y:offline
 ```
 
-The 131 Node tests include all 118,800 possible one-suit 14-tile inventories checked against an independent meld catalogue, 34 independent hand-calculated scoring fixtures, legal claims, special hands, payments, all 256 blind-pass combinations on each final pass, tile conservation, full bot games, lesson answers, practice transitions, and advice privacy/calculations. CI checks JavaScript, runs all Node tests, and checks that the offline bundle matches source before GitHub Pages deployment.
+The **135 Node tests** include all **118,800** possible one-suit 14-tile inventories checked against an independent meld catalogue, **14,400 mixed-suit comparisons** over three replayable seeds, **4,480 independently calculated scoring-context cases**, and the existing 34 hand-calculated scoring fixtures. Mixed-suit coverage includes all suit permutations, honors, zero through four exposures, Kongs, broken pairs, independently judged mutations, and fifth-copy rejection. The suite also checks legal claims, special hands, payments, all 256 blind-pass combinations on each final pass, full bot games, lesson answers, practice transitions, and advice privacy/calculations. A seeded 32-hand probe checks physical-tile conservation, logical hand sizes, and zero-sum scores.
 
-The test command above uses Node 22 or later. Optional browser integration checks require Playwright and Chromium (`npm install --no-save playwright`, then `npx playwright install chromium`):
+Strict `checkJs` checks JSDoc contracts in `core.js`, `table.js`, `hongkong.js`, `american.js`, and `coach.js`. Contracts distinguish physical tiles from tile faces, physical melds from scoring decompositions, claim variants, phases, and results. Ten negative compile fixtures ensure these mistakes remain rejected. UI, lessons, practice, and the Solitaire implementation remain outside this incremental typing boundary.
 
-```sh
-node tests/browser-smoke.cjs
-```
+**Deployment requires every gate to pass:** JavaScript syntax, strict core types, the complete Node suite, a fresh standalone bundle, and browser plus accessibility checks for both modular and standalone editions. Browser jobs run in parallel after the engine checks. Failure screenshots and traces, mobile screenshots, and incremental accessibility reports are retained as Actions artifacts for 14 days. Each browser command has a three-minute limit; jobs have a ten-minute limit.
 
-Set `ATELIER_URL` to test a served site or the bundled file, `CHROMIUM_EXECUTABLE` for an existing Chromium binary, and `ATELIER_SCREENSHOT` for the mobile screenshot output. The browser script verifies all learning paths, wrong/right feedback, comparisons, guided practices, persistence, live hints, American passing and opening wins, provisional exposure changes, Joker/Kong advice refresh, every exposed tile and Joker count, public Flower/Season faces, private local handoffs, concealed and winning-rack presentation, keyboard answers, mobile overflow and Escape.
+The browser suite verifies active rules summaries, all learning paths, wrong/right feedback, comparisons, guided practices, persistence, live hints, American passing and opening wins, provisional exposure changes, Joker/Kong advice refresh, every exposed tile and Joker count, public Flower/Season faces, private local handoffs, concealed and winning-rack presentation, keyboard answers, mobile overflow, and Escape. Browser fixtures use a fixed random seed without changing production randomness.
+
+Local evidence is saved under `test-results/modular/` or `test-results/offline/`. Set `ATELIER_URL` to test a served site, `CHROMIUM_EXECUTABLE` for an existing Chromium binary, `ATELIER_ARTIFACT_DIR` to change the evidence directory, or `ATELIER_SCREENSHOT` to override the smoke test's mobile screenshot path. Without an override, each command opens the corresponding local HTML file.
 
 ## Source layout
 
-`js/core.js` renders tiles; `solitaire.js`, `table.js`, `hongkong.js`, and `american.js` implement games. `coach.js` owns public-state analysis; `path.js`, `practice.js`, and `learn.js` provide learning flows; `ui.js` connects them. `styles.css` preserves Atelier's visual identity. `RULES_AUDIT.md` records source evidence and profile limits; `tests/fixtures/hk-scores.json` holds independent expected scores. `build.py` bundles these into `Mahjong_Atelier.html`. GitHub Actions tests and deploys pushes to `main`.
+`js/core.js` renders tiles; `solitaire.js`, `table.js`, `hongkong.js`, and `american.js` implement games. `coach.js` owns public-state analysis; `path.js`, `practice.js`, and `learn.js` provide learning flows; `ui.js` connects them. `types/mahjong.d.ts` supplies shared checked engine contracts. `styles.css` preserves Atelier's visual identity. `RULES_AUDIT.md` records source evidence and profile limits; `tests/fixtures/hk-scores.json` holds independent expected scores. `build.py` bundles these into `Mahjong_Atelier.html`. GitHub Actions tests and deploys pushes to `main`.

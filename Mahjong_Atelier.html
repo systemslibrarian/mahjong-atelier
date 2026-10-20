@@ -8,7 +8,7 @@
 <title>Mahjong Atelier · Three ways to play</title>
 <style>
 :root{color-scheme:dark;--bg:#081c1b;--panel:#0e2928;--panel-2:#133532;--panel-3:#153d37;--felt:#135448;--line:rgba(228,238,223,.14);--line-bright:rgba(228,238,223,.25);--ivory:#f5f0e3;--pale:#e9eddd;--text:#f3f3e6;--muted:#a6bdb1;--copper:#d9b17b;--orange:#f4c18a;--mint:#a5dcc3;--red:#bf4b44;--shadow:0 18px 60px #021a1c70;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:radial-gradient(ellipse 100% 600px at 52% 0%,#1d4c3e 0%,#0b2422 60%,#071916 100%);color:var(--text);line-height:1.5;font-size:14px}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.47}button:focus-visible,select:focus-visible{outline:3px solid #ffe1a5;outline-offset:3px}a{color:inherit}.shell{max-width:1500px;padding:0 clamp(15px,3.7vw,54px);margin:0 auto}.masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:26px 0 20px;border-bottom:1px solid var(--line)}.identity{display:flex;align-items:center;gap:13px}.logo-tile{background:var(--ivory);color:#bd342b;border-radius:8px;box-shadow:inset -3px -4px #b3b4a4,2px 4px 0 #d1c2a3;font-family:Georgia,serif;font-size:36px;font-weight:bold;width:55px;height:58px;display:grid;place-items:center;transform:rotate(-7deg)}.brand-name{font-size:21px;font-weight:850;letter-spacing:.08em}.brand-name em{font-weight:350;font-style:normal;color:#e2c39d;letter-spacing:.04em}.brand-sub{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--muted);margin-top:3px}.masthead-right{display:flex;align-items:center;gap:17px}.offline-pill{display:inline-flex;align-items:center;gap:8px;font-size:10px;color:#cce6d8;letter-spacing:.1em;font-weight:800}.signal{width:7px;height:7px;background:#7ff0b0;border-radius:100%;box-shadow:0 0 14px #7ff0b0}.game-nav{display:flex;gap:10px;padding:25px 0 31px}.game-tab{display:flex;align-items:center;gap:11px;padding:15px 21px;min-width:180px;border:1px solid var(--line);color:#bfcdc5;background:#13332f;border-radius:9px;font-weight:760;text-align:left;transition:.18s;position:relative}.game-tab:hover{background:#19443c}.game-tab.on{background:#e6c79b;color:#203c34;box-shadow:0 8px 22px #061b184a;border-color:#efd9b9}.game-tab .tab-icon{font-size:21px;line-height:1}.tab-suffix{margin-left:auto;font-size:10px;letter-spacing:.1em;opacity:.6}.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:30px;align-items:start}.game-main{min-width:0}.section-heading{margin:6px 0 22px}.eyebrow{font-size:10px;letter-spacing:.19em;font-weight:850;color:var(--copper);text-transform:uppercase;margin:0 0 10px}.section-heading h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(29px,3.3vw,43px);font-weight:400;line-height:1.11;letter-spacing:-.035em;margin:0 0 10px}.lede{color:#b4c9be;font-size:14px;margin:0;max-width:780px}.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:19px}.stat{background:#12332fc9;border:1px solid var(--line);padding:15px 15px 14px;border-radius:9px;min-height:87px}.stat>span{font-size:10px;color:#bfd0c1;letter-spacing:.055em;text-transform:uppercase}.stat strong{display:block;margin-top:7px;font-size:25px;line-height:1.1;font-weight:770;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.stat strong small{font-size:12px;color:#8fa99e;letter-spacing:0;font-weight:600}.stat-status{font-size:20px!important;white-space:nowrap}.guide-card{background:linear-gradient(155deg,#183c35,#102b27 90%);border:1px solid #4c72603f;border-radius:13px;padding:26px 23px;box-shadow:0 12px 40px #00100d33;position:sticky;top:15px}.guide-kicker{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.16em;font-weight:800;color:#e4c597;padding-bottom:18px;border-bottom:1px solid var(--line)}.guide-kicker span{color:#88ada0}.guide-card h3{font:normal 28px/1.18 Georgia,serif;letter-spacing:-.02em;margin:26px 0 13px}.guide-card p{color:#bbd1c5;line-height:1.65;margin:0 0 23px;font-size:13px}.guide-card p strong{color:#f8f2e5}.tip-list{display:grid;gap:15px;border-top:1px solid var(--line);padding-top:20px}.tip-list>div{display:flex;gap:13px;align-items:flex-start}.tip-icon{flex:none;width:30px;height:30px;border-radius:6px;background:#2b5042;color:#f2d0a1;display:grid;place-items:center;font-weight:900;font-size:11px}.tip-list b{font-size:12px;display:block;color:#fbf7e9}.tip-list small{font-size:11px;line-height:1.55;color:#aec5b9;display:block;margin-top:3px}.guide-note{border-top:1px solid var(--line);margin-top:23px;padding-top:19px;color:#d4b58d;font-size:11px;line-height:1.65}.solitaire-settings{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 0 13px}.layout-prompt,.board-topline,.arena-label{font-size:10px;letter-spacing:.12em;font-weight:780;color:#b9c9bc}.bullet{color:var(--copper);padding:0 6px}.muted{color:#a5bdb2!important}.segment{display:flex;background:#092520;border-radius:8px;padding:4px;border:1px solid var(--line);gap:2px}.segment button{background:transparent;color:#b8c8bb;border:0;border-radius:5px;padding:7px 14px;font-size:12px;font-weight:650}.segment button.active{background:#d5bc91;color:#18362e}.board-frame{position:relative;border:1px solid #5d8f74a3;border-radius:12px;overflow:hidden;background:radial-gradient(ellipse 80% 80% at 45% 40%,#216a56 0%,#155242 52%,#124638 100%);box-shadow:inset 0 0 50px #001c1755,0 16px 40px #00100c50;min-height:490px}.board-frame:before,.arena:before{content:"";pointer-events:none;position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L64 64M-32 0L32 64M32 0L96 64' stroke='%23fff' stroke-opacity='.015' stroke-width='1'/%3E%3C/svg%3E");background-size:64px 64px;opacity:.65}.board-topline{position:relative;z-index:1;display:flex;justify-content:space-between;padding:16px 18px 5px;color:#cbdfcd}.board-topline span:last-child{color:#c5ce9c}.board-scroller{overflow:auto;max-height:720px;position:relative;scrollbar-color:#7aaf86 transparent}.solitaire-board{position:relative;min-width:755px;margin:0 auto}.mj-tile{user-select:none;-webkit-user-select:none;touch-action:manipulation;background:linear-gradient(130deg,#fffdfa,#eeeada 68%,#d5ceb5);border:1px solid #faf7eb;border-radius:7px;width:54px;height:67px;color:#254d40;box-shadow:inset -3px -3px 0 #c8c2ad,inset 1px 1px 0 #fff,3px 5px 0 #7bafa0,4px 6px 5px #052a224b;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex-shrink:0;transition:filter .15s,transform .12s,border-color .13s;padding:3px;overflow:visible}.mj-tile:hover:not(:disabled){filter:brightness(1.09)}.mj-tile:active:not(:disabled){transform:translateY(2px)}.board-tile{position:absolute!important;box-shadow:inset -3px -3px 0 #cbc4af,inset 1px 1px #fff,1px 6px 0 #99b0a3,3px 9px 5px #00171185}.board-tile.free:hover{transform:translateY(-5px);outline:2px solid #fae4ac;outline-offset:0}.board-tile.blocked{filter:brightness(.7) saturate(.72);opacity:.92;cursor:default}.board-tile.is-selected,.rack .mj-tile.is-selected{transform:translateY(-9px);border-color:#ffc875;outline:3px solid #fed497;z-index:99!important;box-shadow:0 0 22px #f7cc9669,3px 6px #67967f}.board-tile.is-hint{animation:hintPulse .8s ease infinite alternate;outline:3px solid #fece7b;z-index:100!important}@keyframes hintPulse{from{filter:brightness(1);transform:translateY(0)}to{filter:brightness(1.28);transform:translateY(-7px)}}.tile-index{position:absolute;top:2px;left:6px;font-size:11px;font-weight:950;color:#bf4435}.tile-symbol{font-family:Georgia,'Times New Roman',serif;display:block;font-size:34px;line-height:1;margin-top:5px;text-shadow:.5px .5px #fff}.tile-caption{font-size:7.3px;font-weight:870;letter-spacing:.07em;margin-top:3px;color:#316c5b}.wind-symbol{color:#184c40}.dragon-symbol{color:#b43b2f}.flower-symbol{color:#b8667f}.joker-symbol{color:#d49524;font-size:38px}.bamboo-symbol{font-size:22px;letter-spacing:-.15em;color:#317c4a}.character-symbol{color:#bf3c2e}.tile-pips{display:grid;grid-template-columns:repeat(3,6px);grid-template-rows:repeat(3,6px);align-content:center;justify-content:center;gap:2px;width:27px;height:27px;flex-shrink:0;margin-top:3px}.pip{width:6px;height:6px;border-radius:50%;border:1px solid #176c72;background:#1590a0;box-shadow:inset 1px 0 #a7d6cf}.pip:first-child,.pip:nth-child(3),.pip:nth-child(7){background:#bf4d4d;border-color:#9a383b}.pip:nth-child(4),.pip:nth-child(8){background:#477d42;border-color:#366331}.board-overlay{position:absolute;inset:0;z-index:150;display:flex;align-items:center;flex-direction:column;justify-content:center;background:#062720dc;backdrop-filter:blur(5px);text-align:center}.winning-medal{font-size:62px;color:#ecc892}.board-overlay h2{font:normal 40px Georgia,serif;margin:5px 0}.board-overlay p{color:#d7ebdc}.no-moves{position:absolute;bottom:12px;right:15px;z-index:105;padding:11px 14px;background:#f6e1b2;color:#443628;border-radius:7px;font-weight:720;box-shadow:var(--shadow)}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;align-items:center}.toolbar-divider{margin-left:auto}.ui-btn{border:1px solid transparent;border-radius:8px;padding:12px 17px;color:var(--text);font-weight:740;font-size:12px;letter-spacing:.015em;white-space:normal;transition:filter .14s,transform .14s}.ui-btn:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}.ui-btn.primary{background:linear-gradient(135deg,#eace9f,#cbab76);color:#173329;border-color:#eed6ab;box-shadow:0 3px 0 #806344}.ui-btn.secondary{background:#1d443b;border-color:#426356;color:#f4f4e8}.ui-btn.ghost{background:transparent;border-color:#4e7568}.ui-btn.highlight{background:#e3bc75;color:#2f2e1a;border-color:#fff5c1}.ui-btn.header-btn{background:transparent;border-color:var(--line);font-size:11px;color:#d7e7d9}.setup-area{background:linear-gradient(155deg,#133e35,#102c28);border:1px solid var(--line-bright);border-radius:13px;max-width:750px;padding:30px;box-shadow:var(--shadow)}.setup-top{text-align:center;border-bottom:1px solid var(--line);padding-bottom:21px;margin-bottom:25px}.setup-emblem{width:62px;height:62px;border-radius:12px;display:grid;place-items:center;background:#e1c395;color:#2f4b3b;font:normal 40px Georgia,serif;margin:0 auto 15px}.setup-top h2{font:normal 29px Georgia,serif;margin:0 0 6px}.setup-top p{font-size:12px;color:#bdcec5;margin:0}.setup-label{font-size:10px;letter-spacing:.16em;color:#d8b782}.opponent-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}.opponent{padding:24px 13px;border:1px solid #517064;background:#153a33;color:var(--text);border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:154px}.opponent.chosen{background:#2a5545;border-color:#f4ce91;box-shadow:0 0 0 1px #f4ce91}.opponent-pict{font-size:23px;color:#f0cb8c}.opponent b{font-size:14px}.opponent small{color:#bdd0c3;max-width:190px}.setup-field{margin-bottom:24px;display:grid;gap:8px}.setup-field label{font-size:12px;font-weight:800}.setup-field select{padding:12px;background:#082921;color:#f5f1e4;border:1px solid #527064;border-radius:7px;max-width:100%}.setup-field small{font-size:11px;color:#acc7b8}.setup-area>.ui-btn{width:100%;font-size:14px;padding:15px}.setup-note{text-align:center;color:#8eb0a1;font-size:11px;margin:18px 0 0}.arena{position:relative;background:radial-gradient(ellipse,#20634f,#155240 63%,#0c4236);border:1px solid #7ca58961;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 65px #052d2963,0 15px 48px #00160d7b}.arena-label{display:flex;justify-content:space-between;padding:16px 18px 0;color:#bed8c5}.arena-grid{position:relative;display:grid;grid-template-columns:minmax(135px,1fr) minmax(260px,3fr) minmax(135px,1fr);grid-template-rows:auto minmax(220px,auto) auto;gap:11px;padding:17px;align-items:stretch}.arena-seat-top{grid-area:1/2}.arena-seat-left{grid-area:2/1}.arena-seat-right{grid-area:2/3}.arena-seat-bottom{grid-area:3/2}.discard-pond{grid-area:2/2;border-radius:11px;background:#0c4439ba;border:1px solid #8bc1a12e;min-height:225px;padding:13px;position:relative}.pond-head{display:flex;justify-content:space-between;gap:5px;font-size:9px;letter-spacing:.09em;color:#b1d1bd;font-weight:780}.pond-head span:last-child{color:#f5d49c}.pond-tiles{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:5px;min-height:175px;padding:14px 3px}.pond-tile{background:#eee9d7;color:#264e41;min-width:27px;height:37px;padding:0 2px;border:1px solid #eee3cc;box-shadow:1px 3px #7fae95,1px 4px 3px #042c236e;border-radius:4px;display:grid;place-items:center;font-weight:900;font-size:15px}.pond-tile.newest{outline:2px solid #ffd18c}.pond-empty{color:#a2c9b7;font:italic 16px Georgia,serif;text-align:center}.seat{height:100%;background:#133c34db;border:1px solid #6ca08442;padding:13px;border-radius:9px}.seat.active{border-color:#ecc68e;box-shadow:inset 0 0 0 1px #d3b17d52;background:#235444}.seat-heading{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.wind-chip{display:grid;place-items:center;border-radius:5px;background:#e7e2d3;color:#19483c;width:26px;height:30px;font:bold 17px Georgia,serif}.seat-heading strong{font-size:13px}.seat-heading small{display:block;font-size:9px;letter-spacing:.1em;color:#aac8b8}.turn-pin{font-size:8px;margin-left:auto;color:#f0cb8d;font-weight:900}.seat-tiles{display:flex;gap:9px;flex-wrap:wrap;font-size:10px;color:#b7d0bf;margin:12px 0}.seat-meta{font-size:10px;color:#89ad9e}.seat-melds{display:flex;gap:5px;flex-wrap:wrap}.exposed-meld{padding:5px 7px;border-radius:5px;background:#306453;color:#e8f0e4;font-size:9px;line-height:1.35}.exposed-meld strong{color:#ecd1a1}.meld-icon{color:#f7d79d}.swap-btn{border:1px solid #f4c994;background:#edcc94;color:#264c40;font-weight:800;font-size:9px;border-radius:4px;padding:2px 4px;margin-left:3px}.action-banner{background:#153b33;border:1px solid #52796663;border-radius:11px;padding:21px;margin:16px 0;display:flex;align-items:center;gap:19px;justify-content:space-between;flex-wrap:wrap}.action-copy{max-width:490px}.action-banner h3{font:normal 25px Georgia,serif;margin:0 0 5px}.action-banner p{font-size:12px;color:#c4d6c6;line-height:1.55;margin:0}.action-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}.action-buttons .ui-btn{min-height:41px}.direction{color:#edc48c;font-family:ui-sans-serif}.counter-note{font-size:11px;color:#e0c38a;font-weight:840}.result-star{font-size:38px;color:#e2bf80}.hand-panel{background:#0d322cb8;border:1px solid var(--line);border-radius:10px;padding:19px 15px 23px}.hand-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:16px;gap:9px}.hand-title h3{font:normal 24px Georgia,serif;margin:0}.hand-title h3 span{font:normal 12px ui-sans-serif;color:#a9c4b1}.rack-symbol{font-size:10px;letter-spacing:.16em;color:#d0ac7c}.rack{border-bottom:11px solid #ad8052;box-shadow:0 8px 0 #503f2e,0 11px 8px #00150c7a;background:linear-gradient(0deg,#3d634a,#174036);border-radius:8px 8px 2px 2px;min-height:110px;display:flex;gap:5px;justify-content:center;align-items:flex-end;padding:10px 11px 12px;overflow-x:auto;scrollbar-width:thin}.rack .mj-tile{margin-bottom:0}.rack .mj-tile:disabled{opacity:.73;filter:saturate(.7)}.rack .mj-tile.is-selected{margin-bottom:8px}.table-footer{margin:13px 0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}.table-footer>.muted{font-size:11px;flex:1;min-width:170px;text-align:right}.practice-card{margin-top:23px;background:#ede8d7;color:#203a33;border:1px solid #f6e9bd;border-radius:11px;padding:23px}.practice-header{display:flex;justify-content:space-between;align-items:center}.practice-header .eyebrow{color:#936c39}.practice-header h3{font:normal 28px Georgia,serif;margin:0 0 10px}.practice-header>span{font-size:10px;font-weight:850;color:#897655;letter-spacing:.13em}.practice-card>p{font-size:12px;color:#56675d;margin:0 0 17px}.pattern-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.pattern{background:#f5f1e6;color:#263c33;border:1px solid #d4d2bf;text-align:left;border-radius:7px;padding:11px;display:grid;gap:5px}.pattern.goal{border-color:#b58a4d;background:#fff6d9;box-shadow:inset 0 0 0 1px #b58a4d}.pattern-name{font-size:13px;font-weight:870}.pattern-name small{display:inline-block;margin-left:8px;font-size:9px;color:#8f7450}.pattern-blocks{display:flex;gap:5px;flex-wrap:wrap}.pattern-group{background:#2d6f59;color:#f9eed5;border-radius:5px;padding:3px 8px;font-size:13px}.pattern-group.singles{background:#a65c4b}.pattern-desc{font-size:10px;color:#637368}.practice-card>.practice-disclaimer{margin:17px 0 0;line-height:1.55}.turn-history{margin-top:21px;border:1px solid var(--line);background:#12342f;border-radius:9px;padding:13px 19px}.turn-history h3{margin:2px 0 7px;font-size:12px;color:#e8c798}.turn-history ol{padding-left:20px;font-size:11px;color:#b3cfc0;line-height:1.75;margin:0}.curtain{position:fixed;inset:0;z-index:500;background:#051d1bea;backdrop-filter:blur(22px);display:grid;place-items:center;padding:15px}.curtain-content{max-width:470px;width:100%;text-align:center;padding:38px 28px;background:#153c34;border:1px solid #d3b183;border-radius:18px;box-shadow:0 30px 100px #000b0c}.curtain-lock{font:normal 60px Georgia,serif;color:#e6c690}.curtain-content h2{font:normal 39px Georgia,serif;margin:0 0 12px}.curtain-content p:not(.eyebrow){color:#c3d7c8;margin:0 auto 25px;max-width:340px}.toast{position:fixed;z-index:700;bottom:24px;left:50%;transform:translateX(-50%);width:max-content;max-width:90vw;background:#e7d2a2;color:#283b31;box-shadow:0 8px 45px #0008;padding:14px 20px;border-radius:9px;font-size:12px;font-weight:750;display:flex;gap:10px;align-items:center}.toast-dot{width:8px;height:8px;background:#246e4e;border-radius:50%}.footer{margin:35px 0 27px;border-top:1px solid var(--line);padding-top:21px;display:flex;justify-content:space-between;gap:15px;color:#8aac9d;font-size:9px;font-weight:780;letter-spacing:.09em;flex-wrap:wrap}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:radial-gradient(ellipse 100% 600px at 52% 0%,#1d4c3e 0%,#0b2422 60%,#071916 100%);color:var(--text);line-height:1.5;font-size:14px}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.47}button:focus-visible,select:focus-visible{outline:3px solid #ffe1a5;outline-offset:3px}a{color:inherit}.shell{max-width:1500px;padding:0 clamp(15px,3.7vw,54px);margin:0 auto}.masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:26px 0 20px;border-bottom:1px solid var(--line)}.identity{display:flex;align-items:center;gap:13px}.logo-tile{background:var(--ivory);color:#bd342b;border-radius:8px;box-shadow:inset -3px -4px #b3b4a4,2px 4px 0 #d1c2a3;font-family:Georgia,serif;font-size:36px;font-weight:bold;width:55px;height:58px;display:grid;place-items:center;transform:rotate(-7deg)}.brand-name{font-size:21px;font-weight:850;letter-spacing:.08em}.brand-name em{font-weight:350;font-style:normal;color:#e2c39d;letter-spacing:.04em}.brand-sub{font-size:11px;letter-spacing:.19em;text-transform:uppercase;color:var(--muted);margin-top:3px}.masthead-right{display:flex;align-items:center;gap:17px}.offline-pill{display:inline-flex;align-items:center;gap:8px;font-size:10px;color:#cce6d8;letter-spacing:.1em;font-weight:800}.signal{width:7px;height:7px;background:#7ff0b0;border-radius:100%;box-shadow:0 0 14px #7ff0b0}.game-nav{display:flex;gap:10px;padding:25px 0 31px}.game-tab{display:flex;align-items:center;gap:11px;padding:15px 21px;min-width:180px;border:1px solid var(--line);color:#bfcdc5;background:#13332f;border-radius:9px;font-weight:760;text-align:left;transition:.18s;position:relative}.game-tab:hover{background:#19443c}.game-tab.on{background:#e6c79b;color:#203c34;box-shadow:0 8px 22px #061b184a;border-color:#efd9b9}.game-tab .tab-icon{font-size:21px;line-height:1}.tab-suffix{margin-left:auto;font-size:10px;letter-spacing:.1em;opacity:1}.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:30px;align-items:start}.game-main{min-width:0}.section-heading{margin:6px 0 22px}.eyebrow{font-size:10px;letter-spacing:.19em;font-weight:850;color:var(--copper);text-transform:uppercase;margin:0 0 10px}.section-heading h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(29px,3.3vw,43px);font-weight:400;line-height:1.11;letter-spacing:-.035em;margin:0 0 10px}.lede{color:#b4c9be;font-size:14px;margin:0;max-width:780px}.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:19px}.stat{background:#12332fc9;border:1px solid var(--line);padding:15px 15px 14px;border-radius:9px;min-height:87px}.stat>span{font-size:10px;color:#bfd0c1;letter-spacing:.055em;text-transform:uppercase}.stat strong{display:block;margin-top:7px;font-size:25px;line-height:1.1;font-weight:770;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.stat strong small{font-size:12px;color:#8fa99e;letter-spacing:0;font-weight:600}.stat-status{font-size:20px!important;white-space:nowrap}.guide-card{background:linear-gradient(155deg,#183c35,#102b27 90%);border:1px solid #4c72603f;border-radius:13px;padding:26px 23px;box-shadow:0 12px 40px #00100d33;position:sticky;top:15px}.guide-kicker{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.16em;font-weight:800;color:#e4c597;padding-bottom:18px;border-bottom:1px solid var(--line)}.guide-kicker span{color:#88ada0}.guide-card h3{font:normal 28px/1.18 Georgia,serif;letter-spacing:-.02em;margin:26px 0 13px}.guide-card p{color:#bbd1c5;line-height:1.65;margin:0 0 23px;font-size:13px}.guide-card p strong{color:#f8f2e5}.tip-list{display:grid;gap:15px;border-top:1px solid var(--line);padding-top:20px}.tip-list>div{display:flex;gap:13px;align-items:flex-start}.tip-icon{flex:none;width:30px;height:30px;border-radius:6px;background:#2b5042;color:#f2d0a1;display:grid;place-items:center;font-weight:900;font-size:11px}.tip-list b{font-size:12px;display:block;color:#fbf7e9}.tip-list small{font-size:11px;line-height:1.55;color:#aec5b9;display:block;margin-top:3px}.guide-note{border-top:1px solid var(--line);margin-top:23px;padding-top:19px;color:#d4b58d;font-size:11px;line-height:1.65}.solitaire-settings{display:flex;align-items:center;justify-content:space-between;gap:15px;margin:0 0 13px}.layout-prompt,.board-topline,.arena-label{font-size:10px;letter-spacing:.12em;font-weight:780;color:#b9c9bc}.bullet{color:var(--copper);padding:0 6px}.muted{color:#a5bdb2!important}.segment{display:flex;background:#092520;border-radius:8px;padding:4px;border:1px solid var(--line);gap:2px}.segment button{background:transparent;color:#b8c8bb;border:0;border-radius:5px;padding:7px 14px;font-size:12px;font-weight:650}.segment button.active{background:#d5bc91;color:#18362e}.board-frame{position:relative;border:1px solid #5d8f74a3;border-radius:12px;overflow:hidden;background:radial-gradient(ellipse 80% 80% at 45% 40%,#216a56 0%,#155242 52%,#124638 100%);box-shadow:inset 0 0 50px #001c1755,0 16px 40px #00100c50;min-height:490px}.board-frame:before,.arena:before{content:"";pointer-events:none;position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L64 64M-32 0L32 64M32 0L96 64' stroke='%23fff' stroke-opacity='.015' stroke-width='1'/%3E%3C/svg%3E");background-size:64px 64px;opacity:.65}.board-topline{position:relative;z-index:1;display:flex;justify-content:space-between;padding:16px 18px 5px;color:#cbdfcd}.board-topline span:last-child{color:#c5ce9c}.board-scroller{overflow:auto;max-height:720px;position:relative;scrollbar-color:#7aaf86 transparent}.solitaire-board{position:relative;min-width:755px;margin:0 auto}.mj-tile{user-select:none;-webkit-user-select:none;touch-action:manipulation;background:linear-gradient(130deg,#fffdfa,#eeeada 68%,#d5ceb5);border:1px solid #faf7eb;border-radius:7px;width:54px;height:67px;color:#254d40;box-shadow:inset -3px -3px 0 #c8c2ad,inset 1px 1px 0 #fff,3px 5px 0 #7bafa0,4px 6px 5px #052a224b;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex-shrink:0;transition:filter .15s,transform .12s,border-color .13s;padding:3px;overflow:visible}.mj-tile:hover:not(:disabled){filter:brightness(1.09)}.mj-tile:active:not(:disabled){transform:translateY(2px)}.board-tile{position:absolute!important;box-shadow:inset -3px -3px 0 #cbc4af,inset 1px 1px #fff,1px 6px 0 #99b0a3,3px 9px 5px #00171185}.board-tile.free:hover{transform:translateY(-5px);outline:2px solid #fae4ac;outline-offset:0}.board-tile.blocked{filter:brightness(.7) saturate(.72);opacity:.92;cursor:default}.board-tile.is-selected,.rack .mj-tile.is-selected{transform:translateY(-9px);border-color:#ffc875;outline:3px solid #fed497;z-index:99!important;box-shadow:0 0 22px #f7cc9669,3px 6px #67967f}.board-tile.is-hint{animation:hintPulse .8s ease infinite alternate;outline:3px solid #fece7b;z-index:100!important}@keyframes hintPulse{from{filter:brightness(1);transform:translateY(0)}to{filter:brightness(1.28);transform:translateY(-7px)}}.tile-index{position:absolute;top:2px;left:6px;font-size:11px;font-weight:950;color:#bf4435}.tile-symbol{font-family:Georgia,'Times New Roman',serif;display:block;font-size:34px;line-height:1;margin-top:5px;text-shadow:.5px .5px #fff}.tile-caption{font-size:7.3px;font-weight:870;letter-spacing:.07em;margin-top:3px;color:#316c5b}.wind-symbol{color:#184c40}.dragon-symbol{color:#b43b2f}.flower-symbol{color:#b8667f}.joker-symbol{color:#d49524;font-size:38px}.bamboo-symbol{font-size:22px;letter-spacing:-.15em;color:#317c4a}.character-symbol{color:#bf3c2e}.tile-pips{display:grid;grid-template-columns:repeat(3,6px);grid-template-rows:repeat(3,6px);align-content:center;justify-content:center;gap:2px;width:27px;height:27px;flex-shrink:0;margin-top:3px}.pip{width:6px;height:6px;border-radius:50%;border:1px solid #176c72;background:#1590a0;box-shadow:inset 1px 0 #a7d6cf}.pip:first-child,.pip:nth-child(3),.pip:nth-child(7){background:#bf4d4d;border-color:#9a383b}.pip:nth-child(4),.pip:nth-child(8){background:#477d42;border-color:#366331}.board-overlay{position:absolute;inset:0;z-index:150;display:flex;align-items:center;flex-direction:column;justify-content:center;background:#062720dc;backdrop-filter:blur(5px);text-align:center}.winning-medal{font-size:62px;color:#ecc892}.board-overlay h2{font:normal 40px Georgia,serif;margin:5px 0}.board-overlay p{color:#d7ebdc}.no-moves{position:absolute;bottom:12px;right:15px;z-index:105;padding:11px 14px;background:#f6e1b2;color:#443628;border-radius:7px;font-weight:720;box-shadow:var(--shadow)}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:15px;align-items:center}.toolbar-divider{margin-left:auto}.ui-btn{border:1px solid transparent;border-radius:8px;padding:12px 17px;color:var(--text);font-weight:740;font-size:12px;letter-spacing:.015em;white-space:normal;transition:filter .14s,transform .14s}.ui-btn:hover:not(:disabled){filter:brightness(1.1);transform:translateY(-1px)}.ui-btn.primary{background:linear-gradient(135deg,#eace9f,#cbab76);color:#173329;border-color:#eed6ab;box-shadow:0 3px 0 #806344}.ui-btn.secondary{background:#1d443b;border-color:#426356;color:#f4f4e8}.ui-btn.ghost{background:transparent;border-color:#4e7568}.ui-btn.highlight{background:#e3bc75;color:#2f2e1a;border-color:#fff5c1}.ui-btn.header-btn{background:transparent;border-color:var(--line);font-size:11px;color:#d7e7d9}.setup-area{background:linear-gradient(155deg,#133e35,#102c28);border:1px solid var(--line-bright);border-radius:13px;max-width:750px;padding:30px;box-shadow:var(--shadow)}.setup-top{text-align:center;border-bottom:1px solid var(--line);padding-bottom:21px;margin-bottom:25px}.setup-emblem{width:62px;height:62px;border-radius:12px;display:grid;place-items:center;background:#e1c395;color:#2f4b3b;font:normal 40px Georgia,serif;margin:0 auto 15px}.setup-top h2{font:normal 29px Georgia,serif;margin:0 0 6px}.setup-top p{font-size:12px;color:#bdcec5;margin:0}.setup-label{font-size:10px;letter-spacing:.16em;color:#d8b782}.opponent-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}.opponent{padding:24px 13px;border:1px solid #517064;background:#153a33;color:var(--text);border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:154px}.opponent.chosen{background:#2a5545;border-color:#f4ce91;box-shadow:0 0 0 1px #f4ce91}.opponent-pict{font-size:23px;color:#f0cb8c}.opponent b{font-size:14px}.opponent small{color:#bdd0c3;max-width:190px}.setup-field{margin-bottom:24px;display:grid;gap:8px}.setup-field label{font-size:12px;font-weight:800}.setup-field select{padding:12px;background:#082921;color:#f5f1e4;border:1px solid #527064;border-radius:7px;max-width:100%}.setup-field small{font-size:11px;color:#acc7b8}.setup-area>.ui-btn{width:100%;font-size:14px;padding:15px}.setup-note{text-align:center;color:#8eb0a1;font-size:11px;margin:18px 0 0}.arena{position:relative;background:radial-gradient(ellipse,#20634f,#155240 63%,#0c4236);border:1px solid #7ca58961;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 65px #052d2963,0 15px 48px #00160d7b}.arena-label{display:flex;justify-content:space-between;padding:16px 18px 0;color:#bed8c5}.arena-grid{position:relative;display:grid;grid-template-columns:minmax(135px,1fr) minmax(260px,3fr) minmax(135px,1fr);grid-template-rows:auto minmax(220px,auto) auto;gap:11px;padding:17px;align-items:stretch}.arena-seat-top{grid-area:1/2}.arena-seat-left{grid-area:2/1}.arena-seat-right{grid-area:2/3}.arena-seat-bottom{grid-area:3/2}.discard-pond{grid-area:2/2;border-radius:11px;background:#0c4439ba;border:1px solid #8bc1a12e;min-height:225px;padding:13px;position:relative}.pond-head{display:flex;justify-content:space-between;gap:5px;font-size:9px;letter-spacing:.09em;color:#b1d1bd;font-weight:780}.pond-head span:last-child{color:#f5d49c}.pond-tiles{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:5px;min-height:175px;padding:14px 3px}.pond-tile{background:#eee9d7;color:#264e41;min-width:27px;height:37px;padding:0 2px;border:1px solid #eee3cc;box-shadow:1px 3px #7fae95,1px 4px 3px #042c236e;border-radius:4px;display:grid;place-items:center;font-weight:900;font-size:15px}.pond-tile.newest{outline:2px solid #ffd18c}.pond-empty{color:#a2c9b7;font:italic 16px Georgia,serif;text-align:center}.seat{height:100%;background:#133c34db;border:1px solid #6ca08442;padding:13px;border-radius:9px}.seat.active{border-color:#ecc68e;box-shadow:inset 0 0 0 1px #d3b17d52;background:#235444}.seat-heading{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.wind-chip{display:grid;place-items:center;border-radius:5px;background:#e7e2d3;color:#19483c;width:26px;height:30px;font:bold 17px Georgia,serif}.seat-heading strong{font-size:13px}.seat-heading small{display:block;font-size:9px;letter-spacing:.1em;color:#aac8b8}.turn-pin{font-size:8px;margin-left:auto;color:#f0cb8d;font-weight:900}.seat-tiles{display:flex;gap:9px;flex-wrap:wrap;font-size:10px;color:#b7d0bf;margin:12px 0}.seat-meta{font-size:10px;color:#89ad9e}.seat-melds{display:flex;gap:5px;flex-wrap:wrap}.exposed-meld{padding:5px 7px;border-radius:5px;background:#306453;color:#e8f0e4;font-size:9px;line-height:1.35}.exposed-meld strong{color:#ecd1a1}.meld-icon{color:#f7d79d}.swap-btn{border:1px solid #f4c994;background:#edcc94;color:#264c40;font-weight:800;font-size:9px;border-radius:4px;padding:2px 4px;margin-left:3px}.action-banner{background:#153b33;border:1px solid #52796663;border-radius:11px;padding:21px;margin:16px 0;display:flex;align-items:center;gap:19px;justify-content:space-between;flex-wrap:wrap}.action-copy{max-width:490px}.action-banner h3{font:normal 25px Georgia,serif;margin:0 0 5px}.action-banner p{font-size:12px;color:#c4d6c6;line-height:1.55;margin:0}.action-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}.action-buttons .ui-btn{min-height:41px}.direction{color:#edc48c;font-family:ui-sans-serif}.counter-note{font-size:11px;color:#e0c38a;font-weight:840}.result-star{font-size:38px;color:#e2bf80}.hand-panel{background:#0d322cb8;border:1px solid var(--line);border-radius:10px;padding:19px 15px 23px}.hand-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:16px;gap:9px}.hand-title h3{font:normal 24px Georgia,serif;margin:0}.hand-title h3 span{font:normal 12px ui-sans-serif;color:#a9c4b1}.rack-symbol{font-size:10px;letter-spacing:.16em;color:#d0ac7c}.rack{border-bottom:11px solid #ad8052;box-shadow:0 8px 0 #503f2e,0 11px 8px #00150c7a;background:linear-gradient(0deg,#3d634a,#174036);border-radius:8px 8px 2px 2px;min-height:110px;display:flex;gap:5px;justify-content:center;align-items:flex-end;padding:10px 11px 12px;overflow-x:auto;scrollbar-width:thin}.rack .mj-tile{margin-bottom:0}.rack .mj-tile:disabled{opacity:.73;filter:saturate(.7)}.rack .mj-tile.is-selected{margin-bottom:8px}.table-footer{margin:13px 0;display:flex;align-items:center;gap:9px;flex-wrap:wrap}.table-footer>.muted{font-size:11px;flex:1;min-width:170px;text-align:right}.practice-card{margin-top:23px;background:#ede8d7;color:#203a33;border:1px solid #f6e9bd;border-radius:11px;padding:23px}.practice-header{display:flex;justify-content:space-between;align-items:center}.practice-header .eyebrow{color:#6b4d27}.practice-header h3{font:normal 28px Georgia,serif;margin:0 0 10px}.practice-header>span{font-size:10px;font-weight:850;color:#6b4d27;letter-spacing:.13em}.practice-card>p{font-size:12px;color:#56675d;margin:0 0 17px}.pattern-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.pattern{background:#f5f1e6;color:#263c33;border:1px solid #d4d2bf;text-align:left;border-radius:7px;padding:11px;display:grid;gap:5px}.pattern.goal{border-color:#b58a4d;background:#fff6d9;box-shadow:inset 0 0 0 1px #b58a4d}.pattern-name{font-size:13px;font-weight:870}.pattern-name small{display:inline-block;margin-left:8px;font-size:9px;color:#6b4d27}.pattern-blocks{display:flex;gap:5px;flex-wrap:wrap}.pattern-group{background:#2d6f59;color:#f9eed5;border-radius:5px;padding:3px 8px;font-size:13px}.pattern-group.singles{background:#a65c4b}.pattern-desc{font-size:10px;color:#44594c}.practice-card>.practice-disclaimer{margin:17px 0 0;line-height:1.55}.turn-history{margin-top:21px;border:1px solid var(--line);background:#12342f;border-radius:9px;padding:13px 19px}.turn-history h3{margin:2px 0 7px;font-size:12px;color:#e8c798}.turn-history ol{padding-left:20px;font-size:11px;color:#b3cfc0;line-height:1.75;margin:0}.curtain{position:fixed;inset:0;z-index:500;background:#051d1bea;backdrop-filter:blur(22px);display:grid;place-items:center;padding:15px}.curtain-content{max-width:470px;width:100%;text-align:center;padding:38px 28px;background:#153c34;border:1px solid #d3b183;border-radius:18px;box-shadow:0 30px 100px #000b0c}.curtain-lock{font:normal 60px Georgia,serif;color:#e6c690}.curtain-content h2{font:normal 39px Georgia,serif;margin:0 0 12px}.curtain-content p:not(.eyebrow){color:#c3d7c8;margin:0 auto 25px;max-width:340px}.toast{position:fixed;z-index:700;bottom:24px;left:50%;transform:translateX(-50%);width:max-content;max-width:90vw;background:#e7d2a2;color:#283b31;box-shadow:0 8px 45px #0008;padding:14px 20px;border-radius:9px;font-size:12px;font-weight:750;display:flex;gap:10px;align-items:center}.toast-dot{width:8px;height:8px;background:#246e4e;border-radius:50%}.footer{margin:35px 0 27px;border-top:1px solid var(--line);padding-top:21px;display:flex;justify-content:space-between;gap:15px;color:#8aac9d;font-size:9px;font-weight:780;letter-spacing:.09em;flex-wrap:wrap}
 @media(max-width:1160px){.content-grid{grid-template-columns:minmax(0,1fr) 235px;gap:15px}.guide-card{padding:19px 15px}.guide-card h3{font-size:24px}.arena-grid{grid-template-columns:minmax(90px,1fr) minmax(185px,3fr) minmax(90px,1fr);padding:10px;gap:8px}.seat{padding:8px}.seat-heading{gap:5px}}
 @media(max-width:920px){.content-grid{grid-template-columns:minmax(0,1fr)}.guide-card{position:static;margin-top:22px}.tip-list{grid-template-columns:repeat(3,1fr)}.guide-card h3{margin:14px 0}.footer{padding-bottom:20px}}
 @media(max-width:620px){.shell{padding:0 12px}.masthead{padding:14px 0}.logo-tile{width:42px;height:45px;font-size:28px}.brand-name{font-size:16px}.brand-sub{font-size:8px;letter-spacing:.1em}.masthead-right{gap:4px}.offline-pill{font-size:8px}.ui-btn.header-btn{font-size:0;padding:8px}.ui-btn.header-btn::before{content:'?';font-size:13px}.game-nav{gap:5px;padding:15px 0 18px}.game-tab{min-width:0;flex:1;justify-content:center;gap:5px;padding:12px 5px;font-size:11px}.tab-suffix{display:none}.game-tab .tab-icon{font-size:16px}.section-heading{margin:4px 0 18px}.section-heading h1{font-size:29px}.lede{font-size:12px}.stats-grid{gap:6px}.stat{padding:10px 7px;min-height:74px}.stat>span{font-size:8px}.stat strong{font-size:18px}.stat strong small{font-size:9px}.stat-status{font-size:13px!important}.solitaire-settings{align-items:flex-start;flex-direction:column}.board-topline{font-size:8px;padding:12px 10px 0}.board-frame{min-height:390px}.toolbar{gap:5px}.toolbar .ui-btn{flex:1;padding:10px 8px}.toolbar-divider{display:none}.tip-list{grid-template-columns:1fr}.arena-label{font-size:8px;padding:11px}.arena-grid{grid-template-columns:72px minmax(0,1fr) 72px;grid-template-rows:auto minmax(190px,auto) auto;padding:7px;gap:5px}.seat{padding:6px}.wind-chip{width:20px;height:22px;font-size:13px}.seat-heading strong{font-size:10px}.seat-heading small{font-size:7px}.seat-tiles{font-size:8px;gap:2px}.seat-meta{font-size:8px}.exposed-meld{font-size:7px;padding:4px}.turn-pin{font-size:7px}.discard-pond{padding:7px;min-height:190px}.pond-head{font-size:7px}.pond-tiles{min-height:130px;gap:2px;padding:6px 1px}.pond-tile{min-width:21px;height:29px;font-size:11px}.hand-title h3{font-size:19px}.hand-panel{padding:12px 9px 20px}.rack{justify-content:flex-start;gap:4px}.rack-symbol{font-size:8px}.action-banner{padding:15px}.action-banner h3{font-size:21px}.action-buttons{justify-content:flex-start}.pattern-list{grid-template-columns:1fr}.setup-area{padding:15px}.opponent-grid{gap:7px}.opponent{padding:13px 8px}.opponent b{font-size:12px}.opponent small{font-size:10px}.table-footer>.muted{text-align:left}.practice-card{padding:15px}}
@@ -101,25 +101,49 @@
 .seat-melds{flex-direction:column;align-items:flex-start}.exposed-meld{max-width:100%;overflow-wrap:anywhere}.public-tiles{display:flex;flex-wrap:wrap;gap:3px;margin:7px 0}.public-tile{width:26px;height:35px;min-width:0;padding:1px;border-radius:4px;box-shadow:inset -1px -2px 0 var(--tile-shadow,#c8c2ad),1px 2px 0 #537f6d;pointer-events:none}.public-tile .tile-art{width:21px;height:23px;margin-top:1px}.public-tile .tile-index{font-size:7px;top:0;left:2px}.public-tile .tile-caption{font-size:4px;letter-spacing:0;margin-top:0}.public-tile .tile-symbol{font-size:20px;margin-top:2px}.public-tile .tile-characters{height:23px;font-size:17px;line-height:.8;margin-top:2px}.public-tile .tile-character-num{font-size:14px}.public-tile .tile-character-wan{font-size:14px}.public-tile .tile-white-dragon{width:17px;height:20px;margin-top:3px}.public-tile .tile-white-dragon span{width:8px;height:8px}.meld-composition{display:block;color:#eff6e7;margin-bottom:4px}.seat-flowers{border-top:1px solid #73967966;margin-top:10px;padding-top:7px;font-size:9px;color:#e9d1a6}
 @media(max-width:620px){.public-tiles{gap:2px}.public-tile{width:22px;height:31px}.public-tile .tile-art{width:18px;height:20px}.public-tile .tile-symbol{font-size:18px}.public-tile .tile-caption{font-size:3.5px}.public-tile .tile-character-num,.public-tile .tile-character-wan{font-size:12px}.seat-flowers{font-size:7px}}
 
+/* Keep the selected rules beside play, with room for every setting on mobile. */
+.rules-profile{display:grid;grid-template-columns:minmax(150px,1fr) auto;align-items:center;gap:10px 18px;margin:0 0 20px;padding:15px 18px;background:linear-gradient(120deg,#1c4437,#12372f);border:1px solid #6b8868;border-left:3px solid #dfbd83;border-radius:10px}
+.rules-profile-heading{min-width:0}.rules-profile-label{display:block;color:#bdd2bf;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.rules-profile h2{margin:4px 0 0;font:normal 21px/1.25 Georgia,serif;color:#f6dfb9}
+.rules-profile-settings{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;list-style:none;padding:0;margin:0}.rules-profile-settings li{display:flex;flex-direction:column;gap:3px;min-width:0;max-width:100%;padding:7px 10px;background:#0c2e27;border:1px solid #55765b8a;border-radius:6px;line-height:1.35}.rules-profile-settings span{font-size:10px;color:#bfd2c2}.rules-profile-settings strong{font-size:12px;color:#fff0d3;font-weight:750;overflow-wrap:anywhere}
+.rules-profile-note{grid-column:1/-1;margin:0;color:#cadbc9;font-size:11px;line-height:1.5}.offline-download{color:#f1d3a4;text-decoration:underline;text-underline-offset:3px}.offline-download:focus-visible{outline:3px solid #ffe1a5;outline-offset:4px;border-radius:2px}
+@media(max-width:760px){.rules-profile{grid-template-columns:1fr;padding:13px 14px;gap:10px}.rules-profile h2{font-size:20px}.rules-profile-settings{justify-content:flex-start;gap:6px}.rules-profile-settings li{flex:1 1 88px;padding:7px 8px}.rules-profile-note{font-size:11px}}
+
 </style>
 </head>
 <body>
 <div id="app"><p style="padding:40px;color:#fff">Loading Mahjong Atelier…</p></div>
 <script>
-(function (M) {
+(function (/** @type {Atelier.Registry} */ M) {
   'use strict';
+  /** @type {Atelier.Suit[]} */
   const SUITS = ['b','d','c'];
+  /** @type {Atelier.HonorCode[]} */
   const HONORS = ['we','ws','ww','wn','dr','dg','dw'];
-  const STANDARD_TYPES = [...SUITS.flatMap(s => Array.from({length:9}, (_,i)=>s+(i+1))), ...HONORS];
+  /** @type {Atelier.Rank[]} */
+  const RANKS = [1,2,3,4,5,6,7,8,9];
+  /** @type {Atelier.BonusTileCode[]} */
+  const BONUS_TYPES = ['f1','f2','f3','f4','f5','f6','f7','f8'];
+  /** @param {Atelier.Suit} suit @param {Atelier.Rank} rank @returns {Atelier.StandardTileCode} */
+  function suitFace(suit,rank){return `${suit}${rank}`;}
+  /** @type {Atelier.StandardTileCode[]} */
+  const STANDARD_TYPES = [...SUITS.flatMap(s => RANKS.map(rank=>suitFace(s,rank))), ...HONORS];
+  /** @type {Record<string,string>} */
   const SUIT_NAMES={b:'Bamboo', d:'Dots', c:'Characters'};
+  /** @type {Record<string,string>} */
   const WIND_NAMES={we:'East wind',ws:'South wind',ww:'West wind',wn:'North wind'};
+  /** @type {Record<string,string>} */
   const DRAGON_NAMES={dr:'Red dragon',dg:'Green dragon',dw:'White dragon'};
+  /** @type {Record<string,string>} */
   const TITLES={...WIND_NAMES,...DRAGON_NAMES,j:'Joker'};
+  /** @type {Record<string,string>} */
   const WIND_MARKS={we:'東',ws:'南',ww:'西',wn:'北'};
+  /** @type {Record<string,string>} */
   const DRAGON_MARKS={dr:'中',dg:'發',dw:'白'};
   const FLOWERS=['Plum','Orchid','Chrysanthemum','Bamboo','Spring','Summer','Autumn','Winter'];
   let uid=0;
+  /** @param {Atelier.TileCode} type @returns {Atelier.Tile} */
   function makeTile(type) { return {id:++uid,type}; }
+  /** @param {Atelier.TileCode | '' | null | undefined} type @returns {string} */
   function name(type) {
     if (!type) return 'Unknown';
     if (type==='j') return 'Joker';
@@ -127,18 +151,34 @@
     if(TITLES[type])return TITLES[type];
     return (type.slice(1)||'')+' '+(SUIT_NAMES[type[0]]||'Tile');
   }
+  /** @param {Atelier.TileCode | '' | null | undefined} type */
   function matchKey(type) {if(!type) return type; if(type[0]==='f')return +type.slice(1)<=4?'flower':'season';return type;}
+  /** @param {Atelier.TileSet} [variant] @returns {Atelier.Tile[]} */
   function tileset(variant='hk'){
     const types=STANDARD_TYPES.flatMap(type=>Array.from({length:4},()=>makeTile(type)));
-    if(variant==='american'){for(let i=1;i<=8;i++)types.push(makeTile('f'+i));for(let i=0;i<8;i++)types.push(makeTile('j'));}
-    if(variant==='solitaire'){for(let i=1;i<=8;i++)types.push(makeTile('f'+i));}
+    if(variant==='american'){for(const type of BONUS_TYPES)types.push(makeTile(type));for(let i=0;i<8;i++)types.push(makeTile('j'));}
+    if(variant==='solitaire'){for(const type of BONUS_TYPES)types.push(makeTile(type));}
     return types;
   }
-  function validMaterial(tiles,variant='hk'){const counts={};for(const t of tiles){const type=t?.type;const limit=STANDARD_TYPES.includes(type)?4:variant==='american'&&type==='j'?8:variant==='american'&&/^f[1-8]$/.test(type)?1:0;if(!limit||(counts[type]=(counts[type]||0)+1)>limit)return false;}return true;}
+  /** @param {readonly Atelier.Tile[]} tiles @param {Atelier.Variant} [variant] @returns {boolean} */
+  function validMaterial(tiles,variant='hk'){
+    /** @type {Record<string,number>} */
+    const counts={};
+    for(const t of tiles){const type=t?.type;const limit=STANDARD_TYPES.some(face=>face===type)?4:variant==='american'&&type==='j'?8:variant==='american'&&/^f[1-8]$/.test(type)?1:0;if(!limit||(counts[type]=(counts[type]||0)+1)>limit)return false;}return true;
+  }
+  /** @template T @param {T[]} arr @param {() => number} [random] @returns {T[]} */
   function shuffle(arr, random=Math.random){ for(let i=arr.length-1;i>0;i--){let j=Math.floor(random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr;}
+  /** @param {readonly Atelier.Tile[]} hand @param {Atelier.TileCode} type @returns {number} */
   function count(hand,type){return hand.reduce((v,t)=>v+(t.type===type?1:0),0);}
-  function countTypes(tiles){let out={}; for(let t of tiles)out[t.type]=(out[t.type]||0)+1;return out;}
-  function sortHand(hand){ const order={b:0,d:1,c:2,we:3,ws:3,ww:3,wn:3,dr:4,dg:4,dw:4,f:5,j:6};
+  /** @param {readonly Atelier.Tile[]} tiles @returns {Record<string,number>} */
+  function countTypes(tiles){
+    /** @type {Record<string,number>} */
+    const out={};for(const t of tiles)out[t.type]=(out[t.type]||0)+1;return out;
+  }
+  /** @template {Atelier.Tile} T @param {T[]} hand @returns {T[]} */
+  function sortHand(hand){
+    /** @type {Record<string,number>} */
+    const order={b:0,d:1,c:2,we:3,ws:3,ww:3,wn:3,dr:4,dg:4,dw:4,f:5,j:6};
     return hand.sort((a,b)=>{
       const oa=order[a.type]??order[a.type[0]]??7,ob=order[b.type]??order[b.type[0]]??7;
       return oa-ob || a.type.localeCompare(b.type,undefined,{numeric:true}) || a.id-b.id;
@@ -147,10 +187,29 @@
   // Tile faces are semantic, self-contained SVG: one tile type always keeps its
   // identity in every theme. No external fonts, sprite servers, or images needed.
   const NUMERALS=['一','二','三','四','五','六','七','八','九'];
+  /** @type {Record<string,string>} */
   const WIND_INDICES={we:'E',ws:'S',ww:'W',wn:'N'};
+  /** @type {Record<string,string>} */
   const DRAGON_INDICES={dr:'R',dg:'G',dw:'Wh'};
   const FLOWER_MARKS=['✿','❀','❁','❃','✽','☀','❋','❄'];
   const FLOWER_CAPTIONS=['PLUM','ORCHID','MUM','BAMBOO','SPRING','SUMMER','AUTUMN','WINTER'];
+  // Keep the complete visible label in the accessible name for voice control,
+  // while retaining the English tile identity used by a screen reader.
+  /** @param {Atelier.TileCode} type @returns {string} */
+  function tileAccessibleName(type){
+    if(type==='j')return 'Joker · J ★ JOKER';
+    if(type[0]==='f'){
+      const i=+type.slice(1)-1;
+      return `${name(type)} · ${i<4?'F':'S'}${i%4+1} ${FLOWER_MARKS[i]} ${FLOWER_CAPTIONS[i]}`;
+    }
+    if(WIND_MARKS[type])return `${name(type)} · ${WIND_INDICES[type]} ${WIND_MARKS[type]} ${WIND_NAMES[type].split(' ')[0].toUpperCase()}`;
+    if(DRAGON_MARKS[type])return `${name(type)} · ${DRAGON_INDICES[type]} ${type==='dw'?'':DRAGON_MARKS[type]+' '}${DRAGON_NAMES[type].split(' ')[0].toUpperCase()} DR`;
+    const n=+type.slice(1);
+    if(type[0]==='d')return name(type);
+    if(type[0]==='b')return `${name(type)} · ${n} BAM`;
+    return `${name(type)} · ${n} ${NUMERALS[n-1]} 萬 CRAK`;
+  }
+  /** @type {Record<number,number[][]>} */
   const DOT_POSITIONS={
     2:[[14,12],[34,34]],
     3:[[11,9],[24,23],[37,37]],
@@ -161,7 +220,9 @@
     8:[[14,7],[34,7],[14,18],[34,18],[14,29],[34,29],[14,40],[34,40]],
     9:[[11,10],[24,10],[37,10],[11,23],[24,23],[37,23],[11,36],[24,36],[37,36]]
   };
+  /** @param {string} content @param {string} className @returns {string} */
   function svgFace(content,className){return `<svg class="tile-art ${className}" viewBox="0 0 48 46" focusable="false" aria-hidden="true">${content}</svg>`;}
+  /** @param {number} n @returns {string} */
   function dotArt(n){
     if(n===1)return svgFace('<circle cx="24" cy="23" r="17" fill="none" stroke="var(--suit-green)" stroke-width="2"/><circle cx="24" cy="23" r="13" fill="var(--suit-blue)" stroke="var(--suit-red)" stroke-width="2"/><circle cx="24" cy="23" r="8" fill="var(--tile-face)"/><circle cx="24" cy="23" r="4" fill="var(--suit-red)"/><path d="M24 7v5M24 34v5M8 23h5M35 23h5" stroke="var(--suit-green)" stroke-width="2"/>','tile-art-dots');
     const dots=DOT_POSITIONS[n].map(([x,y],i)=>{
@@ -173,7 +234,9 @@
   function birdArt(){
     return svgFace('<path d="M6 38q18-4 36 1" stroke="var(--tile-ink)" stroke-width="2" fill="none"/><path d="M19 24L7 11l8 23Z" fill="var(--suit-green)" stroke="var(--tile-ink)" stroke-width=".9"/><path d="M18 25q0-13 13-13 9 0 9 9l-6 6q-6 12-19 4Z" fill="var(--suit-blue)" stroke="var(--tile-ink)" stroke-width="1"/><path d="M21 25q7-10 15-5-2 12-12 10Z" fill="var(--suit-green)"/><path d="M29 13q2-10 8-5l1 8" fill="var(--suit-blue)" stroke="var(--tile-ink)" stroke-width="1"/><circle cx="36" cy="17" r="1.5" fill="var(--tile-ink)"/><path d="m39 19 6 3-6 2" fill="var(--suit-red)"/><path d="m23 35-2 5m9-5-1 5" stroke="var(--suit-red)" stroke-width="1.5"/><path d="M22 25q5-4 8 0" stroke="var(--tile-face)" stroke-width="1.8" fill="none"/>','tile-art-bird');
   }
+  /** @type {Record<number,number[]>} */
   const BAM_ROWS={2:[2],3:[3],4:[2,2],5:[2,1,2],6:[3,3],7:[2,3,2],8:[3,2,3],9:[3,3,3]};
+  /** @param {number} n @returns {string} */
   function bambooArt(n){
     if(n===1)return birdArt();
     const rows=BAM_ROWS[n],rowGap=39/rows.length;
@@ -187,26 +250,30 @@
     }).join('');
     return svgFace(stalks,'tile-art-bamboo');
   }
+  /** @param {Atelier.TileCode} type @returns {string} */
   function tileMarkup(type){
-    if(type==='j')return '<span class="tile-index">J</span><span class="tile-symbol joker-symbol">★</span><span class="tile-caption">JOKER</span>';
+    if(type==='j')return '<span class="tile-index">J</span> <span class="tile-symbol joker-symbol">★</span> <span class="tile-caption">JOKER</span>';
     if(type[0]==='f'){
       const i=+type.slice(1)-1;
-      return `<span class="tile-index">${i<4?'F':'S'}${i%4+1}</span><span class="tile-symbol flower-symbol">${FLOWER_MARKS[i]}</span><span class="tile-caption">${FLOWER_CAPTIONS[i]}</span>`;
+      return `<span class="tile-index">${i<4?'F':'S'}${i%4+1}</span> <span class="tile-symbol flower-symbol">${FLOWER_MARKS[i]}</span> <span class="tile-caption">${FLOWER_CAPTIONS[i]}</span>`;
     }
-    if(WIND_MARKS[type])return `<span class="tile-index">${WIND_INDICES[type]}</span><span class="tile-symbol wind-symbol">${WIND_MARKS[type]}</span><span class="tile-caption">${WIND_NAMES[type].split(' ')[0].toUpperCase()}</span>`;
-    if(DRAGON_MARKS[type])return `<span class="tile-index">${DRAGON_INDICES[type]}</span>${type==='dw'?'<span class="tile-white-dragon" aria-hidden="true"><span></span></span>':`<span class="tile-symbol dragon-symbol ${type==='dg'?'green-dragon':''}">${DRAGON_MARKS[type]}</span>`}<span class="tile-caption">${DRAGON_NAMES[type].split(' ')[0].toUpperCase()} DR</span>`;
+    if(WIND_MARKS[type])return `<span class="tile-index">${WIND_INDICES[type]}</span> <span class="tile-symbol wind-symbol">${WIND_MARKS[type]}</span> <span class="tile-caption">${WIND_NAMES[type].split(' ')[0].toUpperCase()}</span>`;
+    if(DRAGON_MARKS[type])return `<span class="tile-index">${DRAGON_INDICES[type]}</span> ${type==='dw'?'<span class="tile-white-dragon" aria-hidden="true"><span></span></span>':`<span class="tile-symbol dragon-symbol ${type==='dg'?'green-dragon':''}">${DRAGON_MARKS[type]}</span>`} <span class="tile-caption">${DRAGON_NAMES[type].split(' ')[0].toUpperCase()} DR</span>`;
     const n=+type.slice(1),s=type[0];
-    if(s==='d')return `<span class="tile-index">${n}</span>${dotArt(n)}<span class="tile-caption">DOTS</span>`;
-    if(s==='b')return `<span class="tile-index">${n}</span>${bambooArt(n)}<span class="tile-caption">BAM</span>`;
-    return `<span class="tile-index">${n}</span><span class="tile-characters"><span class="tile-character-num">${NUMERALS[n-1]}</span><span class="tile-character-wan">萬</span></span><span class="tile-caption">CRAK</span>`;
+    if(s==='d')return `<span class="tile-index">${n}</span> ${dotArt(n)} <span class="tile-caption">DOTS</span>`;
+    if(s==='b')return `<span class="tile-index">${n}</span> ${bambooArt(n)} <span class="tile-caption">BAM</span>`;
+    return `<span class="tile-index">${n}</span> <span class="tile-characters"><span class="tile-character-num">${NUMERALS[n-1]}</span> <span class="tile-character-wan">萬</span></span> <span class="tile-caption">CRAK</span>`;
   }
+  /** @param {Atelier.Tile | Atelier.TileCode} tile @param {{className?:string,selected?:boolean,disabled?:boolean,attr?:string}} [opts] @returns {string} */
   function tileButton(tile, opts={}) {
     const type=typeof tile==='string'?tile:tile.type;
-    return '<button type="button" class="mj-tile '+(opts.className||'')+' '+(opts.selected?'is-selected':'')+' '+(opts.disabled?'is-disabled':'')+'" '+(opts.disabled?'disabled':'')+' '+(opts.attr||'')+' title="'+name(type)+'" aria-label="'+name(type)+'">'+tileMarkup(type)+'</button>';
+    return '<button type="button" class="mj-tile '+(opts.className||'')+' '+(opts.selected?'is-selected':'')+' '+(opts.disabled?'is-disabled':'')+'" '+(opts.disabled?'disabled':'')+' '+(opts.attr||'')+' title="'+name(type)+'" aria-label="'+tileAccessibleName(type)+'">'+tileMarkup(type)+'</button>';
   }
+  /** @param {number} seconds @returns {string} */
   function elapsed(seconds){return Math.floor(seconds/60).toString().padStart(2,'0')+':'+(seconds%60).toString().padStart(2,'0');}
+  /** @param {readonly Atelier.Tile[]} tiles @returns {boolean} */
   function setCountValid(tiles){return tiles.length===136||tiles.length===144||tiles.length===152;}
-  M.core={SUITS,HONORS,STANDARD_TYPES, SUIT_NAMES,FLOWERS, tileset, makeTile,validMaterial, shuffle, count, countTypes, sortHand, name, matchKey, tileMarkup,tileButton,elapsed,setCountValid};
+  M.core={SUITS,HONORS,STANDARD_TYPES, SUIT_NAMES,FLOWERS, tileset, makeTile,validMaterial, shuffle, count, countTypes, sortHand, name, matchKey, tileAccessibleName,tileMarkup,tileButton,elapsed,setCountValid};
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
 
@@ -309,85 +376,188 @@
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
 
-(function(M){
+(function(/** @type {Atelier.Registry} */ M){
 'use strict';
-const {tileset,shuffle,sortHand,count}=M.core;
+const dependency=M.core;
+if(!dependency)throw Error('Load core.js before table.js');
+const C=dependency;
+const {tileset,shuffle,sortHand,count}=C;
 const WINDS=['East','South','West','North'];
+/** Shared turn machinery. Rule-profile subclasses supply the analysis hooks. */
 class BaseTable {
+ /** @param {Atelier.Variant} variant @param {Atelier.Settings} [settings] */
  constructor(variant,settings={}){
-  this.variant=variant;this.settings={opponents:'bots',...settings};
+  this.variant=variant;
+  /** @type {Atelier.Settings & {opponents:'bots'|'local'}} */
+  this.settings={opponents:'bots',...settings};
   const match=settings.match||{};
-  this.dealer=Number.isInteger(match.dealer)?match.dealer:0;this.round=match.round||0;this.rotations=match.rotations||0;this.handNumber=(match.hands||0)+1;this.scores=(match.scores||[0,0,0,0]).slice();
+  this.dealer=typeof match.dealer==='number'&&Number.isInteger(match.dealer)?match.dealer:0;
+  this.round=match.round||0;this.rotations=match.rotations||0;this.handNumber=(match.hands||0)+1;this.scores=(match.scores||[0,0,0,0]).slice();
   this.expanded=variant==='hk'&&settings.hkProfile==='atelier';this.flowersEnabled=this.expanded&&settings.flowers!==false;
-  const occupants=match.occupants||[0,1,2,3];this.players=WINDS.map((_,i)=>({id:occupants[i],name:settings.opponents==='local'?`Player ${occupants[i]+1}`:occupants[i]===0?'You':`Player ${occupants[i]+1}`,seat:i,hand:[],melds:[],flowers:[],discards:[],bot:this.settings.opponents!=='local'&&occupants[i]!==0}));
-  this.wall=shuffle(tileset(this.flowersEnabled?'solitaire':variant));this.current=this.dealer;this.phase='discard';this.claimQueue=[];this.claimVotes=[];this.lastDiscard=null;this.winner=null;this.result=null;this.log=[];this.lastSource='deal';this.lastDraw=null;this.discardCount=0;this.interrupted=false;
+  const occupants=match.occupants||[0,1,2,3];
+  /** @type {Atelier.Player[]} */
+  this.players=WINDS.map((_,i)=>({id:occupants[i],name:settings.opponents==='local'?`Player ${occupants[i]+1}`:occupants[i]===0?'You':`Player ${occupants[i]+1}`,seat:i,hand:[],melds:[],flowers:[],discards:[],bot:this.settings.opponents!=='local'&&occupants[i]!==0}));
+  this.wall=shuffle(tileset(this.flowersEnabled?'solitaire':variant));this.current=this.dealer;
+  /** @type {Atelier.Phase} */
+  this.phase='discard';
+  /** @type {number[]} */
+  this.claimQueue=[];
+  /** @type {Atelier.ClaimVote[]} */
+  this.claimVotes=[];
+  /** @type {Atelier.LastDiscard|null} */
+  this.lastDiscard=null;
+  /** @type {number|null} */
+  this.winner=null;
+  /** @type {Atelier.Result|null} */
+  this.result=null;
+  /** @type {string[]} */
+  this.log=[];
+  /** @type {Atelier.DrawSource} */
+  this.lastSource='deal';
+  /** @type {Atelier.Tile|null} */
+  this.lastDraw=null;
+  /** @type {number|null} */
+  this.winningFrom=null;
+  this.discardCount=0;this.interrupted=false;
+  // Type-only property declarations: these reads do not shadow subclass methods.
+  /** @type {Atelier.Table['winAnalysis']} */
+  this.winAnalysis;
+  /** @type {Atelier.Table['paymentBase']} */
+  this.paymentBase;
+  /** @type {Atelier.Table['claimOptions']} */
+  this.claimOptions;
+  /** @type {Atelier.Table['robOptions']} */
+  this.robOptions;
+  /** @type {Atelier.Table['resolveRob']} */
+  this.resolveRob;
+  /** @type {Atelier.Table['kongOptions']} */
+  this.kongOptions;
+  /** @type {Atelier.Table['declareKong']} */
+  this.declareKong;
+  /** @type {number|undefined} */
+  this.charSeat;
+  /** @type {Atelier.ProfileConstructor} */
+  this.constructor;
   for(let n=0;n<13;n++)for(let step=0;step<4;step++)this.drawTile((this.dealer+step)%4,false,'deal');
   this.drawTile(this.dealer,false,'deal');this.players.forEach(p=>sortHand(p.hand));this.note(`${this.players[this.dealer].name} is East and begins with 14 tiles.`);
  }
+ /** @param {number} seat @returns {number} */
  windIndex(seat){return (seat-this.dealer+4)%4;}
+ /** @param {number} seat @returns {string} */
  windName(seat){return WINDS[this.windIndex(seat)];}
+ /** @param {string} message @returns {void} */
  note(message){this.log.unshift(message);this.log.length=Math.min(this.log.length,40);}
- who(){if(this.phase==='claims'||this.phase==='robkong')return this.claimQueue[0]??null;if(['charleston','secondChoice','courtesyChoice'].includes(this.phase))return this.charSeat;return this.current;}
+ /** @returns {number|null} */
+ who(){if(this.phase==='claims'||this.phase==='robkong')return this.claimQueue[0]??null;if(['charleston','secondChoice','courtesyChoice'].includes(this.phase))return this.charSeat??null;return this.current;}
+ /** @param {number} seat @param {boolean} [replacement] @param {Atelier.DrawSource} [source] @returns {Atelier.Tile|null} */
  drawTile(seat,replacement=false,source='draw'){
-  while(this.wall.length){const tile=replacement?this.wall.pop():this.wall.shift();if(this.flowersEnabled&&tile.type[0]==='f'){this.players[seat].flowers.push(tile);replacement=true;continue;}this.players[seat].hand.push(tile);this.lastDraw=tile;this.lastSource=source;sortHand(this.players[seat].hand);return tile;}return null;
+  while(this.wall.length){
+   const tile=replacement?this.wall.pop():this.wall.shift();
+   if(!tile)throw Error('Wall inventory changed during a draw');
+   if(this.flowersEnabled&&tile.type[0]==='f'){this.players[seat].flowers.push(tile);replacement=true;continue;}
+   this.players[seat].hand.push(tile);this.lastDraw=tile;this.lastSource=source;sortHand(this.players[seat].hand);return tile;
+  }return null;
  }
+ /** @param {number} seat @returns {boolean} */
  drawReplacement(seat){if(!this.drawTile(seat,true,'kong'))return this.endDraw();this.note(`${this.players[seat].name} draws a Kong replacement.`);return true;}
+ /** @param {number} from @returns {void|false} */
  nextTurn(from){this.current=(from+1)%4;if(!this.drawTile(this.current))return this.endDraw();this.phase='discard';this.note(`${this.players[this.current].name} draws from the wall.`);}
+ /** @param {number} seat @param {number} tileId @returns {void} */
  discard(seat,tileId){
   if(this.phase!=='discard'||seat!==this.current)throw Error('Not your discard turn');const p=this.players[seat],i=p.hand.findIndex(t=>t.id===tileId);if(i<0)throw Error('Tile is not in your hand');
-  const tile=p.hand.splice(i,1)[0];p.discards.push(tile);this.discardCount++;this.lastDiscard={tile,by:seat,lastWall:this.wall.length===0&&this.lastSource!=='claim'};this.note(`${p.name} discarded ${M.core.name(tile.type)}.`);this.claimVotes=[];this.claimQueue=[];
+  const tile=p.hand.splice(i,1)[0];p.discards.push(tile);this.discardCount++;this.lastDiscard={tile,by:seat,lastWall:this.wall.length===0&&this.lastSource!=='claim'};this.note(`${p.name} discarded ${C.name(tile.type)}.`);this.claimVotes=[];this.claimQueue=[];
   for(let step=1;step<=3;step++){const other=(seat+step)%4;if(this.claimOptions(other,tile,seat).length)this.claimQueue.push(other);}
   if(this.claimQueue.length)this.phase='claims';else{this.lastDiscard=null;this.nextTurn(seat);}
  }
- offered(){if(!['claims','robkong'].includes(this.phase)||!this.claimQueue.length)return {seat:null,options:[]};const seat=this.claimQueue[0];return {seat,options:this.phase==='robkong'?this.robOptions(seat):this.claimOptions(seat,this.lastDiscard.tile,this.lastDiscard.by)};}
+ /** @returns {Atelier.Offer} */
+ offered(){
+  if(!['claims','robkong'].includes(this.phase)||!this.claimQueue.length)return {seat:null,options:[]};
+  const seat=this.claimQueue[0];
+  if(this.phase==='robkong'){
+   if(!this.robOptions)throw Error('This profile has no Kong robbery rule');
+   return {seat,options:this.robOptions(seat)};
+  }
+  if(!this.lastDiscard)throw Error('No discard is available to claim');
+  return {seat,options:this.claimOptions(seat,this.lastDiscard.tile,this.lastDiscard.by)};
+ }
+ /** @param {number} seat @param {string} code @returns {void} */
  submitClaim(seat,code){const offer=this.offered();if(offer.seat!==seat)throw Error('Claim is not available for this player');if(code!=='pass'){const opt=offer.options.find(o=>o.code===code);if(!opt)throw Error('Unknown claim');this.claimVotes.push({seat,option:opt});}this.claimQueue.shift();if(!this.claimQueue.length)this.resolveClaims();}
+ /** @returns {void} */
  resolveClaims(){
-  if(this.phase==='robkong')return this.resolveRob();
-  if(!this.claimVotes.length){const from=this.lastDiscard.by;this.lastDiscard=null;this.nextTurn(from);return;}
-  const from=this.lastDiscard.by;this.claimVotes.sort((a,b)=>b.option.priority-a.option.priority||((a.seat-from+4)%4)-((b.seat-from+4)%4));const {seat,option}=this.claimVotes[0],p=this.players[seat],thrower=this.players[from];
-  const dropped=thrower.discards.pop();if(!dropped||dropped.id!==this.lastDiscard.tile.id)throw Error('Discard stack mismatch');
+  if(this.phase==='robkong'){
+   if(!this.resolveRob)throw Error('This profile has no Kong robbery rule');
+   return this.resolveRob();
+  }
+  const discard=this.lastDiscard;
+  if(!discard)throw Error('No discard is available to resolve');
+  if(!this.claimVotes.length){const from=discard.by;this.lastDiscard=null;this.nextTurn(from);return;}
+  const from=discard.by;this.claimVotes.sort((a,b)=>b.option.priority-a.option.priority||((a.seat-from+4)%4)-((b.seat-from+4)%4));const {seat,option}=this.claimVotes[0],p=this.players[seat],thrower=this.players[from];
+  const dropped=thrower.discards.pop();if(!dropped||dropped.id!==discard.tile.id)throw Error('Discard stack mismatch');
   if(option.kind==='win'){p.hand.push(dropped);sortHand(p.hand);this.current=seat;this.winningFrom=from;this.declareWin(seat,false);this.lastDiscard=null;return;}
-  const used=option.use.map(id=>p.hand.find(t=>t.id===id));if(used.some(t=>!t))throw Error('Claim material missing');p.hand=p.hand.filter(t=>!option.use.includes(t.id));p.melds.push({kind:option.kind,tiles:[...used,dropped],type:option.type||dropped.type,from,claimedTileId:dropped.id});
+  const used=option.use.map(id=>p.hand.find(t=>t.id===id));if(!used.every(t=>t!==undefined))throw Error('Claim material missing');p.hand=p.hand.filter(t=>!option.use.includes(t.id));p.melds.push({kind:option.kind,tiles:[...used,dropped],type:option.type||dropped.type,from,claimedTileId:dropped.id});
   this.note(`${p.name} calls ${option.kind.toUpperCase()} on ${thrower.name}'s discard.`);this.interrupted=true;this.current=seat;this.lastDiscard=null;sortHand(p.hand);this.phase='discard';this.lastSource='claim';if(option.kind==='kong'&&this.variant==='hk')this.drawReplacement(seat);
  }
+ /** @param {number|null} seat @returns {boolean} */
  isBotSeat(seat){return seat!=null&&this.players[seat].bot;}
+ /** @returns {false} */
  endDraw(){this.phase='finished';this.result={kind:'draw',message:'The wall is empty. Nobody declared Mahjong.',payments:[0,0,0,0]};this.note(this.result.message);return false;}
+ /** @param {number} seat @returns {Atelier.Analysis|null} */
  canDeclareWin(seat){return this.phase==='discard'&&this.current===seat&&(this.variant!=='hk'||this.lastSource!=='claim')?this.winAnalysis(seat,null,true):null;}
+ /** @param {number} seat @param {boolean} [selfDraw] @returns {Atelier.WinResult} */
  declareWin(seat,selfDraw=true){
   if(this.phase==='finished'||seat!==this.current||!['discard','claims','robkong'].includes(this.phase))throw Error('Not a winning opportunity');
   if(selfDraw&&!this.canDeclareWin(seat))throw Error('Draw a winning tile before declaring');const analysis=this.winAnalysis(seat,null,selfDraw);if(!analysis)throw Error('This hand does not satisfy the selected rules');
-  this.winner=seat;this.result={kind:'win',seat,analysis,selfDraw,from:selfDraw?null:this.winningFrom,message:`${this.players[seat].name} calls Mahjong!`};
-  const base=this.paymentBase?this.paymentBase(analysis):1;const payments=this.players.map(p=>p.seat===seat?0:-base*(selfDraw||p.seat===this.winningFrom?2:1));payments[seat]=-payments.reduce((a,b)=>a+b,0);this.result.payments=payments;this.result.base=base;this.scores=this.scores.map((s,i)=>s+payments[i]);this.phase='finished';this.note(this.result.message);return this.result;
+  this.winner=seat;
+  const base=this.paymentBase?this.paymentBase(analysis):1;const payments=this.players.map(p=>p.seat===seat?0:-base*(selfDraw||p.seat===this.winningFrom?2:1));payments[seat]=-payments.reduce((a,b)=>a+b,0);
+  this.result={kind:'win',seat,analysis,selfDraw,from:selfDraw?null:this.winningFrom,message:`${this.players[seat].name} calls Mahjong!`,payments,base};
+  this.scores=this.scores.map((s,i)=>s+payments[i]);this.phase='finished';this.note(this.result.message);return this.result;
  }
+ /** @returns {Atelier.Table|null} */
  nextHand(){
-  if(this.phase!=='finished')throw Error('Finish this hand first');
+  if(this.phase!=='finished'||!this.result)throw Error('Finish this hand first');
   const repeat=this.variant==='hk'&&(this.result.kind==='draw'||this.winner===this.dealer);const rotations=this.rotations+(repeat?0:1);if(rotations>=16)return null;
   let dealer=repeat?this.dealer:(this.dealer+1)%4;const occupants=this.players.map(p=>p.id),scores=this.scores.slice();
   if(this.variant==='american'&&rotations%4===0){const pivot=occupants.indexOf(0),right=(pivot+1)%4;[occupants[pivot],occupants[right]]=[occupants[right],occupants[pivot]];[scores[pivot],scores[right]]=[scores[right],scores[pivot]];dealer=right;}
   return new this.constructor({...this.settings,match:{dealer,occupants,round:Math.floor(rotations/4),rotations,scores,hands:this.handNumber}});
  }
+ /** @returns {number} */
  integrity(){return this.wall.length+this.players.reduce((sum,p)=>sum+p.hand.length+p.flowers.length+p.discards.length+p.melds.reduce((n,m)=>n+m.tiles.length,0),0);}
+ /** @param {Atelier.Offer} offer @returns {string} */
  botChooseClaim(offer){const win=offer.options.find(o=>o.kind==='win');if(win)return win.code;const big=offer.options.filter(o=>['kong','quint','pung','sextet'].includes(o.kind)).sort((a,b)=>b.priority-a.priority);if(big.length&&Math.random()<.55)return big[0].code;const chow=offer.options.find(o=>o.kind==='chow');return chow&&Math.random()<.23?chow.code:'pass';}
+ /** @param {number} seat @returns {number} */
  botChooseDiscard(seat){const hand=this.players[seat].hand;const scores=hand.map(t=>{let score=3.3*(count(hand,t.type)-1);if(this.variant==='hk'&&/^[bdc][1-9]$/.test(t.type)){for(const o of hand){if(o.id===t.id||o.type[0]!==t.type[0])continue;const d=Math.abs(+o.type.slice(1)-+t.type.slice(1));if(d===1)score+=1.35;if(d===2)score+=.6;}}if(t.type==='j')score+=99;return score+Math.random()*.3;});return hand[scores.indexOf(Math.min(...scores))].id;}
- botStep(){if(['claims','robkong'].includes(this.phase)){const offer=this.offered();if(this.isBotSeat(offer.seat)){this.submitClaim(offer.seat,this.botChooseClaim(offer));return true;}return false;}if(this.phase==='discard'&&this.isBotSeat(this.current)){if(this.canDeclareWin(this.current)){this.declareWin(this.current,true);return true;}const kongs=this.kongOptions?this.kongOptions(this.current):[];if(kongs.length&&Math.random()<.55){this.declareKong(this.current,kongs[0]);return true;}this.discard(this.current,this.botChooseDiscard(this.current));return true;}return false;}
+ /** @returns {boolean} */
+ botStep(){
+  if(['claims','robkong'].includes(this.phase)){const offer=this.offered();if(offer.seat!==null&&this.isBotSeat(offer.seat)){this.submitClaim(offer.seat,this.botChooseClaim(offer));return true;}return false;}
+  if(this.phase==='discard'&&this.isBotSeat(this.current)){if(this.canDeclareWin(this.current)){this.declareWin(this.current,true);return true;}const kongs=this.kongOptions?this.kongOptions(this.current):[];if(kongs.length&&Math.random()<.55){if(!this.declareKong)throw Error('This profile cannot declare a Kong');this.declareKong(this.current,kongs[0]);return true;}this.discard(this.current,this.botChooseDiscard(this.current));return true;}
+  return false;
+ }
 }
 M.BaseTable=BaseTable;
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
 
-(function(M){
+(function(/** @type {Atelier.Registry} */ M){
   'use strict';
-  const {count,countTypes,sortHand}=M.core;
-  const types=M.core.STANDARD_TYPES;
+  const coreDependency=M.core;
+  if(!coreDependency)throw Error('Load core.js before hongkong.js');
+  const C=coreDependency;
+  const {count,countTypes,sortHand}=C;
+  const types=C.STANDARD_TYPES;
+  /** @param {Atelier.Tile[]} tiles @param {Atelier.PhysicalMeld[]} exposed @returns {boolean} */
   function validHandMaterial(tiles,exposed){
-    if(!M.core.validMaterial([...tiles,...exposed.flatMap(m=>m.tiles||[])]))return false;
-    return exposed.every(m=>{const ts=m.tiles.map(t=>t.type);if(m.kind==='chow')return !m.concealed&&ts.length===3&&/^[bdc][1-7]$/.test(m.type)&&[0,1,2].every(n=>ts.includes(m.type[0]+(+m.type[1]+n)));return ['pung','kong'].includes(m.kind)&&ts.length===(m.kind==='kong'?4:3)&&ts.every(t=>t===m.type)&&(!m.concealed||m.kind==='kong');});
+    if(!C.validMaterial([...tiles,...exposed.flatMap(m=>m.tiles||[])]))return false;
+    return exposed.every(m=>{const ts=m.tiles.map(t=>t.type);if(m.kind==='chow')return !m.concealed&&ts.length===3&&/^[bdc][1-7]$/.test(m.type)&&[0,1,2].every(n=>ts.some(t=>t===m.type[0]+(+m.type[1]+n)));return ['pung','kong'].includes(m.kind)&&ts.length===(m.kind==='kong'?4:3)&&ts.every(t=>t===m.type)&&(!m.concealed||m.kind==='kong');});
   }
+  /** @param {Atelier.Tile[]} tiles @param {Atelier.PhysicalMeld[]} [exposed] @returns {Atelier.Partition[]} */
   function partitions(tiles,exposed=[]){
     if(!validHandMaterial(tiles,exposed))return [];
     const need=4-exposed.length;
     if(need<0||tiles.length!==need*3+2)return [];
-    const counts=countTypes(tiles), result=[];
+    const counts=countTypes(tiles);
+    /** @type {Atelier.Partition[]} */
+    const result=[];
+    /** @param {Atelier.ScoredMeld[]} melds @param {Atelier.StandardTileCode|null} pair */
     function search(melds,pair){
       if(result.length>64)return;
       const first=types.find(t=>(counts[t]||0)>0);
@@ -396,13 +566,14 @@ M.BaseTable=BaseTable;
       if(melds.length===need)return;
       if(counts[first]>=3){counts[first]-=3;melds.push({kind:'pung',type:first,tiles:[first,first,first]});search(melds,pair);melds.pop();counts[first]+=3;}
       if('bdc'.includes(first[0]) && first.length===2 && +first.slice(1)<=7){
-        const a=first[0]+(+first.slice(1)+1),b=first[0]+(+first.slice(1)+2);
-        if(counts[a]>0&&counts[b]>0){counts[first]--;counts[a]--;counts[b]--;melds.push({kind:'chow',type:first,tiles:[first,a,b]});search(melds,pair);melds.pop();counts[first]++;counts[a]++;counts[b]++;}
+        const a=types.find(t=>t===first[0]+(+first.slice(1)+1)),b=types.find(t=>t===first[0]+(+first.slice(1)+2));
+        if(a&&b&&counts[a]>0&&counts[b]>0){counts[first]--;counts[a]--;counts[b]--;melds.push({kind:'chow',type:first,tiles:[first,a,b]});search(melds,pair);melds.pop();counts[first]++;counts[a]++;counts[b]++;}
       }
     }
     search([],null);
     return result;
   }
+  /** @param {Atelier.Partition} partition @param {Atelier.PhysicalMeld[]} exposed @param {number} seat @param {boolean} selfDraw @param {number} [prevailing] @returns {Atelier.HongKongAnalysis} */
   function fanScore(partition,exposed,seat,selfDraw,prevailing=0){
     const melds=[...partition.melds,...exposed.map(m=>({kind:m.kind,type:m.type,tiles:m.tiles.map(t=>t.type)}))];
     const vals=[];const pung=melds.filter(m=>m.kind!=='chow');
@@ -421,20 +592,25 @@ M.BaseTable=BaseTable;
     if(selfDraw){fan++;vals.push('Self-draw +1');}
     return {fan,details:vals,partition};
   }
-  const honors=M.core.HONORS, terminals=['b1','b9','c1','c9','d1','d9'];
+  const honors=C.HONORS, terminals=['b1','b9','c1','c9','d1','d9'];
+  /** @param {Atelier.Tile[]} tiles @param {Atelier.PhysicalMeld[]} exposed @param {Atelier.ScoreContext} c @returns {Atelier.HongKongAnalysis[]} */
   function specialHands(tiles,exposed,c){
-    if(exposed.length||tiles.length!==14||!M.core.validMaterial(tiles))return [];const counts=countTypes(tiles),keys=Object.keys(counts),out=[];
+    if(exposed.length||tiles.length!==14||!C.validMaterial(tiles))return [];const counts=countTypes(tiles),keys=Object.keys(counts);
+    /** @type {Atelier.HongKongAnalysis[]} */
+    const out=[];
+    /** @param {string} name @param {number} fan */
     const add=(name,fan)=>{if(c.heavenly||c.earthly){name+=' / '+(c.heavenly?'Heavenly Hand':'Earthly Hand');fan=10;}out.push({fan,qualifyingFan:fan,details:[name+' · '+fan+' faan (fixed special-hand score)'],special:name});};
     if([...honors,...terminals].every(t=>counts[t]>=1)&&keys.length===13)add('Thirteen Orphans',10);
     if(['b','c','d'].some(s=>keys.every(t=>t[0]===s)&&counts[s+'1']>=3&&counts[s+'9']>=3&&[2,3,4,5,6,7,8].every(n=>counts[s+n]>=1)))add('Nine Gates',10);
     if(c.sevenPairs&&keys.length===7&&keys.every(t=>counts[t]===2))add('Seven distinct pairs (house option)',4);
     return out;
   }
+  /** @param {Atelier.Partition} partition @param {Atelier.PhysicalMeld[]} exposed @param {Atelier.Tile[]} tiles @param {Atelier.ScoreContext} c @returns {Atelier.HongKongAnalysis} */
   function extendedScore(partition,exposed,tiles,c){
     const melds=[...partition.melds,...exposed.map(m=>({...m,tiles:m.tiles.map(t=>t.type)}))],sets=melds.filter(m=>m.kind!=='chow'),all=melds.flatMap(m=>m.tiles).concat(partition.pair,partition.pair);
     const dragonSets=sets.filter(m=>['dr','dg','dw'].includes(m.type)).length,windSets=sets.filter(m=>m.type[0]==='w').length;
     const special=[];
-    if(all.every(t=>honors.includes(t)))special.push('All Honors');
+    if(all.every(t=>honors.some(h=>h===t)))special.push('All Honors');
     if(all.every(t=>terminals.includes(t)))special.push('All Terminals');
     if(windSets===4)special.push('Big Four Winds');
     if(windSets===3&&partition.pair[0]==='w')special.push('Little Four Winds');
@@ -447,6 +623,7 @@ M.BaseTable=BaseTable;
     const a=fanScore(partition,exposed,c.seat,c.selfDraw,c.prevailing);
     // Little Three Dragons has a fixed special-hand score in this named profile.
     if(dragonSets===2&&['dr','dg','dw'].includes(partition.pair))return {fan:4,qualifyingFan:4,details:['Little Three Dragons · 4 faan (fixed special-hand score)'],special:'Little Three Dragons',partition};
+    /** @param {string} label @param {number} [n] */
     const add=(label,n=1)=>{a.fan+=n;a.details.push(label+' +'+n);};
     if(c.source==='robkong'&&!c.selfDraw)add('Robbing added Kong');
     if(c.source==='kong'&&c.selfDraw)add('Kong replacement');
@@ -455,20 +632,41 @@ M.BaseTable=BaseTable;
     if(c.flowersEnabled){if(!c.flowers.length)add('No Flowers');else{for(const first of [1,5]){const complete=[0,1,2,3].every(n=>c.flowers.some(f=>f.type==='f'+(first+n)));if(complete)add(first===1?'Complete Flower family':'Complete Season family',2);else if(c.flowers.some(f=>f.type==='f'+(first+c.seat)))add('Own Flower/Season');}}}
     if(a.fan>10){a.details.push('Capped at 10 faan');a.fan=10;}return a;
   }
-  class HongKongTable extends M.BaseTable {
-    constructor(settings={}){super('hk',settings);this.minFan=Number(settings.minFan||0);this.missedWins=[new Set(),new Set(),new Set(),new Set()];this.note(this.expanded?'Atelier Hong Kong: special hands, full score breakdown, and four wind rounds.':'Beginner profile: four melds and a pair; simplified faan.');}
+  const Parent=M.BaseTable;
+  if(!Parent)throw Error('Load table.js before hongkong.js');
+  class HongKongTable extends Parent {
+    /** @param {Atelier.Settings} [settings] */
+    constructor(settings={}){
+      super('hk',settings);
+      /** @type {'hk'} */
+      this.variant;
+      this.minFan=Number(settings.minFan||0);
+      /** @type {Set<Atelier.TileCode>[]} */
+      this.missedWins=[new Set(),new Set(),new Set(),new Set()];
+      /** @type {Atelier.PendingKong|null} */
+      this.pendingKong=null;
+      this.note(this.expanded?'Atelier Hong Kong: special hands, full score breakdown, and four wind rounds.':'Beginner profile: four melds and a pair; simplified faan.');
+    }
+    /** @param {number} seat @param {boolean} [replacement] @param {Atelier.DrawSource} [source] @returns {Atelier.Tile|null} */
     drawTile(seat,replacement=false,source='draw'){const tile=super.drawTile(seat,replacement,source);if(tile)this.missedWins?.[seat]?.clear();return tile;}
+    /** @param {number} seat @param {string} code @returns {void} */
     submitClaim(seat,code){const offer=this.offered();const declined=offer.seat===seat&&code!=='win'&&offer.options.some(o=>o.kind==='win');const type=this.phase==='robkong'?this.pendingKong?.tile.type:this.lastDiscard?.tile.type;if(this.expanded&&declined&&type&&(code==='pass'||offer.options.some(o=>o.code===code)))this.missedWins[seat].add(type);return super.submitClaim(seat,code);}
+    /** @param {number} seat @param {Atelier.Tile|null} [extra] @param {boolean} [selfDraw] @returns {Atelier.HongKongAnalysis|null} */
     winAnalysis(seat,extra=null,selfDraw=true){
       const p=this.players[seat],tiles=extra?[...p.hand,extra]:p.hand;if(!selfDraw&&extra&&this.expanded&&this.missedWins?.[seat]?.has(extra.type))return null;
+      /** @type {Atelier.ScoreContext} */
       const context={seat:this.windIndex(seat),prevailing:this.round,selfDraw,flowers:p.flowers,flowersEnabled:this.flowersEnabled,source:this.phase==='robkong'?'robkong':this.lastSource,lastWall:selfDraw?this.wall.length===0&&['draw','kong'].includes(this.lastSource):this.phase!=='robkong'&&!!this.lastDiscard?.lastWall,heavenly:selfDraw&&this.discardCount===0&&!this.interrupted,earthly:!selfDraw&&this.discardCount===1&&!this.interrupted,sevenPairs:this.settings.sevenPairs===true};
       const candidates=partitions(tiles,p.melds).map(g=>this.expanded?extendedScore(g,p.melds,tiles,context):fanScore(g,p.melds,this.windIndex(seat),selfDraw,this.round));
       if(this.expanded)candidates.push(...specialHands(tiles,p.melds,context));
       return candidates.filter(c=>(c.qualifyingFan??c.fan)>=this.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;
     }
+    /** @param {Atelier.HongKongAnalysis} a @returns {number} */
     paymentBase(a){return this.expanded?(a.fan<4?2**a.fan:a.fan<7?16:a.fan<10?32:64):2**Math.min(a.fan,6);}
+    /** @param {number} seat @param {Atelier.Tile} tile @param {number} by @returns {Atelier.Claim[]} */
     claimOptions(seat,tile,by){
-      const hand=this.players[seat].hand,options=[];
+      const hand=this.players[seat].hand;
+      /** @type {Atelier.Claim[]} */
+      const options=[];
       const can=this.winAnalysis(seat,tile,false);
       if(can)options.push({code:'win',kind:'win',priority:this.expanded&&can.special?.includes('Thirteen Orphans')?110:100,title:'Mahjong!'});
       if(this.players[seat].melds.length>=4)return options;
@@ -480,33 +678,46 @@ M.BaseTable=BaseTable;
         for(const start of [n-2,n-1,n]){
           if(start<1||start>7)continue;
           const needed=[start,start+1,start+2].filter(x=>x!==n).map(x=>suit+x);
-          const neededTiles=needed.map(type=>hand.find(t=>t.type===type)).filter(Boolean);
-          if(neededTiles.length === 2) {
-            options.push({code:'chow-'+start,kind:'chow',type:suit+start,use:neededTiles.map(t=>t.id),priority:40,title:`Chow · ${start}–${start+1}–${start+2} ${M.core.SUIT_NAMES[suit]}`});
+          const neededTiles=needed.map(type=>hand.find(t=>t.type===type)).filter(t=>t!==undefined);
+          const chowType=types.find(t=>t===suit+start);
+          if(neededTiles.length === 2&&chowType) {
+            options.push({code:'chow-'+start,kind:'chow',type:chowType,use:neededTiles.map(t=>t.id),priority:40,title:`Chow · ${start}–${start+1}–${start+2} ${C.SUIT_NAMES[suit]}`});
           }
         }
       }
       return options;
     }
+    /** @param {number} seat @returns {Atelier.KongOption[]} */
     kongOptions(seat){
       const p=this.players[seat];if(this.phase!=='discard'||seat!==this.current||this.lastSource==='claim'||!this.wall.length)return [];
       const hidden=p.melds.length<4?[...new Set(p.hand.filter(t=>count(p.hand,t.type)===4).map(t=>t.type))]:[];
-      return hidden.concat(this.expanded?p.melds.filter(m=>m.kind==='pung'&&p.hand.some(t=>t.type===m.type)).map(m=>'add:'+m.type):[]);
+      /** @type {Atelier.KongOption[]} */
+      const options=[...hidden];
+      if(this.expanded)for(const meld of p.melds)if(meld.kind==='pung'&&p.hand.some(t=>t.type===meld.type))options.push(`add:${meld.type}`);
+      return options;
     }
+    /** @param {number} seat @param {Atelier.KongOption} type @returns {void} */
     declareKong(seat,type){
       if(!this.kongOptions(seat).includes(type))throw Error('Invalid Kong');const p=this.players[seat];
       if(type.startsWith('add:')){
-        const natural=type.slice(4),tile=p.hand.find(t=>t.type===natural);this.pendingKong={seat,tile,type:natural};this.claimVotes=[];this.claimQueue=[];this.phase='robkong';
+        const natural=type.slice(4),tile=p.hand.find(t=>t.type===natural);
+        if(!tile)throw Error('Added Kong material missing');
+        this.pendingKong={seat,tile,type:tile.type};this.claimVotes=[];this.claimQueue=[];this.phase='robkong';
         for(let step=1;step<4;step++){const other=(seat+step)%4;if(this.robOptions(other).length)this.claimQueue.push(other);}
         this.note(`${p.name} proposes adding a fourth tile to a Pung. Opponents may claim it only to win.`);if(!this.claimQueue.length)this.resolveRob();return;
       }
-      const tiles=p.hand.filter(t=>t.type===type).slice(0,4);p.hand=p.hand.filter(t=>!tiles.some(x=>x.id===t.id));p.melds.push({kind:'kong',tiles,type,from:seat,concealed:true});this.interrupted=true;this.note(`${p.name} declares a concealed Kong.`);this.drawReplacement(seat);
+      const tiles=p.hand.filter(t=>t.type===type).slice(0,4);
+      if(tiles.length!==4)throw Error('Concealed Kong material missing');
+      p.hand=p.hand.filter(t=>!tiles.some(x=>x.id===t.id));p.melds.push({kind:'kong',tiles,type:tiles[0].type,from:seat,concealed:true});this.interrupted=true;this.note(`${p.name} declares a concealed Kong.`);this.drawReplacement(seat);
     }
-    robOptions(seat){const a=this.winAnalysis(seat,this.pendingKong.tile,false);return a?[{code:'win',kind:'win',priority:a.special?.includes('Thirteen Orphans')?110:100,title:'Mahjong · rob the added Kong'}]:[];}
+    /** @param {number} seat @returns {Atelier.Claim[]} */
+    robOptions(seat){const pending=this.pendingKong;if(!pending)throw Error('No added Kong to claim');const a=this.winAnalysis(seat,pending.tile,false);return a?[{code:'win',kind:'win',priority:a.special?.includes('Thirteen Orphans')?110:100,title:'Mahjong · rob the added Kong'}]:[];}
+    /** @returns {void} */
     resolveRob(){
-      const {seat,tile,type}=this.pendingKong,p=this.players[seat];
+      const pending=this.pendingKong;if(!pending)throw Error('No added Kong to resolve');
+      const {seat,tile,type}=pending,p=this.players[seat];
       if(this.claimVotes.length){this.claimVotes.sort((a,b)=>b.option.priority-a.option.priority||((a.seat-seat+4)%4)-((b.seat-seat+4)%4));const winner=this.claimVotes[0].seat;p.hand=p.hand.filter(t=>t.id!==tile.id);this.players[winner].hand.push(tile);this.current=winner;this.winningFrom=seat;this.declareWin(winner,false);}
-      else {p.hand=p.hand.filter(t=>t.id!==tile.id);const meld=p.melds.find(m=>m.kind==='pung'&&m.type===type);meld.kind='kong';meld.tiles.push(tile);this.interrupted=true;this.phase='discard';this.current=seat;this.drawReplacement(seat);}
+      else {const meld=p.melds.find(m=>m.kind==='pung'&&m.type===type);if(!meld)throw Error('The proposed added Kong has no exposed Pung');p.hand=p.hand.filter(t=>t.id!==tile.id);meld.kind='kong';meld.tiles.push(tile);this.interrupted=true;this.phase='discard';this.current=seat;this.drawReplacement(seat);}
       this.pendingKong=null;
     }
   }
@@ -517,10 +728,14 @@ M.BaseTable=BaseTable;
 
 
 
-(function(M){
+(function(/** @type {Atelier.Registry} */ M){
   'use strict';
-  const {count,sortHand,STANDARD_TYPES}=M.core;
+  const coreDependency=M.core;
+  if(!coreDependency)throw Error('Load core.js before american.js');
+  const C=coreDependency;
+  const {count,sortHand,STANDARD_TYPES}=C;
   // These are original beginner patterns, NOT an NMJL published annual card.
+  /** @type {Atelier.CardPattern[]} */
   const CARD=[
     {id:'four',name:'Four of a Kindred',groups:[3,3,3,3,2],description:'Four Pungs and one natural Pair. Suit or honor faces; no Flowers.',level:'Exposed · 25 points',value:25},
     {id:'towers',name:'Three Towers',groups:[4,4,4,2],description:'Three Kongs and one natural Pair. Suit or honor faces; no Flowers.',level:'Exposed · 30 points',value:30},
@@ -529,15 +744,17 @@ M.BaseTable=BaseTable;
     {id:'grand',name:'Grand Lantern',groups:[6,3,3,2],description:'A Sextet, two Pungs and a natural Pair. Suit or honor faces; no Flowers.',level:'Exposed · 40 points',value:40},
     {id:'blooms',name:'Bloom Festival',groups:[1,1,3,3,4,2],flowers:2,description:'Any two individual Flowers or Seasons, two Pungs, a Kong and a natural Pair. All sets and the Pair use suit or honor faces.',level:'Exposed · 30 points',value:30}
   ];
+  /** @param {Atelier.ExposureCandidate} meld @returns {boolean} */
   function validExposure(meld){
     if(!meld||!Array.isArray(meld.tiles)||meld.concealed||meld.tiles.length<3||meld.tiles.length>6)return false;
     const type=meld.type??meld.tiles.find(t=>t.type!=='j')?.type;
     // Original-card sets use suit/honor faces. The called natural tile stays in
     // every exposure; all-Joker groups are allowed only in the concealed rack.
-    return STANDARD_TYPES.includes(type)&&meld.tiles.some(t=>t.type===type)&&meld.tiles.every(t=>t.type===type||t.type==='j');
+    return STANDARD_TYPES.some(face=>face===type)&&meld.tiles.some(t=>t.type===type)&&meld.tiles.every(t=>t.type===type||t.type==='j');
   }
+  /** @param {Atelier.Tile[]} hand @param {Atelier.ExposureCandidate[] | undefined} melds @param {Atelier.CardPattern} pattern @returns {boolean} */
   function matchPattern(hand, melds=[],pattern){
-    if(!pattern||melds.some(m=>!validExposure(m))||!M.core.validMaterial([...hand,...melds.flatMap(m=>m.tiles)],'american')||(pattern.concealed&&melds.length)||hand.length+melds.reduce((v,m)=>v+m.tiles.length,0)!==14)return false;
+    if(!pattern||melds.some(m=>!validExposure(m))||!C.validMaterial([...hand,...melds.flatMap(m=>m.tiles)],'american')||(pattern.concealed&&melds.length)||hand.length+melds.reduce((v,m)=>v+m.tiles.length,0)!==14)return false;
     // An exposure consumes exactly one identically sized set on this custom card.
     let specs=pattern.groups.map((size,i)=>({size,flower:!!pattern.flowers&&size===1}));
     for(const meld of melds){
@@ -545,17 +762,20 @@ M.BaseTable=BaseTable;
       if(index<0)return false;
       specs.splice(index,1);
     }
+    /** @type {Record<string,number>} */
     const counts={};let jokers=0;
     for(const tile of hand){if(tile.type==='j')jokers++;else counts[tile.type]=(counts[tile.type]||0)+1;}
+    /** @type {Map<string,boolean>} */
     const memo=new Map();
+    /** @param {{size:number,flower:boolean}[]} left @param {number} j @returns {boolean} */
     function dfs(left,j){
       if(!left.length)return j===0&&Object.values(counts).every(n=>n===0);
       const key=left.map(x=>x.size+(x.flower?'f':'')).join(',')+'|'+j+'|'+Object.keys(counts).sort().map(k=>k+counts[k]).join(':');
-      if(memo.has(key))return memo.get(key);
+      const cached=memo.get(key);if(cached!==undefined)return cached;
       const [group,...rest]=left;
       const types=group.flower?Object.keys(counts).filter(t=>t[0]==='f'&&counts[t]>0)
         : group.size===2?Object.keys(counts).filter(t=>t!=='j'&&t[0]!=='f'&&counts[t]>=2)
-        : STANDARD_TYPES.filter(t=>(counts[t]||0)>0).concat(j>=group.size?['__joker_only']:[]);
+        : [...STANDARD_TYPES.filter(t=>(counts[t]||0)>0),...(j>=group.size?['__joker_only']:[])];
       for(const t of types){
         if(group.flower){counts[t]--;if(dfs(rest,j)){counts[t]++;memo.set(key,true);return true;}counts[t]++;continue;}
         const size=group.size;
@@ -571,64 +791,118 @@ M.BaseTable=BaseTable;
     }
     return dfs(specs,jokers);
   }
+  /** @param {Atelier.Tile[]} hand @param {Atelier.ExposureCandidate[]} [melds] @returns {Atelier.CardPattern[]} */
   function winningPatterns(hand,melds=[]){return CARD.filter(c=>matchPattern(hand,melds,c)).sort((a,b)=>b.value-a.value);}
+  /** @type {Atelier.PassRoute[]} */
   const ROUTE=[{name:'Right',offset:1},{name:'Across',offset:2},{name:'Left',offset:3}];
-  class AmericanTable extends M.BaseTable {
+  /** @type {Record<number,Atelier.MeldKind>} */
+  const EXPOSURE_KINDS={3:'pung',4:'kong',5:'quint',6:'sextet'};
+  const Parent=M.BaseTable;
+  if(!Parent)throw Error('Load table.js before american.js');
+  class AmericanTable extends Parent {
+    /** @param {Atelier.Settings} [settings] */
     constructor(settings={}){
-      super('american',settings);this.passRoute=[...ROUTE];this.charIndex=0;this.charPicks=[null,null,null,null];this.charSeat=0;this.phase='opening';this.blindPicks=[0,0,0,0];this.secondVotes=[null,null,null,null];this.courtesyOffers=[null,null,null,null];this.editableExposure=null;this.note('East checks the dealt rack for an opening win before Charleston.');
+      super('american',settings);
+      /** @type {'american'} */
+      this.variant;
+      this.passRoute=[...ROUTE];this.charIndex=0;
+      /** @type {(number[]|null)[]} */
+      this.charPicks=[null,null,null,null];
+      this.charSeat=0;
+      /** @type {Atelier.Phase} */
+      this.phase='opening';
+      this.blindPicks=[0,0,0,0];
+      /** @type {(boolean|null)[]} */
+      this.secondVotes=[null,null,null,null];
+      /** @type {(number|null)[]} */
+      this.courtesyOffers=[null,null,null,null];
+      /** @type {{seat:number,index:number}|null} */
+      this.editableExposure=null;
+      /** @type {Atelier.Phase|null} */
+      this.pendingPassPhase=null;
+      this.note('East checks the dealt rack for an opening win before Charleston.');
     }
+    /** @param {number} [seat] @returns {void} */
     beginCharleston(seat=this.dealer){if(this.phase!=='opening'||seat!==this.dealer)throw Error('Only East starts the Charleston');if(this.winAnalysis(seat))throw Error('Declare the completed opening hand before passing');this.phase='charleston';this.note('Charleston begins: Right, Across, Left.');}
+    /** @param {number} seat @returns {Atelier.Analysis|null} */
     canDeclareWin(seat){if(['opening','passingWin'].includes(this.phase))return seat===this.dealer?this.winAnalysis(seat):null;return super.canDeclareWin(seat);}
+    /** @param {Atelier.Phase} nextPhase @returns {void} */
     offerPassingWin(nextPhase){this.phase=nextPhase;if(this.winAnalysis(this.dealer)){this.pendingPassPhase=nextPhase;this.phase='passingWin';this.current=this.dealer;}}
-    continuePassing(seat=this.dealer){if(this.phase!=='passingWin'||seat!==this.dealer)throw Error('Only East decides at this passing boundary');this.phase=this.pendingPassPhase;this.pendingPassPhase=null;}
+    /** @param {number} [seat] @returns {void} */
+    continuePassing(seat=this.dealer){if(this.phase!=='passingWin'||seat!==this.dealer||this.pendingPassPhase===null)throw Error('Only East decides at this passing boundary');this.phase=this.pendingPassPhase;this.pendingPassPhase=null;}
+    /** @returns {void} */
     retryBlindPass(){if(this.phase!=='blindDeadlock')throw Error('No blocked blind pass');this.charPicks=[null,null,null,null];this.blindPicks=[0,0,0,0];this.charSeat=0;this.phase='charleston';}
-    passCount(seat){return this.passRoute[this.charIndex]?.courtesy?Math.min(this.courtesyOffers[seat],this.courtesyOffers[(seat+2)%4]):3;}
+    /** @param {number} seat @returns {number} */
+    passCount(seat){
+      if(!this.passRoute[this.charIndex]?.courtesy)return 3;
+      const own=this.courtesyOffers[seat],opposite=this.courtesyOffers[(seat+2)%4];
+      if(own===null||opposite===null)throw Error('Courtesy offers are not complete');
+      return Math.min(own,opposite);
+    }
+    /** @returns {boolean} */
     canBlind(){return this.phase==='charleston'&&!this.passRoute[this.charIndex]?.courtesy&&[2,5].includes(this.charIndex);}
+    /** @param {number} seat @param {boolean} yes @returns {void} */
     chooseSecond(seat,yes){
       if(this.phase!=='secondChoice'||seat!==this.charSeat)throw Error('Not your Charleston decision');this.secondVotes[seat]=!!yes;this.charSeat++;
       if(this.charSeat===4){if(this.secondVotes.every(Boolean)){this.passRoute.push({name:'Left',offset:3},{name:'Across',offset:2},{name:'Right',offset:1});this.phase='charleston';this.charSeat=0;this.note('All players agreed to a second Charleston.');}else{this.note('Second Charleston declined.');this.beginCourtesy();}}
     }
+    /** @param {number} seat @param {number} n @returns {void} */
     chooseCourtesy(seat,n){
       if(this.phase!=='courtesyChoice'||seat!==this.charSeat||!Number.isInteger(n)||n<0||n>3)throw Error('Choose a courtesy offer from 0 to 3');this.courtesyOffers[seat]=n;this.charSeat++;
       if(this.charSeat===4){this.passRoute.push({name:'Across',offset:2,courtesy:true});this.phase='charleston';this.charSeat=0;this.note('Courtesy pairs exchange the smaller of their two offers. Zero declines.');}
     }
+    /** @returns {void} */
     beginCourtesy(){this.phase='courtesyChoice';this.charSeat=0;}
+    /** @returns {void} */
     startPlay(){this.phase='discard';this.current=this.dealer;this.lastSource='deal';this.note('Passing complete. East makes the first discard.');}
-    winAnalysis(seat,extra=null){
+    /** @param {number} seat @param {Atelier.Tile|null} [extra] @param {boolean} [selfDraw] @returns {Atelier.AmericanAnalysis|null} */
+    winAnalysis(seat,extra=null,selfDraw=true){
       const p=this.players[seat],all=extra?[...p.hand,extra]:p.hand;
       const matched=winningPatterns(all,p.melds)[0];
       return matched?{card:matched,jokerFree:![...all,...p.melds.flatMap(m=>m.tiles)].some(t=>t.type==='j'),details:[`Original practice card · ${matched.name}`,matched.concealed?'Concealed hand':'Exposures permitted']}:null;
     }
+    /** @param {number} seat @param {boolean} [selfDraw] @returns {Atelier.WinResult} */
     declareWin(seat,selfDraw=true){
       if(['opening','passingWin'].includes(this.phase)){if(!selfDraw||!this.canDeclareWin(seat))throw Error('No valid dealer opening win');this.phase='discard';this.current=this.dealer;this.lastSource='deal';}
       // Exposing the winning discard does not turn it into a self-picked tile.
-      if(selfDraw&&this.phase==='discard'&&this.lastSource==='claim'){this.winningFrom=this.players[seat].melds.at(-1)?.from;return super.declareWin(seat,false);}
+      if(selfDraw&&this.phase==='discard'&&this.lastSource==='claim'){
+        const from=this.players[seat].melds.at(-1)?.from;
+        if(from===undefined)throw Error('The winning exposure has no discarder');
+        this.winningFrom=from;return super.declareWin(seat,false);
+      }
       return super.declareWin(seat,selfDraw);
     }
+    /** @param {Atelier.AmericanAnalysis} a @returns {number} */
     paymentBase(a){return a.card.value*(a.jokerFree?2:1);}
-    exposureFits(melds){return melds.every(validExposure)&&M.core.validMaterial(melds.flatMap(m=>m.tiles),'american')&&CARD.some(c=>{if(c.concealed)return !melds.length;const sizes=c.groups.slice();for(const m of melds){const i=sizes.indexOf(m.tiles.length);if(i<0||m.tiles.length<3)return false;sizes.splice(i,1);}return true;});}
+    /** @param {Atelier.ExposureCandidate[]} melds @returns {boolean} */
+    exposureFits(melds){return melds.every(validExposure)&&C.validMaterial(melds.flatMap(m=>m.tiles),'american')&&CARD.some(c=>{if(c.concealed)return !melds.length;const sizes=c.groups.slice();for(const m of melds){const i=sizes.indexOf(m.tiles.length);if(i<0||m.tiles.length<3)return false;sizes.splice(i,1);}return true;});}
+    /** @param {number} seat @param {Atelier.Tile} tile @returns {Atelier.Claim[]} */
     claimOptions(seat,tile){
-      if(tile.type==='j')return [];const p=this.players[seat],hand=p.hand,opts=[];
+      if(tile.type==='j')return [];const p=this.players[seat],hand=p.hand;
+      /** @type {Atelier.Claim[]} */
+      const opts=[];
       if(this.winAnalysis(seat,tile,false))opts.push({code:'win',kind:'win',priority:100,title:'Mah Jongg!'});
       if(tile.type[0]==='f'||p.melds.length>=4)return opts;
       const alike=hand.filter(t=>t.type===tile.type),jokers=hand.filter(t=>t.type==='j');
       for(const size of [6,5,4,3]){
         const needed=size-1,maxNatural=Math.min(alike.length,needed),minNatural=Math.max(0,needed-jokers.length);
         for(let natural=maxNatural;natural>=minNatural;natural--){
-          const use=[...alike.slice(0,natural),...jokers.slice(0,needed-natural)],kind=({3:'pung',4:'kong',5:'quint',6:'sextet'})[size];
+          const use=[...alike.slice(0,natural),...jokers.slice(0,needed-natural)],kind=EXPOSURE_KINDS[size];
           if(this.exposureFits([...p.melds,{tiles:[...use,tile]}]))opts.push({code:'set-'+size+(natural===maxNatural?'':'-j'+(needed-natural)),kind,type:tile.type,use:use.map(t=>t.id),priority:50,title:`Expose ${size}: ${natural+1} natural + ${needed-natural} Joker${needed-natural===1?'':'s'}`});
         }
       }return opts;
     }
+    /** @param {number} seat @returns {number[]} */
     botPassTiles(seat){
       const p=this.players[seat],hand=p.hand;
       const candidates=hand.filter(t=>t.type!=='j');
       candidates.sort((a,b)=>{
-        const worth=t=>count(hand,t.type)*5+(t.type[0]==='f'?-4:0)+(t.type==='j'?100:0);
+        /** @param {Atelier.Tile} t */ const worth=t=>count(hand,t.type)*5+(t.type[0]==='f'?-4:0)+(t.type==='j'?100:0);
         return worth(a)-worth(b)+(.05-Math.random()*.1);
       });
       return candidates.slice(0,3).map(t=>t.id);
     }
+    /** @param {number} seat @param {number[]} ids @param {number} [blind] @returns {void} */
     submitPass(seat,ids,blind=0){
       if(this.phase!=='charleston'||seat!==this.charSeat)throw Error('Not the current Charleston seat');
       if(!Number.isInteger(blind)||blind<0||blind>3||(blind&&!this.canBlind()))throw Error('Blind passing is only available on the last pass of a Charleston');
@@ -637,15 +911,20 @@ M.BaseTable=BaseTable;
       const p=this.players[seat],picks=ids.map(id=>p.hand.find(t=>t.id===id));if(picks.some(t=>!t||t.type==='j'))throw Error('Pass only non-Joker tiles from your own rack');
       this.charPicks[seat]=ids.slice();this.blindPicks[seat]=blind;this.charSeat++;if(this.charSeat===4)this.finishPass();
     }
+    /** @returns {void} */
     finishPass(){
-      const route=this.passRoute[this.charIndex],packets=this.players.map((p,i)=>p.hand.filter(t=>this.charPicks[i].includes(t.id)));
+      const picks=this.charPicks;
+      if(!picks.every(ids=>ids!==null))throw Error('Every player must choose a pass before exchanging tiles');
+      const route=this.passRoute[this.charIndex],packets=this.players.map((p,i)=>p.hand.filter(t=>picks[i].includes(t.id)));
       if(!route.courtesy&&packets.every(packet=>!packet.length)){
         if(this.charIndex===5){this.note('Nobody contributes a tile on the final right pass. Charleston ends without courtesy passing.');this.startPlay();}
         else {this.phase='blindDeadlock';this.charSeat=0;this.note('No tiles are available to forward. Rechoose the first-left pass with at least one rack tile contributed.');}
         return;
       }
-      this.players.forEach((p,i)=>{p.hand=p.hand.filter(t=>!this.charPicks[i].includes(t.id));});
-      const blind=this.blindPicks.slice(),received=[[],[],[],[]];
+      this.players.forEach((p,i)=>{p.hand=p.hand.filter(t=>!picks[i].includes(t.id));});
+      const blind=this.blindPicks.slice();
+      /** @type {Atelier.Tile[][]} */
+      const received=[[],[],[],[]];
       // Route selected physical tiles. A blind recipient forwards without revealing.
       const starter=packets.findIndex(packet=>packet.length===Math.max(...packets.map(p=>p.length)));
       for(let step=0;step<4;step++){const origin=(starter+step*(route.offset===3?3:1))%4;for(const tile of packets[origin]){let seat=(origin+route.offset)%4;while(blind[seat]>0){blind[seat]--;seat=(seat+route.offset)%4;}received[seat].push(tile);}}
@@ -656,7 +935,9 @@ M.BaseTable=BaseTable;
       if(this.charIndex===3){this.offerPassingWin('secondChoice');return;}
       if(this.charIndex===6)this.offerPassingWin('courtesyChoice');
     }
+    /** @returns {void} */
     resolveClaims(){super.resolveClaims();if(this.phase==='discard'&&this.lastSource==='claim')this.editableExposure={seat:this.current,index:this.players[this.current].melds.length-1};}
+    /** @param {number} seat @returns {Atelier.ExposureAdjustment[]} */
     adjustmentOptions(seat){
       const e=this.editableExposure;if(!e||e.seat!==seat||this.current!==seat||this.phase!=='discard')return [];
       const p=this.players[seat],m=p.melds[e.index],claimed=m.tiles.find(t=>t.id===m.claimedTileId);if(!claimed)return [];
@@ -666,12 +947,19 @@ M.BaseTable=BaseTable;
         if(this.exposureFits(p.melds.map((x,i)=>i===e.index?{...x,tiles}:x)))out.push({ids:tiles.map(t=>t.id),size,natural:natural+1,jokers:size-1-natural});
       }return out;
     }
+    /** @param {number} seat @param {number[]} ids @returns {void} */
     adjustExposure(seat,ids){
       if(!Array.isArray(ids)||new Set(ids).size!==ids.length)throw Error('Choose distinct tiles for the new exposure');
       const option=this.adjustmentOptions(seat).find(o=>o.ids.length===ids.length&&o.ids.every(id=>ids.includes(id)));if(!option)throw Error('This exposure is locked or incompatible; the claimed tile must stay');
-      const p=this.players[seat],m=p.melds[this.editableExposure.index],pool=[...p.hand,...m.tiles];m.tiles=ids.map(id=>pool.find(t=>t.id===id));m.kind=({3:'pung',4:'kong',5:'quint',6:'sextet'})[ids.length];p.hand=pool.filter(t=>!ids.includes(t.id));sortHand(p.hand);this.note(`${p.name} adjusts the new exposure before discarding or exchanging a Joker.`);
+      const exposure=this.editableExposure;if(!exposure)throw Error('This exposure is locked');
+      const p=this.players[seat],m=p.melds[exposure.index],pool=[...p.hand,...m.tiles];
+      const tiles=ids.map(id=>pool.find(t=>t.id===id));
+      if(!tiles.every(tile=>tile!==undefined))throw Error('Exposure material missing');
+      m.tiles=tiles;m.kind=EXPOSURE_KINDS[ids.length];p.hand=pool.filter(t=>!ids.includes(t.id));sortHand(p.hand);this.note(`${p.name} adjusts the new exposure before discarding or exchanging a Joker.`);
     }
+    /** @param {number} seat @param {number} id @returns {void} */
     discard(seat,id){const result=super.discard(seat,id);this.editableExposure=null;return result;}
+    /** @param {number} seat @param {number} fromSeat @param {number} meldIndex @returns {void} */
     exchangeJoker(seat,fromSeat,meldIndex){
       if(this.phase!=='discard'||seat!==this.current||!['draw','claim','exchange'].includes(this.lastSource))throw Error('Joker exchange is only available on your turn after drawing or completing a claim');
       const m=this.players[fromSeat]?.melds[meldIndex];if(!validExposure(m)||!m.tiles.some(t=>t.type==='j'))throw Error('No Joker to redeem');
@@ -680,13 +968,15 @@ M.BaseTable=BaseTable;
       p.hand.splice(p.hand.findIndex(t=>t.id===natural.id),1);
       const at=m.tiles.findIndex(t=>t.type==='j'),joker=m.tiles[at];m.tiles[at]=natural;p.hand.push(joker);sortHand(p.hand);
       this.lastSource='exchange';this.editableExposure=null;
-      this.note(`${p.name} redeems a Joker from an exposed ${M.core.name(m.type)} set.`);
+      this.note(`${p.name} redeems a Joker from an exposed ${C.name(m.type)} set.`);
     }
+    /** @param {Atelier.Offer} offer @returns {string} */
     botChooseClaim(offer){
       const win=offer.options.find(o=>o.kind==='win');if(win)return win.code;
       const set=offer.options.filter(o=>o.kind!=='win').sort((a,b)=>a.use.length-b.use.length)[0];
       return set&&Math.random()<.55?set.code:'pass';
     }
+    /** @returns {boolean} */
     botStep(){
       if(['opening','passingWin'].includes(this.phase)&&this.isBotSeat(this.dealer)){if(this.canDeclareWin(this.dealer))this.declareWin(this.dealer);else this.beginCharleston(this.dealer);return true;}
       if(this.phase==='secondChoice'&&this.isBotSeat(this.charSeat)){this.chooseSecond(this.charSeat,this.settings.secondCharleston!==false);return true;}
@@ -703,12 +993,17 @@ M.BaseTable=BaseTable;
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
 
-(function(M){
+(function(/** @type {Atelier.Registry} */ M){
 'use strict';
-const C=M.core;
+const coreDependency=M.core,hkDependency=M.hongkongTest,americanDependency=M.americanTest,solitaireDependency=M.solitaireTest;
+if(!coreDependency||!hkDependency||!americanDependency)throw Error('Load the table rules engines before coach.js');
+const C=coreDependency,HK=hkDependency,AM=americanDependency;
+/** @param {Atelier.Tile} t @returns {Atelier.Tile} */
 const copyTile=t=>({id:t.id,type:t.type});
+/** @param {Atelier.PhysicalMeld} m @returns {Atelier.PhysicalMeld} */
 const copyMeld=m=>({kind:m.kind,type:m.type,concealed:!!m.concealed,tiles:m.tiles.map(copyTile)});
 // Privacy boundary: downstream analysis receives only this explicit public view.
+/** @param {Atelier.Table} g @param {number} seat @returns {Atelier.PublicView} */
 function publicView(g,seat){
  const own=g.players[seat];
  return {variant:g.variant,seat,phase:g.phase,current:g.current,hand:own.hand.map(copyTile),melds:own.melds.map(copyMeld),flowers:own.flowers.map(copyTile),
@@ -717,19 +1012,28 @@ function publicView(g,seat){
   expanded:!!g.expanded,minFan:g.minFan||0,seatWind:g.windIndex(seat),prevailing:g.round,flowersEnabled:!!g.flowersEnabled,sevenPairs:!!g.settings.sevenPairs,
   wallCount:g.wall.length,lastSource:g.lastSource,latest:g.lastDiscard?{type:g.lastDiscard.tile.type,by:g.lastDiscard.by}:null};
 }
+/** @param {Atelier.PublicView} v @param {Atelier.Tile[]} tiles @returns {Atelier.CoachAnalysis|null} */
 function winForView(v,tiles){
- if(v.variant==='american'){const card=M.americanTest.winningPatterns(tiles,v.melds)[0];return card?{card}:null;}
+ if(v.variant==='american'){const card=AM.winningPatterns(tiles,v.melds)[0];return card?{card}:null;}
+ /** @type {Atelier.ScoreContext} */
  const context={seat:v.seatWind,prevailing:v.prevailing,selfDraw:true,flowers:v.flowers,flowersEnabled:v.flowersEnabled,source:'draw',lastWall:false,heavenly:false,earthly:false,sevenPairs:v.sevenPairs};
- const values=M.hongkongTest.partitions(tiles,v.melds).map(p=>v.expanded?M.hongkongTest.extendedScore(p,v.melds,tiles,context):M.hongkongTest.fanScore(p,v.melds,v.seatWind,true,v.prevailing));
- if(v.expanded)values.push(...M.hongkongTest.specialHands(tiles,v.melds,context));return values.filter(a=>(a.qualifyingFan??a.fan)>=v.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;
+ const values=HK.partitions(tiles,v.melds).map(p=>v.expanded?HK.extendedScore(p,v.melds,tiles,context):HK.fanScore(p,v.melds,v.seatWind,true,v.prevailing));
+ if(v.expanded)values.push(...HK.specialHands(tiles,v.melds,context));return values.filter(a=>(a.qualifyingFan??a.fan)>=v.minFan).sort((a,b)=>b.fan-a.fan)[0]||null;
 }
+/** @param {Atelier.PublicView} v @returns {Record<string,number>} */
 function knownCounts(v){return C.countTypes([...v.hand,...v.discards,...v.publicMelds.flatMap(m=>m.tiles)]);}
+/** @param {Atelier.Tile[]} hand @param {Atelier.Tile} t @param {Atelier.Variant} variant @returns {Atelier.Support} */
 function support(hand,t,variant){const same=hand.filter(x=>x.type===t.type).length-1;let adjacent=0,gapped=0;if(variant==='hk'&&/^[bdc][1-9]$/.test(t.type))for(const o of hand){if(o.type[0]!==t.type[0])continue;const d=Math.abs(+o.type.slice(1)-+t.type.slice(1));if(d===1)adjacent++;if(d===2)gapped++;}return {same,adjacent,gapped,cost:same*3+adjacent*1.35+gapped*.6+(t.type==='j'?100:0)};}
+/** @param {Atelier.PublicView} v @returns {Atelier.Alternative[]} */
 function alternatives(v){
  if(v.phase!=='discard'||v.current!==v.seat)return [];
- const known=knownCounts(v),types=[...C.STANDARD_TYPES,...(v.variant==='american'?['j',...Array.from({length:8},(_,i)=>'f'+(i+1))]:[])];
+ const known=knownCounts(v);
+ /** @type {Atelier.TileCode[]} */
+ const types=v.variant==='american'?[...C.STANDARD_TYPES,'j','f1','f2','f3','f4','f5','f6','f7','f8']:[...C.STANDARD_TYPES];
  return [...new Map(v.hand.map(t=>[t.type,t])).values()].map(tile=>{
-  const remaining=v.hand.filter(t=>t.id!==tile.id),s=support(v.hand,tile,v.variant),waits=[];
+  const remaining=v.hand.filter(t=>t.id!==tile.id),s=support(v.hand,tile,v.variant);
+  /** @type {Atelier.Wait[]} */
+  const waits=[];
   for(const type of v.wallCount===0?[]:types){const total=type==='j'?8:type[0]==='f'?1:4,unseen=Math.max(0,total-(known[type]||0));if(!unseen)continue;const analysis=winForView(v,[...remaining,{id:-1,type}]);if(analysis)waits.push({type,unseen,fan:analysis.fan??null,pattern:analysis.card?.name??null});}
   const visibleDiscardCount=v.discards.filter(t=>t.type===tile.type).length;
   return {id:tile.id,type:tile.type,waits,unseenWinning:waits.reduce((n,w)=>n+w.unseen,0),support:s,
@@ -739,10 +1043,14 @@ function alternatives(v){
    defense:`${visibleDiscardCount} matching tile${visibleDiscardCount===1?' has':'s have'} already been discarded. That is visible information, not proof this discard is safe.`};
  }).sort((a,b)=>b.unseenWinning-a.unseenWinning||a.support.cost-b.support.cost||a.type.localeCompare(b.type));
 }
+/** @param {Atelier.SolitaireGeometry} g @returns {Atelier.SolitaireChoice[]} */
 function solitaireChoices(g){
+ if(!solitaireDependency)throw Error('Load solitaire.js before using Solitaire coaching');
+ const S=solitaireDependency;
  const before=new Set(g.available().map(t=>t.id));
- return g.pairs().map(ids=>{const remaining=g.tiles.filter(t=>!t.removed&&!ids.includes(t.id));const occ=new Map(remaining.map(t=>[t.id,t]));const newly=remaining.filter(t=>!before.has(t.id)&&M.solitaireTest.free(t,occ)).map(t=>t.id);return {ids,newly,rule:'Both tiles are free and their matching keys agree.',calculation:`Removing this pair makes ${newly.length} previously blocked tile${newly.length===1?'':'s'} free.`,heuristic:'Opening more tiles may give you more choices. This one-step count does not prove the whole board can be cleared.'};}).sort((a,b)=>b.newly.length-a.newly.length);
+ return g.pairs().map(ids=>{const remaining=g.tiles.filter(t=>!t.removed&&!ids.includes(t.id));const occ=new Map(remaining.map(t=>[t.id,t]));const newly=remaining.filter(t=>!before.has(t.id)&&S.free(t,occ)).map(t=>t.id);return {ids,newly,rule:'Both tiles are free and their matching keys agree.',calculation:`Removing this pair makes ${newly.length} previously blocked tile${newly.length===1?'':'s'} free.`,heuristic:'Opening more tiles may give you more choices. This one-step count does not prove the whole board can be cleared.'};}).sort((a,b)=>b.newly.length-a.newly.length);
 }
+/** @param {Atelier.HongKongTable|Atelier.AmericanTable} g @param {number} seat @returns {string} */
 function actionRule(g,seat){
  if(g.phase==='finished')return 'This hand is finished. Read the score breakdown, then choose Next hand.';
  if(g.phase==='opening')return 'East checks the dealt 14 tiles before any pass. A complete original-card hand may win immediately; otherwise Charleston begins.';
@@ -750,7 +1058,7 @@ function actionRule(g,seat){
  if(g.phase==='blindDeadlock')return 'A blind pass needs incoming tiles. Rechoose first left with at least one rack tile contributed; all racks are unchanged.';
  if(g.phase==='secondChoice')return 'Every player chooses. The second Charleston occurs only with unanimous agreement.';
  if(g.phase==='courtesyChoice')return 'Offer 0–3 tiles. Each opposite pair exchanges the smaller offer; zero declines.';
- if(g.phase==='charleston')return `Select ${g.passCount(seat)} non-Joker tiles in total${g.canBlind()?', including any incoming tiles you choose to pass blind':''}. Passing a Joker is illegal.`;
+ if(g.phase==='charleston'&&g.variant==='american')return `Select ${g.passCount(seat)} non-Joker tiles in total${g.canBlind()?', including any incoming tiles you choose to pass blind':''}. Passing a Joker is illegal.`;
  if(g.phase==='robkong')return 'Only a complete qualifying win may take the proposed fourth tile. You cannot claim it for a meld.';
  if(g.phase==='claims')return g.variant==='hk'?'The banner lists claims the engine has verified for your rack. Chow is limited to the preceding seat; Pung/Kong can use any latest discard; Mahjong takes priority.'+(g.expanded?' Thirteen Orphans outranks ordinary wins here. Declining a win blocks another win on the same discarded type until your own next draw.':''):'The banner lists verified claims. A set must fit an exposed original-card row; singles/pairs may use a discard only for a complete win. Discarded Jokers cannot be claimed.';
  return g.variant==='hk'?'Select any rack tile to discard, or declare an eligible winning hand. Kong options appear only when the engine permits them.':'Select a rack tile to discard, redeem an eligible exposed Joker, or declare a complete original-card hand. No Chow calls and no Joker pairs.';
@@ -872,7 +1180,7 @@ class Practice {
 }
 M.Practice=Practice;
 M.openPractice=function(mode,onClose){let practice=new Practice(mode);const d=document.createElement('dialog');d.className='learn-dialog practice-dialog';const appearance=document.querySelector('.shell');if(appearance){d.dataset.tileTheme=appearance.dataset.tileTheme;d.dataset.indices=appearance.dataset.indices;}d.setAttribute('aria-labelledby','practice-title');
- function draw(){const p=practice;if(p.complete){d.innerHTML=`<header class="learn-heading"><h2 id="practice-title">You practiced a useful decision.</h2></header><p>${mode==='solitaire'?'You uncovered blocked tiles and used the Flower matching exception.':mode==='hongkong'?'You preserved a useful wait, verified a winning shape, and saw why a Kong needs a replacement.':'You protected a natural pair, redeemed an exposed Joker, and matched a complete original-card row.'}</p><p>Try explaining one decision in your own words. Winning quickly was not the goal.</p><div class="path-options"><button class="ui-btn primary" data-do="close">Return to my game</button><button class="ui-btn secondary" data-do="retry">Retry the last station</button><button class="ui-btn secondary" data-do="restart">Start practice again</button></div>`;return;}d.innerHTML=`<header class="learn-heading"><div><p class="eyebrow">GUIDED PRACTICE · ${mode==='solitaire'?'MINI BOARD':`STATION ${p.step+1} OF 3`}</p><h2 id="practice-title">${p.title}</h2></div><button class="ui-btn secondary" data-do="close">Close ×</button></header><p class="learn-intro">${p.prompt}</p><p class="practice-boundary">Staged teaching scenario · your regular game is paused and preserved.</p>${mode==='solitaire'?`<div class="practice-mini-board" aria-label="Six-tile practice board">${p.tiles().map(t=>`<button class="mj-tile ${p.game.selected===t.id||p.game.lastHint.includes(t.id)?'practice-selected':''}" style="left:${40+t.x*75-t.z*6}px;top:${35+t.y*110-t.z*16}px;z-index:${t.z+1}" data-pick="${t.id}" aria-label="${C.name(t.tile.type)} · ${p.game.freeId(t.id)?'free':'covered'}">${C.tileMarkup(t.tile.type)}</button>`).join('')}</div>`:`<div class="practice-rack" aria-label="Teaching hand">${p.tiles().map(t=>`<button class="mj-tile ${p.picks.has(t.id)?'practice-selected':''}" data-pick="${t.id}" aria-pressed="${p.picks.has(t.id)}" aria-label="${C.name(t.type)}" ${p.step!==0||p.done?'disabled':''}>${C.tileMarkup(t.type)}</button>`).join('')}</div>${mode==='american'&&p.step===1?'<p>Player 2’s exposure: 5-Characters · 5-Characters · Joker</p>':''}<button class="ui-btn primary" data-do="act" ${p.done?'disabled':''}>${p.step===0?(mode==='hongkong'?'Discard selected tile':'Pass selected three'):p.step===1?(mode==='hongkong'?'Declare Mahjong':'Exchange natural tile for Joker'):(mode==='hongkong'?'Declare concealed Kong':'Declare Mah Jongg')}</button>`}<div class="path-options"><button class="ui-btn secondary" data-do="hint">Hint before choosing</button><button class="ui-btn secondary" data-do="compare">Compare alternatives</button><button class="ui-btn ghost" data-do="retry">${mode==='solitaire'?'Undo last pair':'Retry this station'}</button></div><div class="coach-alternatives">${p.comparisons.map((a,i)=>`<article><button class="ui-btn secondary" data-comparison="${i}">${a.label}</button><p><strong>Rule</strong> ${a.rule}</p><p><strong>Calculation</strong> ${a.calculation}</p><p><strong>Heuristic</strong> ${a.heuristic}</p></article>`).join('')}</div><p class="lesson-feedback" role="status" aria-live="polite">${p.feedback}</p><footer class="lesson-pager"><button class="ui-btn secondary" data-do="restart">Restart practice</button>${p.done?`<button class="ui-btn primary" data-do="next">${mode==='solitaire'||p.step===2?'Complete practice ✓':'Next station →'}</button>`:''}</footer>`;}
+ function draw(){const p=practice;if(p.complete){d.innerHTML=`<header class="learn-heading"><h2 id="practice-title">You practiced a useful decision.</h2></header><p>${mode==='solitaire'?'You uncovered blocked tiles and used the Flower matching exception.':mode==='hongkong'?'You preserved a useful wait, verified a winning shape, and saw why a Kong needs a replacement.':'You protected a natural pair, redeemed an exposed Joker, and matched a complete original-card row.'}</p><p>Try explaining one decision in your own words. Winning quickly was not the goal.</p><div class="path-options"><button class="ui-btn primary" data-do="close">Return to my game</button><button class="ui-btn secondary" data-do="retry">Retry the last station</button><button class="ui-btn secondary" data-do="restart">Start practice again</button></div>`;return;}d.innerHTML=`<header class="learn-heading"><div><p class="eyebrow">GUIDED PRACTICE · ${mode==='solitaire'?'MINI BOARD':`STATION ${p.step+1} OF 3`}</p><h2 id="practice-title">${p.title}</h2></div><button class="ui-btn secondary" data-do="close">Close ×</button></header><p class="learn-intro">${p.prompt}</p><p class="practice-boundary">Staged teaching scenario · your regular game is paused and preserved.</p>${mode==='solitaire'?`<div class="practice-mini-board" aria-label="Six-tile practice board">${p.tiles().map(t=>`<button class="mj-tile ${p.game.selected===t.id||p.game.lastHint.includes(t.id)?'practice-selected':''}" style="left:${40+t.x*75-t.z*6}px;top:${35+t.y*110-t.z*16}px;z-index:${t.z+1}" data-pick="${t.id}" aria-label="${C.tileAccessibleName(t.tile.type)} · ${p.game.freeId(t.id)?'free':'covered'}">${C.tileMarkup(t.tile.type)}</button>`).join('')}</div>`:`<div class="practice-rack" aria-label="Teaching hand">${p.tiles().map(t=>`<button class="mj-tile ${p.picks.has(t.id)?'practice-selected':''}" data-pick="${t.id}" aria-pressed="${p.picks.has(t.id)}" aria-label="${C.tileAccessibleName(t.type)}" ${p.step!==0||p.done?'disabled':''}>${C.tileMarkup(t.type)}</button>`).join('')}</div>${mode==='american'&&p.step===1?'<p>Player 2’s exposure: 5-Characters · 5-Characters · Joker</p>':''}<button class="ui-btn primary" data-do="act" ${p.done?'disabled':''}>${p.step===0?(mode==='hongkong'?'Discard selected tile':'Pass selected three'):p.step===1?(mode==='hongkong'?'Declare Mahjong':'Exchange natural tile for Joker'):(mode==='hongkong'?'Declare concealed Kong':'Declare Mah Jongg')}</button>`}<div class="path-options"><button class="ui-btn secondary" data-do="hint">Hint before choosing</button><button class="ui-btn secondary" data-do="compare">Compare alternatives</button><button class="ui-btn ghost" data-do="retry">${mode==='solitaire'?'Undo last pair':'Retry this station'}</button></div><div class="coach-alternatives">${p.comparisons.map((a,i)=>`<article><button class="ui-btn secondary" data-comparison="${i}">${a.label}</button><p><strong>Rule</strong> ${a.rule}</p><p><strong>Calculation</strong> ${a.calculation}</p><p><strong>Heuristic</strong> ${a.heuristic}</p></article>`).join('')}</div><p class="lesson-feedback" role="status" aria-live="polite">${p.feedback}</p><footer class="lesson-pager"><button class="ui-btn secondary" data-do="restart">Restart practice</button>${p.done?`<button class="ui-btn primary" data-do="next">${mode==='solitaire'||p.step===2?'Complete practice ✓':'Next station →'}</button>`:''}</footer>`;}
  d.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;try{if(b.dataset.do==='close'){d.close();return;}if(b.dataset.do==='restart')practice=new Practice(mode);if(b.dataset.do==='hint')practice.hint();if(b.dataset.do==='compare')practice.compare();if(b.dataset.do==='retry'){practice.complete=false;if(mode==='solitaire'){practice.game.undo();practice.done=false;practice.comparisons=[];practice.feedback='The last pair is back. Try another legal pairing.';}else practice.setup();}if(b.dataset.comparison!==undefined){const a=practice.comparisons[Number(b.dataset.comparison)];if(mode==='solitaire')practice.game.lastHint=a.ids;else practice.picks=new Set(a.ids);practice.feedback=a.calculation+' '+a.heuristic;}if(b.dataset.pick!==undefined)practice.pick(b.dataset.pick);if(b.dataset.do==='act')practice.act();if(b.dataset.do==='next'){practice.next();if(practice.complete){M.learningProgress.complete(mode,'practice');}}draw();const selector=b.dataset.pick!==undefined?`[data-pick="${b.dataset.pick}"]`:b.dataset.comparison!==undefined?`[data-comparison="${b.dataset.comparison}"]`:`[data-do="${b.dataset.do}"]`;const focus=d.querySelector(selector);if(focus&&!focus.disabled)focus.focus({preventScroll:true});else (d.querySelector('[data-do="next"]')||d.querySelector('[data-pick]')||d.querySelector('[data-do="close"]'))?.focus({preventScroll:true});}catch(err){practice.feedback=err.message;draw();}});
  d.addEventListener('close',()=>{d.remove();onClose();},{once:true});draw();document.body.append(d);d.showModal();
 };
@@ -975,7 +1283,7 @@ M.openPath=function(mode,onClose){
   }
   function header(){
     const tabs=[['solitaire','layers','Solitaire'],['hongkong','users','Hong Kong'],['american','star','American']];
-    return `<header class="masthead"><div class="identity"><div class="logo-tile" aria-hidden="true">中</div><div><div class="brand-name">MAHJONG <em>ATELIER</em></div><div class="brand-sub">Three ways to make your move</div></div></div><div class="masthead-right"><span class="offline-pill"><span class="signal"></span> FREE · OFFLINE</span>${btn('ⓘ &nbsp; How to play','learn','header-btn')}</div></header><nav class="game-nav" aria-label="Game mode">${tabs.map(([mode,ico,text])=>`<button type="button" class="game-tab ${state.mode===mode?'on':''}" data-act="switch" data-mode="${mode}" aria-current="${state.mode===mode?'page':'false'}"><span class="tab-icon">${mode==='solitaire'?'◈':mode==='hongkong'?'♟':'✦'}</span><span>${text}</span><span class="tab-suffix">${mode==='solitaire'?'01':mode==='hongkong'?'02':'03'}</span></button>`).join('')}</nav>`;
+    return `<header class="masthead"><div class="identity"><div class="logo-tile" aria-hidden="true">中</div><div><div class="brand-name">MAHJONG <em>ATELIER</em></div><div class="brand-sub">Three ways to make your move</div></div></div><div class="masthead-right"><span class="offline-pill"><span class="signal"></span> FREE TO PLAY</span>${btn('ⓘ &nbsp; How to play','learn','header-btn')}</div></header><nav class="game-nav" aria-label="Game mode">${tabs.map(([mode,ico,text])=>`<button type="button" class="game-tab ${state.mode===mode?'on':''}" data-act="switch" data-mode="${mode}" aria-current="${state.mode===mode?'page':'false'}"><span class="tab-icon">${mode==='solitaire'?'◈':mode==='hongkong'?'♟':'✦'}</span><span>${text}</span><span class="tab-suffix">${mode==='solitaire'?'01':mode==='hongkong'?'02':'03'}</span></button>`).join('')}</nav>`;
   }
   function appearanceBar(){
     return `<div class="appearance-bar" aria-label="Tile appearance"><div class="appearance-intro"><span class="appearance-sparkle">✧</span><span><strong>Find your tile style</strong><small>Same tiles, same rules. Just a different look.</small></span></div><div class="appearance-controls"><label class="appearance-picker" for="tile-style"><span>DESIGN</span><select id="tile-style" data-appearance="theme">${THEMES.map(([key,label])=>`<option value="${key}" ${state.appearance.theme===key?'selected':''}>${label}</option>`).join('')}</select></label><label class="indices-label"><input type="checkbox" data-appearance="indices" ${state.appearance.indices?'checked':''}/><span>English indices</span></label><button type="button" class="tile-help-trigger" data-act="tile-guide">◈ &nbsp; Learn the tiles</button></div></div>`;
@@ -987,6 +1295,29 @@ M.openPath=function(mode,onClose){
     return `<div class="tile-help-overlay"><div class="tile-help-scrim" data-act="close-tile-guide"></div><div class="tile-help-panel" role="dialog" aria-modal="true" aria-labelledby="tile-help-title"><header class="tile-help-heading"><div><p class="eyebrow">THE TILE LIBRARY</p><h2 id="tile-help-title">Read the tiles at a glance.</h2><p>Every style keeps the same suit, number and tile meaning.</p></div><button type="button" class="tile-help-close" aria-label="Close tile guide" data-act="close-tile-guide">×</button></header><div class="legend-suits">${suits.map(([title,desc,types])=>`<section class="legend-group"><h3>${title}</h3><p>${desc}</p><div class="legend-tiles">${types.map(legendTile).join('')}</div></section>`).join('')}</div><section class="legend-special"><h3>The honors</h3><p>Winds and Dragons cannot form numbered sequences. Their symbols have fixed meanings.</p><div class="legend-tiles">${['we','ws','ww','wn','dr','dg','dw'].map(legendTile).join('')}</div></section><section class="legend-special"><h3>Flowers, Seasons &amp; Jokers</h3><div class="legend-tiles">${['f1','f5','j'].map(legendTile).join('')}</div><p>American practice adds eight Jokers and eight bonus tiles. Solitaire uses bonus tiles; Hong Kong uses 136 standard tiles, plus optional bonus tiles in the Atelier profile.</p></section><p class="legend-note">English indices are a learning aid. Hide them in the appearance bar whenever you want a more traditional challenge. The Mahjong rules do not change.</p></div></div>`;
   }
   function panelHeader(kicker,title,description){return `<div class="section-heading"><div><p class="eyebrow">${kicker}</p><h1>${title}</h1><p class="lede">${description}</p></div></div>`;}
+  function rulesProfileMarkup(game=null){
+    // A table keeps its own rules when setup choices change in another mode.
+    const settings=game?game.settings:state.settings;
+    const american=game?game.variant==='american':state.mode==='american';
+    const expanded=!american&&(game?game.expanded:settings.hkProfile==='atelier');
+    const profile=american?'american':expanded?'atelier':'beginner';
+    const title=american?'American Practice v2':expanded?'Atelier Hong Kong v2':'Hong Kong Beginner';
+    let details,note;
+    if(american){
+      details=[['card','Original practice card',M.americanTest.CARD.length+' patterns'],['tiles','Tile set','152 tiles'],['jokers','Jokers','Groups of 3+']];
+      note='American mechanics practice with Atelier’s own card. Official annual-card hands are not included.';
+    }else{
+      const minimum=game?game.minFan:Number(settings.minFan||0);
+      const flowers=expanded&&(game?game.flowersEnabled:settings.flowers!==false);
+      const sevenPairs=expanded&&settings.sevenPairs===true;
+      details=[['minimum','Minimum',minimum+' qualifying faan'],['flowers','Flowers / Seasons',flowers?'On':'Off'],['seven-pairs','Seven pairs',sevenPairs?'On':'Off']];
+      note=expanded?'Atelier house profile. Flower bonuses do not count toward the minimum.':'Four melds and a pair, with simplified Hong Kong scoring.';
+    }
+    return `<section class="rules-profile" aria-label="${game?'Active rules':'Selected rules'}" data-rules-state="${game?'active':'setup'}" data-rules-profile="${profile}"><div class="rules-profile-heading"><span class="rules-profile-label">${game?'Rules at this table':'Rules for your new table'}</span><h2>${title}</h2></div><ul class="rules-profile-settings" aria-label="Rule settings">${details.map(([key,label,value])=>`<li data-rule="${key}"><span>${escapeHTML(label)}</span><strong>${escapeHTML(value)}</strong></li>`).join('')}</ul><p class="rules-profile-note">${note}</p></section>`;
+  }
+  function offlineAccessMarkup(){
+    return location.protocol==='file:'?'This saved game file plays offline in your browser.':'<a class="offline-download" href="Mahjong_Atelier.html" download="Mahjong_Atelier.html">Download for offline play</a> · Save the file, then open it in your browser.';
+  }
   function guide(mode){
     if(!state.showGuide)return '';
     if(mode==='solitaire')return `<aside class="guide-card"><div class="guide-kicker">THE FIELD GUIDE <span>01 / 03</span></div><h3>A quiet game of strategy.</h3><p>Find two matching <strong>free tiles</strong>. A tile is free when nothing rests directly on it and at least one horizontal side is open.</p><div class="tip-list"><div><span class="tip-icon">01</span><span><b>Work from the top</b><small>Peel away layers to reveal the tiles below.</small></span></div><div><span class="tip-icon">02</span><span><b>Plan your pairs</b><small>A match now can block a better match later.</small></span></div><div><span class="tip-icon">03</span><span><b>Rescue your run</b><small>Use Hint, Undo, or Shuffle when stuck; Shuffle can flatten a trapped stack.</small></span></div></div><div class="guide-note">Each new deal is built from at least one valid full-clearing sequence. Some choices can still lead to a dead end.</div></aside>`;
@@ -999,7 +1330,7 @@ M.openPath=function(mode,onClose){
     const width=Math.max(755,110+(maxX+1)*55),height=100+(maxY+1)*69;
     const board=positions.filter(p=>!p.removed).sort((a,b)=>a.z-b.z).map(p=>{
       const enabled=free.has(p.id),tip=g.lastHint.includes(p.id),type=p.tile.type;
-      return `<button type="button" title="${C.name(type)}${enabled?' · Free':' · Blocked'}" aria-label="${C.name(type)}${enabled?' free':' blocked'}" ${enabled?'':'disabled'} data-act="sol-pick" data-tile-id="${p.id}" class="mj-tile board-tile layer-${p.z} ${enabled?'free':'blocked'} ${g.selected===p.id?'is-selected':''} ${tip?'is-hint':''}" style="left:${43+p.x*55-p.z*4}px;top:${37+p.y*69-p.z*7}px;z-index:${5+p.z*3};">${C.tileMarkup(type)}</button>`;
+      return `<button type="button" title="${C.name(type)}${enabled?' · Free':' · Blocked'}" aria-label="${C.tileAccessibleName(type)}${enabled?' free':' blocked'}" ${enabled?'':'disabled'} data-act="sol-pick" data-tile-id="${p.id}" class="mj-tile board-tile layer-${p.z} ${enabled?'free':'blocked'} ${g.selected===p.id?'is-selected':''} ${tip?'is-hint':''}" style="left:${43+p.x*55-p.z*4}px;top:${37+p.y*69-p.z*7}px;z-index:${5+p.z*3};">${C.tileMarkup(type)}</button>`;
     }).join('');
     return `${panelHeader('SOLO PLAY / MATCH & CLEAR','A little peace. A lot of possibilities.','Match free tiles, uncover new paths, and clear the board at your own pace.')}
     <div class="stats-grid"><div class="stat"><span>Tiles remaining</span><strong>${g.remaining}<small> / 144</small></strong></div><div class="stat"><span>Pairs matched</span><strong>${g.moves}</strong></div><div class="stat"><span>Time in play</span><strong data-timer>${C.elapsed(Math.floor((Date.now()-g.startedAt)/1000))}</strong></div><div class="stat"><span>Best moments</span><strong>${state.stats.solitaire||0}<small> clears</small></strong></div></div>
@@ -1009,7 +1340,7 @@ M.openPath=function(mode,onClose){
   }
   function setupView(){
     const isAm=state.mode==='american';
-    return `${panelHeader(isAm?'FOUR-PLAYER / AMERICAN RULES':'FOUR-PLAYER / HONG KONG PROFILES',isAm?'The Charleston is calling.':'Gather around the table.',isAm?'An American-style practice game with original card patterns, Jokers and tile passing.':'Build sets, call discards and race to Mahjong under your selected Hong Kong rules profile.')}
+    return `${panelHeader(isAm?'FOUR-PLAYER / AMERICAN RULES':'FOUR-PLAYER / HONG KONG PROFILES',isAm?'The Charleston is calling.':'Gather around the table.',isAm?'An American-style practice game with original card patterns, Jokers and tile passing.':'Build sets, call discards and race to Mahjong under your selected Hong Kong rules profile.')}${rulesProfileMarkup()}
     <div class="setup-area"><div class="setup-top"><div class="setup-emblem">${isAm?'★':'中'}</div><h2>Set the table</h2><p>Choose how you want to play. Your table runs entirely in this browser.</p></div><h3 class="setup-label">PLAY AGAINST</h3><div class="opponent-grid"><button type="button" data-act="opponents" data-value="bots" class="opponent ${state.settings.opponents==='bots'?'chosen':''}"><span class="opponent-pict">◉ ◉ ◉</span><b>You + three bots</b><small>Play on your own against computer seats</small></button><button type="button" data-act="opponents" data-value="local" class="opponent ${state.settings.opponents==='local'?'chosen':''}"><span class="opponent-pict">♟ ♟ ♟ ♟</span><b>Four players, one device</b><small>Pass the device and keep hands hidden</small></button></div>
     ${isAm?`<div class="setup-field"><label for="second-pass">Computer preference for a second Charleston</label><select id="second-pass" data-setting="secondCharleston"><option value="true" ${state.settings.secondCharleston?'selected':''}>Bots agree to a second round</option><option value="false" ${!state.settings.secondCharleston?'selected':''}>Bots decline a second round</option></select><small>Each human chooses after the first round. One “stop” ends the Charleston. Courtesy offers are then negotiated across the table.</small></div>`:`<div class="setup-field"><label for="hk-profile">Rules profile</label><select id="hk-profile" data-setting="hkProfile"><option value="atelier" ${state.settings.hkProfile==='atelier'?'selected':''}>Atelier Hong Kong · expanded play</option><option value="beginner" ${state.settings.hkProfile==='beginner'?'selected':''}>Beginner · four melds + pair</option></select><small>Atelier uses a named house profile with special hands, added/robbed Kongs, a 10-faan cap, and four wind rounds.</small></div><div class="setup-field"><label for="fan-rule">Minimum qualifying faan</label><select id="fan-rule" data-setting="minFan"><option value="0" ${!state.settings.minFan?'selected':''}>0 · learn hand shapes</option><option value="3" ${state.settings.minFan===3?'selected':''}>3 · scoring challenge</option></select><small>In Atelier, Flower bonuses do not satisfy the minimum.</small></div>${state.settings.hkProfile==='atelier'?`<div class="setup-field"><label><input type="checkbox" data-setting="flowers" ${state.settings.flowers?'checked':''}> Include eight Flowers and Seasons</label><label><input type="checkbox" data-setting="sevenPairs" ${state.settings.sevenPairs?'checked':''}> Allow seven distinct pairs (4-faan house option)</label></div>`:''}`}
 
@@ -1079,7 +1410,7 @@ M.openPath=function(mode,onClose){
     const active=g.who()??g.current;
     const subtitle=state.mode==='american'?'An original card, a little luck, and a whole lot of strategy.':'Chows, Pungs and Kongs. Every discarded tile tells a story.';
     const title=state.mode==='american'?'A distinctly American table.':'Every tile has a story.';
-    return `${panelHeader((g.variant==='hk'?(g.expanded?'ATELIER HONG KONG v2':'HONG KONG BEGINNER'):'AMERICAN PRACTICE')+' / FOUR PLAYERS',title,subtitle)}
+    return `${panelHeader((g.variant==='hk'?(g.expanded?'ATELIER HONG KONG v2':'HONG KONG BEGINNER'):'AMERICAN PRACTICE')+' / FOUR PLAYERS',title,subtitle)}${rulesProfileMarkup(g)}
       <div class="stats-grid table-stats"><div class="stat"><span>Remaining wall</span><strong>${g.wall.length}</strong></div><div class="stat"><span>Round status</span><strong class="stat-status">${['charleston','secondChoice','courtesyChoice'].includes(g.phase)?'Passing':['claims','robkong'].includes(g.phase)?'Claims open':g.phase==='finished'?'Hand ended':'In play'}</strong></div><div class="stat"><span>Active seat</span><strong>${g.windName(active)}</strong></div><div class="stat"><span>Completed games</span><strong>${state.stats[state.mode]||0}</strong></div></div>
       ${scoreboard(g)}<div class="arena"><div class="arena-label"><span>✦ THE FELT TABLE</span><span>${g.settings.opponents==='bots'?'SOLO VS. THREE BOTS':'FOUR LOCAL PLAYERS'}</span></div><div class="arena-grid"><div class="arena-seat-top">${seatMarkup(g.players[2],2,active,g)}</div><div class="arena-seat-left">${seatMarkup(g.players[3],3,active,g)}</div><div class="discard-pond">${pondMarkup(g)}</div><div class="arena-seat-right">${seatMarkup(g.players[1],1,active,g)}</div><div class="arena-seat-bottom">${seatMarkup(g.players[0],0,active,g)}</div></div></div>
       ${actionMarkup(g,active)}${handMarkup(g,active)}${adjustmentMarkup(g,active)}
@@ -1094,7 +1425,7 @@ M.openPath=function(mode,onClose){
   function render(){
     const which=state.mode;
     maybeGuard();
-    root.innerHTML=`<div class="shell" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
+    root.innerHTML=`<div class="shell" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>${offlineAccessMarkup()}</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
     if(state.curtain!==null)root.querySelector('[data-act="reveal"]')?.focus();
     schedulePump();
   }

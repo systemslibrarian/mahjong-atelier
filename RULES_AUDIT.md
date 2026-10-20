@@ -54,7 +54,7 @@ The Charleston guide's rule against interrupting a started round is implemented 
 
 The audit added **34 hand-calculated Hong Kong scoring fixtures**, with expected results stored independently of the scorer. Regression tests cover transition timing, impossible material, payments, exposure locking, both blind-pass directions, identity conservation, and private-information boundaries. These tests improve confidence in specific claims; they are not proof that every possible mahjong situation is correct.
 
-The browser suite exercises each complete path and practice flow, saved progress, wrong/right feedback, comparisons, live guidance, passing, opening wins, exposure adjustments, advice refresh after Joker/Kong actions, concealed and winning-hand presentation, keyboard answers, and mobile overflow. Both modular and standalone builds are checked. CI runs the Node suite and rejects a stale standalone bundle before deployment.
+The browser suite exercises each complete path and practice flow, saved progress, wrong/right feedback, comparisons, live guidance, passing, opening wins, exposure adjustments, advice refresh after Joker/Kong actions, concealed and winning-hand presentation, keyboard answers, and mobile overflow. Both modular and standalone builds are checked. CI requires the Node suite, strict core types, browser and accessibility checks in both builds, and a fresh standalone bundle before deployment.
 
 Original text, exercises, SVG tile faces, and interface code are maintained in this repository. No annual-card transcription, screenshot, extracted table, competitor lesson, or external reference-sheet artwork is included in this update. Source links acknowledge the rules consulted. Copyright protection can extend to expression and arrangement even where game methods are not protected; source access alone is not a license. This audit records the implementation and provenance controls, not a legal guarantee.
 
@@ -78,7 +78,7 @@ Starting source: GitHub main `6f9a0599a6cb20bf6c4edb534109e56de16dbf8c`. All 25 
 
 ### Verification scope and result
 
-The full Node suite contains **131 passing tests**, including **38 new tests** in five review files. Run with Node 22+ using `node --test --test-isolation=none tests/*.test.cjs`. The earlier 34 literal Hong Kong score fixtures remain. New coverage includes competing claims at every seat rotation, three-faan eligibility when robbing a Kong, fixed opening awards/payments, chained Kongs, Flower replacement source, exact Charleston destinations, concealed American wins on a discard, Joker-redemption wins, and Solitaire geometry/rescue/undo boundaries.
+At this review stage the full Node suite contained **131 passing tests**, including **38 new tests** in five review files. Run with Node 24+ using `node --test --test-isolation=none tests/*.test.cjs`; the earlier Node 22 recommendation was corrected when development tools were pinned. The earlier 34 literal Hong Kong score fixtures remain. New coverage includes competing claims at every seat rotation, three-faan eligibility when robbing a Kong, fixed opening awards/payments, chained Kongs, Flower replacement source, exact Charleston destinations, concealed American wins on a discard, Joker-redemption wins, and Solitaire geometry/rescue/undo boundaries.
 
 The Hong Kong standard-hand decomposition was independently compared against **all 118,800 possible one-suit 14-tile inventories**, with each rank limited to four copies. The oracle constructs legal hands forward from a literal catalogue of Pungs, Chows, and a Pair; it does not call the engine's decomposition to obtain its expected answers. This exhaustively covers that one-suit shape domain, not every suit combination, score, or game state. No reachable Hong Kong scoring/turn defect was confirmed in this follow-up. Its named house choices remain intact.
 
@@ -87,3 +87,39 @@ The Hong Kong standard-hand decomposition was independently compared against **a
 The complete Playwright browser suite passed on both `index.html` (modular build) and `Mahjong_Atelier.html` (standalone offline build), using Playwright 1.62.1 and Chromium 153. The checks include all learning paths, staged practice, passing, opening wins, exposure adjustments, public tile composition, private local handoffs, mobile layout at 390px, keyboard interaction, and Escape. JavaScript syntax checks and `git diff --check` passed; rebuilding the standalone file twice produced identical SHA-256 hashes. Node verification ran on Node 24.19.0.
 
 The review continues to exclude Riichi, licensed annual-card validation, full tournament adjudication, dead-hand/false-declaration penalties, and physical-table timing disputes. This is an implementation review with independent automated checks, not certification by a mahjong rules organization or a human tournament referee.
+
+## Verification improvements: 20 October 2026
+
+Starting source: GitHub main `9565596bc66b3c7580a682cbe93cf8ef46e53a2e`, the published follow-up audit above. This pass adds broader independent sampling, checked core types, required browser/accessibility gates, and visible active rules. It does not change the named rules profiles or original card patterns.
+
+### Mixed-suit and context checks
+
+`tests/mixed-suit.test.cjs` adds four tests, bringing the full Node suite to **135 passing tests**. Three deterministic seeds (`0xA71E2026`, `0x13579BDF`, `0x00C0FFEE`) generate **600 valid base shapes**, including **240 with Kongs**, across all five pair families and zero through four declared melds. All six suit permutations, shuffled physical tile order, and declared-meld order produce **14,400 engine/oracle comparisons**: **3,672 accepted** and **10,728 rejected**. Cases include valid hands, a broken pair with an unmeldable honor, single-tile mutations independently classified by the oracle, and impossible fifth copies. A mutation is not assumed invalid: some remain legal hands.
+
+The expected shape results come from an independent forward-built catalogue of suit/honor meld inventories and pairs. That oracle does not call the engine's tile catalogue, material validator, partitioner, or scorer. The production tile constructor only wraps inputs submitted to the engine. Both concealed and exposed Kong declarations occur, and Chow, Pung, and Kong declarations appear at every nonzero declared-meld count. This is seeded comparison coverage, not an exhaustive or guaranteed-unique mixed-suit inventory count.
+
+Another matrix checks **4,480 scoring-context combinations**: four dealers, four seat winds, four rounds, seven winning sources, five Flower policies, and two minimums. One fixed mixed-suit hand isolates seat/round wind, self-draw, robbery, Kong replacement, last-wall, and Flower bonuses. Expected faan are literal arithmetic independent of the scorer; Flower bonuses never satisfy a shortfall in qualifying faan. These are context combinations around one hand, not 4,480 different scoring hands.
+
+Two complete 136-tile fixtures use actual gameplay transitions to confirm that a Chow followed by a discard does not inherit the last-wall bonus, and that a declined-win lock survives a skipped turn and other players' draws until the player's own draw. Both assert exact physical identity conservation. The previous exhaustive 118,800 one-suit checks, 34 hand-calculated score fixtures, American and Solitaire regressions, and 32-hand/2,606-action conservation probe remain in the passing suite. No additional reachable rules defect was found by these new probes.
+
+### Checked core contracts
+
+TypeScript 5.9.3 checks JSDoc in `core.js`, `table.js`, `hongkong.js`, `american.js`, and `coach.js` with `strict`, `checkJs`, and `noEmit`. Shared types distinguish tile faces from physical tiles, scoring decompositions from physical melds, winning claims from set claims, and legal phases, contexts, results, and public coaching views. Ten negative compile fixtures fail the gate if these category errors become accepted. There are no blanket `any`, `@ts-ignore`, or `@ts-nocheck` escapes.
+
+The accompanying runtime changes add explicit checks for missing internal claim/Kong/passing material and initialize pending state consistently. Complete win results include their payments at construction. An independent review of comment-free semantic diffs found the legal-state guards, payment arithmetic, and public-information selection consistent with existing behavior. UI, practice, lessons, and the Solitaire implementation remain outside the incremental typing boundary; the coach uses a narrow Solitaire geometry contract.
+
+### Visible rules and accessibility corrections
+
+Setup and active tables show Hong Kong Beginner, Atelier Hong Kong v2, or American Practice v2. Hong Kong summaries display the qualifying minimum, Flowers/Seasons, and seven-pairs setting. American summaries identify the six original patterns and the official annual-card boundary. Browser fixtures deliberately separate setup settings from the constructed table to verify that an active summary uses the table's actual configuration.
+
+The new axe scan found low-contrast tab suffixes and American-card text, plus interactive tile names that omitted visible abbreviations or glyph labels. Text colors were corrected, and a dedicated accessible-name helper preserves each full English tile identity while including its visible label. Tile markup separates visible text with real whitespace. No axe rules or page regions are excluded to obtain a pass. The hosted footer now links to the single-file download and explains how to use it offline; no service worker is installed.
+
+### Required checks before deployment
+
+Development tools are pinned in `package-lock.json`: TypeScript 5.9.3, Playwright 1.64.1, and the axe Playwright adapter 4.14.0. Node 24 is the supported development minimum and the CI version. These are development dependencies; the browser game still uses plain scripts with no npm runtime dependency.
+
+CI requires syntax checks, strict types, all 135 engine tests, and bundle freshness, followed by parallel modular/offline browser jobs. Each edition runs the complete game/learning suite and **21 accessibility screen/theme scans** with WCAG 2 A/AA and 2.1 A/AA tags. Deployment depends on both editions succeeding. Screens include all tile themes, hidden English indices, all three learning paths and practices, the tile library, table setup/play, a private handoff, and mobile play.
+
+Browser commands have a three-minute deadline and jobs a ten-minute timeout. Startup failures close any created browser; failure screenshots/traces and incremental accessibility reports aid diagnosis. Reports retain both violations and axe's incomplete/manual-review items. Actions keeps browser evidence for 14 days. Automated scans do not certify complete accessibility or replace manual assistive-technology review.
+
+Local verification used Node 24.19.0, Playwright 1.64.1, and Chromium 153. Both modular and rebuilt standalone editions passed the full browser suite and all 21 accessibility scans, with zero automatically detected violations. Strict types, all 135 Node tests, JavaScript syntax, and whitespace checks passed. CI installs the Chromium revision selected by the pinned Playwright package rather than using the local override.

@@ -13,19 +13,63 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install pinned development tools
+        run: npm ci --ignore-scripts
       - name: Check JavaScript
-        run: for file in js/*.js; do node --check "$file"; done
+        run: for file in js/*.js tests/*.cjs; do node --check "$file"; done
+      - name: Check core types
+        run: npm run typecheck
       - name: Run engine tests
-        run: node --test tests/*.test.cjs
+        run: npm test
       - name: Verify offline bundle matches source
         run: |
           python build.py
           git diff --exit-code -- Mahjong_Atelier.html
+  browser:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        edition: [modular, offline]
+    env:
+      ATELIER_EDITION: ${{ matrix.edition }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install pinned development tools
+        run: npm ci --ignore-scripts
+      - name: Install Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Exercise learning and game controls
+        run: npm run test:browser
+      - name: Check accessibility of key screens
+        run: npm run test:a11y
+      - name: Save browser evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: browser-evidence-${{ matrix.edition }}
+          path: test-results/
+          if-no-files-found: warn
+          retention-days: 14
   deploy:
     if: github.event_name != 'pull_request'
-    needs: verify
+    needs: [verify, browser]
     runs-on: ubuntu-latest
     permissions:
       contents: read

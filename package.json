@@ -1,0 +1,23 @@
+{
+  "name": "mahjong-atelier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser mahjong practice with guided learning and independently checked rules profiles.",
+  "scripts": {
+    "test": "node --test --test-isolation=none tests/*.test.cjs",
+    "typecheck": "tsc --project tsconfig.json",
+    "test:browser": "node tests/browser-smoke.cjs",
+    "test:browser:offline": "node tests/browser-smoke.cjs --offline",
+    "test:a11y": "node tests/accessibility.cjs",
+    "test:a11y:offline": "node tests/accessibility.cjs --offline",
+    "build": "python build.py"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "playwright": "1.64.1",
+    "typescript": "5.9.3"
+  }
+}
