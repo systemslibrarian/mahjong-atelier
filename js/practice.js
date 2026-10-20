@@ -25,7 +25,7 @@ class Practice {
  tiles(){return this.mode==='solitaire'?this.game.tiles.filter(t=>!t.removed):this.game.players[0].hand;}
  pick(id){
   if(this.done)return;
-  if(this.mode==='solitaire'){const r=this.game.choose(id);this.feedback=r.action==='locked'?'That tile is covered. Remove the Bamboo tile above it first.':r.action==='nomatch'?'Those faces do not match. Flowers match other Flowers; numbered tiles need identical suit and rank.':r.action==='match'?'Pair removed. Notice which tiles are now uncovered.':'Now choose its free matching partner.';if(this.game.finished){this.done=true;this.feedback='Board cleared: you used both the free-tile rule and the Flower exception.';}return;}
+  if(this.mode==='solitaire'){const r=this.game.choose(id);if(r.action==='match')this.comparisons=[];this.feedback=r.action==='locked'?'That tile is covered. Remove the Bamboo tile above it first.':r.action==='nomatch'?'Those faces do not match. Flowers match other Flowers; numbered tiles need identical suit and rank.':r.action==='match'?'Pair removed. Notice which tiles are now uncovered.':'Now choose its free matching partner.';if(this.game.finished){this.done=true;this.feedback='Board cleared: you used both the free-tile rule and the Flower exception.';}return;}
   if(this.mode==='hongkong'){this.picks.clear();this.picks.add(Number(id));}
   else if(this.picks.has(Number(id)))this.picks.delete(Number(id));else this.picks.add(Number(id));
  }

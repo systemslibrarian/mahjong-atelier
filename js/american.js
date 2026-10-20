@@ -4,21 +4,27 @@
   const {count,sortHand,STANDARD_TYPES}=M.core;
   // These are original beginner patterns, NOT an NMJL published annual card.
   const CARD=[
-    {id:'four',name:'Four of a Kindred',groups:[3,3,3,3,2],description:'Four Pungs and one natural Pair.',level:'Exposed · 25 points',value:25},
-    {id:'towers',name:'Three Towers',groups:[4,4,4,2],description:'Three Kongs and one natural Pair.',level:'Exposed · 30 points',value:30},
-    {id:'parade',name:'Joker Parade',groups:[5,4,3,2],description:'A Quint, a Kong, a Pung and a natural Pair.',level:'Exposed · 35 points',value:35},
-    {id:'twins',name:'Twin Comets',groups:[5,5,2,2],description:'Two Quints and two natural Pairs.',level:'Concealed · 40 points',value:40,concealed:true},
-    {id:'grand',name:'Grand Lantern',groups:[6,3,3,2],description:'A Sextet, two Pungs and a natural Pair.',level:'Exposed · 40 points',value:40},
-    {id:'blooms',name:'Bloom Festival',groups:[1,1,3,3,4,2],flowers:2,description:'Two individual Flowers, two Pungs, a Kong and a natural Pair.',level:'Exposed · 30 points',value:30}
+    {id:'four',name:'Four of a Kindred',groups:[3,3,3,3,2],description:'Four Pungs and one natural Pair. Suit or honor faces; no Flowers.',level:'Exposed · 25 points',value:25},
+    {id:'towers',name:'Three Towers',groups:[4,4,4,2],description:'Three Kongs and one natural Pair. Suit or honor faces; no Flowers.',level:'Exposed · 30 points',value:30},
+    {id:'parade',name:'Joker Parade',groups:[5,4,3,2],description:'A Quint, a Kong, a Pung and a natural Pair. Suit or honor faces; no Flowers.',level:'Exposed · 35 points',value:35},
+    {id:'twins',name:'Twin Comets',groups:[5,5,2,2],description:'Two Quints and two natural Pairs. Suit or honor faces; no Flowers.',level:'Concealed · 40 points',value:40,concealed:true},
+    {id:'grand',name:'Grand Lantern',groups:[6,3,3,2],description:'A Sextet, two Pungs and a natural Pair. Suit or honor faces; no Flowers.',level:'Exposed · 40 points',value:40},
+    {id:'blooms',name:'Bloom Festival',groups:[1,1,3,3,4,2],flowers:2,description:'Any two individual Flowers or Seasons, two Pungs, a Kong and a natural Pair. All sets and the Pair use suit or honor faces.',level:'Exposed · 30 points',value:30}
   ];
+  function validExposure(meld){
+    if(!meld||!Array.isArray(meld.tiles)||meld.concealed||meld.tiles.length<3||meld.tiles.length>6)return false;
+    const type=meld.type??meld.tiles.find(t=>t.type!=='j')?.type;
+    // Original-card sets use suit/honor faces. The called natural tile stays in
+    // every exposure; all-Joker groups are allowed only in the concealed rack.
+    return STANDARD_TYPES.includes(type)&&meld.tiles.some(t=>t.type===type)&&meld.tiles.every(t=>t.type===type||t.type==='j');
+  }
   function matchPattern(hand, melds=[],pattern){
-    if(!pattern||!M.core.validMaterial([...hand,...melds.flatMap(m=>m.tiles)],'american')||(pattern.concealed&&melds.length)||hand.length+melds.reduce((v,m)=>v+m.tiles.length,0)!==14)return false;
+    if(!pattern||melds.some(m=>!validExposure(m))||!M.core.validMaterial([...hand,...melds.flatMap(m=>m.tiles)],'american')||(pattern.concealed&&melds.length)||hand.length+melds.reduce((v,m)=>v+m.tiles.length,0)!==14)return false;
     // An exposure consumes exactly one identically sized set on this custom card.
     let specs=pattern.groups.map((size,i)=>({size,flower:!!pattern.flowers&&size===1}));
     for(const meld of melds){
       const index=specs.findIndex(g=>g.size===meld.tiles.length&&g.size>=3);
       if(index<0)return false;
-      if(!meld.tiles.some(t=>t.type===meld.type)||!meld.tiles.every(t=>t.type===meld.type||t.type==='j'))return false;
       specs.splice(index,1);
     }
     const counts={};let jokers=0;
@@ -82,7 +88,7 @@
       return super.declareWin(seat,selfDraw);
     }
     paymentBase(a){return a.card.value*(a.jokerFree?2:1);}
-    exposureFits(melds){return CARD.some(c=>{if(c.concealed)return !melds.length;const sizes=c.groups.slice();for(const m of melds){const i=sizes.indexOf(m.tiles.length);if(i<0||m.tiles.length<3)return false;sizes.splice(i,1);}return true;});}
+    exposureFits(melds){return melds.every(validExposure)&&M.core.validMaterial(melds.flatMap(m=>m.tiles),'american')&&CARD.some(c=>{if(c.concealed)return !melds.length;const sizes=c.groups.slice();for(const m of melds){const i=sizes.indexOf(m.tiles.length);if(i<0||m.tiles.length<3)return false;sizes.splice(i,1);}return true;});}
     claimOptions(seat,tile){
       if(tile.type==='j')return [];const p=this.players[seat],hand=p.hand,opts=[];
       if(this.winAnalysis(seat,tile,false))opts.push({code:'win',kind:'win',priority:100,title:'Mah Jongg!'});
@@ -150,7 +156,7 @@
     discard(seat,id){const result=super.discard(seat,id);this.editableExposure=null;return result;}
     exchangeJoker(seat,fromSeat,meldIndex){
       if(this.phase!=='discard'||seat!==this.current||!['draw','claim','exchange'].includes(this.lastSource))throw Error('Joker exchange is only available on your turn after drawing or completing a claim');
-      const m=this.players[fromSeat]?.melds[meldIndex];if(!m||m.concealed||!m.tiles.some(t=>t.type==='j'))throw Error('No Joker to redeem');
+      const m=this.players[fromSeat]?.melds[meldIndex];if(!validExposure(m)||!m.tiles.some(t=>t.type==='j'))throw Error('No Joker to redeem');
       const p=this.players[seat],natural=p.hand.find(t=>t.type===m.type);
       if(!natural)throw Error('You need a natural matching tile');
       p.hand.splice(p.hand.findIndex(t=>t.id===natural.id),1);
@@ -167,7 +173,7 @@
       if(['opening','passingWin'].includes(this.phase)&&this.isBotSeat(this.dealer)){if(this.canDeclareWin(this.dealer))this.declareWin(this.dealer);else this.beginCharleston(this.dealer);return true;}
       if(this.phase==='secondChoice'&&this.isBotSeat(this.charSeat)){this.chooseSecond(this.charSeat,this.settings.secondCharleston!==false);return true;}
       if(this.phase==='courtesyChoice'&&this.isBotSeat(this.charSeat)){this.chooseCourtesy(this.charSeat,3);return true;}
-      if(this.phase==='discard'&&this.isBotSeat(this.current)){const hand=this.players[this.current].hand;for(const p of this.players){const i=p.melds.findIndex(m=>m.tiles.some(t=>t.type==='j')&&hand.some(t=>t.type===m.type));if(i>=0){this.exchangeJoker(this.current,p.seat,i);return true;}}}
+      if(this.phase==='discard'&&this.isBotSeat(this.current)){if(this.canDeclareWin(this.current)){this.declareWin(this.current);return true;}const hand=this.players[this.current].hand;for(const p of this.players){const i=p.melds.findIndex(m=>!m.concealed&&m.tiles.some(t=>t.type==='j')&&hand.some(t=>t.type===m.type));if(i>=0){this.exchangeJoker(this.current,p.seat,i);return true;}}}
       if(this.phase==='charleston'&&this.isBotSeat(this.charSeat)){
         this.submitPass(this.charSeat,this.botPassTiles(this.charSeat).slice(0,this.passCount(this.charSeat)));return true;
       }

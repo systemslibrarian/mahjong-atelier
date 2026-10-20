@@ -25,11 +25,11 @@ function alternatives(v){
  const known=knownCounts(v),types=[...C.STANDARD_TYPES,...(v.variant==='american'?['j',...Array.from({length:8},(_,i)=>'f'+(i+1))]:[])];
  return [...new Map(v.hand.map(t=>[t.type,t])).values()].map(tile=>{
   const remaining=v.hand.filter(t=>t.id!==tile.id),s=support(v.hand,tile,v.variant),waits=[];
-  for(const type of types){const total=type==='j'?8:type[0]==='f'?1:4,unseen=Math.max(0,total-(known[type]||0));if(!unseen)continue;const analysis=winForView(v,[...remaining,{id:-1,type}]);if(analysis)waits.push({type,unseen,fan:analysis.fan??null,pattern:analysis.card?.name??null});}
+  for(const type of v.wallCount===0?[]:types){const total=type==='j'?8:type[0]==='f'?1:4,unseen=Math.max(0,total-(known[type]||0));if(!unseen)continue;const analysis=winForView(v,[...remaining,{id:-1,type}]);if(analysis)waits.push({type,unseen,fan:analysis.fan??null,pattern:analysis.card?.name??null});}
   const visibleDiscardCount=v.discards.filter(t=>t.type===tile.type).length;
   return {id:tile.id,type:tile.type,waits,unseenWinning:waits.reduce((n,w)=>n+w.unseen,0),support:s,
    rule:`Discarding ${C.name(tile.type)} is legal on your discard turn.`,
-   calculation:`Keeps ${remaining.length} concealed tiles. ${waits.length} tile type${waits.length===1?'':'s'} could complete a legal hand on a later ordinary self-draw (${waits.reduce((n,w)=>n+w.unseen,0)} copies not accounted for in your hand and visible tiles).`,
+   calculation:v.wallCount===0?`Keeps ${remaining.length} concealed tiles. The wall is empty, so no later self-draw is possible. ${tile.type==='j'?'A discarded Joker cannot be claimed.':'A legal final-discard claim may still end the hand.'}`:`Keeps ${remaining.length} concealed tiles. ${waits.length} tile type${waits.length===1?'':'s'} could complete a legal hand on a later ordinary self-draw (${waits.reduce((n,w)=>n+w.unseen,0)} copies not accounted for in your hand and visible tiles).`,
    heuristic:s.same?`Giving up a duplicate reduces a ${s.same+1}-tile group. Compare whether its tiles serve another structure.`:v.variant==='hk'&&(s.adjacent||s.gapped)?`This tile has ${s.adjacent} adjacent and ${s.gapped} one-gap suit partner(s). Keeping it may preserve sequence routes.`:tile.type==='j'?'A Joker is flexible in large American groups; discarding it usually gives up useful options.':'This tile has little local support in the current rack. Discarding it may preserve stronger groups.',
    defense:`${visibleDiscardCount} matching tile${visibleDiscardCount===1?' has':'s have'} already been discarded. That is visible information, not proof this discard is safe.`};
  }).sort((a,b)=>b.unseenWinning-a.unseenWinning||a.support.cost-b.support.cost||a.type.localeCompare(b.type));

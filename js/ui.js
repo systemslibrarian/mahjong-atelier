@@ -76,10 +76,21 @@
 
     ${btn('Start a new table &nbsp; →','start-table','primary')}<p class="setup-note">✦ &nbsp; No sign-in · No server · No tracking · No bets</p></div>`;
   }
+  function publicTilesMarkup(tiles,label){
+    return `<div class="public-tiles" role="group" aria-label="${escapeHTML(label)}">${tiles.map(t=>`<span class="mj-tile public-tile" role="img" aria-label="${escapeHTML(C.name(t.type))}" title="${escapeHTML(C.name(t.type))}">${C.tileMarkup(t.type)}</span>`).join('')}</div>`;
+  }
   function seatMarkup(p,seat,active,game){
-    let special=p.seat===active?' active':'';
-    let exposed=p.melds.length?`<div class="seat-melds">${p.melds.map((m,i)=>m.concealed&&seat!==(game.settings.opponents==='local'?active:game.players.find(p=>!p.bot)?.seat)&&!(game.phase==='finished'&&game.winner===seat)?'<div class="exposed-meld">▣ CONCEALED KONG · four face-down tiles</div>':`<div title="${m.kind} · ${C.name(m.type)}" class="exposed-meld"><span class="meld-icon">${m.kind==='chow'?'≋':m.kind==='kong'?'▣':'◈'}</span> ${escapeHTML(m.kind.toUpperCase())} <strong>${escapeHTML(C.name(m.type))}</strong>${m.tiles.some(t=>t.type==='j')&&game.variant==='american'&&game.phase==='discard'&&['draw','claim','exchange'].includes(game.lastSource)&&!game.players[game.current].bot&&game.players[game.current].hand.some(t=>t.type===m.type)?`<button type="button" class="swap-btn" data-act="joker-swap" data-seat="${seat}" data-meld="${i}" title="Exchange matching tile for exposed Joker">↔ Joker</button>`:''}</div>`).join('')}</div>`:'<span class="seat-meta">No exposed sets</span>';
-    return `<div class="seat seat-${seat}${special}"><div class="seat-heading"><span class="wind-chip">${['東','南','西','北'][game.windIndex(seat)]}</span><span><strong>${p.name} · ${game.windName(seat)}</strong><small>${p.bot?'BOT':'LOCAL PLAYER'}</small></span>${p.seat===active?'<span class="turn-pin">● TURN</span>':''}</div><div class="seat-tiles"><span>▥ ${p.hand.length} concealed</span><span>◫ ${p.discards.length} discards</span><span>✿ ${p.flowers.length} bonus tiles</span></div>${exposed}</div>`;
+    const special=p.seat===active?' active':'';
+    const viewer=game.settings.opponents==='local'?(state.curtain===null?active:null):game.players.find(p=>!p.bot)?.seat;
+    const exposed=p.melds.length?`<div class="seat-melds">${p.melds.map((m,i)=>{
+      if(m.concealed&&seat!==viewer&&!(game.phase==='finished'&&game.winner===seat))return '<div class="exposed-meld">▣ CONCEALED KONG · four face-down tiles</div>';
+      const jokers=m.tiles.filter(t=>t.type==='j').length;
+      const composition=game.variant==='american'?`${m.tiles.length-jokers} natural · ${jokers} Joker${jokers===1?'':'s'}`:`${m.tiles.length} tiles`;
+      const canExchange=jokers&&game.variant==='american'&&game.phase==='discard'&&['draw','claim','exchange'].includes(game.lastSource)&&!game.players[game.current].bot&&game.players[game.current].hand.some(t=>t.type===m.type);
+      return `<div title="${escapeHTML(m.kind+' · '+C.name(m.type))}" class="exposed-meld"><div><span class="meld-icon">${m.kind==='chow'?'≋':m.kind==='kong'?'▣':'◈'}</span> ${m.concealed?'CONCEALED ':''}${escapeHTML(m.kind.toUpperCase())} <strong>${escapeHTML(C.name(m.type))}</strong></div>${publicTilesMarkup(m.tiles,m.concealed?'Your concealed Kong':'Exposed '+m.kind)}<span class="meld-composition">${composition}</span>${canExchange?`<button type="button" class="swap-btn" data-act="joker-swap" data-seat="${seat}" data-meld="${i}" title="Exchange matching tile for exposed Joker">↔ Joker</button>`:''}</div>`;
+    }).join('')}</div>`:'<span class="seat-meta">No exposed sets</span>';
+    const flowers=p.flowers.length?`<div class="seat-flowers"><span>Exposed Flowers / Seasons</span>${publicTilesMarkup(p.flowers,'Exposed Flowers and Seasons')}</div>`:'';
+    return `<div class="seat seat-${seat}${special}"><div class="seat-heading"><span class="wind-chip">${['東','南','西','北'][game.windIndex(seat)]}</span><span><strong>${p.name} · ${game.windName(seat)}</strong><small>${p.bot?'BOT':'LOCAL PLAYER'}</small></span>${p.seat===active?'<span class="turn-pin">● TURN</span>':''}</div><div class="seat-tiles"><span>▥ ${p.hand.length} concealed</span><span>◫ ${p.discards.length} discards</span><span>✿ ${p.flowers.length} bonus tiles</span></div>${exposed}${flowers}</div>`;
   }
   function compactTile(type){
     const t={'we':'東','ws':'南','ww':'西','wn':'北','dr':'中','dg':'發','dw':'白','j':'★'};
@@ -92,6 +103,7 @@
   }
   function handMarkup(g,active){
     const p=g.players[active];
+    if(g.settings.opponents==='local'&&state.curtain!==null)return '<div class="hand-panel"><p>The private rack stays hidden until its player reveals it.</p></div>';
     if(p.bot&&!(g.phase==='finished'&&g.winner===active))return '<div class="hand-panel"><p>Computer rack is concealed. Your rack returns when it is your turn.</p></div>';
     const playable=!p.bot&&(g.phase==='discard'||g.phase==='charleston');
     if(!p)return '';
@@ -99,7 +111,7 @@
     return `<div class="hand-panel"><div class="hand-title"><div><span class="eyebrow">${['charleston','secondChoice','courtesyChoice'].includes(g.phase)?'THE PASSING RACK':'CONCEALED TILES'}</span><h3>${p.name}'s hand <span>· ${p.hand.length} tiles</span></h3></div><span class="rack-symbol">${g.variant==='american'?'AMERICAN RACK':'TABLE HAND'}</span></div><div class="rack" role="group" aria-label="${p.name} player's tiles">${tiles}</div><div class="rack-hint">← Swipe or scroll the rack to see all your tiles →</div></div>`;
   }
   function cardMarkup(g){if(state.mode!=='american')return '';
-    return `<div class="practice-card"><div class="practice-header"><div><p class="eyebrow">AMERICAN EDITION · ORIGINAL CONTENT</p><h3>The Atelier Practice Card</h3></div><span>6 PATTERNS</span></div><p>Complete <strong>any one entire row</strong> to declare Mah Jongg. The highlighted target is a planning aid, not a restriction.</p><div class="pattern-list">${M.americanTest.CARD.map((c,i)=>`<button type="button" data-act="goal" data-goal="${i}" class="pattern ${state.goal===i?'goal':''}"><span class="pattern-name">${escapeHTML(c.name)}<small>${c.level}</small></span><span class="pattern-blocks">${c.groups.map(n=>`<b class="pattern-group ${n<=2?'singles':''}">${n===1?'F':n}</b>`).join('')}</span><span class="pattern-desc">${escapeHTML(c.description)}</span></button>`).join('')}</div><p class="practice-disclaimer">Each number is a group size; F means a single Flower or Season. Concealed rows allow no exposed sets before the winning call. Groups of 3+ are identical tiles; a Joker can fill these groups, never a pair or single. <strong>Unofficial original learning patterns</strong>, not NMJL annual-card hands.</p></div>`;
+    return `<div class="practice-card"><div class="practice-header"><div><p class="eyebrow">AMERICAN EDITION · ORIGINAL CONTENT</p><h3>The Atelier Practice Card</h3></div><span>6 PATTERNS</span></div><p>Complete <strong>any one entire row</strong> to declare Mah Jongg. The highlighted target is a planning aid, not a restriction.</p><div class="pattern-list">${M.americanTest.CARD.map((c,i)=>`<button type="button" data-act="goal" data-goal="${i}" class="pattern ${state.goal===i?'goal':''}"><span class="pattern-name">${escapeHTML(c.name)}<small>${c.level}</small></span><span class="pattern-blocks">${c.groups.map(n=>`<b class="pattern-group ${n<=2?'singles':''}">${n===1?'F':n}</b>`).join('')}</span><span class="pattern-desc">${escapeHTML(c.description)}</span></button>`).join('')}</div><p class="practice-disclaimer">Each number is a group size; F means a single Flower or Season. Only Bloom Festival uses Flowers/Seasons, as its two singles. All other groups use numbered suits, Winds, or Dragons. Concealed rows allow no exposed sets before the winning call. Groups of 3+ are identical tiles; a Joker can fill these groups, never a pair or single. <strong>Unofficial original learning patterns</strong>, not NMJL annual-card hands.</p></div>`;
   }
   function actionMarkup(g,active){
     if(g.phase==='finished')return `<div class="action-banner result-banner"><div><h3>${g.result.kind==='win'?g.result.message:'A peaceful draw.'}</h3><p>${g.result.kind==='win'?(g.variant==='hk'?`${g.result.analysis.fan} faan · ${g.result.analysis.details.join(' · ')||'Standard hand'}`:`${g.result.analysis.card.name} · ${g.result.analysis.card.value} base points${g.result.analysis.jokerFree?' · Joker-free ×2':''}`):g.result.message}</p><p>Practice points only. ${g.result.kind==='win'?`Each opponent pays ${g.result.base}; ${g.result.selfDraw?'all three pay double for self-draw':'the discarder pays double'}.`:''}</p></div>${btn('Next hand · keep scores →','next-hand','primary')}${btn('New match','new-table','secondary')}</div>`;
@@ -142,8 +154,10 @@
   }
   function render(){
     const which=state.mode;
-    root.innerHTML=`<div class="shell" data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
-    maybeGuard();schedulePump();
+    maybeGuard();
+    root.innerHTML=`<div class="shell" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>Made to learn, play and return to · Works offline in your browser</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
+    if(state.curtain!==null)root.querySelector('[data-act="reveal"]')?.focus();
+    schedulePump();
   }
   function activeHumanSeat(){
     if(state.mode==='solitaire')return null;
@@ -152,7 +166,7 @@
   }
   function maybeGuard(){
     const g=currentGame();if(state.mode==='solitaire'||!g?.settings||g.settings.opponents!=='local'||g.phase==='finished'||state.curtain!==null)return;
-    const seat=activeHumanSeat();if(seat!==null&&seat!==state.lastSeat){state.curtain=seat;root.insertAdjacentHTML('beforeend',privacyCurtain());}
+    const seat=activeHumanSeat();if(seat!==null&&seat!==state.lastSeat){state.curtain=seat;clearAdvice();state.review='';state.selected=null;state.passSelected.clear();state.blind=0;}
   }
   function schedulePump(){
     clearTimeout(pumpTimer);pumpTimer=null;
