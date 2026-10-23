@@ -190,9 +190,9 @@
     const scroller=stage.closest('.board-scroller');
     const originalWidth=Number(stage.dataset.boardWidth)||board.offsetWidth;
     const originalHeight=Number(stage.dataset.boardHeight)||board.offsetHeight;
-    const available=Math.max(0,scroller.clientWidth-4);
-    const fit=window.matchMedia('(max-width: 720px)').matches;
-    const scale=fit&&available?Math.min(1,available/originalWidth):1;
+    const viewportWidth=Math.min(window.innerWidth||Infinity,document.documentElement.clientWidth||Infinity);
+    const available=Math.max(0,Math.min(scroller.clientWidth,viewportWidth)-4);
+    const scale=available?Math.min(1,available/originalWidth):1;
     board.style.transformOrigin='top left';
     board.style.transform=`scale(${scale})`;
     stage.style.width=`${Math.ceil(originalWidth*scale)}px`;
