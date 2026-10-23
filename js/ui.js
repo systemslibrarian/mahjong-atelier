@@ -88,7 +88,7 @@
     return `${panelHeader('SOLO PLAY / MATCH & CLEAR','A little peace. A lot of possibilities.','Match free tiles, uncover new paths, and clear the board at your own pace.')}
     <div class="stats-grid"><div class="stat"><span>Tiles remaining</span><strong>${g.remaining}<small> / 144</small></strong></div><div class="stat"><span>Pairs matched</span><strong>${g.moves}</strong></div><div class="stat"><span>Time in play</span><strong data-timer>${C.elapsed(Math.floor((Date.now()-g.startedAt)/1000))}</strong></div><div class="stat"><span>Best moments</span><strong>${state.stats.solitaire||0}<small> clears</small></strong></div></div>
     <div class="solitaire-settings"><div class="layout-prompt">BOARD SHAPE <span class="bullet">•</span> <span class="muted">Choose your challenge</span></div><div class="segment">${['pyramid','garden','bridge'].map(l=>`<button data-act="layout" data-layout="${l}" class="${g.layout===l?'active':''}" type="button">${({pyramid:'Pyramid',garden:'Garden',bridge:'Bridge'})[l]}</button>`).join('')}</div></div>
-    <div class="board-frame"><div class="board-topline"><span>✧ &nbsp; ${g.reflowed?'RESCUE TRAY':g.layout.toUpperCase()} / LAYERED PUZZLE</span><span>144 TILES · ${g.pairs().length} PAIRS AVAILABLE</span></div><div class="board-scroller"><div class="solitaire-board" role="group" aria-label="Mahjong Solitaire board" style="width:${width}px;height:${height}px">${board}</div></div>${g.finished?'<div class="board-overlay"><div class="winning-medal">✦</div><h2>Beautifully played.</h2><p>You cleared every tile!</p>'+btn('Play again','new-sol','primary')+'</div>':''}${!g.finished&&g.pairs().length===0?'<div class="no-moves">No matching free pairs. Try Undo or Shuffle to continue.</div>':''}</div>
+    <div class="board-frame"><div class="board-topline"><span>✧ &nbsp; ${g.reflowed?'RESCUE TRAY':g.layout.toUpperCase()} / LAYERED PUZZLE</span><span>144 TILES · ${g.pairs().length} PAIRS AVAILABLE</span></div><div class="board-scroller"><div class="solitaire-stage" data-board-width="${width}" data-board-height="${height}" style="width:${width}px;height:${height}px"><div class="solitaire-board" role="group" aria-label="Mahjong Solitaire board" style="width:${width}px;height:${height}px">${board}</div></div></div>${g.finished?'<div class="board-overlay"><div class="winning-medal">✦</div><h2>Beautifully played.</h2><p>You cleared every tile!</p>'+btn('Play again','new-sol','primary')+'</div>':''}${!g.finished&&g.pairs().length===0?'<div class="no-moves">No matching free pairs. Try Undo or Shuffle to continue.</div>':''}</div>
     <div class="toolbar">${btn('↶ &nbsp; Undo','undo','secondary',!g.undoStack.length)}${btn('◌ &nbsp; Hint','hint','secondary',g.finished)}${btn('⤨ &nbsp; Shuffle','shuffle','secondary',g.finished)}<span class="toolbar-divider"></span>${btn('✧ &nbsp; New puzzle','new-sol','primary')}</div>`;
   }
   function setupView(){
@@ -180,7 +180,25 @@
     maybeGuard();
     root.innerHTML=`<div class="shell" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>${offlineAccessMarkup()}</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
     if(state.curtain!==null)root.querySelector('[data-act="reveal"]')?.focus();
+    fitSolitaireBoard();
     schedulePump();
+  }
+  function fitSolitaireBoard(){
+    const stage=root.querySelector('.solitaire-stage');
+    if(!stage)return;
+    const board=stage.querySelector('.solitaire-board');
+    const scroller=stage.closest('.board-scroller');
+    const originalWidth=Number(stage.dataset.boardWidth)||board.offsetWidth;
+    const originalHeight=Number(stage.dataset.boardHeight)||board.offsetHeight;
+    const available=Math.max(0,scroller.clientWidth-4);
+    const fit=window.matchMedia('(max-width: 720px)').matches;
+    const scale=fit&&available?Math.min(1,available/originalWidth):1;
+    board.style.transformOrigin='top left';
+    board.style.transform=`scale(${scale})`;
+    stage.style.width=`${Math.ceil(originalWidth*scale)}px`;
+    stage.style.height=`${Math.ceil(originalHeight*scale)}px`;
+    stage.dataset.scale=scale.toFixed(3);
+    scroller.classList.toggle('is-fitted',scale<0.999);
   }
   function activeHumanSeat(){
     if(state.mode==='solitaire')return null;
@@ -284,6 +302,11 @@
     const t=state.games.solitaire;
     const cell=document.querySelector('[data-timer]');if(cell)cell.textContent=C.elapsed(t.finishedSeconds??Math.floor((Date.now()-t.startedAt)/1000));
   },1000);
+  let fitResizeTimer=null;
+  window.addEventListener('resize',()=>{
+    clearTimeout(fitResizeTimer);
+    fitResizeTimer=setTimeout(fitSolitaireBoard,80);
+  },{passive:true});
   render();
 })(globalThis.Mahjong=globalThis.Mahjong||{});
 
