@@ -29,6 +29,14 @@ runBrowserCheck('browser-flows',async({page,target,artifactPath})=>{
  await page.setViewportSize({width:390,height:844});
  assert.ok(await page.locator('.rules-profile').evaluate(e=>e.scrollWidth<=e.clientWidth));
  await page.screenshot({path:artifactPath('active-rules-mobile.png')});
+ await page.locator('[data-act="switch"][data-mode="solitaire"]').click();
+ await page.evaluate(()=>new Promise(requestAnimationFrame));
+ assert.ok(await page.locator('.solitaire-stage').evaluate((stage)=>{
+  const scroller=stage.closest('.board-scroller');
+  return stage.getBoundingClientRect().width<=scroller.getBoundingClientRect().width+1;
+ }));
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await page.screenshot({path:artifactPath('solitaire-mobile-fit.png')});
  await page.setViewportSize({width:1280,height:900});
  await page.reload();
  await page.locator('[data-act="switch"][data-mode="american"]').click();
