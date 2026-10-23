@@ -65,6 +65,11 @@ runBrowserCheck('accessibility', async ({page, target, artifactPath, edition}) =
   await scan('Mobile Hong Kong table');
   await page.screenshot({path: artifactPath('accessibility-mobile.png'), fullPage: true});
 
+  await page.reload();
+  await scan('Mobile portrait Solitaire');
+  await page.locator('[data-act="board-focus"]').click();
+  await scan('Mobile focused Solitaire');
+
   complete = true;
   await saveReport();
   const failures = reports.flatMap(report => report.violations.map(violation => ({

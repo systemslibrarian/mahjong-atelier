@@ -5,7 +5,20 @@
   function coords(layout) {
     const out=[];
     function rect(z,startX,startY,width,height){for(let y=startY;y<startY+height;y++)for(let x=startX;x<startX+width;x++)out.push({id:`${z}-${x}-${y}`,x,y,z});}
-    if(layout==='garden'){rect(0,0,0,12,8);rect(1,1,2,10,4);rect(2,4,3,4,2);}
+    if(layout==='portrait'){
+      // Six columns keep phone tiles readable. Each centered row has an even
+      // tile count, so pairs can peel away without changing the free-side rule.
+      const rows=[
+        {z:0,y:0,widths:[2,4,6,6,6,6,6,6,4,2]},
+        {z:1,y:1,widths:[2,6,6,6,6,6,6,2]},
+        {z:2,y:2,widths:[4,6,6,6,6,4]},
+        {z:3,y:2,widths:[4,4,4,4,4,4]}
+      ];
+      rows.forEach(layer=>layer.widths.forEach((width,row)=>{
+        rect(layer.z,(6-width)/2,layer.y+row,width,1);
+      }));
+    }
+    else if(layout==='garden'){rect(0,0,0,12,8);rect(1,1,2,10,4);rect(2,4,3,4,2);}
     else if(layout==='bridge'){rect(0,0,1,14,6);rect(1,2,2,10,4);rect(2,3,3,8,2);rect(3,5,3,4,1);}
     else {rect(0,0,0,12,8);rect(1,2,2,8,4);rect(2,3,3,6,2);rect(3,5,3,2,2);}
     if(out.length!==144)throw new Error('Invalid board shape');
@@ -81,7 +94,8 @@
         // If the player leaves a structurally trapped stack (for example, two
         // tiles above/below each other), no tile permutation can rescue it.
         // Move all remaining tiles onto a flat rescue tray before redealing.
-        positions=alive.map((t,i)=>({id:t.id,x:i%12,y:Math.floor(i/12),z:0}));
+        const columns=this.layout==='portrait'?6:12;
+        positions=alive.map((t,i)=>({id:t.id,x:i%columns,y:Math.floor(i/columns),z:0}));
         assigned=assignDeal(positions,tiles);
         const byId=new Map(positions.map(p=>[p.id,p]));
         alive.forEach(t=>{const p=byId.get(t.id);t.x=p.x;t.y=p.y;t.z=p.z;});

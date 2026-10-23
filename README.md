@@ -20,7 +20,7 @@ Optional **Teaching mode** during normal play explains legal actions, offers hin
 
 | Mode/profile | Playable coverage | Boundaries |
 | --- | --- | --- |
-| Solitaire | Complete 144-tile matching puzzle; three layouts, hints, undo, shuffle, rescue tray | A matching puzzle, not four-player mahjong; hints do not prove a full-board solution |
+| Solitaire | Complete 144-tile matching puzzle; four layouts, hints, undo, shuffle, rescue tray | A matching puzzle, not four-player mahjong; hints do not prove a full-board solution |
 | Hong Kong Beginner | 136 tiles, four melds and pair, Chow/Pung/Kong, simplified faan, zero/three minimum | Introductory scoring; no special hands or bonus tiles |
 | Atelier Hong Kong v2 | Named expanded house profile: optional Flowers/Seasons, added and robbed Kongs, special hands, qualifying minimum, capped scoring, payments and four wind rounds | Not a universal Hong Kong or tournament ruleset; exact conventions below and in the rule library |
 | American Practice v2 | 152 tiles; first/optional second Charleston, blind and courtesy passes; exposures, concealed row, cross-player Joker exchanges; six original patterns and practice points | Mechanically playable original-card game; introductory coverage of American play. No licensed annual card, official-card validation, or tournament penalties |
@@ -65,7 +65,9 @@ Riichi, online multiplayer, licensed annual-card play, and full tournament adjud
 
 Four tile themes: Classic Ivory, Modern Minimal, Neon Night, Cozy Pastel. Native buttons, labelled tiles, visible focus, dialog keyboard handling/Escape, text feedback, selected outlines, and scrollable racks support desktop/mobile use. Interactive tile names include both the full English identity and visible abbreviations or glyphs. Learning has no time-based rewards. Theme and English-index choices also apply to practice dialogs.
 
-Required automated accessibility checks cover 21 screen/theme states in each build, including all three learning modes, the tile library, active tables, private handoffs, and mobile layout. These checks detect selected WCAG A/AA problems; they do not replace manual assistive-technology testing or certify complete WCAG conformance.
+On phones, Solitaire starts with **Portrait**, a six-column, 144-tile layered puzzle that gives tile faces more room. The game appears above the style and lesson panels, all three game tabs fit across the screen, and Undo, Hint, Shuffle, and New stay in a bottom toolbar. **Focus board** hides the surrounding panels and fits the board to the available space without shrinking tiles excessively; Exit focus or Escape restores them. Pinch zoom remains available. Rotating the phone or entering Focus preserves the current deal. Pyramid, Garden, and Bridge remain available, and desktop starts with Pyramid. A rescued Portrait board also stays six columns wide.
+
+Required automated accessibility checks cover 23 screen/theme states in each build, including all three learning modes, the tile library, active tables, private handoffs, and mobile layout. These checks detect selected WCAG A/AA problems; they do not replace manual assistive-technology testing or certify complete WCAG conformance.
 
 ## Run and verify
 
@@ -81,17 +83,19 @@ python build.py
 npx playwright install --with-deps chromium
 npm run test:browser
 npm run test:browser:offline
+npm run test:mobile
+npm run test:mobile:offline
 npm run test:a11y
 npm run test:a11y:offline
 ```
 
-The **135 Node tests** include all **118,800** possible one-suit 14-tile inventories checked against an independent meld catalogue, **14,400 mixed-suit comparisons** over three replayable seeds, **4,480 independently calculated scoring-context cases**, and the existing 34 hand-calculated scoring fixtures. Mixed-suit coverage includes all suit permutations, honors, zero through four exposures, Kongs, broken pairs, independently judged mutations, and fifth-copy rejection. The suite also checks legal claims, special hands, payments, all 256 blind-pass combinations on each final pass, full bot games, lesson answers, practice transitions, and advice privacy/calculations. A seeded 32-hand probe checks physical-tile conservation, logical hand sizes, and zero-sum scores.
+The **136 Node tests** include all **118,800** possible one-suit 14-tile inventories checked against an independent meld catalogue, **14,400 mixed-suit comparisons** over three replayable seeds, **4,480 independently calculated scoring-context cases**, and the existing 34 hand-calculated scoring fixtures. Mixed-suit coverage includes all suit permutations, honors, zero through four exposures, Kongs, broken pairs, independently judged mutations, and fifth-copy rejection. The suite also checks legal claims, special hands, payments, all 256 blind-pass combinations on each final pass, full bot games, lesson answers, practice transitions, and advice privacy/calculations. A seeded 32-hand probe checks physical-tile conservation, logical hand sizes, and zero-sum scores.
 
 Strict `checkJs` checks JSDoc contracts in `core.js`, `table.js`, `hongkong.js`, `american.js`, and `coach.js`. Contracts distinguish physical tiles from tile faces, physical melds from scoring decompositions, claim variants, phases, and results. Ten negative compile fixtures ensure these mistakes remain rejected. UI, lessons, practice, and the Solitaire implementation remain outside this incremental typing boundary.
 
-**Deployment requires every gate to pass:** JavaScript syntax, strict core types, the complete Node suite, a fresh standalone bundle, and browser plus accessibility checks for both modular and standalone editions. Browser jobs run in parallel after the engine checks. Failure screenshots and traces, mobile screenshots, and incremental accessibility reports are retained as Actions artifacts for 14 days. Each browser command has a three-minute limit; jobs have a ten-minute limit.
+**Deployment requires every gate to pass:** JavaScript syntax, strict core types, the complete Node suite, a fresh standalone bundle, and browser, touch/mobile, and accessibility checks for both modular and standalone editions. Browser jobs run in parallel after the engine checks. Failure screenshots and traces, mobile screenshots, and incremental accessibility reports are retained as Actions artifacts for 14 days. Each browser command has a three-minute limit; browser jobs have a 45-minute limit.
 
-The browser suite verifies active rules summaries, all learning paths, wrong/right feedback, comparisons, guided practices, persistence, live hints, American passing and opening wins, provisional exposure changes, Joker/Kong advice refresh, every exposed tile and Joker count, public Flower/Season faces, private local handoffs, concealed and winning-rack presentation, keyboard answers, mobile overflow, and Escape. Browser fixtures use a fixed random seed without changing production randomness.
+The browser suite verifies active rules summaries, all learning paths, wrong/right feedback, comparisons, guided practices, persistence, live hints, American passing and opening wins, provisional exposure changes, Joker/Kong advice refresh, every exposed tile and Joker count, public Flower/Season faces, private local handoffs, concealed and winning-rack presentation, keyboard answers, mobile overflow, and Escape. The touch suite checks 320, 360, 390, 430, and 620px viewports, visible tile bounds, real pair taps and Undo, focus controls, rotation without redealing, browser pinch zoom, all four layouts, and the standalone build. Browser fixtures use a fixed random seed without changing production randomness.
 
 Local evidence is saved under `test-results/modular/` or `test-results/offline/`. Set `ATELIER_URL` to test a served site, `CHROMIUM_EXECUTABLE` for an existing Chromium binary, `ATELIER_ARTIFACT_DIR` to change the evidence directory, or `ATELIER_SCREENSHOT` to override the smoke test's mobile screenshot path. Without an override, each command opens the corresponding local HTML file.
 

@@ -111,7 +111,7 @@
 
 /* Mobile usability pass — keep game logic and desktop layout unchanged. */
 @media (max-width: 520px) {
-  html, body { max-width: 100%; overflow-x: hidden; }
+  html, body { max-width: 100%; }
   body { min-width: 0; font-size: 14px; }
   .shell { width: 100%; padding-inline: 10px; }
 
@@ -260,6 +260,99 @@
 /* On narrow screens the complete solitaire layout is scaled into the viewport. */
  .board-scroller.is-fitted{overflow-x:hidden;overflow-y:hidden}
 .board-scroller.is-fitted .solitaire-stage{margin-inline:auto;overflow:hidden}
+
+/* Portrait play: use the phone's height for larger faces, not a tiny wide board. */
+.solitaire-board { min-width: 0; }
+.board-scroller { max-height: none; }
+.solitaire-heading { display: flex; align-items: start; gap: 16px; }
+.solitaire-heading .section-heading { flex: 1; min-width: 0; }
+.solitaire-heading > .ui-btn { flex-shrink: 0; margin-top: 6px; min-height: 44px; }
+.phone-title, .board-touch-tip { display: none; }
+
+.shell.board-focus { max-width: 1000px; }
+.board-focus > .masthead,
+.board-focus > .game-nav,
+.board-focus > .appearance-bar,
+.board-focus > .learn-entry,
+.board-focus > .footer,
+.board-focus .guide-card,
+.board-focus .coach-panel,
+.board-focus .solitaire-settings,
+.board-focus .section-heading .eyebrow,
+.board-focus .section-heading .lede,
+.board-focus .desktop-title,
+.board-focus .board-touch-tip { display: none; }
+.board-focus .phone-title { display: inline; }
+.board-focus .content-grid { grid-template-columns: minmax(0, 1fr); }
+.board-focus .solitaire-heading { align-items: center; }
+.board-focus .section-heading { margin: 10px 0; }
+.board-focus .section-heading h1 { font-size: 24px; margin: 0; }
+.board-focus .solitaire-heading > .ui-btn { margin: 0; }
+.board-focus .stats-grid { margin-bottom: 8px; }
+.board-focus .stat { min-height: 0; padding: 7px 10px; }
+.board-focus .stat strong { font-size: 20px; margin-top: 2px; }
+.board-focus .board-frame { min-height: 0; }
+
+@keyframes touchHintGlow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.18); }
+}
+@media (pointer: coarse) {
+  /* Hints remain visible without moving a finger's tap target. */
+  .board-tile.is-hint { animation-name: touchHintGlow; }
+}
+
+@media (max-width: 620px) {
+  .shell { padding-inline: max(8px, env(safe-area-inset-left)) max(8px, env(safe-area-inset-right)); }
+  .game-nav { margin: 0; padding: 10px 0; gap: 5px; overflow: visible; }
+  .game-tab { min-width: 0; flex: 1 1 0; min-height: 44px; padding: 10px 3px; font-size: 11px; }
+  .shell[data-mode="solitaire"] { display: flex; flex-direction: column; }
+  .shell[data-mode="solitaire"] > .masthead { order: 0; }
+  .shell[data-mode="solitaire"] > .game-nav { order: 1; }
+  .shell[data-mode="solitaire"] > .content-grid { order: 2; }
+  .shell[data-mode="solitaire"] > .appearance-bar { order: 3; margin: 20px 0; }
+  .shell[data-mode="solitaire"] > .learn-entry { order: 4; }
+  .shell[data-mode="solitaire"] > .footer { order: 5; }
+  .solitaire-heading { align-items: center; gap: 8px; }
+  .solitaire-heading .section-heading { margin: 5px 0 10px; }
+  .solitaire-heading h1 { font-size: 24px; margin: 0; }
+  .solitaire-heading .eyebrow, .solitaire-heading .lede,
+  .solitaire-heading .desktop-title, .solitaire-toolbar .desktop-title { display: none; }
+  .phone-title { display: inline; }
+  .solitaire-heading > .ui-btn { margin: 0; padding: 8px 10px; font-size: 11px; }
+  [data-mode="solitaire"] .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 4px 0 10px; }
+  [data-mode="solitaire"] .stat { min-height: 0; padding: 7px 8px; }
+  [data-mode="solitaire"] .stat:last-child { display: none; }
+  [data-mode="solitaire"] .stat > span { font-size: 9px; letter-spacing: 0; }
+  [data-mode="solitaire"] .stat strong { font-size: 20px; margin-top: 2px; }
+  .solitaire-settings { margin-bottom: 8px; }
+  .solitaire-settings .layout-prompt { display: none; }
+  .solitaire-settings .segment { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; overflow: visible; }
+  .solitaire-settings .segment button { min-width: 0; min-height: 44px; padding: 5px 2px; font-size: 11px; }
+  .board-frame { min-height: 0; border-radius: 10px; }
+  .board-topline { padding: 10px 10px 0; gap: 5px; flex-wrap: nowrap; letter-spacing: .08em; }
+  .board-subtitle { display: none; }
+  .board-scroller { padding-bottom: 0; }
+  .board-touch-tip { display: block; text-align: center; color: #bbd1c5; font-size: 11px; margin: 8px 0 18px; }
+  .solitaire-toolbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 180;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    margin: 0 -2px;
+    padding: 8px 2px max(10px, env(safe-area-inset-bottom));
+    background: #0b2422;
+    border-top: 1px solid #527966;
+    box-shadow: 0 -8px 20px #06231b66;
+  }
+  .solitaire-toolbar .toolbar-divider { display: none; }
+  .solitaire-toolbar .ui-btn { min-width: 0; min-height: 48px; padding: 6px 2px; font-size: 11px; }
+  .solitaire-toolbar .ui-btn > span[aria-hidden] { display: block; font-size: 20px; line-height: 1.1; }
+  .toast { bottom: max(86px, calc(env(safe-area-inset-bottom) + 76px)); }
+  .board-focus .solitaire-heading h1 { font-size: 22px; }
+}
 
 </style>
 </head>
@@ -437,7 +530,20 @@
   function coords(layout) {
     const out=[];
     function rect(z,startX,startY,width,height){for(let y=startY;y<startY+height;y++)for(let x=startX;x<startX+width;x++)out.push({id:`${z}-${x}-${y}`,x,y,z});}
-    if(layout==='garden'){rect(0,0,0,12,8);rect(1,1,2,10,4);rect(2,4,3,4,2);}
+    if(layout==='portrait'){
+      // Six columns keep phone tiles readable. Each centered row has an even
+      // tile count, so pairs can peel away without changing the free-side rule.
+      const rows=[
+        {z:0,y:0,widths:[2,4,6,6,6,6,6,6,4,2]},
+        {z:1,y:1,widths:[2,6,6,6,6,6,6,2]},
+        {z:2,y:2,widths:[4,6,6,6,6,4]},
+        {z:3,y:2,widths:[4,4,4,4,4,4]}
+      ];
+      rows.forEach(layer=>layer.widths.forEach((width,row)=>{
+        rect(layer.z,(6-width)/2,layer.y+row,width,1);
+      }));
+    }
+    else if(layout==='garden'){rect(0,0,0,12,8);rect(1,1,2,10,4);rect(2,4,3,4,2);}
     else if(layout==='bridge'){rect(0,0,1,14,6);rect(1,2,2,10,4);rect(2,3,3,8,2);rect(3,5,3,4,1);}
     else {rect(0,0,0,12,8);rect(1,2,2,8,4);rect(2,3,3,6,2);rect(3,5,3,2,2);}
     if(out.length!==144)throw new Error('Invalid board shape');
@@ -513,7 +619,8 @@
         // If the player leaves a structurally trapped stack (for example, two
         // tiles above/below each other), no tile permutation can rescue it.
         // Move all remaining tiles onto a flat rescue tray before redealing.
-        positions=alive.map((t,i)=>({id:t.id,x:i%12,y:Math.floor(i/12),z:0}));
+        const columns=this.layout==='portrait'?6:12;
+        positions=alive.map((t,i)=>({id:t.id,x:i%columns,y:Math.floor(i/columns),z:0}));
         assigned=assignDeal(positions,tiles);
         const byId=new Map(positions.map(p=>[p.id,p]));
         alive.forEach(t=>{const p=byId.get(t.id);t.x=p.x;t.y=p.y;t.z=p.z;});
@@ -1403,7 +1510,9 @@ M.openPath=function(mode,onClose){
   'use strict';
   const C=M.core;
   const root=document.getElementById('app');
-  const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,learning:false,teaching:readTeaching(),advice:[],adviceOpen:false,review:'',games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:true,minFan:0,hkProfile:'atelier',flowers:true,sevenPairs:false},passSelected:new Set(),blind:0,selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
+  // Choose the initial deal once. Rotating or resizing must never redeal it.
+  const initialLayout=window.matchMedia('(max-width: 620px)').matches?'portrait':'pyramid';
+  const state={mode:'solitaire',boardFocus:false,appearance:readAppearance(),showTileGuide:false,learning:false,teaching:readTeaching(),advice:[],adviceOpen:false,review:'',games:{solitaire:new M.Solitaire(initialLayout),hongkong:null,american:null},settings:{layout:initialLayout,opponents:'bots',secondCharleston:true,minFan:0,hkProfile:'atelier',flowers:true,sevenPairs:false},passSelected:new Set(),blind:0,selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
   let pumpTimer=null,toastTimer=null,timerInterval=null;
   const THEMES=[['ivory','Classic Ivory'],['minimal','Modern Minimal'],['neon','Neon Night'],['pastel','Cozy Pastel']];
   function readTeaching(){try{return localStorage.getItem('mahjong-atelier-teaching')!=='off';}catch{return true;}}
@@ -1430,7 +1539,7 @@ M.openPath=function(mode,onClose){
   function currentGame(){return state.games[state.mode];}
   function switchMode(mode){
     clearTimeout(pumpTimer);pumpTimer=null;
-    clearAdvice();state.review='';state.mode=mode;state.blind=0;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
+    clearAdvice();state.review='';state.mode=mode;state.boardFocus=false;state.blind=0;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
     document.title='Mahjong Atelier · '+({solitaire:'Solitaire',hongkong:'Hong Kong',american:'American'}[mode]);
     render();
   }
@@ -1480,16 +1589,19 @@ M.openPath=function(mode,onClose){
   function solitaireView(){
     const g=currentGame(),positions=g.tiles,free=new Set(g.available().map(t=>t.id));
     const maxX=Math.max(...positions.map(p=>p.x)),maxY=Math.max(...positions.map(p=>p.y));
-    const width=Math.max(755,110+(maxX+1)*55),height=100+(maxY+1)*69;
+    const portrait=g.layout==='portrait';
+    const inset=portrait?18:43;
+    const width=portrait?36+(maxX+1)*55:Math.max(755,110+(maxX+1)*55);
+    const height=(portrait?74:100)+(maxY+1)*69;
     const board=positions.filter(p=>!p.removed).sort((a,b)=>a.z-b.z).map(p=>{
       const enabled=free.has(p.id),tip=g.lastHint.includes(p.id),type=p.tile.type;
-      return `<button type="button" title="${C.name(type)}${enabled?' · Free':' · Blocked'}" aria-label="${C.tileAccessibleName(type)}${enabled?' free':' blocked'}" ${enabled?'':'disabled'} data-act="sol-pick" data-tile-id="${p.id}" class="mj-tile board-tile layer-${p.z} ${enabled?'free':'blocked'} ${g.selected===p.id?'is-selected':''} ${tip?'is-hint':''}" style="left:${43+p.x*55-p.z*4}px;top:${37+p.y*69-p.z*7}px;z-index:${5+p.z*3};">${C.tileMarkup(type)}</button>`;
+      return `<button type="button" title="${C.name(type)}${enabled?' · Free':' · Blocked'}" aria-label="${C.tileAccessibleName(type)}${enabled?' free':' blocked'}" ${enabled?'':'disabled'} data-act="sol-pick" data-tile-id="${p.id}" class="mj-tile board-tile layer-${p.z} ${enabled?'free':'blocked'} ${g.selected===p.id?'is-selected':''} ${tip?'is-hint':''}" style="left:${inset+p.x*55-p.z*4}px;top:${37+p.y*69-p.z*7}px;z-index:${5+p.z*3};">${C.tileMarkup(type)}</button>`;
     }).join('');
-    return `${panelHeader('SOLO PLAY / MATCH & CLEAR','A little peace. A lot of possibilities.','Match free tiles, uncover new paths, and clear the board at your own pace.')}
-    <div class="stats-grid"><div class="stat"><span>Tiles remaining</span><strong>${g.remaining}<small> / 144</small></strong></div><div class="stat"><span>Pairs matched</span><strong>${g.moves}</strong></div><div class="stat"><span>Time in play</span><strong data-timer>${C.elapsed(Math.floor((Date.now()-g.startedAt)/1000))}</strong></div><div class="stat"><span>Best moments</span><strong>${state.stats.solitaire||0}<small> clears</small></strong></div></div>
-    <div class="solitaire-settings"><div class="layout-prompt">BOARD SHAPE <span class="bullet">•</span> <span class="muted">Choose your challenge</span></div><div class="segment">${['pyramid','garden','bridge'].map(l=>`<button data-act="layout" data-layout="${l}" class="${g.layout===l?'active':''}" type="button">${({pyramid:'Pyramid',garden:'Garden',bridge:'Bridge'})[l]}</button>`).join('')}</div></div>
-    <div class="board-frame"><div class="board-topline"><span>✧ &nbsp; ${g.reflowed?'RESCUE TRAY':g.layout.toUpperCase()} / LAYERED PUZZLE</span><span>144 TILES · ${g.pairs().length} PAIRS AVAILABLE</span></div><div class="board-scroller"><div class="solitaire-stage" data-board-width="${width}" data-board-height="${height}" style="width:${width}px;height:${height}px"><div class="solitaire-board" role="group" aria-label="Mahjong Solitaire board" style="width:${width}px;height:${height}px">${board}</div></div></div>${g.finished?'<div class="board-overlay"><div class="winning-medal">✦</div><h2>Beautifully played.</h2><p>You cleared every tile!</p>'+btn('Play again','new-sol','primary')+'</div>':''}${!g.finished&&g.pairs().length===0?'<div class="no-moves">No matching free pairs. Try Undo or Shuffle to continue.</div>':''}</div>
-    <div class="toolbar">${btn('↶ &nbsp; Undo','undo','secondary',!g.undoStack.length)}${btn('◌ &nbsp; Hint','hint','secondary',g.finished)}${btn('⤨ &nbsp; Shuffle','shuffle','secondary',g.finished)}<span class="toolbar-divider"></span>${btn('✧ &nbsp; New puzzle','new-sol','primary')}</div>`;
+    return `<div class="solitaire-heading">${panelHeader('SOLO PLAY / MATCH & CLEAR','<span class="desktop-title">A little peace. A lot of possibilities.</span><span class="phone-title">Solitaire</span>','Match free tiles, uncover new paths, and clear the board at your own pace.')}${btn(state.boardFocus?'↙ Exit focus':'⛶ Focus board','board-focus','ghost',false,`aria-pressed="${state.boardFocus}"`)}</div>
+    <div class="stats-grid"><div class="stat"><span>Tiles left</span><strong>${g.remaining}<small> / 144</small></strong></div><div class="stat"><span>Pairs matched</span><strong>${g.moves}</strong></div><div class="stat"><span>Time</span><strong data-timer>${C.elapsed(Math.floor((Date.now()-g.startedAt)/1000))}</strong></div><div class="stat"><span>Best moments</span><strong>${state.stats.solitaire||0}<small> clears</small></strong></div></div>
+    <div class="solitaire-settings"><div class="layout-prompt">BOARD SHAPE <span class="bullet">•</span> <span class="muted">Choose your challenge</span></div><div class="segment" role="group" aria-label="Puzzle layout (starts a new game)">${['portrait','pyramid','garden','bridge'].map(l=>`<button data-act="layout" data-layout="${l}" class="${g.layout===l?'active':''}" aria-pressed="${g.layout===l}" type="button">${({portrait:'Portrait',pyramid:'Pyramid',garden:'Garden',bridge:'Bridge'})[l]}</button>`).join('')}</div></div>
+    <div class="board-frame"><div class="board-topline"><span>✧ &nbsp; ${g.reflowed?'RESCUE TRAY':g.layout.toUpperCase()} <span class="board-subtitle">/ LAYERED PUZZLE</span></span><span>${g.pairs().length} PAIRS AVAILABLE</span></div><div class="board-scroller"><div class="solitaire-stage" data-board-width="${width}" data-board-height="${height}" style="width:${width}px;height:${height}px"><div class="solitaire-board" role="group" aria-label="Mahjong Solitaire board" style="width:${width}px;height:${height}px">${board}</div></div></div>${g.finished?'<div class="board-overlay"><div class="winning-medal">✦</div><h2>Beautifully played.</h2><p>You cleared every tile!</p>'+btn('Play again','new-sol','primary')+'</div>':''}${!g.finished&&g.pairs().length===0?'<div class="no-moves" role="status">No matching free pairs. Try Undo or Shuffle to continue.</div>':''}</div>
+    <div class="toolbar solitaire-toolbar" role="group" aria-label="Puzzle controls">${btn('<span aria-hidden="true">↶</span> Undo','undo','secondary',!g.undoStack.length)}${btn('<span aria-hidden="true">◌</span> Hint','hint','secondary',g.finished)}${btn('<span aria-hidden="true">⤨</span> Shuffle','shuffle','secondary',g.finished)}<span class="toolbar-divider"></span>${btn('<span aria-hidden="true">✧</span> New<span class="desktop-title"> puzzle</span>','new-sol','primary',false,'aria-label="New puzzle"')}</div><p class="board-touch-tip">Pinch to zoom in on the tiles. Focus board gives you more room to play.</p>`;
   }
   function setupView(){
     const isAm=state.mode==='american';
@@ -1578,7 +1690,7 @@ M.openPath=function(mode,onClose){
   function render(){
     const which=state.mode;
     maybeGuard();
-    root.innerHTML=`<div class="shell" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>${offlineAccessMarkup()}</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
+    root.innerHTML=`<div class="shell${state.boardFocus?' board-focus':''}" data-mode="${which}" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>${offlineAccessMarkup()}</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
     if(state.curtain!==null)root.querySelector('[data-act="reveal"]')?.focus();
     fitSolitaireBoard();
     schedulePump();
@@ -1592,7 +1704,14 @@ M.openPath=function(mode,onClose){
     const originalHeight=Number(stage.dataset.boardHeight)||board.offsetHeight;
     const viewportWidth=Math.min(window.innerWidth||Infinity,document.documentElement.clientWidth||Infinity);
     const available=Math.max(0,Math.min(scroller.clientWidth,viewportWidth)-4);
-    const scale=available?Math.min(1,available/originalWidth):1;
+    let scale=available?Math.min(1,available/originalWidth):1;
+    if(state.boardFocus){
+      const chrome=['.solitaire-heading','.stats-grid','.board-topline','.solitaire-toolbar']
+        .reduce((total,selector)=>total+(root.querySelector(selector)?.offsetHeight||0),48);
+      // Fit a focused portrait board vertically when possible, but keep tiles
+      // legible on short screens; normal page scrolling remains available.
+      scale=Math.min(scale,Math.max(44/54,(window.innerHeight-chrome)/originalHeight));
+    }
     board.style.transformOrigin='top left';
     board.style.transform=`scale(${scale})`;
     stage.style.width=`${Math.ceil(originalWidth*scale)}px`;
@@ -1631,6 +1750,13 @@ M.openPath=function(mode,onClose){
       if(act==='practice'){state.learning=true;clearTimeout(pumpTimer);M.openPractice(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
       if(act==='learn'){state.learning=true;clearTimeout(pumpTimer);M.openLessons(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
       if(act==='switch'){switchMode(control.dataset.mode);return;}
+      if(act==='board-focus'){
+        state.boardFocus=!state.boardFocus;
+        render();
+        root.querySelector('[data-act="board-focus"]')?.focus({preventScroll:true});
+        root.querySelector('.solitaire-heading')?.scrollIntoView({block:'start',behavior:'instant'});
+        return;
+      }
       if(act==='toggle-guide'){state.showGuide=!state.showGuide;render();return;}
       if(act==='tile-guide'){state.showTileGuide=true;render();root.querySelector('.tile-help-close')?.focus();return;}
       if(act==='close-tile-guide'){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();return;}
@@ -1697,6 +1823,13 @@ M.openPath=function(mode,onClose){
     render();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.showTileGuide){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();}});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&state.boardFocus&&!state.learning&&!state.showTileGuide){
+      state.boardFocus=false;
+      render();
+      root.querySelector('[data-act="board-focus"]')?.focus({preventScroll:true});
+    }
+  });
   timerInterval=setInterval(()=>{
     if(state.mode!=='solitaire')return;
     const t=state.games.solitaire;

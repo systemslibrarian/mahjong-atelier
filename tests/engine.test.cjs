@@ -19,7 +19,7 @@ test('Chinese faces and bird for 1-Bamboo',()=>{
   assert.match(M.core.tileMarkup('we'),/東/);
 });
 test('all solitaire layouts allow a matched pair and undo',()=>{
-  for(const layout of ['pyramid','garden','bridge']){
+  for(const layout of ['portrait','pyramid','garden','bridge']){
     const g=new M.Solitaire(layout);
     assert.equal(g.remaining,144);
     const pair=g.pairs()[0];assert.ok(pair,'missing pair '+layout);
