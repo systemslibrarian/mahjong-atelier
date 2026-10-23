@@ -98,3 +98,152 @@
 .rules-profile-settings{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;list-style:none;padding:0;margin:0}.rules-profile-settings li{display:flex;flex-direction:column;gap:3px;min-width:0;max-width:100%;padding:7px 10px;background:#0c2e27;border:1px solid #55765b8a;border-radius:6px;line-height:1.35}.rules-profile-settings span{font-size:10px;color:#bfd2c2}.rules-profile-settings strong{font-size:12px;color:#fff0d3;font-weight:750;overflow-wrap:anywhere}
 .rules-profile-note{grid-column:1/-1;margin:0;color:#cadbc9;font-size:11px;line-height:1.5}.offline-download{color:#f1d3a4;text-decoration:underline;text-underline-offset:3px}.offline-download:focus-visible{outline:3px solid #ffe1a5;outline-offset:4px;border-radius:2px}
 @media(max-width:760px){.rules-profile{grid-template-columns:1fr;padding:13px 14px;gap:10px}.rules-profile h2{font-size:20px}.rules-profile-settings{justify-content:flex-start;gap:6px}.rules-profile-settings li{flex:1 1 88px;padding:7px 8px}.rules-profile-note{font-size:11px}}
+
+
+/* Mobile usability pass — keep game logic and desktop layout unchanged. */
+@media (max-width: 520px) {
+  html, body { max-width: 100%; overflow-x: hidden; }
+  body { min-width: 0; font-size: 14px; }
+  .shell { width: 100%; padding-inline: 10px; }
+
+  .masthead { gap: 8px; }
+  .identity { min-width: 0; gap: 9px; }
+  .brand-name, .brand-sub { overflow-wrap: anywhere; }
+  .offline-pill { display: none; }
+
+  .game-nav {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scroll-snap-type: x proximity;
+    justify-content: flex-start;
+    margin-inline: -10px;
+    padding-inline: 10px;
+  }
+  .game-tab {
+    flex: 0 0 auto;
+    min-width: 128px;
+    min-height: 48px;
+    scroll-snap-align: start;
+  }
+
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat { min-width: 0; }
+  .stat strong, .stat-status { overflow-wrap: anywhere; }
+
+  .appearance-bar { align-items: stretch; }
+  .appearance-intro { min-width: 0; width: 100%; }
+  .appearance-controls { align-items: stretch; }
+  .appearance-picker { width: 100%; }
+  .appearance-picker > span { min-width: 54px; }
+  .appearance-picker select { min-height: 44px; }
+  .indices-label, .tile-help-trigger { min-height: 44px; }
+
+  .segment { width: 100%; overflow-x: auto; }
+  .segment button { flex: 1 0 auto; min-height: 44px; padding-inline: 12px; }
+
+  .board-frame { border-radius: 9px; }
+  .board-scroller {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    padding-bottom: 8px;
+  }
+  .solitaire-board { margin-inline: 0; }
+  .board-topline { gap: 10px; flex-wrap: wrap; }
+  .board-topline span:last-child { margin-left: auto; }
+  .no-moves {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    text-align: center;
+  }
+
+  .toolbar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .toolbar .ui-btn { width: 100%; min-height: 44px; }
+  .ui-btn { min-height: 44px; }
+
+  .setup-area { width: 100%; max-width: none; }
+  .opponent-grid { grid-template-columns: 1fr; }
+  .opponent { min-height: 0; }
+  .setup-field select { width: 100%; min-height: 44px; }
+
+  .arena { overflow-x: auto; overscroll-behavior-x: contain; }
+  .arena-grid { min-width: 300px; }
+  .action-buttons { width: 100%; }
+  .action-buttons .ui-btn { flex: 1 1 125px; }
+
+  .hand-title { align-items: flex-start; flex-direction: column; }
+  .rack {
+    padding-inline: 8px;
+    scroll-padding-inline: 8px;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .practice-header { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .pattern { min-width: 0; }
+  .pattern-group { overflow-wrap: anywhere; }
+
+  .guide-card { padding: 17px 14px; }
+  .guide-kicker { gap: 10px; flex-wrap: wrap; }
+
+  .tile-help-overlay { padding: 8px; }
+  .tile-help-panel { width: 100%; border-radius: 11px; }
+  .tile-help-heading { align-items: flex-start; }
+  .legend-tiles { gap: 10px; }
+
+  .learn-dialog {
+    width: calc(100vw - 12px);
+    max-width: none;
+    max-height: 96dvh;
+    margin: 0;
+    padding: 14px;
+    border-radius: 12px;
+  }
+  .learn-layout nav { grid-template-columns: 1fr; }
+  .lesson-pager { flex-direction: column; }
+  .lesson-pager .ui-btn { width: 100%; }
+  .lesson-table { margin-inline: -4px; padding-inline: 4px; }
+
+  .match-ledger > div { grid-template-columns: 1fr; }
+  .practice-mini-board {
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
+
+  .rules-profile-settings li { flex-basis: calc(50% - 4px); }
+  .footer { flex-direction: column; gap: 8px; }
+
+  .curtain { padding: 8px; }
+  .curtain-content { padding: 28px 16px; border-radius: 13px; }
+  .curtain-content h2 { font-size: 32px; }
+
+  .toast {
+    left: 10px;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: auto;
+    max-width: none;
+    transform: none;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand-sub { display: none; }
+  .game-tab { min-width: 116px; font-size: 10px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .rules-profile-settings li { flex-basis: 100%; }
+}
+
+@media (pointer: coarse) {
+  button, select, input, summary, a { touch-action: manipulation; }
+  .game-tab, .ui-btn, .tile-help-trigger, .learn-layout nav button { min-height: 44px; }
+  .mj-tile:hover:not(:disabled), .ui-btn:hover:not(:disabled), .game-tab:hover { filter: none; transform: none; }
+}
