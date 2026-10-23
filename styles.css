@@ -249,7 +249,5 @@
 }
 
 /* On narrow screens the complete solitaire layout is scaled into the viewport. */
-@media(max-width:720px){
-  .board-scroller.is-fitted{overflow-x:hidden;overflow-y:hidden}
-  .board-scroller.is-fitted .solitaire-stage{margin-inline:auto}
-}
+ .board-scroller.is-fitted{overflow-x:hidden;overflow-y:hidden}
+.board-scroller.is-fitted .solitaire-stage{margin-inline:auto;overflow:hidden}
