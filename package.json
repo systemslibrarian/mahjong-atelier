@@ -8,6 +8,8 @@
     "typecheck": "tsc --project tsconfig.json",
     "test:browser": "node tests/browser-smoke.cjs",
     "test:browser:offline": "node tests/browser-smoke.cjs --offline",
+    "test:feedback": "node tests/solitaire-feedback.cjs",
+    "test:feedback:offline": "node tests/solitaire-feedback.cjs --offline",
     "test:mobile": "node tests/mobile-board.cjs",
     "test:mobile:offline": "node tests/mobile-board.cjs --offline",
     "test:a11y": "node tests/accessibility.cjs",

@@ -57,6 +57,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Exercise learning and game controls
         run: npm run test:browser
+      - name: Check matching feedback with mouse and touch
+        run: npm run test:feedback
       - name: Check phone boards, touch controls, rotation, and pinch zoom
         run: npm run test:mobile
       - name: Check accessibility of key screens

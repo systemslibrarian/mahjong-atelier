@@ -23,7 +23,8 @@
   function saveAppearance(){try{localStorage.setItem('mahjong-atelier-appearance',JSON.stringify(state.appearance));}catch{}}
   function readStats(){try{return JSON.parse(localStorage.getItem('mahjong-arcade-stats'))||{solitaire:0,hongkong:0,american:0};}catch{return {solitaire:0,hongkong:0,american:0};}}
   function saveWin(which){state.stats[which]=(state.stats[which]||0)+1;try{localStorage.setItem('mahjong-arcade-stats',JSON.stringify(state.stats));}catch{}}
-  function notify(text){state.toast=text;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{state.toast='';const el=document.querySelector('.toast');if(el)el.remove();},3500);}
+  function clearToast(){clearTimeout(toastTimer);toastTimer=null;state.toast='';root.querySelector('.toast')?.remove();}
+  function notify(text){clearToast();state.toast=text;toastTimer=setTimeout(clearToast,3500);}
   function pop(){if(!state.toast)return '';return '<div role="status" aria-live="polite" class="toast"><span class="toast-dot"></span>'+escapeHTML(state.toast)+'</div>';}
   function escapeHTML(s){return String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
   function btn(text,action,variant='secondary',disabled=false,attrs=''){
@@ -32,6 +33,7 @@
   function currentGame(){return state.games[state.mode];}
   function switchMode(mode){
     clearTimeout(pumpTimer);pumpTimer=null;
+    clearToast();
     clearAdvice();state.review='';state.mode=mode;state.boardFocus=false;state.blind=0;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
     document.title='Mahjong Atelier · '+({solitaire:'Solitaire',hongkong:'Hong Kong',american:'American'}[mode]);
     render();
@@ -253,14 +255,16 @@
       if(act==='toggle-guide'){state.showGuide=!state.showGuide;render();return;}
       if(act==='tile-guide'){state.showTileGuide=true;render();root.querySelector('.tile-help-close')?.focus();return;}
       if(act==='close-tile-guide'){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();return;}
-      if(act==='layout'){clearAdvice();state.review='';state.games.solitaire.newGame(control.dataset.layout);render();return;}
+      if(act==='layout'){clearToast();clearAdvice();state.review='';state.games.solitaire.newGame(control.dataset.layout);render();return;}
       if(act==='sol-pick'){
         const g=state.games.solitaire,before=g.available().map(t=>t.id),action=g.choose(control.dataset.tileId);
+        // Feedback describes this comparison, never a pair that already ended.
+        if(action.action!=='locked')clearToast();
         if(state.teaching&&action.action==='match'){const n=g.available().filter(t=>!before.includes(t.id)).length;state.review=`Legal pair removed; ${n} previously blocked tile${n===1?' is':'s are'} now free. Look at those new choices before taking another pair.`;clearAdvice();}
         if(action.action==='match'&&action.completed){g.finishedSeconds=Math.floor((Date.now()-g.startedAt)/1000);saveWin('solitaire');notify('You cleared the board!');}
         if(action.action==='nomatch')notify('Those tiles do not match. Try another pair.');render();return;
       }
-      if(act==='new-sol'){clearAdvice();state.review='';state.games.solitaire.newGame();render();return;}
+      if(act==='new-sol'){clearToast();clearAdvice();state.review='';state.games.solitaire.newGame();render();return;}
       if(act==='undo'){clearAdvice();state.review='The previous pair has been restored. Compare another choice.';if(state.games.solitaire.undo())notify('The last pair is back.');render();return;}
       if(act==='hint'){if(!state.games.solitaire.hint().length)notify('No match available. Shuffle or Undo to continue.');render();return;}
       if(act==='shuffle'){clearAdvice();state.review='The remaining board has been reshuffled. Previous comparisons no longer apply.';if(state.games.solitaire.reshuffle())notify(state.games.solitaire.reflowed?'Remaining tiles reorganized into an open rescue layout. Undo history cleared.':'Remaining tiles reshuffled into a solvable arrangement. Undo history cleared.');render();return;}
