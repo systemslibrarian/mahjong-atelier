@@ -10,7 +10,7 @@ const artifactDirectory = path.resolve(process.env.ATELIER_ARTIFACT_DIR || path.
 const artifactPath = name => path.join(artifactDirectory, name);
 const target = process.env.ATELIER_URL || pathToFileURL(path.resolve(__dirname, '..', edition === 'offline' ? 'Mahjong_Atelier.html' : 'index.html')).href;
 
-async function runBrowserCheck(name, check) {
+async function runBrowserCheck(name, check, contextOptions = {}) {
   await fs.mkdir(artifactDirectory, {recursive: true});
   const launch = process.env.CHROMIUM_EXECUTABLE
     ? {executablePath: process.env.CHROMIUM_EXECUTABLE, args: ['--no-sandbox', '--no-zygote', '--single-process', '--disable-gpu', '--disable-software-rasterizer', '--disable-gpu-compositing', '--use-gl=disabled']}
@@ -25,7 +25,7 @@ async function runBrowserCheck(name, check) {
     await Promise.race([
       (async () => {
         browser = await chromium.launch({...launch, timeout: 30000});
-        context = await browser.newContext({viewport: {width: 1280, height: 900}});
+        context = await browser.newContext({viewport: {width: 1280, height: 900}, ...contextOptions});
         await context.tracing.start({screenshots: true, snapshots: true});
         tracingStarted = true;
         page = await context.newPage();

@@ -102,7 +102,7 @@
 
 /* Mobile usability pass — keep game logic and desktop layout unchanged. */
 @media (max-width: 520px) {
-  html, body { max-width: 100%; overflow-x: hidden; }
+  html, body { max-width: 100%; }
   body { min-width: 0; font-size: 14px; }
   .shell { width: 100%; padding-inline: 10px; }
 
@@ -251,3 +251,96 @@
 /* On narrow screens the complete solitaire layout is scaled into the viewport. */
  .board-scroller.is-fitted{overflow-x:hidden;overflow-y:hidden}
 .board-scroller.is-fitted .solitaire-stage{margin-inline:auto;overflow:hidden}
+
+/* Portrait play: use the phone's height for larger faces, not a tiny wide board. */
+.solitaire-board { min-width: 0; }
+.board-scroller { max-height: none; }
+.solitaire-heading { display: flex; align-items: start; gap: 16px; }
+.solitaire-heading .section-heading { flex: 1; min-width: 0; }
+.solitaire-heading > .ui-btn { flex-shrink: 0; margin-top: 6px; min-height: 44px; }
+.phone-title, .board-touch-tip { display: none; }
+
+.shell.board-focus { max-width: 1000px; }
+.board-focus > .masthead,
+.board-focus > .game-nav,
+.board-focus > .appearance-bar,
+.board-focus > .learn-entry,
+.board-focus > .footer,
+.board-focus .guide-card,
+.board-focus .coach-panel,
+.board-focus .solitaire-settings,
+.board-focus .section-heading .eyebrow,
+.board-focus .section-heading .lede,
+.board-focus .desktop-title,
+.board-focus .board-touch-tip { display: none; }
+.board-focus .phone-title { display: inline; }
+.board-focus .content-grid { grid-template-columns: minmax(0, 1fr); }
+.board-focus .solitaire-heading { align-items: center; }
+.board-focus .section-heading { margin: 10px 0; }
+.board-focus .section-heading h1 { font-size: 24px; margin: 0; }
+.board-focus .solitaire-heading > .ui-btn { margin: 0; }
+.board-focus .stats-grid { margin-bottom: 8px; }
+.board-focus .stat { min-height: 0; padding: 7px 10px; }
+.board-focus .stat strong { font-size: 20px; margin-top: 2px; }
+.board-focus .board-frame { min-height: 0; }
+
+@keyframes touchHintGlow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.18); }
+}
+@media (pointer: coarse) {
+  /* Hints remain visible without moving a finger's tap target. */
+  .board-tile.is-hint { animation-name: touchHintGlow; }
+}
+
+@media (max-width: 620px) {
+  .shell { padding-inline: max(8px, env(safe-area-inset-left)) max(8px, env(safe-area-inset-right)); }
+  .game-nav { margin: 0; padding: 10px 0; gap: 5px; overflow: visible; }
+  .game-tab { min-width: 0; flex: 1 1 0; min-height: 44px; padding: 10px 3px; font-size: 11px; }
+  .shell[data-mode="solitaire"] { display: flex; flex-direction: column; }
+  .shell[data-mode="solitaire"] > .masthead { order: 0; }
+  .shell[data-mode="solitaire"] > .game-nav { order: 1; }
+  .shell[data-mode="solitaire"] > .content-grid { order: 2; }
+  .shell[data-mode="solitaire"] > .appearance-bar { order: 3; margin: 20px 0; }
+  .shell[data-mode="solitaire"] > .learn-entry { order: 4; }
+  .shell[data-mode="solitaire"] > .footer { order: 5; }
+  .solitaire-heading { align-items: center; gap: 8px; }
+  .solitaire-heading .section-heading { margin: 5px 0 10px; }
+  .solitaire-heading h1 { font-size: 24px; margin: 0; }
+  .solitaire-heading .eyebrow, .solitaire-heading .lede,
+  .solitaire-heading .desktop-title, .solitaire-toolbar .desktop-title { display: none; }
+  .phone-title { display: inline; }
+  .solitaire-heading > .ui-btn { margin: 0; padding: 8px 10px; font-size: 11px; }
+  [data-mode="solitaire"] .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 4px 0 10px; }
+  [data-mode="solitaire"] .stat { min-height: 0; padding: 7px 8px; }
+  [data-mode="solitaire"] .stat:last-child { display: none; }
+  [data-mode="solitaire"] .stat > span { font-size: 9px; letter-spacing: 0; }
+  [data-mode="solitaire"] .stat strong { font-size: 20px; margin-top: 2px; }
+  .solitaire-settings { margin-bottom: 8px; }
+  .solitaire-settings .layout-prompt { display: none; }
+  .solitaire-settings .segment { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; overflow: visible; }
+  .solitaire-settings .segment button { min-width: 0; min-height: 44px; padding: 5px 2px; font-size: 11px; }
+  .board-frame { min-height: 0; border-radius: 10px; }
+  .board-topline { padding: 10px 10px 0; gap: 5px; flex-wrap: nowrap; letter-spacing: .08em; }
+  .board-subtitle { display: none; }
+  .board-scroller { padding-bottom: 0; }
+  .board-touch-tip { display: block; text-align: center; color: #bbd1c5; font-size: 11px; margin: 8px 0 18px; }
+  .solitaire-toolbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 180;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    margin: 0 -2px;
+    padding: 8px 2px max(10px, env(safe-area-inset-bottom));
+    background: #0b2422;
+    border-top: 1px solid #527966;
+    box-shadow: 0 -8px 20px #06231b66;
+  }
+  .solitaire-toolbar .toolbar-divider { display: none; }
+  .solitaire-toolbar .ui-btn { min-width: 0; min-height: 48px; padding: 6px 2px; font-size: 11px; }
+  .solitaire-toolbar .ui-btn > span[aria-hidden] { display: block; font-size: 20px; line-height: 1.1; }
+  .toast { bottom: max(86px, calc(env(safe-area-inset-bottom) + 76px)); }
+  .board-focus .solitaire-heading h1 { font-size: 22px; }
+}

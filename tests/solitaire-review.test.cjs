@@ -73,6 +73,18 @@ test('Undo restores the completed pair and selection without changing its identi
  assert.deepEqual(g.tiles,before);
 });
 
+test('Portrait rescue keeps a trapped stack within six columns and preserves its tiles',()=>{
+ const g=new M.Solitaire('portrait');
+ g.tiles=Array.from({length:14},(_,i)=>tile('stack-'+i,0,0,i,'b'+(Math.floor(i/2)+1)));
+ const inventory=g.tiles.map(t=>t.tile.id).sort((a,b)=>a-b);
+ assert.equal(g.available().length,1,'Only the top of the trapped stack is free');
+ assert.equal(g.reshuffle(),true);
+ assert.equal(g.reflowed,true);
+ assert.ok(g.tiles.every(t=>t.x>=0&&t.x<6&&t.z===0));
+ assert.deepEqual(g.tiles.map(t=>t.tile.id).sort((a,b)=>a-b),inventory);
+ assert.ok(g.pairs().length>0);
+});
+
 test('Solitaire practice discards comparisons whose board changed after a match',()=>{
  const p=new M.Practice('solitaire');p.compare();
  assert.ok(p.comparisons.some(c=>c.ids.includes('c')&&c.ids.includes('d')));

@@ -3,7 +3,9 @@
   'use strict';
   const C=M.core;
   const root=document.getElementById('app');
-  const state={mode:'solitaire',appearance:readAppearance(),showTileGuide:false,learning:false,teaching:readTeaching(),advice:[],adviceOpen:false,review:'',games:{solitaire:new M.Solitaire(),hongkong:null,american:null},settings:{layout:'pyramid',opponents:'bots',secondCharleston:true,minFan:0,hkProfile:'atelier',flowers:true,sevenPairs:false},passSelected:new Set(),blind:0,selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
+  // Choose the initial deal once. Rotating or resizing must never redeal it.
+  const initialLayout=window.matchMedia('(max-width: 620px)').matches?'portrait':'pyramid';
+  const state={mode:'solitaire',boardFocus:false,appearance:readAppearance(),showTileGuide:false,learning:false,teaching:readTeaching(),advice:[],adviceOpen:false,review:'',games:{solitaire:new M.Solitaire(initialLayout),hongkong:null,american:null},settings:{layout:initialLayout,opponents:'bots',secondCharleston:true,minFan:0,hkProfile:'atelier',flowers:true,sevenPairs:false},passSelected:new Set(),blind:0,selected:null,toast:'',curtain:null,lastSeat:-1,showGuide:true,goal:0,mute:false,stats:readStats()};
   let pumpTimer=null,toastTimer=null,timerInterval=null;
   const THEMES=[['ivory','Classic Ivory'],['minimal','Modern Minimal'],['neon','Neon Night'],['pastel','Cozy Pastel']];
   function readTeaching(){try{return localStorage.getItem('mahjong-atelier-teaching')!=='off';}catch{return true;}}
@@ -30,7 +32,7 @@
   function currentGame(){return state.games[state.mode];}
   function switchMode(mode){
     clearTimeout(pumpTimer);pumpTimer=null;
-    clearAdvice();state.review='';state.mode=mode;state.blind=0;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
+    clearAdvice();state.review='';state.mode=mode;state.boardFocus=false;state.blind=0;state.selected=null;state.passSelected.clear();state.curtain=null;state.lastSeat=-1;state.showTileGuide=false;
     document.title='Mahjong Atelier · '+({solitaire:'Solitaire',hongkong:'Hong Kong',american:'American'}[mode]);
     render();
   }
@@ -80,16 +82,19 @@
   function solitaireView(){
     const g=currentGame(),positions=g.tiles,free=new Set(g.available().map(t=>t.id));
     const maxX=Math.max(...positions.map(p=>p.x)),maxY=Math.max(...positions.map(p=>p.y));
-    const width=Math.max(755,110+(maxX+1)*55),height=100+(maxY+1)*69;
+    const portrait=g.layout==='portrait';
+    const inset=portrait?18:43;
+    const width=portrait?36+(maxX+1)*55:Math.max(755,110+(maxX+1)*55);
+    const height=(portrait?74:100)+(maxY+1)*69;
     const board=positions.filter(p=>!p.removed).sort((a,b)=>a.z-b.z).map(p=>{
       const enabled=free.has(p.id),tip=g.lastHint.includes(p.id),type=p.tile.type;
-      return `<button type="button" title="${C.name(type)}${enabled?' · Free':' · Blocked'}" aria-label="${C.tileAccessibleName(type)}${enabled?' free':' blocked'}" ${enabled?'':'disabled'} data-act="sol-pick" data-tile-id="${p.id}" class="mj-tile board-tile layer-${p.z} ${enabled?'free':'blocked'} ${g.selected===p.id?'is-selected':''} ${tip?'is-hint':''}" style="left:${43+p.x*55-p.z*4}px;top:${37+p.y*69-p.z*7}px;z-index:${5+p.z*3};">${C.tileMarkup(type)}</button>`;
+      return `<button type="button" title="${C.name(type)}${enabled?' · Free':' · Blocked'}" aria-label="${C.tileAccessibleName(type)}${enabled?' free':' blocked'}" ${enabled?'':'disabled'} data-act="sol-pick" data-tile-id="${p.id}" class="mj-tile board-tile layer-${p.z} ${enabled?'free':'blocked'} ${g.selected===p.id?'is-selected':''} ${tip?'is-hint':''}" style="left:${inset+p.x*55-p.z*4}px;top:${37+p.y*69-p.z*7}px;z-index:${5+p.z*3};">${C.tileMarkup(type)}</button>`;
     }).join('');
-    return `${panelHeader('SOLO PLAY / MATCH & CLEAR','A little peace. A lot of possibilities.','Match free tiles, uncover new paths, and clear the board at your own pace.')}
-    <div class="stats-grid"><div class="stat"><span>Tiles remaining</span><strong>${g.remaining}<small> / 144</small></strong></div><div class="stat"><span>Pairs matched</span><strong>${g.moves}</strong></div><div class="stat"><span>Time in play</span><strong data-timer>${C.elapsed(Math.floor((Date.now()-g.startedAt)/1000))}</strong></div><div class="stat"><span>Best moments</span><strong>${state.stats.solitaire||0}<small> clears</small></strong></div></div>
-    <div class="solitaire-settings"><div class="layout-prompt">BOARD SHAPE <span class="bullet">•</span> <span class="muted">Choose your challenge</span></div><div class="segment">${['pyramid','garden','bridge'].map(l=>`<button data-act="layout" data-layout="${l}" class="${g.layout===l?'active':''}" type="button">${({pyramid:'Pyramid',garden:'Garden',bridge:'Bridge'})[l]}</button>`).join('')}</div></div>
-    <div class="board-frame"><div class="board-topline"><span>✧ &nbsp; ${g.reflowed?'RESCUE TRAY':g.layout.toUpperCase()} / LAYERED PUZZLE</span><span>144 TILES · ${g.pairs().length} PAIRS AVAILABLE</span></div><div class="board-scroller"><div class="solitaire-stage" data-board-width="${width}" data-board-height="${height}" style="width:${width}px;height:${height}px"><div class="solitaire-board" role="group" aria-label="Mahjong Solitaire board" style="width:${width}px;height:${height}px">${board}</div></div></div>${g.finished?'<div class="board-overlay"><div class="winning-medal">✦</div><h2>Beautifully played.</h2><p>You cleared every tile!</p>'+btn('Play again','new-sol','primary')+'</div>':''}${!g.finished&&g.pairs().length===0?'<div class="no-moves">No matching free pairs. Try Undo or Shuffle to continue.</div>':''}</div>
-    <div class="toolbar">${btn('↶ &nbsp; Undo','undo','secondary',!g.undoStack.length)}${btn('◌ &nbsp; Hint','hint','secondary',g.finished)}${btn('⤨ &nbsp; Shuffle','shuffle','secondary',g.finished)}<span class="toolbar-divider"></span>${btn('✧ &nbsp; New puzzle','new-sol','primary')}</div>`;
+    return `<div class="solitaire-heading">${panelHeader('SOLO PLAY / MATCH & CLEAR','<span class="desktop-title">A little peace. A lot of possibilities.</span><span class="phone-title">Solitaire</span>','Match free tiles, uncover new paths, and clear the board at your own pace.')}${btn(state.boardFocus?'↙ Exit focus':'⛶ Focus board','board-focus','ghost',false,`aria-pressed="${state.boardFocus}"`)}</div>
+    <div class="stats-grid"><div class="stat"><span>Tiles left</span><strong>${g.remaining}<small> / 144</small></strong></div><div class="stat"><span>Pairs matched</span><strong>${g.moves}</strong></div><div class="stat"><span>Time</span><strong data-timer>${C.elapsed(Math.floor((Date.now()-g.startedAt)/1000))}</strong></div><div class="stat"><span>Best moments</span><strong>${state.stats.solitaire||0}<small> clears</small></strong></div></div>
+    <div class="solitaire-settings"><div class="layout-prompt">BOARD SHAPE <span class="bullet">•</span> <span class="muted">Choose your challenge</span></div><div class="segment" role="group" aria-label="Puzzle layout (starts a new game)">${['portrait','pyramid','garden','bridge'].map(l=>`<button data-act="layout" data-layout="${l}" class="${g.layout===l?'active':''}" aria-pressed="${g.layout===l}" type="button">${({portrait:'Portrait',pyramid:'Pyramid',garden:'Garden',bridge:'Bridge'})[l]}</button>`).join('')}</div></div>
+    <div class="board-frame"><div class="board-topline"><span>✧ &nbsp; ${g.reflowed?'RESCUE TRAY':g.layout.toUpperCase()} <span class="board-subtitle">/ LAYERED PUZZLE</span></span><span>${g.pairs().length} PAIRS AVAILABLE</span></div><div class="board-scroller"><div class="solitaire-stage" data-board-width="${width}" data-board-height="${height}" style="width:${width}px;height:${height}px"><div class="solitaire-board" role="group" aria-label="Mahjong Solitaire board" style="width:${width}px;height:${height}px">${board}</div></div></div>${g.finished?'<div class="board-overlay"><div class="winning-medal">✦</div><h2>Beautifully played.</h2><p>You cleared every tile!</p>'+btn('Play again','new-sol','primary')+'</div>':''}${!g.finished&&g.pairs().length===0?'<div class="no-moves" role="status">No matching free pairs. Try Undo or Shuffle to continue.</div>':''}</div>
+    <div class="toolbar solitaire-toolbar" role="group" aria-label="Puzzle controls">${btn('<span aria-hidden="true">↶</span> Undo','undo','secondary',!g.undoStack.length)}${btn('<span aria-hidden="true">◌</span> Hint','hint','secondary',g.finished)}${btn('<span aria-hidden="true">⤨</span> Shuffle','shuffle','secondary',g.finished)}<span class="toolbar-divider"></span>${btn('<span aria-hidden="true">✧</span> New<span class="desktop-title"> puzzle</span>','new-sol','primary',false,'aria-label="New puzzle"')}</div><p class="board-touch-tip">Pinch to zoom in on the tiles. Focus board gives you more room to play.</p>`;
   }
   function setupView(){
     const isAm=state.mode==='american';
@@ -178,7 +183,7 @@
   function render(){
     const which=state.mode;
     maybeGuard();
-    root.innerHTML=`<div class="shell" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>${offlineAccessMarkup()}</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
+    root.innerHTML=`<div class="shell${state.boardFocus?' board-focus':''}" data-mode="${which}" ${state.curtain!==null?'inert aria-hidden="true"':''} data-tile-theme="${state.appearance.theme}" data-indices="${state.appearance.indices?'show':'hide'}">${header()}${appearanceBar()}<div class="learn-entry"><p><strong>Learn ${M.lessons[which].name}</strong><br>Choose a move. See why it helps. Compare alternatives—and discover what changes under another variant.</p><div class="learn-entry-actions">${btn('Start learning path →','path','primary')}${btn('Guided practice','practice','secondary')}${btn('Rule library','learn','ghost')}</div></div><main class="content-grid"><section class="game-main">${which==='solitaire'?solitaireView():tableView()}${coachPanel()}</section>${guide(which)}</main><footer class="footer"><span>◈ &nbsp; MAHJONG ATELIER</span><span>${offlineAccessMarkup()}</span><span>NO ACCOUNTS · NO ADS</span></footer>${tileGuide()}</div>${pop()}${privacyCurtain()}`;
     if(state.curtain!==null)root.querySelector('[data-act="reveal"]')?.focus();
     fitSolitaireBoard();
     schedulePump();
@@ -192,7 +197,14 @@
     const originalHeight=Number(stage.dataset.boardHeight)||board.offsetHeight;
     const viewportWidth=Math.min(window.innerWidth||Infinity,document.documentElement.clientWidth||Infinity);
     const available=Math.max(0,Math.min(scroller.clientWidth,viewportWidth)-4);
-    const scale=available?Math.min(1,available/originalWidth):1;
+    let scale=available?Math.min(1,available/originalWidth):1;
+    if(state.boardFocus){
+      const chrome=['.solitaire-heading','.stats-grid','.board-topline','.solitaire-toolbar']
+        .reduce((total,selector)=>total+(root.querySelector(selector)?.offsetHeight||0),48);
+      // Fit a focused portrait board vertically when possible, but keep tiles
+      // legible on short screens; normal page scrolling remains available.
+      scale=Math.min(scale,Math.max(44/54,(window.innerHeight-chrome)/originalHeight));
+    }
     board.style.transformOrigin='top left';
     board.style.transform=`scale(${scale})`;
     stage.style.width=`${Math.ceil(originalWidth*scale)}px`;
@@ -231,6 +243,13 @@
       if(act==='practice'){state.learning=true;clearTimeout(pumpTimer);M.openPractice(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
       if(act==='learn'){state.learning=true;clearTimeout(pumpTimer);M.openLessons(state.mode,()=>{state.learning=false;schedulePump();control.focus();});return;}
       if(act==='switch'){switchMode(control.dataset.mode);return;}
+      if(act==='board-focus'){
+        state.boardFocus=!state.boardFocus;
+        render();
+        root.querySelector('[data-act="board-focus"]')?.focus({preventScroll:true});
+        root.querySelector('.solitaire-heading')?.scrollIntoView({block:'start',behavior:'instant'});
+        return;
+      }
       if(act==='toggle-guide'){state.showGuide=!state.showGuide;render();return;}
       if(act==='tile-guide'){state.showTileGuide=true;render();root.querySelector('.tile-help-close')?.focus();return;}
       if(act==='close-tile-guide'){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();return;}
@@ -297,6 +316,13 @@
     render();
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&state.showTileGuide){state.showTileGuide=false;render();root.querySelector('[data-act=tile-guide]')?.focus();}});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&state.boardFocus&&!state.learning&&!state.showTileGuide){
+      state.boardFocus=false;
+      render();
+      root.querySelector('[data-act="board-focus"]')?.focus({preventScroll:true});
+    }
+  });
   timerInterval=setInterval(()=>{
     if(state.mode!=='solitaire')return;
     const t=state.games.solitaire;
