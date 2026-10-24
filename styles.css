@@ -10,18 +10,26 @@
 
 /* Theme system — purely visual: tile IDs and game logic never change. */
 .mj-tile{
-  --tile-face:#f8f4e9;--tile-ink:#174c42;
-  --suit-red:#bc4539;--suit-green:#337b4c;--suit-blue:#257f89;
+  --tile-face:#fffaf0;--tile-ink:#183e36;
+  --suit-red:#a42e29;--suit-green:#216942;--suit-blue:#235d85;
+  background:linear-gradient(135deg,#fffef9 0%,#fffaf0 48%,#eee4d0 100%);
+  border-color:#fffcf2;border-radius:6px;padding:7px 3px 9px;
+  box-shadow:inset 1px 1px 0 #fff,inset -2px -3px 0 #d5c8ad,1px 4px 0 #809e8b,2px 6px 4px #06251e70;
 }
-.tile-art{display:block;width:41px;height:42px;flex-shrink:0;margin-top:2px;overflow:visible}
-.tile-art-bird{width:44px;height:42px}
+.board-tile{box-shadow:inset 1px 1px 0 #fff,inset -2px -3px 0 #d5c8ad,0 3px 0 #b1b7a1,1px 6px 0 #809e8b,2px 8px 4px #05221970}
+.board-tile.blocked{filter:brightness(.86) saturate(.88);opacity:1}
+.tile-art{display:block;width:42px;height:43px;flex-shrink:0;margin-top:0;overflow:visible;pointer-events:none;shape-rendering:geometricPrecision}
+.tile-art-bird{width:40px;height:43px}
+.tile-art-glyph{width:36px;height:43px}
+.logo-tile{--suit-red:#a42e29;--tile-face:#fffaf0;--tile-ink:#183e36}
+.logo-tile svg{width:65%;height:75%;display:block}
 .tile-characters{display:flex;flex-direction:column;align-items:center;justify-content:center;height:42px;flex-shrink:0;margin-top:2px;font-family:Georgia,'Noto Serif CJK SC','Noto Serif',serif;line-height:1.03;font-weight:750}
 .tile-character-num{font-size:21px;color:var(--tile-ink)}
 .tile-character-wan{font-size:23px;color:var(--suit-red)}
 .tile-white-dragon{height:33px;width:31px;flex-shrink:0;display:grid;place-items:center;margin-top:5px;border:3px solid var(--suit-blue);box-shadow:inset 0 0 0 2px var(--tile-face),inset 0 0 0 4px var(--suit-blue);border-radius:2px}
 .tile-white-dragon span{height:15px;width:15px;border:1px solid var(--suit-blue);opacity:.65}
-.tile-index{color:var(--suit-red);top:1px;left:5px;font-size:10px;line-height:1.25}
-.tile-caption{color:var(--tile-ink);font-size:7px;letter-spacing:.04em;white-space:nowrap;margin-top:2px}
+.tile-index{color:var(--suit-red);top:2px;left:4px;font-size:10px;line-height:1.2;font-weight:800;z-index:1;background:var(--tile-face);border-radius:2px;padding:0 1px}
+.tile-caption{position:absolute;bottom:4px;left:1px;right:1px;color:var(--tile-ink);font-size:7px;font-weight:800;line-height:1;letter-spacing:.035em;white-space:nowrap;margin:0;text-align:center}
 .wind-symbol{color:var(--tile-ink)}
 .dragon-symbol{color:var(--suit-red)}
 .green-dragon{color:var(--suit-green)}
@@ -34,7 +42,7 @@
 :is(.shell,.learn-dialog)[data-tile-theme="neon"] .tile-caption{color:#a4f8d6}
 :is(.shell,.learn-dialog)[data-tile-theme="neon"] .tile-index{color:#ffb0ce}
 :is(.shell,.learn-dialog)[data-tile-theme="neon"] .tile-symbol{text-shadow:0 0 8px #75d6ffa8}
-:is(.shell,.learn-dialog)[data-tile-theme="pastel"] .mj-tile{--tile-face:#fff7ed;--tile-ink:#605b87;--suit-red:#d77a95;--suit-green:#5daba4;--suit-blue:#8a8ed1;background:linear-gradient(145deg,#fffaf3,#fcece7 75%,#f7dfe3);border:1px solid #fffcf4;border-radius:10px;color:#605b87;box-shadow:inset -3px -3px #eacfd7,0 4px 0 #b89bc0,1px 6px 5px #132d2988}
+:is(.shell,.learn-dialog)[data-tile-theme="pastel"] .mj-tile{--tile-face:#fff7ed;--tile-ink:#514568;--suit-red:#a84465;--suit-green:#326f65;--suit-blue:#63589e;background:linear-gradient(145deg,#fffaf3,#fcece7 75%,#f7dfe3);border:1px solid #fffcf4;border-radius:10px;color:#514568;box-shadow:inset -3px -3px #eacfd7,0 4px 0 #b89bc0,1px 6px 5px #132d2988}
 :is(.shell,.learn-dialog)[data-tile-theme="pastel"] .tile-caption{color:#605b87}
 :is(.shell,.learn-dialog)[data-tile-theme="pastel"] .flower-symbol{color:#c67dba}
 :is(.shell,.learn-dialog)[data-tile-theme] .board-tile.is-selected,:is(.shell,.learn-dialog)[data-tile-theme] .rack .mj-tile.is-selected{box-shadow:0 0 20px #f6d18e9c,0 6px 0 #497d65;outline:3px solid #ffd58d}
@@ -89,7 +97,7 @@
 .exposure-adjust{background:#153c32;border:1px solid #6d8a67;padding:16px;border-radius:10px;margin:16px 0}.exposure-adjust summary{cursor:pointer;color:#ffe0a6;font-weight:700}.exposure-adjust p{max-width:75ch}.pond-tiles{max-height:300px;overflow-y:auto}
 
 /* Public sets show every face, including Joker composition and bonus identities. */
-.seat-melds{flex-direction:column;align-items:flex-start}.exposed-meld{max-width:100%;overflow-wrap:anywhere}.public-tiles{display:flex;flex-wrap:wrap;gap:3px;margin:7px 0}.public-tile{width:26px;height:35px;min-width:0;padding:1px;border-radius:4px;box-shadow:inset -1px -2px 0 var(--tile-shadow,#c8c2ad),1px 2px 0 #537f6d;pointer-events:none}.public-tile .tile-art{width:21px;height:23px;margin-top:1px}.public-tile .tile-index{font-size:7px;top:0;left:2px}.public-tile .tile-caption{font-size:4px;letter-spacing:0;margin-top:0}.public-tile .tile-symbol{font-size:20px;margin-top:2px}.public-tile .tile-characters{height:23px;font-size:17px;line-height:.8;margin-top:2px}.public-tile .tile-character-num{font-size:14px}.public-tile .tile-character-wan{font-size:14px}.public-tile .tile-white-dragon{width:17px;height:20px;margin-top:3px}.public-tile .tile-white-dragon span{width:8px;height:8px}.meld-composition{display:block;color:#eff6e7;margin-bottom:4px}.seat-flowers{border-top:1px solid #73967966;margin-top:10px;padding-top:7px;font-size:9px;color:#e9d1a6}
+.seat-melds{flex-direction:column;align-items:flex-start}.exposed-meld{max-width:100%;overflow-wrap:anywhere}.public-tiles{display:flex;flex-wrap:wrap;gap:3px;margin:7px 0}.public-tile{width:26px;height:35px;min-width:0;padding:1px;border-radius:4px;box-shadow:inset -1px -2px 0 var(--tile-shadow,#c8c2ad),1px 2px 0 #537f6d;pointer-events:none}.public-tile .tile-art{width:21px;height:23px;margin-top:-3px}.public-tile .tile-index{font-size:7px;top:0;left:2px}.public-tile .tile-caption{font-size:4px;letter-spacing:0;margin-top:0;bottom:2px}.public-tile .tile-symbol{font-size:20px;margin-top:2px}.public-tile .tile-characters{height:23px;font-size:17px;line-height:.8;margin-top:2px}.public-tile .tile-character-num{font-size:14px}.public-tile .tile-character-wan{font-size:14px}.public-tile .tile-white-dragon{width:17px;height:20px;margin-top:3px}.public-tile .tile-white-dragon span{width:8px;height:8px}.meld-composition{display:block;color:#eff6e7;margin-bottom:4px}.seat-flowers{border-top:1px solid #73967966;margin-top:10px;padding-top:7px;font-size:9px;color:#e9d1a6}
 @media(max-width:620px){.public-tiles{gap:2px}.public-tile{width:22px;height:31px}.public-tile .tile-art{width:18px;height:20px}.public-tile .tile-symbol{font-size:18px}.public-tile .tile-caption{font-size:3.5px}.public-tile .tile-character-num,.public-tile .tile-character-wan{font-size:12px}.seat-flowers{font-size:7px}}
 
 /* Keep the selected rules beside play, with room for every setting on mobile. */

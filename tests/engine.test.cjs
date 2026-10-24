@@ -1,6 +1,7 @@
 'use strict';
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
+require('../js/tile-art.js');
 require('../js/core.js');
 require('../js/solitaire.js');
 require('../js/table.js');

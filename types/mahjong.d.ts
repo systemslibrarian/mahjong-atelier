@@ -179,6 +179,7 @@ declare namespace Atelier {
   /** Optional during ordered script loading; each checked file validates the
    * dependencies it consumes before exporting its implementation. */
   interface Registry {
+    tileArt?: Record<string, string>;
     core?: Core; BaseTable?: BaseConstructor;
     HongKongTable?: ProfileConstructor<HongKongTable>;
     AmericanTable?: ProfileConstructor<AmericanTable>;

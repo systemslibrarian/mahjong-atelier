@@ -13,6 +13,7 @@
   },
   "files": [
     "types/mahjong.d.ts",
+    "js/tile-art.js",
     "js/core.js",
     "js/table.js",
     "js/hongkong.js",
